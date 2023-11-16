@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanwha.robotics.user.mapper.NewsroomMapper">
+
+	<sql id="newsroomWhere">
+	        AND show_yn = 'Y'
+            <if test="typeCd != null and typeCd != '' ">
+                AND type_cd = #{typeCd}
+            </if>
+    </sql>
+
+    <select id="selectNewsroomList" parameterType="hashMap" resultType="Newsroom">
+        SELECT
+           newsroom_no,
+           type_cd,
+           title,
+           create_dt,
+           content,
+           category_cd
+        FROM 
+            tb_newsroom
+		<where>
+			<include refid="newsroomWhere" />
+		</where>
+        ORDER BY 
+            FIELD(category_cd, 'NOTICE') DESC, 
+            create_dt DESC
+		LIMIT
+			#{page.size}
+		OFFSET
+			#{page.offset}
+    </select>
+
+
+    <select id="selectNewsroomCnt" parameterType="hashMap" resultType="int">
+        SELECT
+           COUNT(*)
+        FROM 
+            tb_newsroom
+		<where>
+			<include refid="newsroomWhere" />
+		</where>
+    </select>
+    
+</mapper>

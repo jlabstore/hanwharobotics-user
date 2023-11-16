@@ -236,7 +236,7 @@
                               url : "/main/newsroom",
                               success : function(data) {
                                     if(data.code === 200){
-                                          console.log(data)
+                                          // console.log(data)
                                           var template = $("#newsroom-tmpl").html();
                                           if(template){
                                                 var rendered = Mustache.render(template, {'list' : data.data});

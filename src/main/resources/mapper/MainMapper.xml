@@ -8,7 +8,8 @@
            type_cd,
            title,
            create_dt,
-           content
+           content,
+           category_cd
         FROM 
             tb_newsroom
         <where>

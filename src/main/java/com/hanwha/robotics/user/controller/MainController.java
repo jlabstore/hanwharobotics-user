@@ -8,13 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
-import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.service.MainService;
 
@@ -25,6 +23,11 @@ public class MainController {
     @Autowired
     private MainService mainService;
 
+
+    /**
+     * Main 페이지 
+     * @return
+     */
     @GetMapping("/")
     public String mainPage(){
         return "main";
