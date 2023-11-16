@@ -4,24 +4,21 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-  <th:block th:replace="/layout/head_config :: headConfig"></th:block>
+  <th:block th:replace="/layout/common_head :: commonHead"></th:block>
   <link rel="stylesheet" href="./css/common.css" />
   <link rel="stylesheet" href="./css/main.css" />
 </head>
 
 <body class="pc">
-  <header id="header" class="main_header">
-  </header>
+  <header id="header" class="main_header"></header>
 
 
   <div layout:fragment="content"></div>
 
-  <footer id="footer">
-  </footer>
+  <footer id="footer"></footer>
 
   <div class="layer_wrap"></div>
 
-  <script text="text/javascript" src="./js/jquery.min.js"></script>
   <script type="text/javascript" src="./js/aos.js"></script>
 
   <script text="text/javascript" src="./js/gsap.min.js"></script>
@@ -36,5 +33,5 @@
   <script src="./js/main.js"></script>
 
 </body>
-
+<th:block layout:fragment="script"></th:block>
 </html>
