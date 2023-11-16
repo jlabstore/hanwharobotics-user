@@ -25,7 +25,14 @@ public class MainServiceImpl implements MainService{
         Map<String, Object> map = new HashMap<>();
         map.put("typeCd", NewsroomType.Notice.getCode());
         map.put("limit", 3);
-        return mainMapper.selectNoticeList(map);
+        return mainMapper.selectNewsroomList(map);
+    }
+
+    @Override
+    public List<Newsroom> getMainNewsroom() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("limit", 3);
+        return mainMapper.selectNewsroomList(map);
     }
     
 }

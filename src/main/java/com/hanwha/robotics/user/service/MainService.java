@@ -6,4 +6,5 @@ import com.hanwha.robotics.user.common.entity.Newsroom;
 
 public interface MainService {
     public List<Newsroom> getMainUpdates();
+    public List<Newsroom> getMainNewsroom();
 }

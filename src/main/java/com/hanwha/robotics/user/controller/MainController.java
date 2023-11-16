@@ -39,9 +39,22 @@ public class MainController {
      */
     @RequestMapping(value = "/main/updates", method=RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> getMainUpdate(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Object> getMainUpdates(HttpServletRequest request, HttpServletResponse response) {
         return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainUpdates()), HttpStatus.OK);
     }
 
     
+
+    /**
+     * Main > Newsroom : Newsroom 최신 3개
+     * @param request 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/main/newsroom", method=RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> getMainNewsroom(HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainNewsroom()), HttpStatus.OK);
+    }
+
 }

@@ -10,6 +10,6 @@ import com.hanwha.robotics.user.common.entity.Newsroom;
 @Mapper
 public interface MainMapper {
 
-    public List<Newsroom> selectNoticeList(Map<String, Object> map);
+    public List<Newsroom> selectNewsroomList(Map<String, Object> map);
 
 }

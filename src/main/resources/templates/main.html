@@ -27,12 +27,10 @@
               
                       </div>
               
-                      <div class="update">
+                      <div class="update updatesDiv">
                         <div class="title">Updates</div>
-                        <div class="txt">
-                          <div>소프트웨어 1.4 업데이트 버전이 배포되었습니다.</div>
-                          <div>신제품 HCR-8A가 출시되었습니다.</div>
-                          <div>소프트웨어 1.35 업데이트 버전이 배포되었습니다.</div>
+                        <div class="txt updatesContentDiv">
+                              <div>조회결과가 없습니다.</div>
                         </div>
                       </div>
                     </div>
@@ -135,36 +133,13 @@
                     <section class="section3">
                       <div class="board_wrap">
                         <div class="board news">
-                          <div class="title"><a href="#" target="_blank">Newsroom</a></div>
-                          <div class="list">
-                            <a href="#" target="_blank">
-                              <div class="list_title">
-                                (주)한화, 협동로봇 신제품 출시로 시장 공략 강화
+                          <div class="title"><a href="/newsroom" target="_blank">Newsroom</a></div>
+                          <div class="newsroomDiv">
+                              <div class="list">
+                                    <div class="list_title">
+                                          조회 결과가 없습니다.
+                                    </div>
                               </div>
-                              <div class="list_date">
-                                2023.08.23
-                              </div>
-                            </a>
-                          </div>
-                          <div class="list">
-                            <a href="#" target="_blank">
-                              <div class="list_title">
-                                EMO 2019 전시회 참가(9/16 ~ 21)
-                              </div>
-                              <div class="list_date">
-                                2023.08.23
-                              </div>
-                            </a>
-                          </div>
-                          <div class="list">
-                            <a href="#" target="_blank">
-                              <div class="list_title">
-                                중국 CIIF 전시회(19.9.17 ~ 21)
-                              </div>
-                              <div class="list_date">
-                                2023.08.23
-                              </div>
-                            </a>
                           </div>
                         </div>
                       </div>
@@ -209,6 +184,22 @@
                         <div>{{title}}</div>
                   {{/list}}
             </script>
+
+
+            <script id="newsroom-tmpl" type="x-tmpl-mustache">
+                  {{#list}}
+                        <div class="list">
+                          <a href="#" target="_blank">
+                            <div class="list_title">
+                              {{title}}
+                            </div>
+                            <div class="list_date">
+                              2023.08.23
+                            </div>
+                          </a>
+                        </div>
+                  {{/list}}
+            </script>
       </div>
 
 </body>
@@ -217,6 +208,7 @@
                         
                   $(document).ready(function () {   
                         getMainUpdates();   
+                        getMainNewsroom();   
                   }); 
             
                   function getMainUpdates(){
@@ -229,6 +221,26 @@
                                           if(template){
                                                 var rendered = Mustache.render(template, {'list' : data.data});
                                                 $('.updatesContentDiv').html(rendered);
+                                          }
+                                    }
+                              },
+                              error : function(jqXHR, textStatus, errorThrown){
+                                    console.log(jqXHR.status, jqXHR);
+                                    
+                              }
+                        });
+                  }
+
+                  function getMainNewsroom(){
+                        COMM.ajax({
+                              url : "/main/newsroom",
+                              success : function(data) {
+                                    if(data.code === 200){
+                                          console.log(data)
+                                          var template = $("#newsroom-tmpl").html();
+                                          if(template){
+                                                var rendered = Mustache.render(template, {'list' : data.data});
+                                                $('.newsroomDiv').html(rendered);
                                           }
                                     
                                     }
