@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+    <div layout:fragment="content">   
+
+        
+        <main class="sub ir-list">
+            <div class="board board-type1">
+            <div class="column">
+                <h1>IR</h1>
+                <p class="desc">
+                한화로보틱스는 항상 더 나은<br />내일을 위해 도전합니다
+                </p>
+            </div>
+
+            <div class="column board_list">
+                <div class="table">
+                <div class="thead">
+                    <div class="th">번호</div>
+                    <div class="th">제목</div>
+                    <div class="th">첨부파일</div>
+                    <div class="th">등록일</div>
+                </div>
+                <div class="tbody">
+                    <div class="tr">
+                        <a href='javascript:void(0)' id='test' onclick='preventClick(event)' style="cursor: unset;">
+                            <div class="td"></div>
+                            <div class="td">
+                                <span class="contents" style="text-align: center;width: 100%;">
+                                    조회 결과가 없습니다.
+                                </span>
+                            </div>
+                            <div class="td"></div>
+                            <div class="td"></div>
+                        </a>
+                    </div>
+                </div>
+                </div>
+
+                <div class="paging">
+                </div>
+            </div>
+            </div>
+        </main>
+
+
+        <form id="form" >
+            <input type="hidden" name="size" id="size"  value="10"/>
+            <input type="hidden" name="page" id="page"  value="1"/>
+        </form>
+
+        <script id="list-tmpl" type="x-tmpl-mustache" class="hide">
+            {{#list}}
+                <div class="tr">
+                    <a href="#" target="_blank">
+                        <div class="td">{{no}} </div>
+                        <div class="td">
+                        <span class="contents">
+                            {{title}}
+                        </span>
+                        </div>
+                        <div class="td">
+                        <button class="download">
+                            <img src="../images/pc/btn_download.svg" width="22" height="22" alt="" />
+                        </button>
+                        </div>
+                        <div class="td">{{createDt}} </div>
+                    </a>
+                </div>
+            {{/list}}
+            {{^list}}
+                <div class="tr">
+                    <a href='javascript:void(0)' id='test' onclick='preventClick(event)' style="cursor: unset;">
+                        <div class="td"></div>
+                        <div class="td">
+                            <span class="contents" style="text-align: center;width: 100%;">
+                                조회 결과가 없습니다.
+                            </span>
+                        </div>
+                        <div class="td"></div>
+                        <div class="td"></div>
+                    </a>
+                </div>
+            {{/list}}
+        </script>
+    </div>
+
+</body>
+
+    <th:block layout:fragment="script">
+        <script>  
+            $(document).ready(function () {   
+                    //뒤로가기 or 새로고침시 검색어 유지 
+                    setQueryStringParams();
+                    getList(); 
+            }); 
+
+            function getList(page){
+                if(typeof page != "undefined" && page != null) $('#page').val(page);
+                
+                COMM.ajaxPagingList({
+                        url : "/newsroom/ir"
+                    },
+                    function success(data){
+                        console.log(data)
+
+                        var template = $("#list-tmpl").html();
+                        if(template){
+                            var rendered = Mustache.render(template, {'list' : data.contents});
+                            $('.tbody').html(rendered);
+                        }
+
+                        setPagination(data, $('.paging'));
+
+                    }
+                );
+
+            }
+        </script>
+    </th:block>
+</html>

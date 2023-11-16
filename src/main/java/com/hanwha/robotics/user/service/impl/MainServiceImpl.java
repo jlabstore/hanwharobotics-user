@@ -27,7 +27,7 @@ public class MainServiceImpl implements MainService{
     @Override
     public List<Newsroom> getMainUpdates() {
         Map<String, Object> map = new HashMap<>();
-        map.put("typeCd", NewsroomType.Notice.getCode());
+        map.put("typeCd", NewsroomType.NOTICE.getCode());
         map.put("limit", 3);
         return mainMapper.selectNewsroomList(map);
     }

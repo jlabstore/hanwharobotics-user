@@ -8,8 +8,8 @@ import lombok.Getter;
 public enum NewsroomType {
     
     IR("NEWSROOM_IR"),
-    Notice("NEWSROOM_NOTICE"),
-    Press("NEWSROOM_PRESS");
+    NOTICE("NEWSROOM_NOTICE"),
+    PRESS("NEWSROOM_PRESS");
 
     private String code;
  

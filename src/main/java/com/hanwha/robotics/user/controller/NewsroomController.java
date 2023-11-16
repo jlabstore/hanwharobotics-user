@@ -1,18 +1,19 @@
 package com.hanwha.robotics.user.controller;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.dto.PageRequest;
@@ -38,21 +39,34 @@ public class NewsroomController {
     }
 
     /**
-     * newsroom > notice 페이지 
+     * newsroom  페이지 
      * @return
      */
-    @GetMapping("/notice")
-    public ModelAndView notice(PageRequest pageRequest){
-        ModelAndView mv = new ModelAndView("newsroom/notice_list");
-        // mv.addObject("pageRequest", pageRequest);
-        // mv.addObject("data", newsroomService.getNewsroomList(NewsroomType.Notice, pageRequest));
-        return mv;
+    @GetMapping("/{type}")
+    public String notice(@PathVariable String type){
+        boolean isValid = Arrays.stream(NewsroomType.values()).anyMatch(v -> v.name().equals(type.toUpperCase()));
+        String pageStr = isValid ?  type.toLowerCase() : "notice";
+        return "newsroom/"+pageStr+"_list";
     }
 
 
     @PostMapping("/notice")
     @ResponseBody
     public ResponseEntity<Object> noticeList(PageRequest pageRequest, HttpServletRequest request, HttpServletResponse response) {
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), newsroomService.getNewsroomList(NewsroomType.Notice, pageRequest)), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), newsroomService.getNewsroomList(NewsroomType.NOTICE, pageRequest)), HttpStatus.OK);
+    }
+
+    @PostMapping("/ir")
+    @ResponseBody
+    public ResponseEntity<Object> irList(PageRequest pageRequest, HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), newsroomService.getNewsroomList(NewsroomType.IR, pageRequest)), HttpStatus.OK);
+    }
+
+
+    @PostMapping("/press")
+    @ResponseBody
+    public ResponseEntity<Object> pressList(PageRequest pageRequest, HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), newsroomService.getNewsroomList(NewsroomType.PRESS, pageRequest)), HttpStatus.OK);
     }
 }
+
