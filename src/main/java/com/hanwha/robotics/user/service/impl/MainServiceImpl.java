@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hanwha.robotics.user.common.entity.Newsroom;
 import com.hanwha.robotics.user.common.enums.NewsroomType;
+import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.mapper.MainMapper;
 import com.hanwha.robotics.user.service.MainService;
 
@@ -19,6 +20,9 @@ public class MainServiceImpl implements MainService{
 
     @Autowired
     private MainMapper mainMapper;
+
+    @Autowired
+    private MailUtil mailUtil;
 
     @Override
     public List<Newsroom> getMainUpdates() {
@@ -33,6 +37,17 @@ public class MainServiceImpl implements MainService{
         Map<String, Object> map = new HashMap<>();
         map.put("limit", 3);
         return mainMapper.selectNewsroomList(map);
+    }
+
+    @Override
+    public String sendMail(Map<String,Object> params){
+        String result = "FAIL";
+        // TODO Auto-generated method stub
+        Boolean sendYn = mailUtil.sendMail(params);
+        if(sendYn){
+            result="OK";
+        }
+        return result;
     }
     
 }
