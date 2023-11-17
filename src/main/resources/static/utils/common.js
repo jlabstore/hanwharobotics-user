@@ -80,7 +80,6 @@ var COMM = {
         var mergeConf = $.extend(true, {}, defaultConf, ajaxConfig);
         $.ajax(mergeConf);
     }
-    
 }
 
 
@@ -131,4 +130,18 @@ var setPagination = function(data, elemnt){
     
     elemnt.html(prev + paginate + next)
 
+}
+
+var layerInquiryBtn = function(data){
+    $('body').addClass('scroll-lock');
+    var type  = data == 1 ? '대리점 문의' : '제품문의'
+    $('#inquiryType').val(type);
+    $('.layer.inquiry').show();
+    $('.layer_bg').show();
+}
+
+var closeInquiryLayer = function(){
+    $('body').removeClass('scroll-lock');
+    $('.layer.inquiry').hide();
+    $('.layer_bg').hide();
 }
