@@ -4,21 +4,23 @@
 
     <select id="selectNewsroomList" parameterType="hashMap" resultType="Newsroom">
         SELECT
-           newsroom_no,
-           type_cd,
-           title,
-           create_dt,
-           content,
-           category_cd
+           tn.newsroom_no,
+           tn.type_cd,
+           tn.title,
+           tn.create_dt,
+           tn.content,
+           tn.category_cd,
+           tc.code_name as typeCdNm
         FROM 
-            tb_newsroom
+            tb_newsroom tn
+            LEFT JOIN tb_code tc ON tn.type_cd = tc.code
         <where>
-	        AND show_yn = 'Y'
+	        AND tn.show_yn = 'Y'
             <if test="typeCd != null and typeCd != '' ">
-                AND type_cd = #{typeCd}
+                AND tn.type_cd = #{typeCd}
             </if>
 		</where>
-        ORDER BY create_dt DESC
+        ORDER BY tn.create_dt DESC
         LIMIT #{limit}
     </select>
     

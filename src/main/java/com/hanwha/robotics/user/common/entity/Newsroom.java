@@ -9,16 +9,20 @@ import lombok.Data;
 public class Newsroom {
    private int newsroomNo;
    private String typeCd;
+   private String typeCdNm;
    private String title;
    private Date createDt;
    private String content;
    private String showYn;
    private String categoryCd;
+   private String categoryCdNm;
 
    //IR
    private String originalFileNm;
    private String filePath;
 
    private List<NewsroomFile> files;
+
+
 
 }

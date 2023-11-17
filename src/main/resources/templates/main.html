@@ -189,12 +189,12 @@
             <script id="newsroom-tmpl" type="x-tmpl-mustache">
                   {{#list}}
                         <div class="list">
-                          <a href="#" target="_blank">
+                          <a href="{{href}}" >
                             <div class="list_title">
                               {{title}}
                             </div>
                             <div class="list_date">
-                              2023.08.23
+                              {{createDt}}
                             </div>
                           </a>
                         </div>
@@ -215,13 +215,11 @@
                         COMM.ajax({
                               url : "/main/updates",
                               success : function(data) {
-                                    if(data.code === 200){
+                                    if(data.code === 200 &&  data.data != null){
                                           // console.log(data)
-                                          var template = $("#updates-tmpl").html();
-                                          if(template){
-                                                var rendered = Mustache.render(template, {'list' : data.data});
-                                                $('.updatesContentDiv').html(rendered);
-                                          }
+                                        var template = $("#updates-tmpl").html();
+                                        var rendered = Mustache.render(template, {'list' : data.data});
+                                        $('.updatesContentDiv').html(rendered);
                                     }
                               },
                               error : function(jqXHR, textStatus, errorThrown){
@@ -235,13 +233,15 @@
                         COMM.ajax({
                               url : "/main/newsroom",
                               success : function(data) {
-                                    if(data.code === 200){
-                                          // console.log(data)
+                                    if(data.code === 200 &&  data.data != null){
+                                          $(data.data).map(function(i, e){
+                                              e.href = "newsroom" + "/" + e.typeCdNm.toLowerCase();
+                                              if(e.typeCdNm.toLowerCase() != 'ir') e.href += "/" + e.newsroomNo
+                                              e.createDt = e.createDt ? e.createDt.replaceAll('-','.') : e.createDt;
+                                          });
                                           var template = $("#newsroom-tmpl").html();
-                                          if(template){
-                                                var rendered = Mustache.render(template, {'list' : data.data});
-                                                $('.newsroomDiv').html(rendered);
-                                          }
+                                          var rendered = Mustache.render(template, {'list' : data.data});
+                                          $('.newsroomDiv').html(rendered);
                                     
                                     }
                               },
