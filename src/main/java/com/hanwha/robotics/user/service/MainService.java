@@ -18,5 +18,4 @@ public interface MainService {
      */
     public List<Newsroom> getMainNewsroom();
 
-    public String sendMail(Map<String,Object> params);
 }
