@@ -15,8 +15,6 @@ import com.hanwha.robotics.user.common.enums.NewsroomType;
 import com.hanwha.robotics.user.mapper.NewsroomMapper;
 import com.hanwha.robotics.user.service.NewsroomService;
 
-import groovyjarjarantlr4.v4.parse.ANTLRParser.labeledAlt_return;
-
 @Service
 @Transactional
 public class NewsroomServiceImpl implements NewsroomService{
