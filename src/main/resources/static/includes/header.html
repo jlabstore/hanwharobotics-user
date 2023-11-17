@@ -32,13 +32,13 @@
 
     <ul class="header__nav__items">
       <li>
-        <a class="header__nav__link on" href="https://o.hanwharobotics.com/" target="_blank">ROBOTS</a>
+        <a class="header__nav__link" href="https://o.hanwharobotics.com/" target="_blank">ROBOTS</a>
       </li>
       <li>
         <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp" target="_blank">AGVS</a>
       </li>
-      <li><a class="header__nav__link" href="/about" target="_blank">ABOUT</a></li>
-      <li><a class="header__nav__link" href="/newsroom" target="_blank">NEWSROOM</a></li>
+      <li><a class="header__nav__link header_about" href="/about" >ABOUT</a></li>
+      <li><a class="header__nav__link header_newsroom" href="/newsroom" >NEWSROOM</a></li>
       <li class="inquiry"><button class="inquiry" onclick="layerInquiryBtn(1)">문의하기</button></li>
     </ul>
 
@@ -57,3 +57,17 @@
   </div>
 
 </div>
+
+
+<script>
+  $(document).ready(function () {   
+      setHeaderOn();
+  }); 
+
+  var setHeaderOn = function(){
+      var paths = window.location.pathname.split('/')
+      if(paths.length > 1){
+          $(".header_"+paths[1]).addClass('on');
+      }
+  }
+</script>
