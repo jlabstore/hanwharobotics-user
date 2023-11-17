@@ -3,28 +3,35 @@
 <mapper namespace="com.hanwha.robotics.user.mapper.NewsroomMapper">
 
 	<sql id="newsroomWhere">
-	        AND show_yn = 'Y'
+	        AND tn.show_yn = 'Y'
             <if test="typeCd != null and typeCd != '' ">
-                AND type_cd = #{typeCd}
+                AND tn.type_cd = #{typeCd}
             </if>
     </sql>
 
     <select id="selectNewsroomList" parameterType="hashMap" resultType="Newsroom">
         SELECT
-           newsroom_no,
-           type_cd,
-           title,
-           create_dt,
-           content,
-           category_cd
+           tn.newsroom_no,
+           tn.type_cd,
+           tn.title,
+           tn.create_dt,
+           tn.content,
+           tn.category_cd,
+           tnf.original_file_nm,
+           tnf.file_path
         FROM 
-            tb_newsroom
+            tb_newsroom tn
+            LEFT JOIN tb_newsroom_file tnf on tnf.file_no = (SELECT file_no 
+                                                                FROM tb_newsroom_file 
+                                                                WHERE newsroom_no = tn.newsroom_no
+                                                                ORDER BY file_no DESC
+                                                                limit 1)
 		<where>
 			<include refid="newsroomWhere" />
 		</where>
         ORDER BY 
-            FIELD(category_cd, 'NOTICE') DESC, 
-            create_dt DESC
+            FIELD(tn.category_cd, 'NOTICE') DESC, 
+            tn.create_dt DESC
 		LIMIT
 			#{page.size}
 		OFFSET
@@ -36,7 +43,7 @@
         SELECT
            COUNT(*)
         FROM 
-            tb_newsroom
+            tb_newsroom tn
 		<where>
 			<include refid="newsroomWhere" />
 		</where>
@@ -55,5 +62,17 @@
             tb_newsroom
         WHERE 
             newsroom_no = #{no} and show_yn = 'Y'
+    </select>
+
+    <select id="selectNewsroomFileByNo" parameterType="int" resultType="NewsroomFile">
+        SELECT 
+            file_no,
+            newsroom_no,
+            original_file_nm,
+            file_nm,
+            type_cd,
+            file_path
+        FROM tb_newsroom_file
+        WHERE newsroom_no = #{no} 
     </select>
 </mapper>

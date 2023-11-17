@@ -1,0 +1,16 @@
+<html lagn="ko" 
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="filesTmpl">
+
+
+      <script id="files-tmpl" type="x-tmpl-mustache">
+        {{#list}}
+          <a href="{{filePath}}" download="{{originalFileNm}}">
+            <span class="txt">{{originalFileNm}}</span>
+            <span class="download">
+              <img src="/images/pc/btn_download.svg" alt="" />
+            </span>
+          </a>
+        {{/list}}
+      </script>
+  </html>

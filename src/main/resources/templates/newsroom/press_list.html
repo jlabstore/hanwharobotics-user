@@ -89,10 +89,9 @@
                     function success(data){
                         // console.log(data)
                         var template = $("#list-tmpl").html();
-                        if(template){
-                            var rendered = Mustache.render(template, {'list' : data.contents});
-                            $('.thumbs').html(rendered);
-                        }
+                        var rendered = Mustache.render(template, {'list' : data.contents});
+                        $('.thumbs').html(rendered);
+
                         setPagination(data, $('.paging'));
 
                     }

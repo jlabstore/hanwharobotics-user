@@ -108,13 +108,11 @@
                         $(data.contents).map(function(i, e){
                             e['isLabel'] = e.categoryCd && e.categoryCd == 'NOTICE';
                         });
-                        console.log(data)
+                        // console.log(data)
 
                         var template = $("#list-tmpl").html();
-                        if(template){
-                            var rendered = Mustache.render(template, {'list' : data.contents});
-                            $('.tbody').html(rendered);
-                        }
+                        var rendered = Mustache.render(template, {'list' : data.contents});
+                        $('.tbody').html(rendered);
 
                         setPagination(data, $('.paging'));
 

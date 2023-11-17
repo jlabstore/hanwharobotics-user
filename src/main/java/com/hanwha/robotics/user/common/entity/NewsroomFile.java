@@ -8,7 +8,7 @@ import lombok.Data;
 public class NewsroomFile {
    private int fileNo;  
    private int newsroomNo; 
-   private String originalFileName;
+   private String originalFileNm;
    private String fileNm;
    private String typeCd; 
    private String filePath; 

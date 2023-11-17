@@ -55,7 +55,7 @@
         <script id="list-tmpl" type="x-tmpl-mustache" class="hide">
             {{#list}}
                 <div class="tr">
-                    <a href="#" target="_blank">
+                    <a href="{{filePath}}" download="{{originalFileNm}}">
                         <div class="td">{{no}} </div>
                         <div class="td">
                         <span class="contents">
@@ -105,13 +105,11 @@
                         url : "/newsroom/ir"
                     },
                     function success(data){
-                        console.log(data)
+                        // console.log(data)
 
                         var template = $("#list-tmpl").html();
-                        if(template){
-                            var rendered = Mustache.render(template, {'list' : data.contents});
-                            $('.tbody').html(rendered);
-                        }
+                        var rendered = Mustache.render(template, {'list' : data.contents});
+                        $('.tbody').html(rendered);
 
                         setPagination(data, $('.paging'));
 

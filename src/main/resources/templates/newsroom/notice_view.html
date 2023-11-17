@@ -20,16 +20,7 @@
                 <div class="board_date"></div>
                 <div class="board_contents"></div>
         
-                <div class="board_files">
-                  <a href="#" download>
-                    <span class="txt">
-                      첨부파일-20231103.pdf
-                    </span>
-                    <span class="download">
-                      <img src="/images/pc/btn_download.svg" alt="" />
-                    </span>
-                  </a>
-                </div>
+                <div class="board_files"></div>
                 
                 <div class="board_prev">
                   <a href="javascript:history.back()" >
@@ -39,8 +30,6 @@
               </div>
             </div>
           </main>
-
-
     </div>
 
 </body>
@@ -66,6 +55,12 @@
                           $('.board_title').html(data.data.title);
                           $('.board_date').html(data.data.createDt.replaceAll('-','.'));
                           $('.board_contents').html(data.data.content);
+
+                          if(data.data.files != null && data.data.files.length > 0){
+                            var template = $("#files-tmpl").html();
+                            var rendered = Mustache.render(template, {'list' : data.data.files});
+                            $('.board_files').html(rendered);
+                          }
                         }
                   }
                 },
