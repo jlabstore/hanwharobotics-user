@@ -35,7 +35,7 @@ public class MainController {
 
 
     /**
-     * Main > Update : Notice 최신 3개
+     * Main > Update API : Notice 최신 3개
      * @param request 
      * @param response
      * @return
@@ -49,7 +49,7 @@ public class MainController {
     
 
     /**
-     * Main > Newsroom : Newsroom 최신 3개
+     * Main > Newsroom API : Newsroom 최신 3개
      * @param request 
      * @param response
      * @return

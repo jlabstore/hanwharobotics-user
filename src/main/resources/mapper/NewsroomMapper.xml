@@ -41,5 +41,19 @@
 			<include refid="newsroomWhere" />
 		</where>
     </select>
-    
+
+
+    <select id="selectNewsroomByNo" parameterType="int" resultType="Newsroom">
+        SELECT
+           newsroom_no,
+           type_cd,
+           title,
+           create_dt,
+           content,
+           category_cd
+        FROM 
+            tb_newsroom
+        WHERE 
+            newsroom_no = #{no} and show_yn = 'Y'
+    </select>
 </mapper>

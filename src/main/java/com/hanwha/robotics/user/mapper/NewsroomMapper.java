@@ -12,4 +12,6 @@ public interface NewsroomMapper {
 
     public List<Newsroom> selectNewsroomList(Map<String, Object> map);
     public int selectNewsroomCnt(Map<String, Object> map);
+    public Newsroom selectNewsroomByNo(int no);
+    
 }

@@ -34,5 +34,10 @@ public class NewsroomServiceImpl implements NewsroomService{
         PageResponse pageResponse = new PageResponse(list, total, page);
         return pageResponse;
     }
+
+    @Override
+    public Newsroom getNewsroom(int no) {
+        return newsroomMapper.selectNewsroomByNo(no);
+    }
     
 }

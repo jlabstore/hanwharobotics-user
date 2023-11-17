@@ -1,0 +1,28 @@
+
+
+<html lagn="ko" 
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="pagingTmpl">
+
+    <!-- paging mustache start -->
+    <script id="paginate-prev-tmpl" type="x-tmpl-mustache">
+        <a href="#" class="button prev {{class}}" onclick="getList({{page}})">
+            <span>이전</span>
+        </a>
+    </script>
+
+    <script id="paginate-next-tmpl" type="x-tmpl-mustache">
+        <a href="#" class="button next {{class}}" onclick="getList({{page}})">
+            <span>다음</span>
+        </a>
+    </script>
+
+    <script id="paginate-tmpl" type="x-tmpl-mustache">
+        <span>
+            {{#list}}
+                <a href="#" class="{{class}}" onclick="getList({{page}})">{{page}}</a>
+            {{/list}}
+        </span>
+    </script>
+    <!-- paging mustache end -->
+<html>

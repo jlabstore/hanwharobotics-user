@@ -14,14 +14,14 @@ $(window).on("load resize", function (e) {
 
 
 $(document).ready(async function() {
-  $('#header').load('../includes/header.html');
-  $('#footer').load('../includes/footer.html', function() {
+  $('#header').load('/includes/header.html');
+  $('#footer').load('/includes/footer.html', function() {
     changeUrl();
   });
 
-  $('.layer_wrap').load('../includes/layer.html', function() {
-    $('.layer.agency').load('../includes/layer_agency.html');
-    $('.layer.inquiry').load('../includes/layer_inquiry.html');
+  $('.layer_wrap').load('/includes/layer.html', function() {
+    $('.layer.agency').load('/includes/layer_agency.html');
+    $('.layer.inquiry').load('/includes/layer_inquiry.html');
   });
 
   $(document).on('click', 'header .btn_menu button', function() {

@@ -8,7 +8,7 @@ var COMM = {
             // contentType: 'application/json;charset=UTF-8',
             error : function(jqXHR, textStatus){ 
                 // 에러 공통 메세지를 띄우지 않으려면 error자체를 ajaxConfig에 재지정
-                // 메세지는 띄우고 추가 작업이 필요하면 errorCallback 전달
+                // 에러 공통 메세지는 띄우고 추가 작업이 필요하면 errorCallback 전달
                 console.log(jqXHR.status, jqXHR );
                 
                 alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
@@ -25,10 +25,10 @@ var COMM = {
         var params = {};
     
         //Search Data
-        var keyword = $('#keyword').val(); //검색어
-        var type = $('#type').val();       //구분
-        if(keyword != undefined) params['keyword'] = keyword;
-        if(type != undefined) params['type'] = type;
+        // var keyword = $('#keyword').val(); //검색어
+        // var type = $('#type').val();       //구분
+        // if(keyword != undefined) params['keyword'] = keyword;
+        // if(type != undefined) params['type'] = type;
 
         //Paging Data    
         var size = $('#size').val();    
@@ -70,7 +70,6 @@ var COMM = {
 			async: true,
             error : function(jqXHR, textStatus){
                 console.log(jqXHR.status, jqXHR );
-                
                 alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
                 if(typeof errorCallback != "undefined" && errorCallback != null){
                     errorCallback(jqXHR);
@@ -118,7 +117,7 @@ var setPagination = function(data, elemnt){
 
     var nextTmpl = $("#paginate-next-tmpl").html();
     var nextPage = data.page +1 > data.totalPages ?   data.totalPages : data.page +1;
-    var next = Mustache.render(nextTmpl,  {'class' : data.page !=  data.totalPages? 'enabled' : 'disabled', 'page': nextPage});
+    var next = Mustache.render(nextTmpl,  {'class' : data.page < data.totalPages? 'enabled' : 'disabled', 'page': nextPage});
 
     var paginateTmpl = $("#paginate-tmpl").html();
     var list = []
