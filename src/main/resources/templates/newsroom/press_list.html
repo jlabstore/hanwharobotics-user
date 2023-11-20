@@ -49,9 +49,11 @@
                             <div class="thumb_contents">{{{content}}}</div>
                             <div class="thumb_date">{{createDt}}</div>
                         </div>
-                        <div class="thumb_img">
-                            <img src="./images/pc/press_thumb@3x.jpg" alt="" />
-                        </div>
+                        {{#filePath}}
+                            <div class="thumb_img">
+                                <img src="{{filePath}}" alt="" />
+                            </div>
+                        {{/filePath}}
                     </a>
                 </div>
             {{/list}}

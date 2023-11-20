@@ -23,7 +23,13 @@
             tb_newsroom tn
             LEFT JOIN tb_newsroom_file tnf on tnf.file_no = (SELECT file_no 
                                                                 FROM tb_newsroom_file 
-                                                                WHERE newsroom_no = tn.newsroom_no
+                                                                <where>
+                                                                    and newsroom_no = tn.newsroom_no
+                                                                    <choose>
+                                                                        <when test="typeCd != null and typeCd != '' and typeCd == 'NEWSROOM_PRESS'">and thumnail_yn = 'Y'</when>
+                                                                        <otherwise>and thumnail_yn != 'Y'</otherwise>
+                                                                    </choose>
+                                                                </where>
                                                                 ORDER BY file_no DESC
                                                                 limit 1)
 		<where>
@@ -73,6 +79,8 @@
             type_cd,
             file_path
         FROM tb_newsroom_file
-        WHERE newsroom_no = #{no} 
+        WHERE 
+            newsroom_no = #{no} 
+            and thumnail_yn != 'Y'
     </select>
 </mapper>
