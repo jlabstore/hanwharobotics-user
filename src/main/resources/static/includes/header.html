@@ -104,7 +104,7 @@
         
           <ul class="header__nav__items_sub">
             <li>
-              <a href="#" target="_blank">Sales Inquiry</a>
+              <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
             </li>
           </ul>
         </li>
@@ -143,12 +143,10 @@
   }); 
 
   var setHeaderOn = function(){
-      var paths = window.location.pathname.split('/')
-      if(paths.length > 1){
-          $(".header_"+paths[1]).addClass('on');
-      }      
-      if(paths.length > 2){
-          $(".header_"+paths[2]).addClass('on');
+      var paths = window.location.pathname.split('/');
+      for(var i=0; i < paths.length ; i++){
+          $(".header_"+paths[i]).addClass('on');
+
       }
   }
 </script>

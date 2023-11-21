@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import com.hanwha.robotics.user.service.InquiryService;
 import com.hanwha.robotics.user.service.MainService;
 
 @Controller
+@RequestMapping("/contact")
 public class InquiryController {
     
     @Autowired
@@ -28,6 +30,16 @@ public class InquiryController {
     
     @Autowired
     InquiryService inquiryService;
+
+    
+    /**
+     * 문의하기 페이지 
+     * @return
+     */
+    @GetMapping("/inquiry")
+    public String about(){
+        return "contact/sales_inquiry_list";
+    }
 
 
     @RequestMapping(value="/inquiry/normal")

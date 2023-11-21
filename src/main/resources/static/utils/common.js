@@ -137,6 +137,7 @@ var layerInquiryBtn = function(data){
     $('#inquiryType').val(type);
     $('.layer.inquiry').show();
     $('.layer_bg').show();
+    $('#loading-prograss').hide();
 }
 
 var closeInquiryLayer = function(){
