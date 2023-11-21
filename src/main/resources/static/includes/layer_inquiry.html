@@ -1,5 +1,5 @@
 <div class="layer_inner">
-  <button class="btn_close" onclick="closeInquiryLayer()"><span>close</span></button>
+  <button class="btn_close"><span>close</span></button>
 
   <div class="title">문의하기</div>
 
@@ -21,9 +21,9 @@
         <label for="email">이메일주소<span>*</span></label>
         <input type="text" name="email" id="email" />
       </div>
-      <div class="form_input" style="display: none;">
+      <div class="form_input">
         <label for="inquiryType">문의유형<span>*</span></label>
-        <input type="text" name="inquiryType" id="inquiryType" readonly/>
+        <input type="text" name="inquiryType" id="inquiryType" placeholder="문의유형을 선택해주세요." />
       </div>
       <div class="form_input">
         <label for="company">회사명</label>
@@ -33,7 +33,11 @@
         <label for="inquiry">문의내용</label>
 
         <div class="inquiry">
-          <textarea name="inquiry" id="inquiry"></textarea>
+          <textarea name="inquiry">
+한화로보틱스는 첨단 정밀기계/자동화 분야에서 축적한 고도화된 설계 및 스마트 기술 레퍼런스를 기반으로 우수한 품질과 신뢰도를 보유한 협동로봇, 모빌리티(AGV/AMR) 기술을 개발하고 있습니다. 
+첨단산업 등 B2B 고객 대상으로는 스마트 팩토리 등 고부가 가치의 솔루션 제공을 통해 고객의 지속적인 성장에 함께하겠습니다. 나아가 서비스, 푸드테크 등 B2C 분야에서 인간과 로봇이 조화롭게 공존하는 자동화 기술과 제품 구현을 통해 인간이 더 편리하고 자유로울 수 있는 디지털 시대로의 전환(Digital Transformation)에 기여하고자 합니다.
+한화로보틱스는 기술 품질과 신뢰를 경영의 제1원칙으로 설정해 고객이 안심하고 사용할 수 있는 제품과 솔루션을 제공하고, 미래를 내다보는 차별화된 기술과 솔루션을 제공하겠습니다.
+          </textarea>
         </div>
       </div>
     </div>
@@ -58,8 +62,8 @@
       </div>
 
       <div class="btn_group">
-        <button type="button" class="btn btn--block btn--orange" onclick="validate()">보내기</button>
-        <button type="button" class="btn btn--block btn--gray"  onclick="closeInquiryLayer()">취소</button>
+        <button type="button" class="btn btn--block btn--orange">보내기</button>
+        <button type="button" class="btn btn--block btn--gray">취소</button>
       </div>
     </div>
   </form>
@@ -77,51 +81,3 @@
     <p>로봇해외영업 : 하인오 대리 (ioh9310@hanwha.com)</p>
   </div>
 </div>
-  <script>
-    function validate(){
-      if($('#name').val() == ''){
-        alert('이름을 입력해주세요.');
-        $('#name').focus();
-        return;
-      }else if($('#tel').val() == ''){
-        alert('연락처를 입력해주세요.');
-        $('#tel').focus();
-        return;
-      }else if($('#email').val() == ''){
-        alert('이메일을 입력해주세요.');
-        $('#email').focus();
-        return;
-      }else if($('#agree').is(':checked') == false){
-        alert('개인정보 수집 및 이용동의에 동의해주세요.');
-        $('#agree').focus();
-        return;
-      }else{
-        sendMail();
-      }
-    }
-    function sendMail(){
-      var temp = {
-        name: $('#name').val(),
-        tel: $('#tel').val(),
-        email: $('#email').val(),
-        inquiryType: $('#inquiryType').val(),
-        company : $('#company').val(),
-        inquiry : $('#inquiry').val()
-      }
-          COMM.ajax({
-                url : "/inquiry/send",
-                headers: {'Content-Type': 'application/json'},
-                data: JSON.stringify(temp),
-                success : function(data) {
-                      if(data.code === 200){
-                        alert('문의가 완료되었습니다. \r\n 담당자가 확인 후 연락드릴 예정입니다')
-                        closeInquiryLayer();
-                      }
-                },
-                error : function(jqXHR, textStatus, errorThrown){
-                      console.log(jqXHR.status, jqXHR);
-                      
-                }
-          });
-    }
-  </script>

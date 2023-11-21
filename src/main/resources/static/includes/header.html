@@ -4,16 +4,6 @@
     <a href="/" class="logo_link">
       <span>한화로보틱스</span>
     </a>
-
-    <div class="txt">
-      <a href="#" target="_blank">
-        한화로보틱스와 함께 로봇산업을 이끌어 갈 대리점을 모집합니다
-        <span>
-          more
-          <strong></strong>
-        </span>
-      </a>
-    </div>
   </div>
 
   <div class="btn_menu">
@@ -26,20 +16,106 @@
   <div class="gnb_layer"></div>
 
   <div class="gnb_menu">
+
+    <div class="logo">
+      <a href="/" class="logo_link">
+        <span>한화로보틱스</span>
+      </a>
+    </div>
+    
     <button class="btn_close">
-      Close
+      <span>Close</span>
     </button>
 
     <ul class="header__nav__items">
       <li>
-        <a class="header__nav__link" href="https://o.hanwharobotics.com/" target="_blank">ROBOTS</a>
+        <a class="header__nav__link" href="https://o.hanwharobotics.com/" target="_blank" style="opacity: 100%;">ROBOTS</a>
+        <!-- <span class="header__nav__link">ROBOTS</span>
+        <ul class="header__nav__items_sub">
+          <li>
+            <a href="https://o.hanwharobotics.com/Product/HCR3" target="_blank">Products</a>
+          </li>
+          <li>
+            <a href="https://o.hanwharobotics.com/" target="_blank">Solutions</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">Ecosystem</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">Case Study</a>
+          </li>
+        </ul> -->
       </li>
       <li>
-        <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp" target="_blank">AGVS</a>
+        <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp" target="_blank" style="opacity: 100%;">AGVS</a>
+        <!-- <span class="header__nav__link">AGVS</span>
+
+        <ul class="header__nav__items_sub">
+          <li>
+            <a href="#" target="_blank">Products</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">Solutions</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">Case Study</a>
+          </li>
+        </ul> -->
       </li>
-      <li><a class="header__nav__link header_about" href="/about" >ABOUT</a></li>
-      <li><a class="header__nav__link header_newsroom" href="/newsroom" >NEWSROOM</a></li>
-      <li class="inquiry"><button class="inquiry" onclick="layerInquiryBtn(1)">문의하기</button></li>
+      <li>
+        <!-- <a class="header__nav__link" href="/about.html" target="_blank">ABOUT</a> -->
+        <span class="header__nav__link">ABOUT</span>
+
+        <ul class="header__nav__items_sub">
+          <li>
+            <a href="/about" >한화로보틱스</a>
+          </li>
+          <!-- <li>
+            <a href="#" target="_blank">연혁</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">경영</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">채용</a>
+          </li> -->
+        </ul>
+      </li>
+      <li>
+        <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
+        <span class="header__nav__link">NEWSROOM</span>
+      
+        <ul class="header__nav__items_sub">
+          <li>
+            <a href="/newsroom/press" target="_blank">Press</a>
+          </li>
+          <li>
+            <a href="/newsroom/ir" target="_blank">IR</a>
+          </li>
+          <li>
+            <a href="/newsroom/notice" target="_blank">Notice</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
+        <span class="header__nav__link">CONTACT</span>
+      
+        <ul class="header__nav__items_sub">
+          <li>
+            <a href="#" target="_blank">Sales Inquiry</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="header__nav__items_right">
+      <li>
+        <a href="#" class="sales-inquiry">대리점 모집</a>
+      </li>
+      <li>
+        <button class="inquiry">문의하기</button>
+      </li>
     </ul>
 
     <!-- <div class="footer">
@@ -47,27 +123,13 @@
     </div> -->
   </div>
 
-  <div class="more_btn">
-    <button class="inquiry" onclick="layerInquiryBtn(2)">
+  <!-- <div class="more_btn">
+    <button class="inquiry">
       문의하기
     </button>
-    <a href="/distributor" class="distributor" onclick="layerInquiryBtn(1)">
+    <a href="/distributor" class="distributor">
       대리점 모집
     </a>
-  </div>
+  </div> -->
 
 </div>
-
-
-<script>
-  $(document).ready(function () {   
-      setHeaderOn();
-  }); 
-
-  var setHeaderOn = function(){
-      var paths = window.location.pathname.split('/')
-      if(paths.length > 1){
-          $(".header_"+paths[1]).addClass('on');
-      }
-  }
-</script>
