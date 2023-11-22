@@ -23,7 +23,7 @@
                 <div class="board_files"></div>
         
                 <div class="board_prev">
-                    <a href="javascript:history.back()" >
+                    <a href="javascript:void(0)" onClick="goBack()">
                       목록으로
                     </a>
                 </div>
@@ -39,6 +39,21 @@
             $(document).ready(function () {  
               getData(); 
             }); 
+
+
+            function goBack(){
+              var params = {};  
+              window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
+                 function(str, key, value) { 
+                    params[key] = value; 
+                 }
+              );
+              if(params["to"] != undefined && params["to"]=="main"){
+                 location.href="/newsroom/press";
+              }else{
+                 history.back();
+              }
+            }
 
             function getData(){
               var paths = window.location.pathname.split('/')

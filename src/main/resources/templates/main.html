@@ -181,7 +181,7 @@
 
             <script id="updates-tmpl" type="x-tmpl-mustache">
                   {{#list}}
-                        <div onclick="location.href='/newsroom/notice/{{newsroomNo}}'" style="cursor:pointer">{{title}}</div>
+                        <div onclick="location.href='/newsroom/notice/{{newsroomNo}}?to=main'" style="cursor:pointer">{{title}}</div>
                   {{/list}}
             </script>
 
@@ -215,7 +215,7 @@
                         COMM.ajax({
                               url : "/main/updates",
                               success : function(data) {
-                                    if(data.code === 200 &&  data.data != null){
+                                    if(data.code === 200 &&  data.data != null  && data.data.length > 0){
                                           // console.log(data)
                                         var template = $("#updates-tmpl").html();
                                         var rendered = Mustache.render(template, {'list' : data.data});
@@ -233,10 +233,11 @@
                         COMM.ajax({
                               url : "/main/newsroom",
                               success : function(data) {
-                                    if(data.code === 200 &&  data.data != null){
+                                    if(data.code === 200 &&  data.data != null && data.data.length > 0){
                                           $(data.data).map(function(i, e){
-                                              e.href = "newsroom" + "/" + e.typeCdNm.toLowerCase();
-                                              if(e.typeCdNm.toLowerCase() != 'ir') e.href += "/" + e.newsroomNo
+                                              var typeCdNm =  e.typeCdNm != null ? e.typeCdNm.toLowerCase() : 'notice';
+                                              e.href = "newsroom" + "/" + typeCdNm;
+                                              if(typeCdNm != 'ir') e.href += "/" + e.newsroomNo + '?to=main'
                                               e.createDt = e.createDt ? e.createDt.replaceAll('-','.') : e.createDt;
                                           });
                                           var template = $("#newsroom-tmpl").html();
