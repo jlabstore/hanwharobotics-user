@@ -111,7 +111,9 @@
                         var rendered = Mustache.render(template, {'list' : data.contents});
                         $('.tbody').html(rendered);
 
-                        setPagination(data, $('.paging'));
+                        if(data.totalElements != 0){
+                            setPagination(data, $('.paging'));
+                        }
 
                     }
                 );
