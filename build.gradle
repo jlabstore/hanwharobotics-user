@@ -12,6 +12,10 @@ java {
 	sourceCompatibility = '11'
 }
 
+bootWar {
+	archiveFileName = 'ROOT.war'
+}
+
 repositories {
 	mavenCentral()
 }
