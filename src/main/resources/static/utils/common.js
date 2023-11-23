@@ -133,8 +133,17 @@ var setPagination = function(data, elemnt){
 
 var layerInquiryBtn = function(data){
     $('body').addClass('scroll-lock');
-    var type  = data == 1 ? '대리점 문의' : '제품문의'
+    var type  = data == 1 ? '대리점 문의' : '제품문의';
+
+    //init
     $('#inquiryType').val(type);
+    $('#name').val('');
+    $('#tel').val('');
+    $('#email').val('');
+    $('#company').val('');
+    $('#inquiry').val('');
+
+    //show
     $('.layer.inquiry').show();
     $('.layer_bg').show();
     $('#loading-prograss').hide();
