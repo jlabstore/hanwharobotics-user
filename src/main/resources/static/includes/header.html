@@ -5,7 +5,19 @@
       <a href="/" class="logo_link">
         <span>한화로보틱스</span>
       </a>
+
+      <div class="txt">
+        <a href="/contact/inquiry" target="_blank">
+          한화로보틱스와 함께 로봇산업을 이끌어 갈 대리점을 모집합니다
+          <span>
+            more
+            <strong></strong>
+          </span>
+        </a>
+      </div>
+
     </div>
+
 
     <div class="btn_menu">
       <button>
@@ -23,12 +35,34 @@
           <span>한화로보틱스</span>
         </a>
       </div>
-      
+
       <button class="btn_close">
-        <span>Close</span>
+        <span>X</span>
       </button>
 
       <ul class="header__nav__items">
+        <li>
+          <!-- <a class="header__nav__link" href="/about.html" target="_blank">ABOUT</a> -->
+          <span class="header__nav__link">ABOUT</span>
+
+          <ul class="header__nav__items_sub">
+            <li>
+              <a href="/about" class="header_about">한화로보틱스</a>
+            </li>
+            <li>
+              <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
+            </li>
+            <!-- <li>
+              <a href="#" target="_blank">연혁</a>
+            </li>
+            <li>
+              <a href="#" target="_blank">경영</a>
+            </li>
+            <li>
+              <a href="#" target="_blank">채용</a>
+            </li> -->
+          </ul>
+        </li>
         <li>
           <a class="header__nav__link" href="https://o.hanwharobotics.com/"  style="opacity: 100%;" target="_blank">ROBOTS</a>
           <!-- <span class="header__nav__link on">ROBOTS</span>
@@ -63,29 +97,11 @@
             </li>
           </ul> -->
         </li>
-        <li>
-          <!-- <a class="header__nav__link" href="/about.html" target="_blank">ABOUT</a> -->
-          <span class="header__nav__link">ABOUT</span>
 
-          <ul class="header__nav__items_sub">
-            <li>
-              <a href="/about" class="header_about">한화로보틱스</a>
-            </li>
-            <!-- <li>
-              <a href="#" target="_blank">연혁</a>
-            </li>
-            <li>
-              <a href="#" target="_blank">경영</a>
-            </li>
-            <li>
-              <a href="#" target="_blank">채용</a>
-            </li> -->
-          </ul>
-        </li>
         <li>
           <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
           <span class="header__nav__link">NEWSROOM</span>
-        
+
           <ul class="header__nav__items_sub">
             <li>
               <a href="/newsroom/press" class="header_press" >Press</a>
@@ -101,7 +117,7 @@
         <li>
           <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
           <span class="header__nav__link">CONTACT</span>
-        
+
           <ul class="header__nav__items_sub">
             <li>
               <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
@@ -112,9 +128,9 @@
 
 
       <ul class="header__nav__items_right">
-        <!-- <li>
-          <a href="#" class="sales-inquiry">대리점 모집</a>
-        </li> -->
+        <li>
+          <a href="/contact/inquiry" class="sales-inquiry">대리점 모집</a>
+        </li>
         <li>
           <button class="inquiry" onclick="location.href='/contact/inquiry'">문의하기</button>
         </li>
@@ -136,18 +152,3 @@
 
   </div>
 </div>
-
-
-<script>
-  $(document).ready(function () {   
-      setHeaderOn();
-  }); 
-
-  var setHeaderOn = function(){
-      var paths = window.location.pathname.split('/');
-      for(var i=0; i < paths.length ; i++){
-          $(".header_"+paths[i]).addClass('on');
-
-      }
-  }
-</script>
