@@ -144,13 +144,13 @@ var layerInquiryBtn = function(data){
     $('#inquiry').val('');
 
     //show
-    $('.layer.inquiry').show();
+    $('.layer.inquiry').show('fast');;
     $('.layer_bg').show();
     $('#loading-prograss').hide();
 }
 
 var closeInquiryLayer = function(){
     $('body').removeClass('scroll-lock');
-    $('.layer.inquiry').hide();
+    $('.layer.inquiry').hide('fast');
     $('.layer_bg').hide();
 }
