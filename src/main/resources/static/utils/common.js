@@ -142,6 +142,7 @@ var layerInquiryBtn = function(data){
     $('#email').val('');
     $('#company').val('');
     $('#inquiry').val('');
+    $('#position').val('');
 
     //show
     $('.layer.inquiry').show('fast');;

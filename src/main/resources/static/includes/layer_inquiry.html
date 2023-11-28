@@ -52,23 +52,27 @@
         <input type="text" name="name" id="name" />
       </div>
       <div class="form_input">
-        <label for="tel">연락처<span>*</span></label>
-        <input type="text" name="tel" id="tel" />
+        <label for="company">회사명<span>*</span></label>
+        <input type="text" name="company" id="company" />
       </div>
       <div class="form_input">
-        <label for="email">이메일주소<span>*</span></label>
+        <label for="position">직급<span>*</span></label>
+        <input type="text" name="position" id="position" />
+      </div>
+      <div class="form_input">
+        <label for="email">이메일<span>*</span></label>
         <input type="text" name="email" id="email" />
+      </div>
+      <div class="form_input">
+        <label for="tel">연락처<span>*</span></label>
+        <input type="text" name="tel" id="tel" />
       </div>
       <div class="form_input" style="display: none;">
         <label for="inquiryType">문의유형<span>*</span></label>
         <input type="text" name="inquiryType" id="inquiryType" readonly/>
       </div>
       <div class="form_input">
-        <label for="company">회사명</label>
-        <input type="text" name="company" id="company" />
-      </div>
-      <div class="form_input">
-        <label for="inquiry">문의내용</label>
+        <label for="inquiry">문의내용<span>*</span></label>
 
         <div class="inquiry">
           <textarea name="inquiry" id="inquiry"></textarea>
@@ -121,13 +125,25 @@
         alert('이름을 입력해주세요.');
         $('#name').focus();
         return;
-      }else if($('#tel').val() == ''){
-        alert('연락처를 입력해주세요.');
-        $('#tel').focus();
+      }else if($('#company').val() == ''){
+        alert('회사명을 입력해주세요.');
+        $('#company').focus();
+        return;
+      }else if($('#position').val() == ''){
+        alert('직급을 입력해주세요.');
+        $('#position').focus();
         return;
       }else if($('#email').val() == ''){
         alert('이메일을 입력해주세요.');
         $('#email').focus();
+        return;
+      }else if($('#tel').val() == ''){
+        alert('연락처를 입력해주세요.');
+        $('#tel').focus();
+        return;
+      }else if($('#inquiry').val() == ''){
+        alert('문의내용을 입력해주세요.');
+        $('#inquiry').focus();
         return;
       }else if($('#agree').is(':checked') == false){
         alert('개인정보 수집 및 이용동의에 동의해주세요.');
@@ -137,13 +153,15 @@
         sendMail();
       }
     }
+
     function sendMail(){
       var temp = {
         name: $('#name').val(),
-        tel: $('#tel').val(),
-        email: $('#email').val(),
-        inquiryType: $('#inquiryType').val(),
         company : $('#company').val(),
+        position : $('#position').val(),
+        email: $('#email').val(),
+        tel: $('#tel').val(),
+        inquiryType: $('#inquiryType').val(),
         inquiry : $('#inquiry').val()
       }
           COMM.ajax({
