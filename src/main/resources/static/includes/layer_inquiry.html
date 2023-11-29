@@ -67,10 +67,10 @@
         <label for="tel">연락처<span>*</span></label>
         <input type="text" name="tel" id="tel" />
       </div>
-      <div class="form_input" style="display: none;">
+      <!-- <div class="form_input" style="display: none;">
         <label for="inquiryType">문의유형<span>*</span></label>
         <input type="text" name="inquiryType" id="inquiryType" readonly/>
-      </div>
+      </div> -->
       <div class="form_input">
         <label for="inquiry">문의내용<span>*</span></label>
 
@@ -176,9 +176,9 @@
                 },
                 error : function(jqXHR, textStatus, errorThrown){
                       console.log(jqXHR.status, jqXHR);
-                      
+
                 },
-                beforeSend: function (){  
+                beforeSend: function (){
                       $('#loading-prograss').show();
                 },
                 complete : function (){

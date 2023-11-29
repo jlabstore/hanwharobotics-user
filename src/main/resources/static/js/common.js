@@ -1,12 +1,19 @@
 const win = $(this); //this = window
+let headerMinHeight = '90px';
 
 // pc, table, mobile 여부
 $(window).on("load resize", function (e) {
+  $('#header .header__nav__items_sub').removeClass('active');
+  $(this).closest('#header').removeClass('active');
+  $(this).removeClass('active');
+  $('header .btn_menu button').removeClass('active');
+  $('.gnb_menu, .gnb_layer').removeClass('active');
+  $('html').removeClass('scroll-lock');
 
   let top = 0;
-  
+
   if (win.width() <= 950) {
-    top = 70;
+    top = 100;
   } else if (win.width() > 950 && win.width() <= 1190) {
     top = 167;
   } else {
@@ -14,9 +21,13 @@ $(window).on("load resize", function (e) {
   }
 
   let headerHeight = '332px';
-  if(win.width() <= 1550) {
-    headerHeight = '450px';
+  if(win.width() <= 1024) {
+    headerMinHeight = '70px';
   }
+
+  // if(win.width() <= 1550) {
+  //   headerHeight = '450px';
+  // }
 
   if (win.width() <= 1024) {
     $(document).off('mouseover mouseleave');
@@ -29,13 +40,32 @@ $(window).on("load resize", function (e) {
       e.stopPropagation();
 
       if(e.target.tagName !== 'A') {
-        $(this).find('.header__nav__items_sub').addClass('active');
-        $(this).closest('#header').addClass('active');
-        $(this).closest('#header').animate({'height': headerHeight}, 'fast');
+        $(this).closest('#header').stop().animate({'height': headerHeight}, 'fast', () => {
+          $(this).find('.header__nav__items_sub').addClass('active');
+          $(this).closest('#header').addClass('active');
+        });
         // $(this).closest('.header__nav__items_sub').addClass('active');
       }
     });
+  } else {
+
+    $(document).on('mouseover', '#header .gnb_menu', function() {
+
+      $(this).closest('#header').addClass('active');
+      $(this).closest('#header').stop().animate({'height': headerHeight}, 100, () => {
+        $(this).find('.header__nav__items_sub').addClass('active');
+      });
+    })
+    .on('mouseleave', '#header', function() {
+      $(this).closest('#header').stop().animate({'height': headerMinHeight}, 100, () => {
+        $(this).find('.header__nav__items_sub').removeClass('active');
+        $(this).closest('#header').removeClass('active');
+      });
+    });
+
   }
+
+  $('#header').css('height', headerMinHeight);
 
   if (win.width() <= 1024) {
     $("body").attr("class", "mobile");
@@ -49,7 +79,7 @@ $(window).on("load resize", function (e) {
   setTimeout(function() {
     // more_btn 요소를 선택합니다.
     const moreBtn = $('#aside .more_btn');
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;    
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     // Convert the current top style to an integer and add the scroll position
     // const currentTop = parseInt(moreBtn.css('top'), 10);
     moreBtn.css('top', top + scrollPosition + 'px');
@@ -59,9 +89,6 @@ $(window).on("load resize", function (e) {
 $(document).ready(async function() {
 
   let headerHeight = '332px';
-  if(win.width() <= 1550) {
-    headerHeight = '450px';
-  }
 
   $('#header').load('/includes/header.html');
   $('#aside').load('/includes/aside.html');
@@ -85,7 +112,9 @@ $(document).ready(async function() {
   $(document).on('click', 'header .gnb_layer, header .gnb_menu .btn_close', function(e) {
     e.stopPropagation();
 
-    $(this).closest('#header').animate({'height': '90px'}, 'fast');
+    if(win.width() > 950) {
+      $(this).closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+    }
     $('#header .header__nav__items_sub').removeClass('active');
     $(this).closest('#header').removeClass('active');
     $(this).removeClass('active');
@@ -97,7 +126,9 @@ $(document).ready(async function() {
   $(document).on('click', 'header .gnb_menu .header__nav__items .header__nav__items_sub a', function(e) {
     e.stopPropagation();
 
-    $(this).closest('#header').animate({'height': '90px'}, 'fast');
+    if(win.width() > 950) {
+      $(this).closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+    }
     $('#header .header__nav__items_sub').removeClass('active');
     $(this).closest('#header').removeClass('active');
     $(this).removeClass('active');
@@ -106,6 +137,9 @@ $(document).ready(async function() {
     $('html').removeClass('scroll-lock');
   });
 
+  /**
+   * 문의하기 버튼(header.html와 aside.html의 inquiry) 클릭 시 문의하기 팝업 호출
+   */
   $(document).on('click', '#header button.inquiry, #aside button.inquiry', function(e) {
     e.stopPropagation();
 
@@ -113,35 +147,27 @@ $(document).ready(async function() {
     $('.layer.inquiry').show('fast');
     $('.layer_bg').show();
     $(this).removeClass('active');
-    $('html').removeClass('scroll-lock'); 
+    $('html').removeClass('scroll-lock');
 
     $('header .btn_menu button').removeClass('active');
     $('.gnb_menu, .gnb_layer').removeClass('active');
 
     $('.header__nav__items_sub').removeClass('active');
-    $(this).closest('#header').animate({'height': '90px'}, 'fast');
+    $(this).closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
     $('#header').removeClass('active');
   });
 
+  /**
+   * utils/common.js 에 동일한 기능 존재하여 주석 처리
+   */
   // $(document).on('click', '.layer_bg, .layer .btn_close', function() {
   //   $('body').removeClass('scroll-lock');
   //   $('.layer.inquiry').hide('fast');
   //   $('.layer_bg').hide();
   // });
 
-  $(document).on('mouseover', '#header .gnb_menu', function() {
-    $(this).closest('#header').addClass('active');
-    $(this).find('.header__nav__items_sub').addClass('active');
-    $(this).closest('#header').animate({'height': headerHeight}, 'fast');
-  })
-  .on('mouseleave', '#header', function() {
-    $(this).find('.header__nav__items_sub').removeClass('active');
-    $(this).closest('#header').removeClass('active');
-    $(this).closest('#header').animate({'height': '90px'}, 'fast');
-  });
-
 });
-  
+
 // 스크롤 이벤트 리스너를 추가합니다.
 window.addEventListener('scroll', throttle(function() {
   requestAnimationFrame(() => {
@@ -157,10 +183,10 @@ window.addEventListener('scroll', throttle(function() {
 
     // more_btn 요소를 선택합니다.
     const moreBtn = $('#aside .more_btn');
-    
+
     // 브라우저 창 상단으로부터의 현재 스크롤 위치를 얻습니다.
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      
+
     // Convert the current top style to an integer and add the scroll position
     // const currentTop = parseInt(moreBtn.css('top'), 10);
     moreBtn.css('top', top + scrollPosition + 'px');
