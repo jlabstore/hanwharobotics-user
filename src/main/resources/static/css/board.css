@@ -270,12 +270,13 @@
 }
 .press-list .board-type1 .thumbs {
   width: 100%;
+  border-bottom: 1px solid #cbcbcb;
 }
 
 .press-list .board-type1 .thumb {
   padding: 44px 0 45px 0;
   border-top: 1px solid #cbcbcb;
-  border-bottom: 1px solid #cbcbcb;
+  /* border-bottom: 1px solid #cbcbcb; */
 }
 
 .press-list .board-type1 .thumb a {
@@ -296,6 +297,10 @@
   color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.press-list .board-type1 .thumb .thumb_contents figure {
+  display: none !important;
 }
 
 .press-list .board-type1 .thumb .thumb_contents {
