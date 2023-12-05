@@ -28,7 +28,7 @@ function padBoxPositionUp() {
       rootMargin: '400px 0px -100px 0px', // 50px 상단에서 감시를 시작합니다
       threshold: 0 // 대상 요소가 뷰포트에 진입할 때 콜백 함수를 호출합니다
     };
-    
+
     // Intersection Observer 콜백 함수
     const observerCallback = (entries, observer) => {
       entries.forEach(entry => {
@@ -42,11 +42,11 @@ function padBoxPositionUp() {
 
     // Intersection Observer 인스턴스 생성
     const observer = new IntersectionObserver(observerCallback, options);
-    
+
     // 감시할 요소를 Observer에 연결
     observer.observe(element);
   }
-} 
+}
 
 function imgShowHide(ele, height) {
   const element = document.querySelectorAll(ele);
@@ -54,7 +54,7 @@ function imgShowHide(ele, height) {
   const fiftyVHInPixels = vhInPixels * 48; // 50vh의 픽셀 값
   const rootHeightResult = $('body').hasClass('pc') ? 3 : 2.7;
   const rootHeight = height/rootHeightResult;
-  
+
   for(let i = 0; i < element.length; i++) {
     // Intersection Observer 옵션 설정
     const options = {
@@ -62,7 +62,7 @@ function imgShowHide(ele, height) {
       rootMargin: `-${fiftyVHInPixels+rootHeight}px 0px -${fiftyVHInPixels-rootHeight}px 0px`, // 50px 상단에서 감시를 시작합니다
       threshold: [0, 0.25, 0.5, 0.75, 1] // 대상 요소가 뷰포트에 진입할 때 콜백 함수를 호출합니다
     };
-    
+
     // Intersection Observer 콜백 함수
     const observerCallback = (entries, observer) => {
       entries.forEach(entry => {
@@ -95,7 +95,7 @@ function imgShowHide(ele, height) {
 
         } else {
           const eleLength = i <=  $img.length ? i+1 : $img.length;
-          
+
           if((eleLength%2) === 0) {
             $img.eq(i)
             .closest('.imageScroll_inner').css({
@@ -112,7 +112,7 @@ function imgShowHide(ele, height) {
               .removeClass('hideTop hideBottom').addClass(className);
             }
           }
-        }          
+        }
 
         lastScrollY = currentScrollY; // Update the value for the next callback invocation
 
@@ -121,7 +121,7 @@ function imgShowHide(ele, height) {
 
     // Intersection Observer 인스턴스 생성
     let observer = new IntersectionObserver(observerCallback, options);
-    
+
     // 감시할 요소를 Observer에 연결
     observer.observe(element[i]);
 
@@ -132,7 +132,7 @@ function imgShowHide(ele, height) {
 function stopObservingAll(ele) {
   const element = document.querySelectorAll(ele);
   const $img = $('.imageScroll .img');
-  
+
   for (let i = 0; i < element.length; i++) {
     if(imgObservers[i]) {
       imgObservers[i].unobserve(element[i]);
@@ -158,15 +158,15 @@ $(window).on("load resize", function (e) {
 
   resizeTimeout = setTimeout(function() {
     const win = $(this); //this = window
-    
+
     AOS.init({
       disable: function() {
         var maxWidth = 1024;
         return window.innerWidth > maxWidth;
       }
     });
-    
-    if (win.width() <= 1024) {
+
+    if (win.width() <= 1023) {
       stopObservingAll('.section_2 .list');
     } else if (win.width() <= 1500) {
       padBoxPositionUp();

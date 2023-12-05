@@ -187,7 +187,10 @@ header .btn_menu .icon-bottom {
 }
 
 #aside {
-	position: relative;
+	/* position: relative; */
+	position: fixed;
+	top: 207px;
+	right: 63px;
 	z-index: 6;
 	max-width: 1920px;
 	margin: 0 auto;
@@ -195,9 +198,9 @@ header .btn_menu .icon-bottom {
 #aside .more_btn {
 	display: flex;
 	flex-direction: column;
-	position: absolute;
+	/* position: absolute;
 	top: 207px;
-	right: 63px;
+	right: 63px; */
 	z-index: 6;
 	gap: 13px;
 }
@@ -498,7 +501,7 @@ header .gnb_layer.active {
 	margin: 0 auto;
 	max-width: 1920px;
 	box-sizing: border-box;
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
 }
 
 .sub.about {
@@ -759,8 +762,8 @@ footer select {
 		width: 100%;
 		height: 100%;
 		display: flex;
-		opacity: 0.6;
-		background-color: #000;
+		opacity: 1;
+		background-color: #666;
 	}
 
 	.inquiry_more a {
@@ -1101,7 +1104,7 @@ footer select {
 }
 
 
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
 	header .gnb_menu .header__nav__items li.inquiry {
 		display: none;
 	}
@@ -1110,7 +1113,7 @@ footer select {
 		position: relative;
 		display: flex;
 		justify-content: space-between;
-		margin-top: 10vw;
+		/* margin-top: 10vw; */
 		padding: 52px 64px 52px;
 		background-color: #000;
 	}
@@ -1365,6 +1368,11 @@ footer select {
 		/* bottom: 35px; */
 		/* right: 35px; */
 	}
+
+	#aside {
+		top: 167px;
+		right: 40px;
+	}
 }
 
 @media (max-width: 1023px) {
@@ -1372,7 +1380,7 @@ footer select {
 		position: relative;
 		display: flex;
 		justify-content: space-between;
-		margin-top: 10vw;
+		/* margin-top: 10vw; */
 		padding: 42px 50px 42px;
 		background-color: #000;
 	}
@@ -1517,11 +1525,13 @@ footer select {
 
 @media (max-width: 950px) {
 	
-	#aside .more_btn {
+	#aside {
 		top: 130px;
 		right: 10px;
 	}
-
+	#aside .more_btn {
+		gap: 3px;
+	}
 	#aside .more_btn a, #aside button.inquiry {
 		cursor: pointer;
 		display: flex;
@@ -1736,13 +1746,18 @@ footer select {
 		transform: translateX(0%);
 		background-color: #000;
 	}
+
+	#aside {
+		top: 120px;
+		right: 10px;
+	}
 	footer {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 		height: auto;
-		margin-top: 60px;
+		/* margin-top: 60px; */
 		padding: 42px 50px 42px;
 		background-color: #000;
 		overflow: hidden;
@@ -1836,7 +1851,7 @@ footer select {
 		flex-direction: column;
 		justify-content: flex-start;
 		height: auto;
-		margin-top: 60px;
+		/* margin-top: 60px; */
 		padding: 50px 20px 50px;
 		background-color: #000;
 		overflow: hidden;
