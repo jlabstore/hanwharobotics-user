@@ -1,37 +1,43 @@
 .notice-list {
-  padding: 190px 60px 0;
+  padding: 180px 60px 0;
 }
 
 .sales-inquiry-list {
-  padding: 190px 60px 0;
+  padding: 180px 60px 0;
 }
 
 .notice-view {
-  padding: 190px 60px 0;
+  padding: 180px 60px 0;
 }
 
 .ir-list {
-  padding: 190px 60px 0;
+  padding: 180px 60px 0;
 }
 
 .press-list {
-  padding: 190px 60px 0;
+  padding: 180px 60px 0;
 }
 
 .press-view {
-  padding: 190px 60px 0;
+  padding: 180px 60px 0;
 }
 
 .board {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   width: 100%;
   /* gap: 250px; */
 }
 
+
+.notice-view .board, .press-view .board {
+  justify-content: flex-start;
+}
+
+
 .board-type1 .column:first-child {
-  width: 64%;
+  /* width: 64%; */
 }
 
 
@@ -78,8 +84,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
-  margin: 165px 0 0 200px;
+  width: 1100px;
+  margin: 165px 0 0 0;
   gap: 60px;
 }
 
@@ -213,12 +219,12 @@
 }
 
 .notice-view .board-type1 .column:nth-child(1) {
-  width: auto !important;
+  /* width: auto !important; */
 }
 
 .notice-view .board-type1 .column:nth-child(2) {
   margin-left: 92px;
-  width: 50%;
+  width: 800px;
 }
 
 .notice-view .board-type1 .board_title {
@@ -288,8 +294,8 @@
 }
 
 .press-list .board-type1 .thumb .thumb_title {
-  height: 25px;
-  font-family: HanwhaGothicEL_OTF;
+  max-height: 50px;
+  font-family: HanwhaGothicB_OTF;
   font-size: 22px;
   font-weight: bold;
   line-height: 1.18;
@@ -345,8 +351,10 @@
 }
 
 .press-view .board-type1 .column:nth-child(2) {
+  /* margin-left: 92px;
+  width: 50%; */
+  width: 800px;
   margin-left: 92px;
-  width: 50%;
 }
 
 
@@ -416,6 +424,14 @@
 
 .press-view .board-type1 .board_contents .image {
   margin-bottom: 40px;
+}
+
+.press-view .board-type1 .board_contents .image .image_desc{
+  margin-top: 15px;
+  font-family: HanwhaGothicB_OTF;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #999;
 }
 
 .press-view .board-type1 .board_contents img {
@@ -699,18 +715,63 @@
   color: #000;
 }
 
+@media (max-width: 1650px) {
+
+  .board-type1 h1 {
+    font-family: HanwhaGothicB_OTF;
+    font-size: 93px !important;
+    line-height: 1.19;
+    text-align: left;
+    color: #000;
+  }
+
+  .board-type1 .desc {
+    margin-top: 25px;
+    /* padding-bottom: 70%; */
+    font-family: HanwhaGothicEL_OTF;
+    font-size: 25px !important;
+    line-height: 1.39;
+    color: #000;
+    /* background: url('../images/pc/bg_notice@3x.webp') no-repeat 0 100%; */
+    background-size: 100% auto;
+  }
+
+}
+
+@media (max-width: 1580px) {
+
+  .board-type1 h1 {
+    font-family: HanwhaGothicB_OTF;
+    font-size: 83px !important;
+    line-height: 1.19;
+    text-align: left;
+    color: #000;
+  }
+
+  .board-type1 .desc {
+    margin-top: 25px;
+    /* padding-bottom: 70%; */
+    font-family: HanwhaGothicEL_OTF;
+    font-size: 20px !important;
+    line-height: 1.39;
+    color: #000;
+    /* background: url('../images/pc/bg_notice@3x.webp') no-repeat 0 100%; */
+    background-size: 100% auto;
+  }
+
+}
 @media (max-width: 1500px) {
   .ir-list {
-    padding: 130px 30px 0;
+    padding: 230px 30px 0;
   }
   .notice-list {
-    padding: 130px 30px 0;
+    padding: 230px 30px 0;
   }
   .sales-inquiry-list {
-    padding: 130px 30px 0;
+    padding: 230px 30px 0;
   }
   .press-list {
-    padding: 130px 30px 0;
+    padding: 230px 30px 0;
   }
 }
 
@@ -859,6 +920,17 @@
     background: url('../images/pc/btn_prev.svg') no-repeat 0 center;
     background-size: 31px 31px;
   }
+  .press-list .board-type1 .thumb .thumb_img {
+    margin-top: 0;
+    display: none;
+  }
+  .press-view .board-type1 .board_contents .image .image_desc{
+    margin-top: 10px;
+    font-family: HanwhaGothicB_OTF;
+    font-size: 14px;
+    line-height: 1.43;
+    color: #999;
+  }
 
   .press-view .board-type1 .board_title {
     margin-top: 26px;
@@ -1004,24 +1076,24 @@
 @media (max-width: 765px) {
 
   .notice-list {
-    padding: 130px 15px 0;
+    padding: 230px 15px 0;
   }
   .sales-inquiry-list {
-    padding: 130px 15px 0;
+    padding: 230px 15px 0;
   }
   .notice-view {
-    padding: 130px 15px 0;
+    padding: 230px 15px 0;
   }
 
   .ir-list {
-    padding: 130px 15px 0;
+    padding: 230px 15px 0;
   }
   .press-list {
-    padding: 130px 15px 0;
+    padding: 230px 15px 0;
   }
 
   .press-view {
-    padding: 130px 15px 0;
+    padding: 230px 15px 0;
   }
 
   .board-type1 h1 {
@@ -1078,11 +1150,11 @@
     height: 15px;
   }
   .press-list .board-type1 .thumb .thumb_title {
-    height: 26px;
-    font-size: 20px;
+    max-height: 44px;
+    font-size: 18px;
   }
   .press-list .board-type1 .thumb .thumb_contents {
-    height: 87px;
+    max-height: 87px;
     font-size: 14px;
   }
 
