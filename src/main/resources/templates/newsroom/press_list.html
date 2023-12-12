@@ -12,9 +12,10 @@
         <div class="board board-type1">
         <div class="column">
             <h1>Press</h1>
-            <p class="desc">
+            <p class="desc" th:utext="#{press}"></p>
+            <!-- <p class="desc">
                 한화로보틱스의 최신 소식을<br />알려드립니다.
-            </p>
+            </p> -->
         </div>
 
         <div class="column board_list">
@@ -22,7 +23,8 @@
                 <div class="thumb">
                     <div class="thumb_wrap">
                         <div class="thumb_title" style="min-width:350px"></div>
-                        <div class="thumb_contents" style="margin-left:20px">조회 결과가 없습니다.</div>
+                        <!-- <div class="thumb_contents" style="margin-left:20px">조회 결과가 없습니다.</div> -->
+                        <div class="thumb_contents" style="margin-left:20px" th:utext="#{main.noLists}"></div>
                         <div class="thumb_title" ></div>
                     </div>
                 </div>
@@ -62,7 +64,8 @@
                     <div class="thumb">
                         <div class="thumb_wrap">
                             <div class="thumb_title" style="min-width:350px"></div>
-                            <div class="thumb_contents" style="margin-left:20px">조회 결과가 없습니다.</div>
+                            <div class="thumb_contents" style="margin-left:20px" th:utext="#{main.noLists}"></div>
+                            <!-- <div class="thumb_contents" style="margin-left:20px">조회 결과가 없습니다.</div> -->
                             <div class="thumb_title" ></div>
                         </div>
                     </div>

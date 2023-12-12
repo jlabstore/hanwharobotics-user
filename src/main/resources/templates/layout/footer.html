@@ -1,0 +1,95 @@
+<html lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="footer(footerId)">
+<footer th:id="${footerId}">
+  <div class="column">
+    <div class="logo">
+    <a href="/">
+      <img height="42" src="/images/pc/footer_logo.svg" alt="한화로보틱스" />
+    </a>
+  </div>
+
+  <!-- <div class="pc address">
+    본사 : 경기도 성남시 분당구 판교로 323 벤처포럼벤처타워 5층  /  대표 E-MAIL : robot_inquiry@hanwha.com<br />
+    영업문의 : AGV영업(통합)_맹진호 차장 (mjh1129@hanwha.com) /
+    로봇영업(국내)_박길영 대리 (gilyeong.bak@hanwha.com) /
+    로봇영업(해외)_하인오 대리 (ioh9310@hanwha.com)
+  </div> -->
+  <div class="pc address" th:utext="#{footer.pcAddress}"></div>
+
+  <!-- <div class="tablet address">
+    본사 : 경기도 성남시 분당구 판교로 323 벤처포럼벤처타워 5층  /  대표 E-MAIL : robot_inquiry@hanwha.com<br />
+    영업문의 : AGV영업(통합)_맹진호 차장 (mjh1129@hanwha.com) /<br />
+    로봇영업(국내)_박길영 대리 (gilyeong.bak@hanwha.com) /<br />
+    로봇영업(해외)_하인오 대리 (ioh9310@hanwha.com)
+  </div> -->
+  <div class="tablet address" th:utext="#{footer.tabletAddress}"></div>
+
+  <div class="mobile mobile1 address" th:utext="#{footer.mobile1Address}"></div>
+  <!-- <div class="mobile mobile1 address">
+    본사 : 경기도 성남시 분당구 판교로 323 벤처포럼벤처타워 5층  /<br />
+    대표 E-MAIL : robot_inquiry@hanwha.com<br />
+    영업문의 : AGV영업(통합)_맹진호 차장 (mjh1129@hanwha.com) /<br />
+    로봇영업(국내)_박길영 대리 (gilyeong.bak@hanwha.com) /<br />
+    로봇영업(해외)_하인오 대리 (ioh9310@hanwha.com)
+  </div> -->
+
+  <div class="mobile mobile2 address" th:utext="#{footer.mobile2Address}"></div>
+  <!-- <div class="mobile mobile2 address">
+    본사 : 경기도 성남시 분당구 판교로 323 벤처포럼벤처타워 5층  / 대표 E-MAIL : robot_inquiry@hanwha.com<br />
+    영업문의 : AGV영업(통합)_맹진호 차장 (mjh1129@hanwha.com) /<br />
+    로봇영업(국내)_박길영 대리 (gilyeong.bak@hanwha.com) / 로봇영업(해외)_하인오 대리 (ioh9310@hanwha.com)
+  </div> -->
+
+  <div class="mobile mobile3 address" th:utext="#{footer.mobile3Address}"></div>
+  <!-- <div class="mobile mobile3 address">
+    본사 : 경기도 성남시 분당구 판교로 323 벤처포럼벤처타워 5층  /<br />
+    대표 E-MAIL : robot_inquiry@hanwha.com<br />
+    영업문의 :<br />
+    AGV영업(통합)_맹진호 차장 (mjh1129@hanwha.com)<br />
+    로봇영업(국내)_박길영 대리<br />
+    (gilyeong.bak@hanwha.com)<br />
+    로봇영업(해외)_하인오 대리<br />
+    (ioh9310@hanwha.com)
+  </div> -->
+
+  <!-- <div class="copyright">
+    본 사이트의 콘텐츠는 저작권법의 보호를 받는바, 무단 전재, 복사, 배포 등을 금합니다.<br />
+    COPYRIGHT 2023 Hanwha Robotics CO.LTD.ALL RIGHTS RESERVED.
+  </div> -->
+  <div class="copyright" th:utext="#{footer.copyright}"></div>
+  </div>
+
+  <div class="column column1">
+    <!-- <ul class="sitemap">
+      <li><a href="#">회사방침</a></li>
+      <li><a href="#">개인정보처리(취급)방침</a></li>
+      <li><a href="#">이메일무단수집거부</a></li>
+      <li><a href="#">저작권침해행위거부</a></li>
+    </ul> -->
+
+    <div class="link">
+      <div class="select_wrap">
+        <select id="siteSelector">
+          <option selected>Family Site</option>
+          <!-- <option value="https://hanwha.co.kr">한화 그룹</option>
+            <option value="https://hanwha.com">한화 그룹(eng)</option>
+            <option value="https://hanwha.com/zh">한화 그룹(中文)</option> -->
+            <option value="https://hanwha.co.kr" th:utext="#{footer.hanwhagroupKo}"></option>
+          <option value="https://hanwha.com" th:utext="#{footer.hanwhagroupEn}"></option>
+          <option value="https://hanwha.com/zh" th:utext="#{footer.hanwhagroupCh}"></option>
+        </select>
+      </div>
+
+      <div class="sns">
+        <a href="https://www.youtube.com/@hanwharobotics" target="_blank">
+          <img src="/images/pc/youtube.svg" alt="유튜브" />
+        </a>
+        <a href="https://www.linkedin.com/company/hanwharobotics" target="_blank">
+          <img src="/images/pc/linkedin.svg" alt="링크드인" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>

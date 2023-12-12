@@ -103,17 +103,22 @@ $(window).on("load resize", function (e) {
 $(document).ready(async function() {
 
   // let headerHeight = '332px';
-  $('.inquiry_more').load('/includes/inquiry.html');
+  // $('.inquiry_more').load('/includes/inquiry.html');
 
-  $('#header').load('/includes/header.html');
-  $('#aside').load('/includes/aside.html');
-  $('#footer').load('/includes/footer.html', function() {
-    changeUrl();
-  });
+  // $('#header').load('/includes/header.html');
+  // $('#aside').load('/includes/aside.html');
 
-  $('.layer_wrap').load('/includes/layer.html', function() {
-    $('.layer.inquiry').load('/includes/layer_inquiry.html');
-  });
+  // $('#footer').load('/layout/footer.html', function() {
+  //   changeUrl();
+  // });
+  changeUrl()
+  // $('#footer').load('/includes/footer.html', function() {
+  //   changeUrl();
+  // });
+
+  // $('.layer_wrap').load('/includes/layer.html', function() {
+  //   $('.layer.inquiry').load('/includes/layer_inquiry.html');
+  // });
 
   $(document).on('click', 'header .btn_menu button', function(e) {
     e.stopPropagation();

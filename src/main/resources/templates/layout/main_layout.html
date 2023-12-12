@@ -7,19 +7,36 @@
   <th:block th:replace="/layout/common_head :: commonHead"></th:block>
   <link rel="stylesheet" th:href="@{/css/common.css}" />
   <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+          var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
+          console.log('쿠키값~!~@#~', lang)
+          if (lang === 'en') {
+            console.log('이프 안~~~~')
+              document.querySelector('html').classList.add('en');
+          }
+      });
+  </script>
 </head>
 
 <body class="pc">
-  <section class="inquiry_more"></section>
-  <header id="header" class="main_header"></header>
+  <!-- <section class="inquiry_more"></section> -->
+  <th:block th:replace="/layout/inquiry :: inquiry('inquiry_more')"></th:block>
 
-  <aside id="aside"></aside>
+  <!-- <header id="header" class="main_header"></header> -->
+  <th:block th:replace="/layout/header :: header('main_header')" id="header" ></th:block>
+  <!-- header라는 함수 호출 하면서 main_header라는 파라미터값을 넘기는 것. /layout/header보기 -->
+
+  <!-- <aside id="aside"></aside> -->
+  <th:block th:replace="/layout/aside :: aside('aside')"></th:block>
 
   <div layout:fragment="content"></div>
 
-  <footer id="footer"></footer>
+  <!-- <footer id="footer"></footer> -->
+  <th:block th:replace="/layout/footer :: footer('footer')"></th:block>
 
-  <div class="layer_wrap"></div>
+  <!-- <div class="layer_wrap"></div> -->
+  <th:block th:replace="/layout/layer :: div('layer_wrap')"></th:block>
 
   <script type="text/javascript" th:src="@{/js/aos.js}"></script>
 

@@ -1,3 +1,7 @@
+<html lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="div(layerInquiryClass)">
+<div th:class="${layerInquiryClass}">
 <div class="layer_inner">
 
 
@@ -39,8 +43,8 @@
 
   <button class="btn_close" onclick="closeInquiryLayer()"><span>close</span></button>
 
-  <div class="title">문의하기</div>
-  <!-- <div class="title" th:text="#{inquiry}"></div> -->
+  <!-- <div class="title">문의하기</div> -->
+  <div class="title" th:utext="#{inquiry}"></div>
 <!--
   <p class="desc">
     아래 신청폼을 통해서 궁금하신 점을 문의해주시면 기입하신 연락처로<br />각 담당자분들이 연락드립니다.
@@ -49,24 +53,28 @@
   <form>
     <div class="form_row">
       <div class="form_input">
-        <!-- <label for="name" th:text="#{name}"><span>*</span></label> -->
-        <label for="name">이름<span>*</span></label>
+        <label for="name" th:utext="#{name}"></label>
+        <!-- <label for="name">이름<span>*</span></label> -->
         <input type="text" name="name" id="name" />
       </div>
       <div class="form_input">
-        <label for="company">회사명<span>*</span></label>
+        <label for="company" th:utext="#{company}"></label>
+        <!-- <label for="company">회사명<span>*</span></label> -->
         <input type="text" name="company" id="company" />
       </div>
       <div class="form_input">
-        <label for="position">직급<span>*</span></label>
+        <label for="position" th:utext="#{job}"></label>
+        <!-- <label for="position">직급<span>*</span></label> -->
         <input type="text" name="position" id="position" />
       </div>
       <div class="form_input">
-        <label for="email">이메일<span>*</span></label>
+        <label for="email" th:utext="#{email}"></label>
+        <!-- <label for="email">이메일<span>*</span></label> -->
         <input type="text" name="email" id="email" />
       </div>
       <div class="form_input">
-        <label for="tel">연락처<span>*</span></label>
+        <label for="tel" th:utext="#{mobile}"></label>
+        <!-- <label for="tel">연락처<span>*</span></label> -->
         <input type="text" name="tel" id="tel" />
       </div>
       <!-- <div class="form_input" style="display: none;">
@@ -74,7 +82,8 @@
         <input type="text" name="inquiryType" id="inquiryType" readonly/>
       </div> -->
       <div class="form_input">
-        <label for="inquiry">문의내용<span>*</span></label>
+        <label for="inquiry" th:utext="#{inquiries}"></label>
+        <!-- <label for="inquiry">문의내용<span>*</span></label> -->
 
         <div class="inquiry">
           <textarea name="inquiry" id="inquiry"></textarea>
@@ -83,10 +92,10 @@
     </div>
 
     <div class="terms">
-      <div class="sub_title">
+      <!-- <div class="sub_title">
         개인정보 수집 및 이용동의
-      </div>
-      <!-- <div class="sub_title" th:utext="#{inquiry.agree}"></div> -->
+      </div> -->
+      <div class="sub_title" th:utext="#{inquiry.privacy}"></div>
 
       <div class="terms_box">
         <div class="terms_inner">
@@ -99,12 +108,15 @@
 
       <div class="form_input">
         <input type="checkbox" name="agree" id="agree" />
-        <label for="agree">개인정보 수집 및 이용동의 문구를 확인하였고, 이에 동의합니다.</label>
+        <label for="agree" th:utext="#{inquiry.agree}"></label>
+        <!-- <label for="agree">개인정보 수집 및 이용동의 문구를 확인하였고, 이에 동의합니다..</label> -->
       </div>
 
       <div class="btn_group">
-        <button type="button" class="btn btn--block btn--orange" onclick="validate()">보내기</button>
-        <button type="button" class="btn btn--block btn--gray"  onclick="closeInquiryLayer()">취소</button>
+        <button type="button" class="btn btn--block btn--orange" onclick="validate()" th:utext="#{inquiry.submit}"></button>
+        <!-- <button type="button" class="btn btn--block btn--orange" onclick="validate()">보내기</button> -->
+        <button type="button" class="btn btn--block btn--gray"  onclick="closeInquiryLayer()" th:utext="#{inquiry.cancel}"></button>
+        <!-- <button type="button" class="btn btn--block btn--gray"  onclick="closeInquiryLayer()">취소</button> -->
       </div>
     </div>
   </form>
@@ -113,14 +125,18 @@
 
 <div class="footer">
   <div class="sub_title">
-    <!-- <strong>담당자 연락처</strong> -->
-    <strong>영업 담당자</strong>
+    <strong th:utext="#{footer.salesRepresentatives}"></strong>
+    <!-- <strong>영업 담당자</strong> -->
   </div>
   <div class="contents">
     <!-- <p>대표 E-MAIL : robot_inquiry@hanwha.com</p> -->
-    <p>AGV영업(통합) : 맹진호 차장 (mjh1129@hanwha.com)</p>
+
+    <p th:utext="#{footer.agvSales}"></p>
+    <p th:utext="#{footer.robotSalesKorea}"></p>
+    <p th:utext="#{footer.robotSalesOverseas}"></p>
+    <!-- <p>AGV영업(통합) : 맹진호 차장 (mjh1129@hanwha.com)</p>
     <p>로봇영업(국내) : 박길영 대리 (gilyeong.bak@hanwha.com)</p>
-    <p>로봇영업(해외) : 하인오 대리 (ioh9310@hanwha.com)</p>
+    <p>로봇영업(해외) : 하인오 대리 (ioh9310@hanwha.com)</p> -->
   </div>
 </div>
   <script>
@@ -192,3 +208,5 @@
           });
     }
   </script>
+</div>
+</html>

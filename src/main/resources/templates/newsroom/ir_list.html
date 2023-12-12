@@ -11,24 +11,32 @@
             <div class="board board-type1">
             <div class="column">
                 <h1>IR</h1>
-                <p class="desc">
+                <p class="desc" th:utext="#{ir}"></p>
+                <!-- <p class="desc">
                     정확하고 투명한 한화로보틱스<br />경영 정보를 전달해 드립니다.
-                </p>
+                </p> -->
             </div>
 
             <div class="column board_list">
                 <div class="table">
                 <div class="thead">
-                    <div class="th">번호</div>
-                    <div class="th">제목</div>
-                    <div class="th">첨부파일</div>
-                    <div class="th">등록일</div>
+                    <!-- <div class="th">번호</div> -->
+                    <div class="th" th:utext="#{no}"></div>
+                    <!-- <div class="th">제목</div> -->
+                    <div class="th" th:utext="#{title}"></div>
+                    <!-- <div class="th">첨부파일</div> -->
+                    <div class="th" th:utext="#{file}"></div>
+                    <!-- <div class="th">등록일</div> -->
+                    <div class="th" th:utext="#{updateDate}"></div>
                 </div>
                 <div class="tbody">
                     <div class="tr">
-                        <p class="empty">
+                        <!-- <p class="empty">
                             조회 결과가 없습니다.
-                        </p>
+                        </p> -->
+                        <p class="empty" th:utext="#{main.noLists}"></p>
+
+
                         <!-- <a href='javascript:void(0)' id='test' onclick='preventClick(event)' style="cursor: unset;">
                             <div class="td"></div>
                             <div class="td">
@@ -76,9 +84,10 @@
             {{/list}}
             {{^list}}
                 <div class="tr">
-                    <p class="empty">
+                    <!-- <p class="empty">
                         조회 결과가 없습니다.
-                    </p>
+                    </p> -->
+                    <p class="empty" th:utext="#{main.noLists}"></p>
                 </div>
             {{/list}}
         </script>

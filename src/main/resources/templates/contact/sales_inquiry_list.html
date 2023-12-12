@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body>
-    <div layout:fragment="content"> 
-        
+    <div layout:fragment="content">
+
         <main class="sub sales-inquiry-list">
             <div class="board board-type1">
             <div class="column">
                 <h1>Sales<br />Inquiry</h1>
-                <p class="desc">
+                <!-- <p class="desc">
                 한화로보틱스 제품 및 대리점 모집에 대한<br />궁금한 점을 문의해주세요.
-                </p>
+                </p> -->
+                <p class="desc" th:utext="#{inquiryList.inquiryContent}"></p>
             </div>
 
             <div class="column sales-board-list">
-                
+
                 <div class="sales-inquiry-contents">
                 <div class="section-sales-inquiry">
                     <div class="section-title">
-                    <h2>대리점 모집 문의</h2>
-                    <p>한화로보틱스와 함께 로봇산업을 이끌어 갈 대리점을 모집합니다.</p>
+                    <!-- <h2>대리점 모집 문의</h2> -->
+                    <h2 th:utext="#{inquiryList.distributorTitle}"></h2>
+                    <!-- <p>한화로보틱스와 함께 로봇산업을 이끌어 갈 대리점을 모집합니다.</p> -->
+                    <p th:utext="#{inquiryList.distributorTitle}"></p>
                     </div>
 
-                    <a href="javascript:void(0)" class="inquiry" onclick="layerInquiryBtn(1)">  
+                    <!-- <a href="javascript:void(0)" class="inquiry" onclick="layerInquiryBtn(1)">
                         대리점 모집 문의하기
                     <span><strong>+</strong></span>
-                    </a>
+                    </a> -->
+                    <a href="javascript:void(0)" class="inquiry" onclick="layerInquiryBtn(1)" th:utext="#{inquiryList.distributorOpenForm}"></a>
                 </div>
                 </div>
 
                 <div class="section-sales-inquiry-benefit">
-                <h3>한화로보틱스 대리점 Benefit</h3>
+                <h3 th:utext="#{inquiryList.benefitTitle}"></h3>
+                <!-- <h3>한화로보틱스 대리점 Benefit</h3> -->
 
                 <div class="section-sales-inquiry-benefit-list">
                     <div class="section-sales-inquiry-benefit-list-item">
                     <strong>01</strong>
-                    <span>협동로봇 대리점 특별 가격 제공 [물량, 안건에 따라 추가 프로모션 제공]</span>
+                    <!-- <span>대리점 특별 가격 제공 [물량, 안건에 따라 추가 프로모션 제공]</span> -->
+                    <span th:utext="#{inquiryList.benefitContent1}"></span>
                     </div>
                     <div class="section-sales-inquiry-benefit-list-item">
                     <strong>02</strong>
-                    <span>홍보 및 마케팅 지원 [온라인/오프라인]</span>
+                    <!-- <span>홍보 및 마케팅 지원 [온라인/오프라인]</span> -->
+                    <span th:utext="#{inquiryList.benefitContent2}"></span>
                     </div>
                     <div class="section-sales-inquiry-benefit-list-item">
                     <strong>03</strong>
-                    <span>협동로봇 교육 제공</span>
+                    <!-- <span>협동로봇 교육 제공</span> -->
+                    <span th:utext="#{inquiryList.benefitContent3}"></span>
                     </div>
                     <div class="section-sales-inquiry-benefit-list-item">
                     <strong>04</strong>
-                    <span>본사 영업 의뢰 건에 대한 영업 기회 제공</span>
+                    <!-- <span>본사 영업 의뢰 건에 대한 영업 기회 제공</span> -->
+                    <span th:utext="#{inquiryList.benefitContent4}"></span>
                     </div>
                     <div class="section-sales-inquiry-benefit-list-item">
                     <strong>05</strong>
-                    <span>협동로봇 및 협동로봇 시스템 수주를 위한 본사 영업 지원</span>
+                    <!-- <span>협동로봇 및 협동로봇 시스템 수주를 위한 본사 영업 지원</span> -->
+                    <span th:utext="#{inquiryList.benefitContent5}"></span>
                     </div>
                 </div>
                 </div>
@@ -61,14 +71,17 @@
                 <div class="section-product-contents">
                 <div class="section-product-inquiry">
                     <div class="section-title">
-                    <h2>제품 문의</h2>
-                    <p>한화로보틱스 제품에 대해 문의하실 내용을 아래 문의하기 폼을 이용해 보내주시거나<br />아래 메일 주소로 직접 메일을 보내주세요. 담당자들이 확인 후 연락드립니다.</p>
+                    <!-- <h2>제품 문의</h2> -->
+                    <h2 th:utext="#{inquiryList.productInquiries}"></h2>
+                    <!-- <p>한화로보틱스 제품과 솔루션에 대한 문의는 양식을 작성해 주시거나,<br />아래 메일 주소로 메일을 보내주세요. 담당자 확인 후 연락드리겠습니다.</p> -->
+                    <p th:utext="#{inquiryList.productInquiryContent}"></p>
                     </div>
 
-                    <a href="javascript:void(0)" class="inquiry" onclick="layerInquiryBtn()">  
+                    <!-- <a href="javascript:void(0)" class="inquiry" onclick="layerInquiryBtn()">
                     제품 문의하기
                     <span><strong>+</strong></span>
-                    </a>
+                    </a> -->
+                    <a href="javascript:void(0)" class="inquiry" onclick="layerInquiryBtn()" th:utext="#{inquiryList.productInquiryOpenForm}"></a>
                 </div>
                 </div>
             </div>

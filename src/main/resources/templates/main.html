@@ -13,16 +13,18 @@
                 <div class="main_txt">
 
                   <div class="title">Quality & Trust</div>
-                  <div class="txt">
+                  <!-- <div class="txt">
                     품질과 신뢰성을 기반으로<br />
                     차별화된 기술과 솔루션을<br />
                     제공합니다.
-                  </div>
+                  </div> -->
+                  <div class="txt" th:utext="#{main.quality}"></div>
                   <div class="move_to_intro">
-                    <a href="/about">
+                    <!-- <a href="/about">
                       한화로보틱스 소개<br />보러가기
                       <span></span>
-                    </a>
+                    </a> -->
+                    <a href="/about" th:utext="#{main.trust}"></a>
                   </div>
 
                 </div>
@@ -31,7 +33,8 @@
               <div class="update updatesDiv">
                 <div class="title">Updates</div>
                 <div class="txt updatesContentDiv">
-                      <div>조회결과가 없습니다.</div>
+                      <!-- <div>조회결과가 없습니다.</div> -->
+                      <div th:utext="#{main.noUpdates}"></div>
                 </div>
               </div>
             </section>
@@ -43,16 +46,19 @@
                     <div class="contents">
                       <div class="pc_title title">Robots</div>
                       <div class="mobile_title title">Robots</div>
-                      <div class="pc_txt txt">
+                      <!-- <div class="pc_txt txt">
                         사람과 함께 일하는 협동 로봇
-                      </div>
-                      <div class="not_pc_txt txt">
+                      </div> -->
+                      <div class="pc_txt txt" th:utext="#{main.robots1}"></div>
+                      <!-- <div class="not_pc_txt txt">
                         사람과 함께 일하는<br />협동 로봇
-                      </div>
-                      <div class="detail"  >
+                      </div> -->
+                      <div class="not_pc_txt txt" th:utext="#{main.robots2}"></div>
+                      <!-- <div class="detail">
                         자세히 보기
                         <span></span>
-                      </div>
+                      </div> -->
+                      <div class="detail" th:utext="#{main.learnMore}"></div>
                     </div>
                   </a>
                 </div>
@@ -62,16 +68,19 @@
                     <div class="contents">
                       <div class="pc_title title">AGVS/AMRS</div>
                       <div class="mobile_title title">AGVS/AMRS</div>
-                      <div class="pc_txt txt">
+                      <!-- <div class="pc_txt txt">
                         안전하고 효율적인 모빌리티 솔루션
-                      </div>
-                      <div class="not_pc_txt txt">
+                      </div> -->
+                      <div class="pc_txt txt" th:utext="#{main.agv1}"></div>
+                      <!-- <div class="not_pc_txt txt">
                         안전하고 효율적인<br />모빌리티 솔루션
-                      </div>
-                      <div class="detail">
+                      </div> -->
+                      <div class="not_pc_txt txt" th:utext="#{main.agv2}"></div>
+                      <!-- <div class="detail">
                         자세히 보기
                         <span></span>
-                      </div>
+                      </div> -->
+                      <div class="detail" th:utext="#{main.learnMore}"></div>
                     </div>
                   </a>
                 </div>
@@ -86,9 +95,10 @@
                       <div class="title">Newsroom</div>
                       <div class="newsroomDiv">
                           <div class="list">
-                                <div class="list_title">
+                                <!-- <div class="list_title">
                                       조회 결과가 없습니다.
-                                </div>
+                                </div> -->
+                                <div class="list_title" th:utex="#{main.noLists}"></div>
                           </div>
                       </div>
                     </div>
@@ -97,8 +107,10 @@
                   <div class="recruit">
                     <a href="/contact/inquiry">
                       <strong>INQUIRIES</strong>
-                      <span class="pc">한화로보틱스 제품 및 대리점 모집에 대한<br />궁금한 점을 문의해주세요.</span>
-                      <span class="tablet">한화로보틱스 제품 및<br />대리점 모집에 대한<br />궁금한 점을 문의해주세요.</span>
+                      <!-- <span class="pc">한화로보틱스 제품 및 대리점 모집 관련<br />궁금한 점을 문의해주세요.</span> -->
+                      <span class="pc" th:utext="#{main.inquiryPc}"></span>
+                      <!-- <span class="tablet">한화로보틱스 제품 및<br />대리점 모집 관련<br />궁금한 점을 문의해주세요.</span> -->
+                      <span class="tablet" th:utext="#{main.inquiryTablet}"></span>
                     </a>
                   </div>
                 </section>

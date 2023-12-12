@@ -1,0 +1,16 @@
+
+<html lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="inquiry(inquiryClass)">
+<section th:class="${inquiryClass}">
+  <!-- <a href="/contact/inquiry">
+    한화로보틱스와 함께 로봇산업을 이끌어 갈 대리점을 모집합니다
+    <span>
+      more
+      <strong></strong>
+    </span>
+  </a> -->
+  <a href="/contact/inquiry" th:utext="#{header.banner}"></a>
+  <div class="bg"></div>
+</section>
+</html>
