@@ -17,7 +17,13 @@ var COMM = {
                 // 에러 공통 메세지는 띄우고 추가 작업이 필요하면 errorCallback 전달
                 console.log(jqXHR.status, jqXHR );
 
-                alert("[[#{alert.error}]]");
+                // alert("[[#{alert.error}]]");
+                if (lang == 'ko') {
+                    alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
+                } else if(lang == 'en'){
+                    alert("There has been an error processing your request. Please contact Admin.")
+                }
+
                 if(typeof errorCallback != "undefined" && errorCallback != null){
                     errorCallback(jqXHR);
                 }
@@ -76,7 +82,12 @@ var COMM = {
 			async: true,
             error : function(jqXHR, textStatus){
                 console.log(jqXHR.status, jqXHR );
-                alert("[[#{alert.error}]]");
+                // alert("[[#{alert.error}]]");
+                if (lang == 'ko') {
+                    alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
+                } else if(lang == 'en'){
+                    alert("There has been an error processing your request. Please contact Admin.")
+                }
                 if(typeof errorCallback != "undefined" && errorCallback != null){
                     errorCallback(jqXHR);
                 }
