@@ -18,7 +18,7 @@ function hideHeader() {
     },
     onUpdate: function(self) {
       const currentScrollPos = self.scroll();
-      
+
       if (currentScrollPos > lastScrollPos) {
         $header.css('opacity', 0);
       } else {
@@ -31,7 +31,7 @@ function hideHeader() {
 
 function pcBoxPositionUp() {
   const $missionBox = $('.section2 .second_box');
-  
+
   $missionBox.css('top', '140px')
   .on('mouseenter', function() {
     $missionBox.stop().animate({'top': '0'});
@@ -51,7 +51,7 @@ $(window).on("resize", function () {
   // if ($(this).width() >= 1190) {
   //   pcBoxPositionUp();
   // } else {
-  
+
   //   $missionBox.css('top', '0')
   //   .off('mouseenter mouseleave');
   // }
@@ -70,7 +70,7 @@ $(window).on("load", function (e) {
   // }
 
   // document.querySelectorAll('.main .section1 .contents').forEach((section, index, array) => {
-  
+
   //   // Pin the section
   //   gsap.to(section, {
   //     scrollTrigger: {
@@ -81,7 +81,7 @@ $(window).on("load", function (e) {
   //       scrub: true
   //     }
   //   });
-    
+
   //   // Only proceed if there is a next section
   //   if (index < array.length - 1) {
   //     const nextSection = array[index + 1]; // Get the next section
@@ -101,8 +101,8 @@ $(window).on("load", function (e) {
   //           // When the next section's .title and .txt start coming in, fade out the current section's .title and .txt
   //           textElements.forEach(el => {
   //             gsap.to(el, { opacity: 0, duration: 3 });
-  //           });           
-            
+  //           });
+
   //         },
   //         onLeaveBack: () => {
   //           // When scrolling back up, reset the opacity if the previous .title and .txt are in view again
@@ -121,7 +121,6 @@ $(window).on("load", function (e) {
   // });
 });
 
-
 $(window).scroll(function (e) {
   if(window.scrollY < 1) {
     $header.css('backgroundColor', 'transparent').find('.header_wrapper').css('backgroundColor', 'transparent');
@@ -129,12 +128,17 @@ $(window).scroll(function (e) {
       'opacity': '0.6',
       'background': '#000'
     });
-  } else { 
+    $('header .logo .txt span').css('color', '#f60');
+    $('header .logo .txt span strong').css('background', 'url(/images/pc/ic_main_more.svg) no-repeat 0 0')
+
+  } else {
 
     $header.css('backgroundColor', '#f60').find('.header_wrapper').css('backgroundColor', '#f60');
     $('.inquiry_more .bg').css({
       'opacity': '1',
       'background': '#666'
     });
+    $('header .logo .txt span, header .logo .txt span strong').css('color', '#fff');
+    $('header .logo .txt span strong').css('background', 'url(/images/pc/ic_sub_more.svg) no-repeat 0 0')
   }
 });

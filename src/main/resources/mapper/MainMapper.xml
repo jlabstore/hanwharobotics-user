@@ -11,7 +11,7 @@
            tn.content,
            tn.category_cd,
            tc.code_name as typeCdNm
-        FROM 
+        FROM
             tb_newsroom tn
             LEFT JOIN tb_code tc ON tn.type_cd = tc.code
         <where>
@@ -19,9 +19,12 @@
             <if test="typeCd != null and typeCd != '' ">
                 AND tn.type_cd = #{typeCd}
             </if>
+            <if test="lang != null and lang != '' ">
+                AND tn.lang = #{lang}
+            </if>
 		</where>
         ORDER BY tn.create_dt DESC
         LIMIT #{limit}
     </select>
-    
+
 </mapper>

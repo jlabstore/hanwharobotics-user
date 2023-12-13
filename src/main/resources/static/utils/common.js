@@ -1,10 +1,16 @@
 
 var COMM = {
 	ajax: function(ajaxConfig, errorCallback) {
+        var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
+        var params = {
+            lang: lang !== undefined && lang !== null && lang !== '' ? lang.trim() : 'ko'
+        }
+
         var defaultConf = {
             type: 'POST',
             dataType: 'json',
 			async: true,
+            data: JSON.stringify(params),
             // contentType: 'application/json;charset=UTF-8',
             error : function(jqXHR, textStatus){
                 // 에러 공통 메세지를 띄우지 않으려면 error자체를 ajaxConfig에 재지정
@@ -17,29 +23,41 @@ var COMM = {
                 }
             }
         };
+        if(ajaxConfig.data !== undefined){
+            try{
+                var tempData = JSON.parse(ajaxConfig.data)
+                var data = $.extend(tempData,params)
+                ajaxConfig.data = JSON.stringify(data)
+            }catch(err){
+                ajaxConfig.data = ajaxConfig.data
+            }
+        }
+
         var mergeConf = $.extend(true, {}, defaultConf, ajaxConfig);
         $.ajax(mergeConf);
     }
-     // 페이징 리스트 AJAX   
+     // 페이징 리스트 AJAX
      ,ajaxPagingList : function(ajaxConfig, dataCallback){
         var params = {};
-    
+
         //Search Data
         // var keyword = $('#keyword').val(); //검색어
         // var type = $('#type').val();       //구분
         // if(keyword != undefined) params['keyword'] = keyword;
         // if(type != undefined) params['type'] = type;
 
-        //Paging Data    
-        var size = $('#size').val();    
+        //Paging Data
+        var size = $('#size').val();
         var page = $('#page').val();
+        var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1')
         params['size'] = size != undefined && size > 0 ? size : 10;
         params['page'] = page != undefined && page > 0 ? page : 1;
+        params['lang'] = lang !== undefined && lang !== null && lang !== '' ? lang.trim() : 'ko';
 
-        //검색 및 페이징 데이터 추가  
+        //검색 및 페이징 데이터 추가
         ajaxConfig.data =  $.extend(true, {}, ajaxConfig.data, params);
 
-        //paging ajax succes 공통 
+        //paging ajax succes 공통
         if(ajaxConfig.success == undefined){
             ajaxConfig.success = function(pageRes){
                 // console.log(pageRes)
@@ -56,7 +74,7 @@ var COMM = {
             }
         }
         ajaxConfig.complete = function(){
-            //새로고침시 검색데이터 유지되도록 
+            //새로고침시 검색데이터 유지되도록
             setQueryStringURI(this.data);
         }
 
@@ -82,7 +100,7 @@ var COMM = {
 }
 
 
-//검색 파라미터 -> URI 파라미터 
+//검색 파라미터 -> URI 파라미터
 var setQueryStringURI = function(data){
     var queryString = new URLSearchParams(data).toString();
     var redirectUri = location.pathname + '?' + queryString;
@@ -90,7 +108,7 @@ var setQueryStringURI = function(data){
 }
 
 
-//URI 파라미터 -> 검색 파라미터 
+//URI 파라미터 -> 검색 파라미터
 var setQueryStringParams = function(formId) {
 	if ( !location.search ) {
 		return false;
@@ -126,7 +144,7 @@ var setPagination = function(data, elemnt){
         list.push({'class':page == data.page ? 'on':'', 'page':page})
     }
     var paginate = Mustache.render(paginateTmpl, {'list' : list});
-    
+
     elemnt.html(prev + paginate + next)
 
 }
@@ -155,3 +173,10 @@ var closeInquiryLayer = function(){
     $('.layer.inquiry').hide('fast');
     $('.layer_bg').hide();
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    if (lang === 'en') {
+        document.querySelector('html').classList.add('en');
+    }
+});

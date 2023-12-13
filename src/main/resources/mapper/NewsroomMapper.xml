@@ -7,6 +7,9 @@
             <if test="typeCd != null and typeCd != '' ">
                 AND tn.type_cd = #{typeCd}
             </if>
+            <if test="lang != null and lang != '' ">
+                AND tn.lang = #{lang}
+            </if>
     </sql>
 
     <select id="selectNewsroomList" parameterType="hashMap" resultType="Newsroom">
@@ -19,10 +22,10 @@
            tn.category_cd,
            tnf.original_file_nm,
            tnf.file_path
-        FROM 
+        FROM
             tb_newsroom tn
-            LEFT JOIN tb_newsroom_file tnf on tnf.file_no = (SELECT file_no 
-                                                                FROM tb_newsroom_file 
+            LEFT JOIN tb_newsroom_file tnf on tnf.file_no = (SELECT file_no
+                                                                FROM tb_newsroom_file
                                                                 <where>
                                                                     and newsroom_no = tn.newsroom_no
                                                                     <choose>
@@ -35,8 +38,8 @@
 		<where>
 			<include refid="newsroomWhere" />
 		</where>
-        ORDER BY 
-            FIELD(tn.category_cd, 'NOTICE') DESC, 
+        ORDER BY
+            FIELD(tn.category_cd, 'NOTICE') DESC,
             tn.create_dt DESC
 		LIMIT
 			#{page.size}
@@ -48,7 +51,7 @@
     <select id="selectNewsroomCnt" parameterType="hashMap" resultType="int">
         SELECT
            COUNT(*)
-        FROM 
+        FROM
             tb_newsroom tn
 		<where>
 			<include refid="newsroomWhere" />
@@ -64,14 +67,14 @@
            create_dt,
            content,
            category_cd
-        FROM 
+        FROM
             tb_newsroom
-        WHERE 
+        WHERE
             newsroom_no = #{no} and show_yn = 'Y'
     </select>
 
     <select id="selectNewsroomFileByNo" parameterType="int" resultType="NewsroomFile">
-        SELECT 
+        SELECT
             file_no,
             newsroom_no,
             original_file_nm,
@@ -79,8 +82,8 @@
             type_cd,
             file_path
         FROM tb_newsroom_file
-        WHERE 
-            newsroom_no = #{no} 
+        WHERE
+            newsroom_no = #{no}
             and thumnail_yn != 'Y'
     </select>
 </mapper>
