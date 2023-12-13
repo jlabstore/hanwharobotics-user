@@ -7,9 +7,14 @@
             <if test="typeCd != null and typeCd != '' ">
                 AND tn.type_cd = #{typeCd}
             </if>
-            <if test="lang != null and lang != '' ">
-                AND tn.lang = #{lang}
-            </if>
+            <choose>
+                <when test="page != null and  page.lang !=null and page.lang != '' ">
+                    AND tn.lang = #{page.lang}
+                </when>
+                <otherwise>
+                    AND (tn.lang is null or tn.lang = '' or tn.lang = 'ko') 
+                </otherwise>
+            </choose>
     </sql>
 
     <select id="selectNewsroomList" parameterType="hashMap" resultType="Newsroom">

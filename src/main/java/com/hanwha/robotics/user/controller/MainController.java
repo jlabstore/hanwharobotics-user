@@ -42,8 +42,8 @@ public class MainController {
      */
     @RequestMapping(value = "/main/updates", method=RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> getMainUpdates(HttpServletRequest request, HttpServletResponse response) {
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainUpdates()), HttpStatus.OK);
+    public ResponseEntity<Object> getMainUpdates(String lang, HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainUpdates(lang)), HttpStatus.OK);
     }
 
     
@@ -56,8 +56,8 @@ public class MainController {
      */
     @RequestMapping(value = "/main/newsroom", method=RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> getMainNewsroom(HttpServletRequest request, HttpServletResponse response) {
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainNewsroom()), HttpStatus.OK);
+    public ResponseEntity<Object> getMainNewsroom(String lang, HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainNewsroom(lang)), HttpStatus.OK);
     }
 
 }

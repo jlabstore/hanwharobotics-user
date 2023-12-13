@@ -9,12 +9,12 @@ public interface MainService {
      * 메인 > Updates 리스트
      * @return
      */
-    public List<Newsroom> getMainUpdates();
+    public List<Newsroom> getMainUpdates(String lang);
 
     /**
      * 메인 > Newsroom 리스트
      * @return
      */
-    public List<Newsroom> getMainNewsroom();
+    public List<Newsroom> getMainNewsroom(String lang);
 
 }

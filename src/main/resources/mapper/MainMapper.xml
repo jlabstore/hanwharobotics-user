@@ -19,9 +19,14 @@
             <if test="typeCd != null and typeCd != '' ">
                 AND tn.type_cd = #{typeCd}
             </if>
-            <if test="lang != null and lang != '' ">
-                AND tn.lang = #{lang}
-            </if>
+            <choose>
+                <when test="lang !=null and lang != '' ">
+                    AND tn.lang = #{lang}
+                </when>
+                <otherwise>
+                    AND (tn.lang is null or tn.lang = '' or tn.lang = 'ko') 
+                </otherwise>
+            </choose>
 		</where>
         ORDER BY tn.create_dt DESC
         LIMIT #{limit}

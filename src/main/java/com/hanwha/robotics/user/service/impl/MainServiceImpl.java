@@ -21,17 +21,19 @@ public class MainServiceImpl implements MainService{
     private MainMapper mainMapper;
 
     @Override
-    public List<Newsroom> getMainUpdates() {
+    public List<Newsroom> getMainUpdates(String lang) {
         Map<String, Object> map = new HashMap<>();
         map.put("typeCd", NewsroomType.NOTICE.getCode());
         map.put("limit", 3);
+        map.put("lang",lang);
         return mainMapper.selectNewsroomList(map);
     }
 
     @Override
-    public List<Newsroom> getMainNewsroom() {
+    public List<Newsroom> getMainNewsroom(String lang) {
         Map<String, Object> map = new HashMap<>();
         map.put("limit", 3);
+        map.put("lang",lang);
         return mainMapper.selectNewsroomList(map);
     }
     
