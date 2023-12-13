@@ -162,6 +162,18 @@ var closeInquiryLayer = function(){
     $('.layer_bg').hide();
 }
 
+// 쿠키 가져오기 
+var getCookie = (key) => {
+    var cookies = document.cookie.split(`; `).map((el) => el.split('='));
+
+    for (var i = 0; i < cookies.length; i++) {
+        if (cookies[i][0] === key) {
+            return cookies[i][1];
+        }
+    }
+    return null;
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
     if (lang === 'en') {
