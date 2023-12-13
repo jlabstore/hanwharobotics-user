@@ -108,12 +108,8 @@ $(document).ready(async function() {
   // $('#header').load('/includes/header.html');
   // $('#aside').load('/includes/aside.html');
 
-  // $('#footer').load('/layout/footer.html', function() {
-  //   changeUrl();
-  // });
-  changeUrl()
   // $('#footer').load('/includes/footer.html', function() {
-  //   changeUrl();
+    changeUrl();
   // });
 
   // $('.layer_wrap').load('/includes/layer.html', function() {
