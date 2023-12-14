@@ -70,27 +70,6 @@ var COMM = {
 
         this.ajax(ajaxConfig, null);
     }
-    ,putAjax: function(ajaxConfig, errorCallback) {
-        var defaultConf = {
-            type: 'PUT',
-            dataType: 'json',
-			async: true,
-            error : function(jqXHR, textStatus){
-                console.log(jqXHR.status, jqXHR );
-                var lang = getCookieLang();
-                if (lang == 'ko') {
-                    alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
-                } else if(lang == 'en'){
-                    alert("There has been an error processing your request. Please contact Admin.")
-                }
-                if(typeof errorCallback != "undefined" && errorCallback != null){
-                    errorCallback(jqXHR);
-                }
-            }
-        };
-        var mergeConf = $.extend(true, {}, defaultConf, ajaxConfig);
-        $.ajax(mergeConf);
-    }
 }
 
 
@@ -116,11 +95,12 @@ var setQueryStringParams = function(formId) {
 	});
 }
 
+//이벤트 막기 
 var preventClick = function(e){
 	e.preventDefault()
 }
 
-
+// 페이징 UI 셋팅
 var setPagination = function(data, elemnt){
     var prevTmpl = $("#paginate-prev-tmpl").html();
     var prevPage = data.page > 1 ?   data.page-1 : 1;
@@ -143,6 +123,7 @@ var setPagination = function(data, elemnt){
 
 }
 
+// 문의하기 팝업 레이어 열기 
 var layerInquiryBtn = function(data){
     $('body').addClass('scroll-lock');
     var type  = data == 1 ? '대리점 문의' : '제품문의';
@@ -162,6 +143,8 @@ var layerInquiryBtn = function(data){
     $('#loading-prograss').hide();
 }
 
+
+// 문의하기 팝업 레이어 닫기 
 var closeInquiryLayer = function(){
     $('body').removeClass('scroll-lock');
     $('.layer.inquiry').hide('fast');

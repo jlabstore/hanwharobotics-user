@@ -8,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
@@ -47,7 +46,7 @@ public class MainController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "/main/updates", method=RequestMethod.POST)
+    @PostMapping("/main/updates")
     @ResponseBody
     public ResponseEntity<Object> getMainUpdates(HttpServletRequest request, HttpServletResponse response) {
         return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainUpdates(commonUtil.getCookieLang(request))), HttpStatus.OK);
@@ -61,7 +60,7 @@ public class MainController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "/main/newsroom", method=RequestMethod.POST)
+    @PostMapping("/main/newsroom")
     @ResponseBody
     public ResponseEntity<Object> getMainNewsroom(HttpServletRequest request, HttpServletResponse response) {
         return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainNewsroom(commonUtil.getCookieLang(request))), HttpStatus.OK);
