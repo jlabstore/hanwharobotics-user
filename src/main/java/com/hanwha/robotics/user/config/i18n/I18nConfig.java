@@ -1,4 +1,4 @@
-package com.hanwha.robotics.user.i18n.config;
+package com.hanwha.robotics.user.config.i18n;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
