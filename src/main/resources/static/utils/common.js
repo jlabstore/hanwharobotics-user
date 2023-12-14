@@ -70,6 +70,27 @@ var COMM = {
 
         this.ajax(ajaxConfig, null);
     }
+    ,putAjax: function(ajaxConfig, errorCallback) {
+        var defaultConf = {
+            type: 'PUT',
+            dataType: 'json',
+			async: true,
+            error : function(jqXHR, textStatus){
+                console.log(jqXHR.status, jqXHR );
+                var lang = getCookieLang();
+                if (lang == 'en') {
+                    alert("There has been an error processing your request. Please contact Admin.")
+                } else {
+                    alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
+                }
+                if(typeof errorCallback != "undefined" && errorCallback != null){
+                    errorCallback(jqXHR);
+                }
+            }
+        };
+        var mergeConf = $.extend(true, {}, defaultConf, ajaxConfig);
+        $.ajax(mergeConf);
+    }
 }
 
 
