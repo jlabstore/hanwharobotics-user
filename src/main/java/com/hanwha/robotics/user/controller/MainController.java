@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
+import com.hanwha.robotics.user.common.utils.CommonUtil;
 import com.hanwha.robotics.user.service.MainService;
 
 @Controller
@@ -22,6 +23,11 @@ public class MainController {
 
     @Autowired
     private MainService mainService;
+
+
+    @Autowired
+    private CommonUtil commonUtil;
+
 
 
     /**
@@ -34,16 +40,17 @@ public class MainController {
     }
 
 
+    
     /**
      * Main > Update API : Notice 최신 3개
-     * @param request 
+     * @param request
      * @param response
      * @return
      */
     @RequestMapping(value = "/main/updates", method=RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> getMainUpdates(String lang, HttpServletRequest request, HttpServletResponse response) {
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainUpdates(lang)), HttpStatus.OK);
+    public ResponseEntity<Object> getMainUpdates(HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainUpdates(commonUtil.getCookieLang(request))), HttpStatus.OK);
     }
 
     
@@ -56,8 +63,8 @@ public class MainController {
      */
     @RequestMapping(value = "/main/newsroom", method=RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> getMainNewsroom(String lang, HttpServletRequest request, HttpServletResponse response) {
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainNewsroom(lang)), HttpStatus.OK);
+    public ResponseEntity<Object> getMainNewsroom(HttpServletRequest request, HttpServletResponse response) {
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), mainService.getMainNewsroom(commonUtil.getCookieLang(request))), HttpStatus.OK);
     }
 
 }

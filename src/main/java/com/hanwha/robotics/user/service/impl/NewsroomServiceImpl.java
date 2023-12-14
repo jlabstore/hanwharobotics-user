@@ -24,10 +24,11 @@ public class NewsroomServiceImpl implements NewsroomService{
     private NewsroomMapper newsroomMapper;
 
     @Override
-    public PageResponse getNewsroomList(NewsroomType newsroomType,  PageRequest page) {
+    public PageResponse getNewsroomList(NewsroomType newsroomType,  PageRequest page, String lang) {
         Map<String, Object> map = new HashMap<>();
         map.put("typeCd", newsroomType.getCode());
         map.put("page", page);
+        map.put("lang", lang);
 
         int total = newsroomMapper.selectNewsroomCnt(map);
         List<Newsroom> list = newsroomMapper.selectNewsroomList(map);

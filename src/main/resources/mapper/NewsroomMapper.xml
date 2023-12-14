@@ -8,8 +8,8 @@
                 AND tn.type_cd = #{typeCd}
             </if>
             <choose>
-                <when test="page != null and  page.lang !=null and page.lang != '' ">
-                    AND tn.lang = #{page.lang}
+                <when test="lang !=null and lang != '' ">
+                    AND tn.lang = #{lang}
                 </when>
                 <otherwise>
                     AND (tn.lang is null or tn.lang = '' or tn.lang = 'ko') 

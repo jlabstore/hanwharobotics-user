@@ -19,6 +19,7 @@ import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.enums.NewsroomType;
+import com.hanwha.robotics.user.common.utils.CommonUtil;
 import com.hanwha.robotics.user.service.NewsroomService;
 import com.mysql.cj.util.StringUtils;
 
@@ -29,6 +30,10 @@ public class NewsroomController {
 
     @Autowired
     private NewsroomService newsroomService;
+
+    @Autowired
+    private CommonUtil commonUtil;
+
 
     /**
      * newsroom - 기본 notice 페이지로 이동
@@ -63,7 +68,8 @@ public class NewsroomController {
     @ResponseBody
     public ResponseEntity<Object> newsroomListAPI(@PathVariable String type, PageRequest pageRequest, HttpServletRequest request, HttpServletResponse response) {
         NewsroomType newsroomType = NewsroomType.valueOf(type.toUpperCase());
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), newsroomService.getNewsroomList(newsroomType, pageRequest)), HttpStatus.OK);
+        String lang = commonUtil.getCookieLang(request);
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), newsroomService.getNewsroomList(newsroomType, pageRequest, lang)), HttpStatus.OK);
     }
 
 

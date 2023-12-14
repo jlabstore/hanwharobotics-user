@@ -2,10 +2,6 @@
 var COMM = {
 	ajax: function(ajaxConfig, errorCallback) {
         var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
-        var params = {
-            lang: lang !== undefined && lang !== null && lang !== '' ? lang.trim() : 'ko'
-        }
-        ajaxConfig.data =  $.extend(true, {}, ajaxConfig.data, params);
 
         var defaultConf = {
             type: 'POST',
@@ -82,7 +78,6 @@ var COMM = {
 			async: true,
             error : function(jqXHR, textStatus){
                 console.log(jqXHR.status, jqXHR );
-                // alert("[[#{alert.error}]]");
                 if (lang == 'ko') {
                     alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
                 } else if(lang == 'en'){

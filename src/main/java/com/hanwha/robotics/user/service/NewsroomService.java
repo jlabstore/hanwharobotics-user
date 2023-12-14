@@ -12,7 +12,7 @@ public interface NewsroomService {
      * @param page  : 페이징 정보
      * @return
      */
-    public PageResponse getNewsroomList(NewsroomType newsroomType, PageRequest page);
+    public PageResponse getNewsroomList(NewsroomType newsroomType, PageRequest page, String lang);
 
 
     /**

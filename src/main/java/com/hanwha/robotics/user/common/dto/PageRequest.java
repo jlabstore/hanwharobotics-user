@@ -15,7 +15,6 @@ public class PageRequest extends SearchRequest {
     private String sort;
     private String direction;
 
-    private String lang;
     private String categoryLang;
     private String selectLang;
 
