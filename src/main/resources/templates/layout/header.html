@@ -183,9 +183,7 @@
             })
 
             function setLanguageSelect(){
-              var langType = ['ko', 'en'];
-              var lang = langType.includes(getCookie('lang')) ? getCookie('lang') : 'ko';
-              $('#languageSelect').val(lang);
+              $('#languageSelect').val(getCookieLang());
             }
           </script>
         </div>

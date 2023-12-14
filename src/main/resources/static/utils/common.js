@@ -1,8 +1,6 @@
 
 var COMM = {
 	ajax: function(ajaxConfig, errorCallback) {
-        var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
-
         var defaultConf = {
             type: 'POST',
             dataType: 'json',
@@ -14,10 +12,11 @@ var COMM = {
                 console.log(jqXHR.status, jqXHR );
 
                 // alert("[[#{alert.error}]]");
-                if (lang == 'ko') {
-                    alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
-                } else if(lang == 'en'){
+                var lang = getCookieLang();
+                if(lang == 'en'){
                     alert("There has been an error processing your request. Please contact Admin.")
+                }else{
+                    alert("요청 실행 중 문제가 발생했습니다. 관리자에게 문의하세요.");
                 }
 
                 if(typeof errorCallback != "undefined" && errorCallback != null){
@@ -168,7 +167,7 @@ var closeInquiryLayer = function(){
     $('.layer_bg').hide();
 }
 
-// 쿠키 가져오기 
+// 쿠키값 가져오기 
 var getCookie = (key) => {
     var cookies = document.cookie.split(`; `).map((el) => el.split('='));
 
@@ -180,8 +179,15 @@ var getCookie = (key) => {
     return null;
 };
 
+// 쿠키 다국어 값 가져오기 
+var getCookieLang = ()=>{
+    var langType = ['ko', 'en'];
+    var lang = langType.includes(getCookie('lang')) ? getCookie('lang') : 'ko';
+    return lang;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    var lang = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    var lang = getCookieLang();
     if (lang === 'en') {
         document.querySelector('html').classList.add('en');
     }
