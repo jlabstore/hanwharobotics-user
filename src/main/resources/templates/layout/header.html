@@ -22,192 +22,141 @@
                 </a> -->
                 <a href="/contact/inquiry" th:utext="#{header.banner}"></a>
               </div>
-              
-            </div>
-
-            <div>
-              <select id="languageSelect" class="languageSelect">
-                <option value="ko">한국어</option>
-                <option value="en">English</option>
-              </select>
-            </div>
-
-
-            <div class="btn_menu">
-              <button>
-                <div class="icon-top"></div>
-                <div class="icon-bottom"></div>
-              </button>
             </div>
 
             <div class="gnb_layer"></div>
 
-            <div class="gnb_menu">
+            <div class="gnb_right">
+              <div class="gnb_menu">
+                <div class="logo">
+                  <a href="/" class="logo_link">
+                    <!-- <span>한화로보틱스</span> -->
+                    <span th:utext="#{hanwharobotics.large}"></span>
+                  </a>
+                </div>
 
-              <div class="logo">
-                <a href="/" class="logo_link">
-                  <!-- <span>한화로보틱스</span> -->
-                  <span th:utext="#{hanwharobotics.large}"></span>
-                </a>
+                <button class="btn_close">
+                  <span></span>
+                </button>
+
+                <ul class="header__nav__items">
+                  <li>
+                    <!-- <a class="header__nav__link" href="/about.html" target="_blank">ABOUT</a> -->
+                    <span class="header__nav__link">ABOUT</span>
+
+                    <ul class="header__nav__items_sub">
+                      <li>
+                        <a href="/about" class="header_about" th:utext="#{hanwharobotics.large}"></a>
+                        <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
+                      </li>
+                      <li>
+                        <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
+                      </li>
+                      <!-- <li>
+                        <a href="#" target="_blank">연혁</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">경영</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">채용</a>
+                      </li> -->
+                    </ul>
+                  </li>
+                  <li>
+                    <span class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.co.kr/'">ROBOTS</span>
+                    <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOTS</a> -->
+                    <!-- <span class="header__nav__link on">ROBOTS</span>
+                    <ul class="header__nav__items_sub">
+                      <li>
+                        <a href="#" class="on" target="_blank">Products</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">Solutions</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">Ecosystem</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">Case Study</a>
+                      </li>
+                    </ul> -->
+                  </li>
+                  <li>
+                    <span class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp'">AGVS/AMRS</span>
+                    <!-- <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp"  style="opacity: 100%;"  target="_blank">AGVS</a> -->
+                    <!-- <span class="header__nav__link">AGVS</span>
+
+                    <ul class="header__nav__items_sub">
+                      <li>
+                        <a href="#" target="_blank">Products</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">Solutions</a>
+                      </li>
+                      <li>
+                        <a href="#" target="_blank">Case Study</a>
+                      </li>
+                    </ul> -->
+                  </li>
+
+                  <li>
+                    <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
+                    <span class="header__nav__link">NEWSROOM</span>
+
+                    <ul class="header__nav__items_sub">
+                      <li>
+                        <a href="/newsroom/press" class="header_press" >Press</a>
+                      </li>
+                      <li>
+                        <a href="/newsroom/ir" class="header_ir">IR</a>
+                      </li>
+                      <li>
+                        <a href="/newsroom/notice" class="header_notice">Notice</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
+                    <span class="header__nav__link">CONTACT</span>
+
+                    <ul class="header__nav__items_sub">
+                      <li>
+                        <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
 
-              <button class="btn_close">
-                <span></span>
-              </button>
+              <div class="selected_country"  th:if="#{header.nation} == 'EN'">
+                <!-- <a><span id="languageSelect">국가</span></a> -->
+                <a><span id="languageSelect" th:utext="#{header.nation}" value="en"></span></a>
+              </div>
+              <div class="selected_country"  th:unless="#{header.nation} == 'EN'">
+                <a><span id="languageSelect" th:utext="#{header.nation}" value="ko"></span></a>
+              </div>
 
-              <ul class="header__nav__items">
-                <li>
-                  <!-- <a class="header__nav__link" href="/about.html" target="_blank">ABOUT</a> -->
-                  <span class="header__nav__link">ABOUT</span>
-
-                  <ul class="header__nav__items_sub">
-                    <li>
-                      <a href="/about" class="header_about" th:utext="#{hanwharobotics.large}"></a>
-                      <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
-                    </li>
-                    <li>
-                      <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
-                    </li>
-                    <!-- <li>
-                      <a href="#" target="_blank">연혁</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">경영</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">채용</a>
-                    </li> -->
-                  </ul>
-                </li>
-                <li>
-                  <span class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.co.kr/'">ROBOTS</span>
-                  <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOTS</a> -->
-                  <!-- <span class="header__nav__link on">ROBOTS</span>
-                  <ul class="header__nav__items_sub">
-                    <li>
-                      <a href="#" class="on" target="_blank">Products</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">Solutions</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">Ecosystem</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">Case Study</a>
-                    </li>
-                  </ul> -->
-                </li>
-                <li>
-                  <span class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp'">AGVS/AMRS</span>
-                  <!-- <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp"  style="opacity: 100%;"  target="_blank">AGVS</a> -->
-                  <!-- <span class="header__nav__link">AGVS</span>
-
-                  <ul class="header__nav__items_sub">
-                    <li>
-                      <a href="#" target="_blank">Products</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">Solutions</a>
-                    </li>
-                    <li>
-                      <a href="#" target="_blank">Case Study</a>
-                    </li>
-                  </ul> -->
-                </li>
-
-                <li>
-                  <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
-                  <span class="header__nav__link">NEWSROOM</span>
-
-                  <ul class="header__nav__items_sub">
-                    <li>
-                      <a href="/newsroom/press" class="header_press" >Press</a>
-                    </li>
-                    <li>
-                      <a href="/newsroom/ir" class="header_ir">IR</a>
-                    </li>
-                    <li>
-                      <a href="/newsroom/notice" class="header_notice">Notice</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
-                  <span class="header__nav__link">CONTACT</span>
-
-                  <ul class="header__nav__items_sub">
-                    <li>
-                      <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-
-
-              <!-- <ul class="header__nav__items_right">
-                <li>
-                  <a href="/contact/inquiry" class="sales-inquiry">대리점 모집</a>
-                </li>
-                <li>
-                  <button class="inquiry" onclick="location.href='/contact/inquiry'">문의하기</button>
-                </li>
-              </ul> -->
-
-              <!-- <div class="footer">
-                <a target="_blank" href="#">English</a><em></em>
-              </div> -->
+              <div class="btn_menu">
+                <button>
+                  <div class="icon-top"></div>
+                  <div class="icon-bottom"></div>
+                </button>
+              </div>
             </div>
-
-            <!-- <div class="more_btn">
-              <button class="inquiry">
-                문의하기
-              </button>
-              <a href="/distributor" class="distributor">
-                대리점 모집
-              </a>
-            </div> -->
 
           </div>
           <script>
             $(document).ready(function () {
 
-              setLanguageSelect();
-
-              $('#languageSelect').change(function() {
-                var selectedLanguage = $(this).val();
-                var param = "lang=" + selectedLanguage
+              $('#languageSelect').click(function() {
+                var selectedLanguage = $(this).attr('value');
+                var param = "lang=" + selectedLanguage;
                 var url = window.location.pathname + "?" + param;
                 window.location.href = url;
               })
             })
-
-            function setLanguageSelect(){
-              $('#languageSelect').val(getCookieLang());
-            }
           </script>
         </div>
       </header>
-
-
-
-      <style>
-        #languageSelect {
-            padding-right: 38px;
-            font-family: HanwhaGothicR_OTF;
-            font-size: 16px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 2.5;
-            letter-spacing: normal;
-            text-align: left;
-            color: #fff;
-            outline: 0;
-            border: 0;
-            background: url(../images/pc/ico_arrow_down.svg) no-repeat 100% 38%;
-            background-size: 12px;
-            margin-top: 6px;
-        }
-        </style>
 </html>
