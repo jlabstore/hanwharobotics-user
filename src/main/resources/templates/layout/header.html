@@ -64,7 +64,8 @@
                     </ul>
                   </li>
                   <li>
-                    <span class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'">ROBOTS</span>
+                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.co.kr/'">ROBOTS</span>
+                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'">ROBOTS</span>
                     <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOTS</a> -->
                     <!-- <span class="header__nav__link on">ROBOTS</span>
                     <ul class="header__nav__items_sub">
@@ -83,7 +84,8 @@
                     </ul> -->
                   </li>
                   <li>
-                    <span class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'">AGVS/AMRS</span>
+                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp'">AGVS/AMRS</span>
+                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'">AGVS/AMRS</span>
                     <!-- <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp"  style="opacity: 100%;"  target="_blank">AGVS</a> -->
                     <!-- <span class="header__nav__link">AGVS</span>
 
