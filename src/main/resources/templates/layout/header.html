@@ -131,13 +131,14 @@
                 </ul>
               </div>
 
-              <div class="selected_country"  th:if="#{header.nation} == 'EN'">
+
+              <a class="selected_country" id="languageSelect" th:if="#{header.nation} == 'EN'" value="en">
                 <!-- <a><span id="languageSelect">국가</span></a> -->
-                <a><span id="languageSelect" th:utext="#{header.nation}" value="en"></span></a>
-              </div>
-              <div class="selected_country"  th:unless="#{header.nation} == 'EN'">
-                <a><span id="languageSelect" th:utext="#{header.nation}" value="ko"></span></a>
-              </div>
+                <span th:utext="#{header.nation}"></span>
+              </a>
+              <a class="selected_country" id="languageSelect" th:unless="#{header.nation} == 'EN'" value="ko">
+                <span th:utext="#{header.nation}"></span>
+              </a>
 
               <div class="btn_menu">
                 <button>
