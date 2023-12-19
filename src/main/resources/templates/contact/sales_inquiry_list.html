@@ -60,7 +60,7 @@
                     <!-- <span>본사 영업 의뢰 건에 대한 영업 기회 제공</span> -->
                     <span th:utext="#{inquiryList.benefitContent4}"></span>
                     </div>
-                    <div class="section-sales-inquiry-benefit-list-item">
+                    <div th:if="#{header.nation} == 'EN'" class="section-sales-inquiry-benefit-list-item">
                     <strong>05</strong>
                     <!-- <span>협동로봇 및 협동로봇 시스템 수주를 위한 본사 영업 지원</span> -->
                     <span th:utext="#{inquiryList.benefitContent5}"></span>
