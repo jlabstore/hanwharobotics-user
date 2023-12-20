@@ -164,23 +164,24 @@ $(document).ready(async function() {
 
   /**
    * 문의하기 버튼(header.html와 aside.html의 inquiry) 클릭 시 문의하기 팝업 호출
+   * layerInquiryBtn()로 대체
    */
-  $(document).on('click', '#header button.inquiry, #aside button.inquiry', function(e) {
-    e.stopPropagation();
+  // $(document).on('click', '#header button.inquiry, #aside button.inquiry', function(e) {
+  //   e.stopPropagation();
 
-    // $('body').addClass('scroll-lock');
-    $('.layer.inquiry').show('fast');
-    $('.layer_bg').show();
-    $(this).removeClass('active');
-    $('html').removeClass('scroll-lock');
+  //   // $('body').addClass('scroll-lock');
+  //   $('.layer.inquiry').show('fast');
+  //   $('.layer_bg').show();
+  //   $(this).removeClass('active');
+  //   $('html').removeClass('scroll-lock');
 
-    $('header .btn_menu button').removeClass('active');
-    $('.gnb_menu, .gnb_layer').removeClass('active');
+  //   $('header .btn_menu button').removeClass('active');
+  //   $('.gnb_menu, .gnb_layer').removeClass('active');
 
-    $('.header__nav__items_sub').removeClass('active');
-    $(this).closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
-    $('#header').removeClass('active');
-  });
+  //   $('.header__nav__items_sub').removeClass('active');
+  //   $(this).closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+  //   $('#header').removeClass('active');
+  // });
 
   /**
    * utils/common.js 에 동일한 기능 존재하여 주석 처리

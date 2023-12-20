@@ -123,28 +123,35 @@ var setPagination = function(data, elemnt){
 
 }
 
-// 문의하기 팝업 레이어 열기 
+// 문의하기 팝업 레이어 열기
 var layerInquiryBtn = function(data){
-    $('body').addClass('scroll-lock');
-    var type  = data == 1 ? '대리점 문의' : '제품문의';
 
-    //init
-    $('#inquiryType').val(type);
-    $('#name').val('');
-    $('#tel').val('');
-    $('#email').val('');
-    $('#company').val('');
-    $('#inquiry').val('');
-    $('#position').val('');
+    var lang = getCookieLang()
+    console.log('lang==', lang)
+    if (lang == 'en') {
+        alert('Coming Soon');
+    } else {
+        $('body').addClass('scroll-lock');
+        var type  = data == 1 ? '대리점 문의' : '제품문의';
 
-    //show
-    $('.layer.inquiry').show('fast');;
-    $('.layer_bg').show();
-    $('#loading-prograss').hide();
+        //init
+        $('#inquiryType').val(type);
+        $('#name').val('');
+        $('#tel').val('');
+        $('#email').val('');
+        $('#company').val('');
+        $('#inquiry').val('');
+        $('#position').val('');
+
+        //show
+        $('.layer.inquiry').show('fast');;
+        $('.layer_bg').show();
+        $('#loading-prograss').hide();
+    }
 }
 
 
-// 문의하기 팝업 레이어 닫기 
+// 문의하기 팝업 레이어 닫기
 var closeInquiryLayer = function(){
     $('body').removeClass('scroll-lock');
     $('.layer.inquiry').hide('fast');
