@@ -164,7 +164,7 @@ $(document).ready(async function() {
 
   /**
    * 문의하기 버튼(header.html와 aside.html의 inquiry) 클릭 시 문의하기 팝업 호출
-   * layerInquiryBtn()로 대체
+   * utils/common.js layerInquiryBtn()로 대체
    */
   // $(document).on('click', '#header button.inquiry, #aside button.inquiry', function(e) {
   //   e.stopPropagation();
