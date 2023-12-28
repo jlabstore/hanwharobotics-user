@@ -95,7 +95,7 @@ var setQueryStringParams = function(formId) {
 	});
 }
 
-//이벤트 막기 
+//이벤트 막기
 var preventClick = function(e){
 	e.preventDefault()
 }
@@ -144,17 +144,49 @@ var layerInquiryBtn = function(data){
         $('#position').val('');
 
         //show
-        $('.layer.inquiry').show('fast');;
+        $('.layer.inquiry').show('fast');
         $('.layer_bg').show();
         $('#loading-prograss').hide();
     }
 }
 
+// 푸터 팝업 열기
+var layerCompanyOpenBtn = function(data) {
+    //show
+    $('.layer.company').show('fast');
+    $('.layer_bg').show();
+    $('#loading-prograss').hide();
+}
+var layerPrivacyOpenBtn = function(data) {
+    //show
+    $('.layer.privacy').show('fast');
+    $('.layer_bg').show();
+    $('#loading-prograss').hide();
+}
+var layerCopyrightOpenBtn = function(data) {
+    //show
+    $('.layer.copyright').show('fast');
+    $('.layer_bg').show();
+    $('#loading-prograss').hide();
+}
+var layerEmailOpenBtn = function(data) {
+    //show
+    $('.layer.email').show('fast');
+    $('.layer_bg').show();
+    $('#loading-prograss').hide();
+}
+var layerFamilyOpenBtn = function(data) {
+    //show
+    $('.layer.family').show('fast');
+    $('.layer_bg').show();
+    $('#loading-prograss').hide();
+}
 
 // 문의하기 팝업 레이어 닫기
 var closeInquiryLayer = function(){
     $('body').removeClass('scroll-lock');
-    $('.layer.inquiry').hide('fast');
+    // $('.layer.inquiry').hide('fast');
+    $('.layer').hide('fast');
     $('.layer_bg').hide();
 }
 

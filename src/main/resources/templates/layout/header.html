@@ -151,14 +151,32 @@
           </div>
           <script>
             $(document).ready(function () {
+              checkDomainLang();
 
               $('#languageSelect').click(function() {
                 var selectedLanguage = $(this).attr('value');
                 var param = "lang=" + selectedLanguage;
                 var url = window.location.pathname + "?" + param;
-                window.location.href = url;
+                if (selectedLanguage == "en") {
+                  url = "https://hanwharobotics.com" + url
+                  window.location.href = url;
+                } else {
+                  url = "https://hanwharobotics.co.kr" + url
+                  window.location.href = url;
+                }
               })
             })
+
+            function checkDomainLang(){
+              var lang = getCookieLang();
+              var domain = window.location.host;
+              if(domain == "https://hanwharobotics.co.kr" && lang == "en" ){
+                window.location.href = domain +  window.location.pathname + "?lang=kr"
+              } else if (domain == "https://hanwharobotics.com" && lang == "ko") {
+                window.location.href = domain +  window.location.pathname + "?lang=en"
+              }
+
+            }
           </script>
         </div>
       </header>

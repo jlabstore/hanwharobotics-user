@@ -1,6 +1,23 @@
 const win = $(this); //this = window
 let headerMinHeight = '90px';
 
+function showLayer(layerName, target, headerMinHeight) {
+
+  const offset = $(window).scrollTop()+50;
+
+  $(`.layer.${layerName}`).css('top', offset+'px').show('fast');
+  $('.layer_bg').show();
+  target.removeClass('active');
+  $('html').removeClass('scroll-lock');
+
+  $('header .btn_menu button').removeClass('active');
+  $('.gnb_menu, .gnb_layer').removeClass('active');
+
+  $('.header__nav__items_sub').removeClass('active');
+  target.closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+  $('#header').removeClass('active');
+}
+
 // pc, table, mobile 여부
 $(window).on("load resize", function (e) {
   $('#header .header__nav__items_sub').removeClass('active');
@@ -119,6 +136,11 @@ $(document).ready(async function() {
 
   // $('.layer_wrap').load('/includes/layer.html', function() {
   //   $('.layer.inquiry').load('/includes/layer_inquiry.html');
+    // $('.layer.company').load('/includes/layer_company.html');
+    // $('.layer.email').load('/includes/layer_email.html');
+    // $('.layer.privacy').load('/includes/layer_privacy.html');
+    // $('.layer.copyright').load('/includes/layer_copyright.html');
+    // $('.layer.family').load('/includes/layer_family.html');
   // });
 
   $(document).on('click', 'header .btn_menu button', function(e) {
@@ -184,11 +206,46 @@ $(document).ready(async function() {
   // });
 
   /**
+   * 푸터 팝업 버튼 utils/common.js layerOpenBtn()로 대체
+   */
+  // $(document).on('click', 'button.sitemap_company', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('company', $(this), headerMinHeight);
+  // });
+
+  // $(document).on('click', 'button.sitemap_email', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('email', $(this), headerMinHeight);
+  // });
+
+
+  // $(document).on('click', 'button.sitemap_copyright', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('copyright', $(this), headerMinHeight);
+  // });
+
+  // $(document).on('click', 'button.sitemap_privacy', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('privacy', $(this), headerMinHeight);
+  // });
+
+  // $(document).on('click', '.link .select_wrap.popup', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('family', $(this), headerMinHeight);
+  // });
+
+  /**
    * utils/common.js 에 동일한 기능 존재하여 주석 처리
    */
   // $(document).on('click', '.layer_bg, .layer .btn_close', function() {
   //   $('body').removeClass('scroll-lock');
-  //   $('.layer.inquiry').hide('fast');
+  //  // $('.layer.inquiry').hide('fast');
+  //   $('.layer').hide('fast');
   //   $('.layer_bg').hide();
   // });
 
