@@ -151,32 +151,27 @@ var layerInquiryBtn = function(data){
 }
 
 // 푸터 팝업 열기
-var layerCompanyOpenBtn = function(data) {
-    //show
+var layerCompanyOpenBtn = function() {
     $('.layer.company').show('fast');
     $('.layer_bg').show();
     $('#loading-prograss').hide();
 }
-var layerPrivacyOpenBtn = function(data) {
-    //show
+var layerPrivacyOpenBtn = function() {
     $('.layer.privacy').show('fast');
     $('.layer_bg').show();
     $('#loading-prograss').hide();
 }
-var layerCopyrightOpenBtn = function(data) {
-    //show
+var layerCopyrightOpenBtn = function() {
     $('.layer.copyright').show('fast');
     $('.layer_bg').show();
     $('#loading-prograss').hide();
 }
-var layerEmailOpenBtn = function(data) {
-    //show
+var layerEmailOpenBtn = function() {
     $('.layer.email').show('fast');
     $('.layer_bg').show();
     $('#loading-prograss').hide();
 }
-var layerFamilyOpenBtn = function(data) {
-    //show
+var layerFamilyOpenBtn = function() {
     $('.layer.family').show('fast');
     $('.layer_bg').show();
     $('#loading-prograss').hide();
