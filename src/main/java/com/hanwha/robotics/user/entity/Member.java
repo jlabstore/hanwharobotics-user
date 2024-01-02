@@ -1,4 +1,4 @@
-package com.hanwha.robotics.user.entitiy;
+package com.hanwha.robotics.user.entity;
 
 import lombok.Builder;
 import lombok.Data;
