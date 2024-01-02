@@ -126,9 +126,17 @@
                       <li>
                         <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
                       </li>
-                      <li>
+
+
+                      <li th:if="${#request.userPrincipal == null}">
                         <a href="/member/login" class="header_inquiry">로그인</a>
                       </li>
+
+                      <li th:if="${#request.userPrincipal != null}">
+                        <a href="/logout" class="header_inquiry">로그아웃</a>
+                      </li>
+
+
                     </ul>
                   </li>
                 </ul>

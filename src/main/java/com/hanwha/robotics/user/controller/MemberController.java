@@ -18,7 +18,7 @@ public class MemberController {
      * @return
      */
     @GetMapping("/login")
-    public String login() {
+    public String loginPage() {
         return "contact/login";
     }
 
@@ -41,4 +41,24 @@ public class MemberController {
         memberService.registerMember(request);
         return "main";
     }
+
+    /**
+     * 회원Id 중복확인
+     * @param memberId
+     * @return
+     */
+    @GetMapping("/check")
+    @ResponseBody
+    public boolean checkMemberId(@RequestParam String memberId) {
+        return memberService.isMemberIdExists(memberId);
+    }
+
+    @GetMapping("/findId")
+    public String findIdPage () {
+        return "contact/findId";
+    }
+
+
+
+
 }

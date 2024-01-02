@@ -1,6 +1,6 @@
 package com.hanwha.robotics.user.dto;
 
-import com.hanwha.robotics.user.entitiy.Member;
+import com.hanwha.robotics.user.entity.Member;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -25,5 +25,6 @@ public class MemberRequest {
     public void encryptedPassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
     }
+
 
 }
