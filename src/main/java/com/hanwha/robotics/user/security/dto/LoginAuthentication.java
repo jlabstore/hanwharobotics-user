@@ -15,6 +15,8 @@ public class LoginAuthentication extends AbstractAuthenticationToken {
         this.password = password;
     }
 
+    // 차라리 여기에 MemberRequest 를 받는 생성자를 만들자!
+
     @Override
     public String getCredentials() {
         return password;
