@@ -27,4 +27,5 @@ public class MemberRequest {
     }
 
 
+    // toAuthentication() 는 여기두지 말자!
 }

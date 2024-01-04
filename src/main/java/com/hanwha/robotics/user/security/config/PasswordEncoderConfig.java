@@ -1,4 +1,4 @@
-package com.hanwha.robotics.user.config;
+package com.hanwha.robotics.user.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

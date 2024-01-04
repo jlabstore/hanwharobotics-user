@@ -1,21 +1,20 @@
 package com.hanwha.robotics.user.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hanwha.robotics.user.security.dto.LoginCompleteAuthentication;
-import com.hanwha.robotics.user.security.dto.LoginRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import java.io.IOException;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hanwha.robotics.user.security.dto.LoginRequest;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -32,18 +31,12 @@ public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingF
         try {
             LoginRequest loginReq = new ObjectMapper().readValue(request.getReader(), LoginRequest.class);
             return super.getAuthenticationManager().authenticate(loginReq.toAuthentication());
+        } catch (IOException ex) {
+            // TODO: 에러 만들기
+            throw new RuntimeException("Bad Request Exception", ex);
         } catch (RuntimeException ex) {
-            throw new AuthenticationBusinessException("로그인에 실패하였습니다.", ex);
+            throw new RuntimeException("Internal Server Exception", ex);
         }
-    }
-
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        LoginCompleteAuthentication auth = (LoginCompleteAuthentication) authResult;
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        context.setAuthentication(auth);
-        SecurityContextHolder.clearContext();
-        SecurityContextHolder.setContext(context);
     }
 
     @Override

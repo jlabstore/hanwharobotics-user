@@ -24,4 +24,10 @@ public interface MemberService {
      * @return
      */
     Member login(String memberId, String password);
+
+    /**
+     * 비밀번호 찾기 - 임시비밀번호 전송
+     * @param request
+     */
+    void findPassword(MemberRequest request);
 }

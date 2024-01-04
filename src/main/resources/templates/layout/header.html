@@ -128,12 +128,12 @@
                       </li>
 
 
-                      <li th:if="${#request.userPrincipal == null}">
+                      <li th:if="${#request.userPrincipal == null}">인
                         <a href="/member/login" class="header_inquiry">로그인</a>
                       </li>
 
                       <li th:if="${#request.userPrincipal != null}">
-                        <a href="/logout" class="header_inquiry">로그아웃</a>
+                        <a href="/member/logout" class="header_inquiry">로그아웃</a>
                       </li>
 
 
