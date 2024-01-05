@@ -13,4 +13,5 @@ public interface MemberMapper {
 	Member selectByMemberId(String memberId);
 
     Member selectByMemberIdAndEmail(String memberId, String email);
+    Member selectByNameAndEmail(String name, String email);
 }

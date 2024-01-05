@@ -26,6 +26,12 @@
         WHERE member_id = #{memberId}
     </select>
 
+    <select id="selectByNameAndEmail" resultType="com.hanwha.robotics.user.entity.Member" parameterType="String">
+        SELECT *
+        FROM tb_member
+        WHERE name = #{name} and email = #{email}
+    </select>
+
     <select id="selectByMemberIdAndEmail" resultType="com.hanwha.robotics.user.entity.Member" parameterType="String">
         SELECT *
         FROM tb_member

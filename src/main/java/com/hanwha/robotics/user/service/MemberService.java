@@ -6,9 +6,9 @@ import com.hanwha.robotics.user.entity.Member;
 public interface MemberService {
     /**
      * 회원가입
-     * @param memberRequest
+     * @param request
      */
-    void registerMember(MemberRequest memberRequest);
+    void registerMember(MemberRequest request);
 
     /**
      * 회원가입 아이디 중복체크
@@ -26,8 +26,16 @@ public interface MemberService {
     Member login(String memberId, String password);
 
     /**
+     * 아이디 찾기 - 이메일로 전송
+     * @param request
+     */
+    void findId(MemberRequest request);
+
+    /**
      * 비밀번호 찾기 - 임시비밀번호 전송
      * @param request
      */
     void findPassword(MemberRequest request);
+
+
 }

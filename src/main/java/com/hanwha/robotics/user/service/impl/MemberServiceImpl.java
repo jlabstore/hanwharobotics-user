@@ -26,9 +26,9 @@ public class MemberServiceImpl implements MemberService {
     private MailUtil mailUtil;
 
     @Override
-    public void registerMember(MemberRequest memberRequest) {
-        memberRequest.encryptedPassword(passwordEncoder);
-        Member member = memberRequest.toEntity();
+    public void registerMember(MemberRequest request) {
+        request.encryptedPassword(passwordEncoder);
+        Member member = request.toEntity();
         memberMapper.insertMember(member);
     }
 
@@ -49,13 +49,22 @@ public class MemberServiceImpl implements MemberService {
         return member;
     }
 
+    @Override
+    public void findId(MemberRequest request) {
+        Member member = Optional.ofNullable(memberMapper.selectByNameAndEmail(request.getName(), request.getEmail()))
+                .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없음"));
+        String memberId = member.getMemberId();
+        mailUtil.sendMemberId(member.getEmail(), memberId);
+    }
 
     @Override
     public void findPassword(MemberRequest request) {
         Member member = Optional.ofNullable(memberMapper.selectByMemberIdAndEmail(request.getMemberId(), request.getEmail()))
-            .orElseThrow(() -> new RuntimeException("찾을 수 없음"));
+            .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없음"));
         String tempPassword = mailUtil.sendTempPassword(member.getEmail());
         String encodedPassword = passwordEncoder.encode(tempPassword);
         memberMapper.updatePassword(member.getMemberId(), encodedPassword);
     }
+
+
 }

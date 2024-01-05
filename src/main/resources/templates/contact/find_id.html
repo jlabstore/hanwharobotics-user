@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <td class="td-button">
-                    <button class="btn btn-light">아이디 발송</button>
+                    <button class="btn btn-light" onclick="sendId()">아이디 발송</button>
                 </td>
             </tr>
 <!--            <tr>-->
@@ -85,6 +85,37 @@
 </html>
 
 <script>
+
+    function sendId() {
+        const name = $('#name').val();
+        const email = $('#email').val();
+
+        const jsonData = {
+            name: name,
+            email: email
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/id/send',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+            success: function (data) {
+                alert('임시 비밀번호가 발송되었습니다.')
+                window.location.href = '/member/login';
+            },
+
+            error: function (xhr, textStatus) {
+                console.error('전송 실패:', textStatus);
+                if (xhr.responseJSON) {
+                    const errorMessage = xhr.responseJSON.message;
+                    alert(errorMessage);
+                } else {
+                    alert('아이디 전송에 실패했습니다.');
+                }
+            }
+        });
+    }
 
 
 </script>

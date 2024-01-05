@@ -67,7 +67,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-id")
 	public String findIdPage() {
-		return "contact/findId";
+		return "find_id";
 	}
 
 	/**
@@ -76,7 +76,17 @@ public class MemberController {
 	 */
 	@GetMapping("/find-pw")
 	public String findPwPage() {
-		return "contact/findPw";
+		return "find_pw";
+	}
+
+	/**
+	 * 아이디 찾기 - 이메일로 아이디 전송
+	 * @return
+	 */
+	@PostMapping("/id/send")
+	public ResponseEntity<Void> sendMemberId(@RequestBody MemberRequest request) {
+		memberService.findId(request);
+		return ResponseEntity.ok().build();
 	}
 
 	/**

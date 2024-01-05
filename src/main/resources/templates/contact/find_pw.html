@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <td class="td-input">
-                    <div class="login_area"><input class="isStatusOnInput" id="name" type="text" placeholder="가입하신 아이디를 입력해 주세요"></div>
+                    <div class="login_area"><input class="isStatusOnInput" id="memberId" type="text" placeholder="가입하신 아이디를 입력해 주세요"></div>
                 </td>
             </tr>
             <tr>
@@ -51,7 +51,7 @@
             </tr>
             <tr>
                 <td class="td-input">
-                    <button class="btn btn-light">임시 비밀번호 발송</button>
+                    <button class="btn btn-light" onclick="sendTempPw()">임시 비밀번호 발송</button>
                 </td>
             </tr>
         </table>
@@ -64,6 +64,38 @@
 </html>
 
 <script>
+
+
+    function sendTempPw() {
+        const memberId = $('#memberId').val();
+        const email = $('#email').val();
+
+        const jsonData = {
+            memberId: memberId,
+            email: email
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/member/temp-password/send',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+            success: function (data) {
+                alert('임시 비밀번호가 발송되었습니다.')
+                window.location.href = '/member/login';
+            },
+
+            error: function (xhr, textStatus) {
+                console.error('전송 실패:', textStatus);
+                if (xhr.responseJSON) {
+                    const errorMessage = xhr.responseJSON.message;
+                    alert(errorMessage);
+                } else {
+                    alert('임시비밀번호 발송을 실패했습니다.');
+                }
+            }
+        });
+    }
 
 
 </script>

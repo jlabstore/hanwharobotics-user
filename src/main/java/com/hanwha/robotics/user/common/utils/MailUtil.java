@@ -51,18 +51,33 @@ public class MailUtil {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
 			messageHelper.setTo(email); // 메일 수신자
-			messageHelper.setSubject("한화로보틱스 임시 패스워드 발송메일"); // 메일 제목
-			messageHelper.setText(tempPassword); // 메일 본문 내용, HTML 여부
+			messageHelper.setSubject("문의하신 한화로보틱스 임시 패스워드 안내 입니다."); // 메일 제목
+			messageHelper.setText("임시비밀번호는 " + tempPassword + "입니다."); // 메일 본문 내용, HTML 여부
 			javaMailSender.send(mimeMessage);
 		} catch (Exception e) {
 			throw new RuntimeException("임시 패스워드 이메일 발송 실패", e);
 		}
         return tempPassword;
     }
+
+	public void sendMemberId(String email, String memberId) {
+		try {
+			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+			messageHelper.setTo(email); // 메일 수신자
+			messageHelper.setSubject("문의하신 한화로보틱스 아이디 안내 입니다."); // 메일 제목
+			messageHelper.setText("아이디는 " + memberId + " 입니다."); // 메일 본문 내용, HTML 여부
+			javaMailSender.send(mimeMessage);
+		} catch (Exception e) {
+			throw new RuntimeException("아이디 발송 실패", e);
+		}
+	}
     
 	public String setContext(Map<String, Object> params) {
 		Context context = new Context();
 		context.setVariables(params);
 		return templateEngine.process("inquiryTemplete", context);
 	}
+
+
 }
