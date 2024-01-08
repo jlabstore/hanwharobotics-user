@@ -131,7 +131,7 @@ $(document).ready(async function() {
   // $('#aside').load('/includes/aside.html');
 
   // $('#footer').load('/includes/footer.html', function() {
-    changeUrl();
+    // changeUrl();
   // });
 
   // $('.layer_wrap').load('/includes/layer.html', function() {
