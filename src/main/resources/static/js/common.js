@@ -206,7 +206,7 @@ $(document).ready(async function() {
   // });
 
   /**
-   * 푸터 팝업 버튼 utils/common.js layerOpenBtn()로 대체
+   * 푸터 팝업 버튼 utils/common.js layerCompanyOpenBtn()로 대체
    */
   // $(document).on('click', 'button.sitemap_company', function(e) {
   //   e.stopPropagation();

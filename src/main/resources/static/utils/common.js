@@ -144,37 +144,55 @@ var layerInquiryBtn = function(data){
         $('#position').val('');
 
         //show
-        $('.layer.inquiry').show('fast');
-        $('.layer_bg').show();
-        $('#loading-prograss').hide();
+        // $('.layer.inquiry').show('fast');
+        // $('.layer_bg').show();
+        // $('#loading-prograss').hide();
+
+        // e.stopPropagation();
+        showLayer('inquiry', $('.layer.inquiry'), headerMinHeight);
     }
 }
 
 // 푸터 팝업 열기
 var layerCompanyOpenBtn = function() {
-    $('.layer.company').show('fast');
-    $('.layer_bg').show();
-    $('#loading-prograss').hide();
+    // $('.layer.company').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('company', $('.layer.company'), headerMinHeight);
 }
 var layerPrivacyOpenBtn = function() {
-    $('.layer.privacy').show('fast');
-    $('.layer_bg').show();
-    $('#loading-prograss').hide();
+    // $('.layer.privacy').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('privacy', $('.layer.privacy'), headerMinHeight);
 }
 var layerCopyrightOpenBtn = function() {
-    $('.layer.copyright').show('fast');
-    $('.layer_bg').show();
-    $('#loading-prograss').hide();
+    // $('.layer.copyright').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('copyright', $('.layer.copyright'), headerMinHeight);
 }
 var layerEmailOpenBtn = function() {
-    $('.layer.email').show('fast');
-    $('.layer_bg').show();
-    $('#loading-prograss').hide();
+    // $('.layer.email').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('email', $('.layer.email'), headerMinHeight);
 }
 var layerFamilyOpenBtn = function() {
-    $('.layer.family').show('fast');
-    $('.layer_bg').show();
-    $('#loading-prograss').hide();
+    // $('.layer.family').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('family', $('.layer.family'), headerMinHeight);
 }
 
 // 문의하기 팝업 레이어 닫기
