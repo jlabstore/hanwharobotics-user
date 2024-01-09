@@ -1,11 +1,7 @@
 package com.hanwha.robotics.user.service.impl;
 
-import java.util.Optional;
-
-import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.entity.Member;
-import com.hanwha.robotics.user.mapper.MemberLogMapper;
 import com.hanwha.robotics.user.mapper.MemberMapper;
 import com.hanwha.robotics.user.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +14,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberMapper memberMapper;
-    @Autowired
-    private MemberLogMapper memberLogMapper;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private MailUtil mailUtil;
 
     @Override
     public void registerMember(MemberRequest memberRequest) {
@@ -40,22 +33,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member login(String memberId, String password) {
-        Member member = Optional.ofNullable(memberMapper.selectByMemberId(memberId))
-            .orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
-        if (member.getAcceptYn().equals("N")) {
-            throw new RuntimeException("승인전 계정입니다.");
+        Member member = memberMapper.selectByMemberId(memberId);
+        if (member == null || !passwordEncoder.matches(password, member.getPassword())) {
+            // TODO : log 업데이트
+            return null;
         }
-        memberLogMapper.insertMemberLog(member);
         return member;
     }
 
 
-    @Override
-    public void findPassword(MemberRequest request) {
-        Member member = Optional.ofNullable(memberMapper.selectByMemberIdAndEmail(request.getMemberId(), request.getEmail()))
-            .orElseThrow(() -> new RuntimeException("찾을 수 없음"));
-        String tempPassword = mailUtil.sendTempPassword(member.getEmail());
-        String encodedPassword = passwordEncoder.encode(tempPassword);
-        memberMapper.updatePassword(member.getMemberId(), encodedPassword);
-    }
+
 }

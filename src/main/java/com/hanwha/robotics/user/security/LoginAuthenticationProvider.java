@@ -25,7 +25,8 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
             Member member = memberService.login(memberId, password);
             return new LoginCompleteAuthentication(member);
         } catch (RuntimeException ex) {
-            throw new AuthenticationBusinessException("로그인에 실패했습니다.", ex);
+//            throw new AuthenticationBusinessException(ex);
+            throw new RuntimeException(ex);
         }
     }
 

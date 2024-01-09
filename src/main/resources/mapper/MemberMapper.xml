@@ -7,15 +7,8 @@
         VALUES (#{memberId}, #{password}, #{name}, #{email}, current_timestamp, 'N', 'Y')
     </insert>
 
-    <update id="updatePassword" parameterType="String">
-        UPDATE tb_member
-        SET password = #{password}
-        WHERE member_id = #{memberId}
-    </update>
-
     <select id="checkMemberId" resultType="int" parameterType="String">
-        SELECT
-            COUNT(*)
+        SELECT COUNT(*)
         FROM tb_member
         WHERE member_id = #{ memberId }
     </select>
@@ -24,12 +17,6 @@
         SELECT *
         FROM tb_member
         WHERE member_id = #{memberId}
-    </select>
-
-    <select id="selectByMemberIdAndEmail" resultType="com.hanwha.robotics.user.entity.Member" parameterType="String">
-        SELECT *
-        FROM tb_member
-        WHERE member_id = #{memberId} and email = #{email}
     </select>
 
 </mapper>
