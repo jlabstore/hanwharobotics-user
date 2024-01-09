@@ -5,7 +5,19 @@
 <div th:class="${layerClass}">
    <!-- <div class="layer inquiry"></div> -->
    <th:block th:replace="/layout/layer_inquiry :: div('layer inquiry')"></th:block>
-   <div class="layer agency"></div>
+   <!-- <div class="layer agency"></div> -->
+
+
+   <!-- <div class="layer company"></div> -->
+   <th:block th:replace="/layout/layer_company :: div('layer company')"></th:block>
+   <!-- <div class="layer privacy"></div> -->
+   <th:block th:replace="/layout/layer_privacy :: div('layer privacy')"></th:block>
+   <!-- <div class="layer copyright"></div> -->
+   <th:block th:replace="/layout/layer_copyright :: div('layer copyright')"></th:block>
+   <!-- <div class="layer email"></div> -->
+   <th:block th:replace="/layout/layer_email :: div('layer email')"></th:block>
+   <!-- <div class="layer family"></div> -->
+   <th:block th:replace="/layout/layer_family :: div('layer family')"></th:block>
 
    <div class="layer_bg"></div>
 </div>
