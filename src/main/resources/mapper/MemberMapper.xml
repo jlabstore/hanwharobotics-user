@@ -7,16 +7,4 @@
         VALUES (#{memberId}, #{password}, #{name}, #{email}, current_timestamp, 'N', 'Y')
     </insert>
 
-    <select id="checkMemberId" resultType="int" parameterType="String">
-        SELECT COUNT(*)
-        FROM tb_member
-        WHERE member_id = #{ memberId }
-    </select>
-    
-    <select id="selectByMemberId" resultType="com.hanwha.robotics.user.entity.Member" parameterType="String">
-        SELECT *
-        FROM tb_member
-        WHERE member_id = #{memberId}
-    </select>
-
 </mapper>

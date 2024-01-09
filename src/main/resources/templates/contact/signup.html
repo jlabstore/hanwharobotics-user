@@ -11,19 +11,17 @@
         <h1>회원가입</h1><br>
         <form method="post" th:action="@{/member/signup}" modelAttribute="MemberRequest">
 
-            아이디 <input type="text" id="memberId" name="memberId" required/>
-            <button type="button" onclick="checkDuplicateId()">중복확인</button>
-            <br>
+            아이디 <input type="text" id="memberId" name="memberId"/><br>
 <!--                <span class="check-text" id="idCheck" th:text="${valid_userId}"></span>-->
 
-            비밀번호 <input type="password" id="password" name="password" required/><br>
+            비밀번호 <input type="password" id="password" name="password"/><br>
 <!--                <span class="check-text" id="pwCheck" th:text="${valid_password}"></span>-->
 <!--            비밀번호 재입력 <input type="password" id="password2" name="password2"/>-->
 <!--                <span id="pw2Check" class="check-text" th:text="${valid_password2}"></span>-->
 
-            이름(대리점명) <input type="text" id="name" name="name" required><br>
+            이름(대리점명) <input type="text" id="name" name="name"><br>
 <!--                <span class="check-text" id="nameCheck" th:text="${valid_name}"></span>-->
-            이메일 <input type="text" id="email" name="email" required><br>
+            이메일 <input type="text" id="email" name="email"><br>
 
 <!--               <button class="btn btn-light" style="width: 150px;">인증번호 발송</button>-->
 <!--                        <input type="text" id="" name="" class="form-control" placeholder="인증번호 입력">-->
@@ -37,34 +35,5 @@
 
 
     </div>
-
-
 </body>
 </html>
-
-<script th:inline="javascript">
-
-    // TODO: 요구사항 확인 필요
-    function checkDuplicateId() {
-        let memberId = $('#memberId').val();
-        if (memberId.length < 4) {
-            alert("아이디를 입력해 주세요.");
-        } else {
-            $.ajax({
-                type: 'GET',
-                url: `/member/check?memberId=${encodeURIComponent(memberId)}`,
-                success: function(data) {
-                    if (data === true) {
-                        alert("이미 존재하는 아이디입니다.");
-                    } else {
-                        alert("사용 가능한 아이디입니다.");
-                    }
-                },
-                error: function() {
-                    alert('서버 에러');
-                }
-            });
-        }
-    }
-
-</script>
