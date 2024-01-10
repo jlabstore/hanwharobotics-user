@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+<div layout:fragment="content">
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <div>
+        비밀번호 재설정
+        현재 비밀번호 <input type="password" id="password" name="password"/>
+        비밀번호 <input type="password" id="newPassword" name="password"/>
+        재입력 <input type="password" id="newPassword2" name="password"/>
+        <button type="button" onclick="resetPw()">확인</button>
+    </div>
+
+
+</div>
+</body>
+</html>
+
+<script>
+    function resetPw() {
+        const password = $('#password').val();
+        const newPassword = $('#newPassword').val();
+
+        const jsonData = {
+            password: password,
+            newPassword : newPassword
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/member/reset/password/',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+            success: function (data) {
+                alert('변경에 성공하였습니다.')
+                window.location.href = '/';
+            },
+
+            error: function (xhr, textStatus) {
+                console.error('전송 실패:', textStatus);
+                if (xhr.responseJSON) {
+                    const errorMessage = xhr.responseJSON.message;
+                    alert(errorMessage);
+                } else {
+                    alert('비밀번호 재설정에 실패했습니다.');
+                }
+            }
+        });
+    }
+</script>

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class MemberRequest {
     private String memberId;
     private String password;
+    private String newPassword;
     private String name;
     private String email;
 
@@ -26,6 +27,7 @@ public class MemberRequest {
         this.password = passwordEncoder.encode(this.password);
     }
 
-
-    // toAuthentication() 는 여기두지 말자!
+//    public void changePassword(String password) {
+//        this.newPassword = password;
+//    }
 }

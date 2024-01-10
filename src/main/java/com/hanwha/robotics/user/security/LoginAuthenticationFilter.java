@@ -32,10 +32,7 @@ public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingF
             LoginRequest loginReq = new ObjectMapper().readValue(request.getReader(), LoginRequest.class);
             return super.getAuthenticationManager().authenticate(loginReq.toAuthentication());
         } catch (IOException ex) {
-            // TODO: 에러 만들기
             throw new RuntimeException("Bad Request Exception", ex);
-        } catch (RuntimeException ex) {
-            throw new RuntimeException("Internal Server Exception", ex);
         }
     }
 

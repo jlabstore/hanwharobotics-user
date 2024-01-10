@@ -11,7 +11,6 @@ public interface MemberMapper {
 	void updatePassword(String memberId, String password);
 	int checkMemberId(String memberId);
 	Member selectByMemberId(String memberId);
-
     Member selectByMemberIdAndEmail(String memberId, String email);
     Member selectByNameAndEmail(String name, String email);
 }

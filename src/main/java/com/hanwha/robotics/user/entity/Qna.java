@@ -7,13 +7,10 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class Member {
+public class Qna {
+    private int qnaNo;
     private int memberNo;
-    private String memberId;
-    private String password;
-    private String name;
-    private String email;
+    private String title;
+    private String content;
     private LocalDateTime createDt;
-    private String acceptYn;
-    private String useYn;
 }

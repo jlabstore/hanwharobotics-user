@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanwha.robotics.user.mapper.QnaMapper">
+
+    <select id="countQnaList" resultType="int">
+        SELECT count(*) FROM tb_qna
+    </select>
+
+    <select id="selectQnaList" parameterType="hashMap" resultType="com.hanwha.robotics.user.dto.QnaResponse">
+        SELECT q.qna_no,
+               q.title,
+               q.content,
+               q.create_dt,
+               m.name
+        FROM tb_qna q
+                 LEFT JOIN tb_member m on q.member_no = m.member_no
+
+        <where>
+            <choose>
+                <when test="searchType == 'TITLE'">
+                    AND q.title LIKE '%' + #{keyword} + '%'
+                </when>
+                <when test="searchType == 'CONTENT'">
+                    AND q.content LIKE '%' + #{keyword} + '%'
+                </when>
+                <when test="searchType == 'NAME'">
+                    AND m.name LIKE '%' + #{keyword} + '%'
+                </when>
+            </choose>
+        </where>
+
+        ORDER BY qna_no desc
+        LIMIT #{page.size}
+        OFFSET #{page.offset}
+    </select>
+
+    <select id="selectQnaByNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaResponse">
+        SELECT
+            qna_no,
+            title,
+            content,
+            create_dt
+        FROM
+            tb_qna
+        WHERE
+            qna_no = #{qnaNo}
+    </select>
+
+
+</mapper>

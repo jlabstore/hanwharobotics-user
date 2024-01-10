@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class MemberLog {
-    private int logNo; // PK
+    private int logNo;
     private int memberNo;
     private LocalDateTime accessDt;
 }

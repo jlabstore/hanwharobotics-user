@@ -18,7 +18,7 @@ public class ExceptionAdviceHandler {
         
         RuntimeException runtimeException = new RuntimeException(e.getClass().getName());
         runtimeException.setStackTrace(new StackTraceElement[0]);
-        return  new ResponseEntity<>(runtimeException, HttpStatus.INTERNAL_SERVER_ERROR); 
+        return new ResponseEntity<>(runtimeException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
 }

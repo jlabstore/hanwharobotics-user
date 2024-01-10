@@ -37,5 +37,5 @@ public interface MemberService {
      */
     void findPassword(MemberRequest request);
 
-
+    void resetPassword(String memberId, MemberRequest request);
 }
