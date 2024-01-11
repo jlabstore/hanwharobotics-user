@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hanwha.robotics.user.dto.QnaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +34,17 @@ public class QnaServiceImpl implements QnaService {
 
     @Override
     public QnaResponse getQna(int qnaNo) {
-        QnaResponse qnaResponse = qnaMapper.selectQnaByNo(qnaNo);
-        return qnaResponse;
+        return qnaMapper.selectQnaByNo(qnaNo);
     }
+
+    @Override
+    public int register(QnaRequest request) {
+        qnaMapper.insertQna(request);
+        return request.getQnaNo();
+//        int qnaNo = request.getQnaNo();
+//        qnaMapper.selectQnaByQnaNo(qnaNo);
+    }
+
 
 
 }

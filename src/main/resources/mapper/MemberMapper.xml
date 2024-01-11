@@ -15,6 +15,8 @@
         WHERE member_id = #{memberId}
     </update>
 
+
+
     <select id="checkMemberId" resultType="int" parameterType="String">
         SELECT
             COUNT(*)
@@ -27,6 +29,14 @@
         FROM tb_member
         WHERE member_id = #{memberId}
     </select>
+
+
+    <select id="selectByMemberNo" resultType="com.hanwha.robotics.user.entity.Member" parameterType="int">
+        SELECT *
+        FROM tb_member
+        WHERE member_no = #{memberNo}
+    </select>
+
 
     <select id="selectByNameAndEmail" resultType="com.hanwha.robotics.user.entity.Member" parameterType="String">
         SELECT *

@@ -25,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MailUtil mailUtil;
 
-	// TODO: 회원가입시 tb_policy 테이블에서 정책 상태 찾아와서 넣어줘야함
 	@Override
 	public void registerMember(MemberRequest request) {
 		request.encryptedPassword(passwordEncoder);
@@ -39,7 +38,6 @@ public class MemberServiceImpl implements MemberService {
 		return count == 1;
 	}
 
-	// TODO: 에러 메세지 리스폰스로 내려주기
 	@Override
 	public Member login(String memberId, String password) {
 		return Optional.ofNullable(memberMapper.selectByMemberId(memberId)).map(member -> {
@@ -72,15 +70,15 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
 	}
 
+
 	@Override
-	public void resetPassword(String memberId, MemberRequest request) {
-		Member member = memberMapper.selectByMemberId(memberId);
+	public void resetPassword(int memberNo, MemberRequest request) {
+		Member member = memberMapper.selectByMemberNo(memberNo);
 		if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
 			throw new RuntimeException("잘못된 비밀번호 입니다.");
 		}
 		String encodedPassword = passwordEncoder.encode(request.getNewPassword());
-		//        request.changePassword(encodedPassword);
-		memberMapper.updatePassword(memberId, encodedPassword);
+		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
 	}
 
 }

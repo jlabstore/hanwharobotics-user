@@ -9,8 +9,12 @@ import java.util.Collections;
 @Getter
 public class LoginCompleteAuthentication extends UsernamePasswordAuthenticationToken {
 
+//    public LoginCompleteAuthentication(Member member) {
+//        super(member.getMemberId(), null, Collections.emptyList());
+//    }
+
     public LoginCompleteAuthentication(Member member) {
-        super(member.getMemberId(), null, Collections.emptyList());
+        super(member.getMemberNo(), null, Collections.emptyList());
     }
 
 }

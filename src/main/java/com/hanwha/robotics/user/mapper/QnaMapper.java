@@ -1,5 +1,6 @@
 package com.hanwha.robotics.user.mapper;
 
+import com.hanwha.robotics.user.dto.QnaRequest;
 import com.hanwha.robotics.user.dto.QnaResponse;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,4 +12,8 @@ public interface QnaMapper {
     int countQnaList();
     List<QnaResponse> selectQnaList(Map<String, Object> map);
     QnaResponse selectQnaByNo(int qnaNo);
+
+    int insertQna(QnaRequest request);
+
+    QnaResponse selectQnaByQnaNo(int qnaNo);
 }

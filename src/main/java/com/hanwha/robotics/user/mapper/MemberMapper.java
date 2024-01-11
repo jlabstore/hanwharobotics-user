@@ -9,8 +9,13 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberMapper {
     void insertMember(Member member);
 	void updatePassword(String memberId, String password);
+
 	int checkMemberId(String memberId);
 	Member selectByMemberId(String memberId);
+
+    Member selectByMemberNo(int memberNo);
+
+
     Member selectByMemberIdAndEmail(String memberId, String email);
     Member selectByNameAndEmail(String name, String email);
 }

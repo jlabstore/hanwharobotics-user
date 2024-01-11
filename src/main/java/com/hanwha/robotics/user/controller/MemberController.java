@@ -113,20 +113,25 @@ public class MemberController {
 		return "contact/reset_pw";
 	}
 
-	/**
-	 * 비밀번호 재설정
-	 * @param memberId
-	 * @param request
-	 * @return
-	 */
+
+//	@PutMapping("/reset/password")
+//	public ResponseEntity<Void> resetPassword(
+//			@AuthenticationPrincipal String memberId,
+//			@RequestBody MemberRequest request
+//	) {
+//		memberService.resetPassword(memberId, request);
+//		return ResponseEntity.ok().build();
+//	}
+
 	@PutMapping("/reset/password")
 	public ResponseEntity<Void> resetPassword(
-			@AuthenticationPrincipal String memberId,
+			@AuthenticationPrincipal int memberNo,
 			@RequestBody MemberRequest request
 	) {
-		memberService.resetPassword(memberId, request);
+		memberService.resetPassword(memberNo, request);
 		return ResponseEntity.ok().build();
 	}
+
 
 
 }
