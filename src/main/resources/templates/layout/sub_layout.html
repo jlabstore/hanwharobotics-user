@@ -48,6 +48,15 @@
   <th:block th:replace="/common/paging_tmpl :: pagingTmpl"></th:block>
   <th:block th:replace="/common/files_tmpl :: filesTmpl"></th:block>
 
+  <!-- Add Google Analytics script here -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9CFYTN47J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D9CFYTN47J');
+  </script>
+
 </body>
   <th:block layout:fragment="script"></th:block>
 </html>
