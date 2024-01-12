@@ -82,6 +82,17 @@
         <input type="text" name="inquiryType" id="inquiryType" readonly/>
       </div> -->
       <div class="form_input">
+        <label for="inquiryType" th:utext="#{inquiry.type}"></label>
+
+        <select class="inquiry_select" name="inquiryType" id="inquiryType">
+          <option value="">선택</option>
+          <option value="제품 문의">제품</option>
+          <option value="대리점 문의">대리점</option>
+          <option value="사업협력/제휴 문의">사업협력/제휴</option>
+          <option value="교육 문의">교육</option>
+        </select>
+      </div>
+      <div class="form_input">
         <label for="inquiry" th:utext="#{inquiries}"></label>
         <!-- <label for="inquiry">문의내용<span>*</span></label> -->
 
@@ -160,6 +171,10 @@
       }else if($('#tel').val() == ''){
         alert("[[#{alert.checkPhone}]]");
         $('#tel').focus();
+        return;
+      }else if($('#inquiryType').val() == ''){
+        alert("[[#{alert.checkInquiryType}]]");
+        $('#inquiryType').focus();
         return;
       }else if($('#inquiry').val() == ''){
         alert("[[#{alert.checkInquiryContent}]]");

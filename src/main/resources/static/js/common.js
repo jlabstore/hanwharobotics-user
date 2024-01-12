@@ -1,4 +1,11 @@
 const win = $(this); //this = window
+const mailList = {
+  "product" : "rbt_sales@hanwha.com",
+  "inquiry" : "rbt_distributor@hanwha.com",
+  "partner" : "rbt_business@hanwha.com",
+  "education" : "rbt_education@hanwha.com"
+}
+
 let headerMinHeight = '90px';
 
 function showLayer(layerName, target, headerMinHeight) {
@@ -248,7 +255,6 @@ $(document).ready(async function() {
   //   $('.layer').hide('fast');
   //   $('.layer_bg').hide();
   // });
-
 });
 
 // 스크롤 이벤트 리스너를 추가합니다.

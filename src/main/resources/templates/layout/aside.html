@@ -4,8 +4,10 @@
         th:fragment="aside(asideId)">
 <aside th:id="${asideId}">
    <div class="more_btn">
-      <button class="inquiry" onclick="layerInquiryBtn()" th:utext="#{product.inquiry}"></button>
-      <a class="distributor" onclick="layerInquiryBtn(1)" th:utext="#{distributor.inquiry}"></a>
+      <button class="inquiry" onclick="layerInquiryBtn()" th:utext="#{inquiry}"></button>
+      <!-- <button class="inquiry" onclick="layerInquiryBtn()" th:utext="#{product.inquiry}"></button> -->
+      <!-- <a class="distributor" onclick="layerInquiryBtn(1)" th:utext="#{distributor.inquiry}"></a> -->
+
       <!-- <button class="inquiry" onclick="layerInquiryBtn()">
          문의하기
       </button>

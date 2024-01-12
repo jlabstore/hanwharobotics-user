@@ -1,4 +1,3 @@
-
 var COMM = {
 	ajax: function(ajaxConfig, errorCallback) {
         var defaultConf = {
@@ -127,21 +126,31 @@ var setPagination = function(data, elemnt){
 var layerInquiryBtn = function(data){
 
     var lang = getCookieLang()
-    console.log('lang==', lang)
     if (lang == 'en') {
         alert('Coming Soon');
     } else {
         $('body').addClass('scroll-lock');
-        var type  = data == 1 ? '대리점 문의' : '제품문의';
+        // var type  = data == 1 ? '대리점 문의' : '제품 문의';
+        var type = "";
+        if(data == 1) {
+            type = '대리점 문의';
+        } else if (data == 2) {
+            type = '제품 문의';
+        } else {
+            type = "";
+        }
 
         //init
         $('#inquiryType').val(type);
+        // $('#inquiryType').val('');
         $('#name').val('');
         $('#tel').val('');
         $('#email').val('');
         $('#company').val('');
         $('#inquiry').val('');
         $('#position').val('');
+
+        // $('#inquiryType').val(type);
 
         //show
         // $('.layer.inquiry').show('fast');

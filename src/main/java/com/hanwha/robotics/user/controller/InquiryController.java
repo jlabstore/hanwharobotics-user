@@ -21,19 +21,36 @@ import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.service.InquiryService;
 import com.hanwha.robotics.user.service.MainService;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Controller
 @RequestMapping("/contact")
 public class InquiryController {
-    
+
     @Autowired
     MainService mainService;
-    
+
     @Autowired
     InquiryService inquiryService;
 
-    
     /**
-     * 문의하기 페이지 
+     * 문의 유형 별 메일 주소 설정
+     */
+    @Value("${mail.address.product}")
+    private String productMail;
+
+    @Value("${mail.address.distributor}")
+    private String distributorMail;
+
+    @Value("${mail.address.cooperation}")
+    private String cooperationMail;
+
+    @Value("${mail.address.education}")
+    private String educationMail;
+
+
+    /**
+     * 문의하기 페이지
      * @return
      */
     @GetMapping("/inquiry")
@@ -51,6 +68,27 @@ public class InquiryController {
     @RequestMapping(value = "/inquiry/send", method=RequestMethod.POST , consumes = "application/json")
     @ResponseBody
     public ResponseEntity<Object> sendInquiryMail(HttpServletRequest request, HttpServletResponse response , @RequestBody Map<String,Object> params) {
+
+        // 문의 유형별 메일 설정
+        String inquiryType = (String) params.get("inquiryType");
+        String targetMail = "";
+        switch (inquiryType) {
+            case "제품 문의":
+                targetMail = productMail;
+                break;
+            case "대리점 문의":
+                targetMail = distributorMail;
+                break;
+            case "사업협력/제휴 문의":
+                targetMail = cooperationMail;
+                break;
+            case "교육 문의":
+                targetMail = educationMail;
+                break;
+        }
+
+        params.put("targetMail", targetMail);
+
         return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), inquiryService.sendMail(params)), HttpStatus.OK);
     }
 }
