@@ -195,11 +195,40 @@ var layerFamilyOpenBtn = function() {
     showLayer('family', $('.layer.family'), headerMinHeight);
 }
 
+var checkCookie = function () {
+    console.log('cookie popup')
+
+    if(localStorage.chk1Yn != undefined && localStorage.chk1Yn != null && localStorage.chk1Yn) {
+        document.getElementById('chk2').checked = localStorage.chk2Yn === 'true'
+        document.getElementById('chk3').checked = localStorage.chk3Yn  === 'true'
+    }
+
+    // 모두 거부 상태
+    if(localStorage.chk1Yn != undefined && localStorage.chk1Yn != null && !localStorage.chk1Yn) {
+        document.getElementById('chk1').checked = true
+        document.getElementById('chk2').checked = false
+        document.getElementById('chk2').checked = false
+    }
+}
+
+var layerCookieOpenBtn = function() {
+    // e.stopPropagation();
+
+    checkCookie();
+    showLayer('cookie', $(".layer.cookie"), headerMinHeight);
+
+}
+
 // 문의하기 팝업 레이어 닫기
-var closeInquiryLayer = function(){
+var closeInquiryLayer = function(id){
     $('body').removeClass('scroll-lock');
     // $('.layer.inquiry').hide('fast');
-    $('.layer').hide('fast');
+    if(id){
+        $('#'+ id).hide('fast');
+
+    }else{
+        $('.layer').hide('fast');
+    }
     $('.layer_bg').hide();
 }
 
@@ -229,3 +258,89 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('html').classList.add('en');
     }
 });
+
+
+// function saveCookie(data) {
+//     var chk1Yn = document.getElementById("chk1").checked
+//     var chk2Yn = document.getElementById("chk2").checked
+//     var chk3Yn = document.getElementById("chk3").checked
+
+//     localStorage.setItem("chk1Yn", chk1Yn);
+//     localStorage.setItem("chk2Yn", chk2Yn);
+//     localStorage.setItem("chk3Yn", chk3Yn);
+
+//     if(data == 1){
+//         closeInquiryLayer()
+//     } else if (data == 2) {
+//         location.reload();
+//     }
+// }
+// function denyCookie(data) {
+//     var chk1Yn = document.getElementById("chk1").checked
+//     var chk2Yn = document.getElementById("chk2").checked
+//     var chk3Yn = document.getElementById("chk3").checked
+
+//     chk1Yn = false;
+//     chk2Yn = false;
+//     chk3Yn = false;
+
+//     localStorage.setItem("chk1Yn", chk1Yn);
+//     localStorage.setItem("chk2Yn", chk2Yn);
+//     localStorage.setItem("chk3Yn", chk3Yn);
+
+//     if(data == 1){
+//         closeInquiryLayer()
+//     } else if (data == 2) {
+//         location.reload();
+//     }
+// }
+// function saveCookieAll(data) {
+//     var chk1Yn = document.getElementById("chk1").checked
+//     var chk2Yn = document.getElementById("chk2").checked
+//     var chk3Yn = document.getElementById("chk3").checked
+
+//     chk1Yn = true;
+//     chk2Yn = true;
+//     chk3Yn = true;
+
+//     localStorage.setItem("chk1Yn", chk1Yn);
+//     localStorage.setItem("chk2Yn", chk2Yn);
+//     localStorage.setItem("chk3Yn", chk3Yn);
+
+//     if(data == 1){
+//         closeInquiryLayer()
+//     } else if (data == 2) {
+//         location.reload();
+//     }
+// }
+function updateCookieValues(chk1Yn, chk2Yn, chk3Yn) {
+    localStorage.setItem("chk1Yn", chk1Yn);
+    localStorage.setItem("chk2Yn", chk2Yn);
+    localStorage.setItem("chk3Yn", chk3Yn);
+}
+
+function handleCookieAction(data, chk1Yn, chk2Yn, chk3Yn) {
+    updateCookieValues(chk1Yn, chk2Yn, chk3Yn);
+
+    if (data === 1) {
+        closeInquiryLayer();
+    } else if (data === 2) {
+        location.reload();
+    }
+}
+
+function saveCookie(data) {
+    var chk1Yn = document.getElementById("chk1").checked;
+    var chk2Yn = document.getElementById("chk2").checked;
+    var chk3Yn = document.getElementById("chk3").checked;
+
+    handleCookieAction(data, chk1Yn, chk2Yn, chk3Yn);
+}
+
+function denyCookie(data) {
+    handleCookieAction(data, false, false, false);
+}
+
+function saveCookieAll(data) {
+    handleCookieAction(data, true, true, true);
+}

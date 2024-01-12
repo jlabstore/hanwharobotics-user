@@ -141,6 +141,7 @@ $(document).ready(async function() {
     // $('.layer.privacy').load('/includes/layer_privacy.html');
     // $('.layer.copyright').load('/includes/layer_copyright.html');
     // $('.layer.family').load('/includes/layer_family.html');
+    // $('.layer.cookie').load('./includes/layer_cookie.html');
   // });
 
   $(document).on('click', 'header .btn_menu button', function(e) {
@@ -237,6 +238,15 @@ $(document).ready(async function() {
   //   e.stopPropagation();
 
   //   showLayer('family', $(this), headerMinHeight);
+  // });
+
+  /**
+   * utils/common.js 에 동일한 기능 존재하여 주석 처리
+   */
+  // $(document).on('click', 'button.sitemap_cookie', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('cookie', $(this), headerMinHeight);
   // });
 
   /**

@@ -1,9 +1,9 @@
 <html lang="ko"
         xmlns:th="http://www.thymeleaf.org"
         th:fragment="div(layerInquiryClass)">
-<div th:class="${layerInquiryClass}">
+<div th:class="${layerInquiryClass}" th:id="privacy">
 <div class="layer_inner">
-  <button class="btn_close" onclick="closeInquiryLayer()"><span>close</span></button>
+  <button class="btn_close" onclick="closeInquiryLayer('privacy')"><span>close</span></button>
 
   <div class="title">개인정보처리방침</div>
 
@@ -217,4 +217,9 @@
   </div>
 </div>
 </div>
+<style>
+  .privacy {
+    z-index: 15;
+  }
+</style>
 </html>
