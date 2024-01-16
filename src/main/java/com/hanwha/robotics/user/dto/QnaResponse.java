@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class QnaResponse {
     private int qnaNo;
+    private int memberNo;
     private String title;
     private String content;
     private LocalDate createDt;

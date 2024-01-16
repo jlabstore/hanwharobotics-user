@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class QnaReply {
     private int replyNO;
     private int qnaNo;
-    private String adminId;
     private String adminName;
     private String replyContent;
     private String replyType;

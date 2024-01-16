@@ -37,7 +37,11 @@ public interface MemberService {
      */
     void findPassword(MemberRequest request);
 
-//    void resetPassword(String memberId, MemberRequest request);
+    /**
+     * 비밀번호 재설정
+     * @param memberNo
+     * @param request
+     */
     void resetPassword(int memberNo, MemberRequest request);
 
 }

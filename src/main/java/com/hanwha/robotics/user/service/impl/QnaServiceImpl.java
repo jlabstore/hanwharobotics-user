@@ -3,8 +3,11 @@ package com.hanwha.robotics.user.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import com.hanwha.robotics.user.dto.QnaReplyResponse;
 import com.hanwha.robotics.user.dto.QnaRequest;
+import com.hanwha.robotics.user.mapper.QnaReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,17 +37,13 @@ public class QnaServiceImpl implements QnaService {
 
     @Override
     public QnaResponse getQna(int qnaNo) {
-        return qnaMapper.selectQnaByNo(qnaNo);
+        return qnaMapper.selectByQnaNo(qnaNo);
     }
 
     @Override
     public int register(QnaRequest request) {
         qnaMapper.insertQna(request);
         return request.getQnaNo();
-//        int qnaNo = request.getQnaNo();
-//        qnaMapper.selectQnaByQnaNo(qnaNo);
     }
-
-
 
 }

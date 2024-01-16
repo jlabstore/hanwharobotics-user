@@ -12,5 +12,5 @@ import java.time.LocalDateTime;
 public class QnaReplyResponse {
     private String replyContent;
     private String replyType;
-    private LocalDateTime createDt;
+    private String createDt;
 }

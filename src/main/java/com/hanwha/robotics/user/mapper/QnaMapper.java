@@ -11,9 +11,9 @@ import java.util.Map;
 public interface QnaMapper {
     int countQnaList();
     List<QnaResponse> selectQnaList(Map<String, Object> map);
-    QnaResponse selectQnaByNo(int qnaNo);
+    QnaResponse selectByQnaNo(int qnaNo);
 
-    int insertQna(QnaRequest request);
+    void insertQna(QnaRequest request);
 
     QnaResponse selectQnaByQnaNo(int qnaNo);
 }

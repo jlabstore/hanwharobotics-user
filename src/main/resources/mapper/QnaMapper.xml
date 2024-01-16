@@ -34,9 +34,10 @@
         OFFSET #{page.offset}
     </select>
 
-    <select id="selectQnaByNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaResponse">
+    <select id="selectByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaResponse">
         SELECT
             q.qna_no,
+            q.member_no,
             q.title,
             q.content,
             q.create_dt,
@@ -58,6 +59,7 @@
         <selectKey keyProperty="qnaNo" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID() AS qnaNo
         </selectKey>
+
         INSERT INTO
             tb_qna (member_no, title, content, create_dt, end_status)
         VALUES

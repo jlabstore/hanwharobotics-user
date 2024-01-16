@@ -70,7 +70,6 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
 	}
 
-
 	@Override
 	public void resetPassword(int memberNo, MemberRequest request) {
 		Member member = memberMapper.selectByMemberNo(memberNo);

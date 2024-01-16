@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QnaReplyRequest {
-    public int memberNo;
-    public String replyContent;
+    private int qnaNo;
+    private String replyContent;
+    private String replyType;
 }

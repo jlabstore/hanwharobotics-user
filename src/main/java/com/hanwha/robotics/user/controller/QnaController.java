@@ -6,11 +6,9 @@ import com.hanwha.robotics.user.common.dto.PageResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.enums.NewsroomType;
 import com.hanwha.robotics.user.common.utils.CommonUtil;
-import com.hanwha.robotics.user.dto.MemberRequest;
-import com.hanwha.robotics.user.dto.QnaReplyRequest;
-import com.hanwha.robotics.user.dto.QnaRequest;
-import com.hanwha.robotics.user.dto.QnaResponse;
+import com.hanwha.robotics.user.dto.*;
 import com.hanwha.robotics.user.entity.Qna;
+import com.hanwha.robotics.user.service.QnaReplyService;
 import com.hanwha.robotics.user.service.QnaService;
 import com.mysql.cj.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
+import java.util.*;
 
 @Controller
 @RequestMapping("/qna")
@@ -32,6 +30,8 @@ public class QnaController {
 
     @Autowired
     private QnaService qnaService;
+    @Autowired
+    private QnaReplyService qnaReplyService;
     @Autowired
     private CommonUtil commonUtil;
 
@@ -68,7 +68,6 @@ public class QnaController {
     }
 
     // TODO: 글 확인은 모든 사람이 가능하나 답글 입력은 작성 회원만 할 수 있음.
-
     /**
      * Q&A 상세 페이지 API
      * @param qnaNo
@@ -77,7 +76,15 @@ public class QnaController {
     @PostMapping("/{qnaNo}")
     @ResponseBody
     public ResponseEntity<Object> qnaViewAPI(@PathVariable int qnaNo) {
-        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaService.getQna(qnaNo)));
+
+        QnaResponse qnaDetail = qnaService.getQna(qnaNo);
+        List<QnaReplyResponse> qnaReplies = qnaReplyService.getQnaReplies(qnaNo);
+
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("qnaDetail", qnaDetail);
+        responseData.put("qnaReplies", qnaReplies);
+
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), responseData));
     }
 
     /**
@@ -105,17 +112,15 @@ public class QnaController {
         return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/qna/" + qnaNo).build();
     }
 
-    @PostMapping("/reply/register")
-    public ResponseEntity<QnaResponse> replyRegister(
+    // FIXME: replyType enum 으로?
+    @PostMapping("/reply")
+    public ResponseEntity<Void> replyRegister(
             @AuthenticationPrincipal int memberNo,
             @RequestBody QnaReplyRequest request
     ) {
-        request.setMemberNo(memberNo);
-
+        qnaReplyService.register(request);
         return ResponseEntity.ok().build();
     }
-
-
 
 
 

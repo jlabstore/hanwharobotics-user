@@ -28,6 +28,7 @@
         SELECT *
         FROM tb_member
         WHERE member_id = #{memberId}
+        AND use_yn = 'Y'
     </select>
 
 

@@ -23,16 +23,32 @@
 
 
 
-                <div class="board_files"></div>
 
 
                 <div>
                     <label>
                         답변 입력
-                        <input name="replyContent" type="text">
+                        <input id="replyContent" type="text">
                     </label>
                     <button onclick="register()">등록 </button>
                 </div>
+
+
+
+                <div class="reply"></div>
+
+
+
+                <script id="reply-html" type="text/template">
+                    {{#list}}
+                    <div class="reply-item">
+                        <p>{{replyContent}}</p>
+                        <p>{{replyType}}</p>
+                        <p>{{createDt}}</p>
+                    </div>
+                    {{/list}}
+                </script>
+
 
 
 
@@ -44,6 +60,8 @@
                 </div>
             </div>
         </div>
+
+
 
 
 
@@ -75,8 +93,10 @@
             }
         }
 
+        const paths = window.location.pathname.split('/');
+
         function getData(){
-            var paths = window.location.pathname.split('/')
+            // var paths = window.location.pathname.split('/')
 
             COMM.ajax({
                 url : "/qna/" + paths[paths.length-1],
@@ -87,15 +107,28 @@
                             alert("[[#{alert.postNotExist}]]");
                             window.history.back();
                         }else{
-                            $('.board_title').html(data.data.title);
-                            $('.board_date').html(data.data.createDt.replaceAll('-','.'));
-                            $('.board_contents').html(data.data.content);
+                            $('.board_title').html(data.data.qnaDetail.title);
+                            $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-','.'));
+                            $('.board_contents').html(data.data.qnaDetail.content);
 
-                            if(data.data.files != null && data.data.files.length > 0){
-                                var template = $("#files-tmpl").html();
-                                var rendered = Mustache.render(template, {'list' : data.data.files});
-                                $('.board_files').html(rendered);
+                            if(data.data.qnaReplies != null && data.data.qnaReplies.length > 0){
+                                var template = $("#reply-html").html();
+                                var rendered = Mustache.render(template, {'list' : data.data.qnaReplies});
+                                $('.reply').html(rendered);
                             }
+
+
+
+                            // var userMemberNo = ;
+                            // var qnaAuthorMemberNo = data.data.qnaDetail.memberNo;
+                            //
+                            // if (userMemberNo !== qnaAuthorMemberNo) {
+                            //     $('#replyContent').prop('disabled', true);
+                            // }
+
+
+
+
                         }
                     }
                 },
@@ -110,18 +143,21 @@
 
         function register() {
             const replyContent = $('#replyContent').val();
+            const qnaNo = paths[paths.length - 1];
             const jsonData = {
-                replyContent: replyContent
+                replyContent: replyContent,
+                qnaNo : qnaNo
             };
 
             $.ajax({
                 type: 'POST',
-                url: '/qna/reply/register',
+                url: '/qna/reply',
                 data: JSON.stringify(jsonData),
                 contentType: 'application/json',
                 success: function (data) {
                     alert('등록되었습니다.')
-                    // window.location.href = '/member/login';
+                    $('#replyContent').val('');
+                    getData();
                 },
 
                 error: function (xhr, textStatus) {
