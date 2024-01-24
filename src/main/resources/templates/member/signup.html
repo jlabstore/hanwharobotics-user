@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+    <div layout:fragment="content">
+
+        <div>
+            <br><br><br><br><br><br><br><br><br><br>
+            <h1>회원가입</h1><br>
+
+            <form method="post" th:action="@{/member/signup}" modelAttribute="MemberRequest">
+
+                <label for="memberId">아이디 * </label><input type="text" id="memberId" name="memberId" required/>
+                <button type="button" onclick="checkDuplicateId()">중복확인</button>
+                <br>
+                <span id="id_check" class="check_text" style="color: #ff0000;"></span>
+                <br><br>
+
+
+                <label for="password">비밀번호 * </label><input type="password" id="password" name="password" required/><br>
+                영문과 숫자를 조합하여 만들어주세요.<br>
+                <span id="pw_check" class="check_text"></span><br>
+                <label for="password2">비밀번호 재입력 * </label><input type="password" id="password2" name="password2"/><br>
+                <span id="pw2_check" class="check_text"></span>
+                <br><br>
+
+
+
+                <label for="companyName">업체명 * </label><input type="text" id="companyName" name="companyName">
+                <br><br>
+
+
+                <div>
+                    <label for="region">Country/Region * </label>
+
+                    <select id="region">
+                        <option value="Republic of Korea">Republic of Korea</option>
+                        <option value="USA">USA</option>
+                    </select>
+
+
+
+                    <br>
+                    <label for="city">City * </label><input type="text" id="city" name="region">
+                </div>
+                <br><br>
+
+
+                <div>
+                    <label for="postcode">우편번호 *</label><input type="text" id="postcode" name="postcode">
+                    <button type="button" onclick="daumPostcode()">우편번호 찾기</button>
+                    <br>
+
+                    <label for="address">주소 *</label><input type="text" id="address" name="address">
+                    <br>
+
+                    <label for="addressDetail">상세주소 *</label><input type="text" id="addressDetail" name="addressDetail">
+                </div>
+                <br><br>
+
+
+                <label for="store">로봇 구매처 / 대리점 * </label><input type="text" id="store" name="store" required>
+                <br><br>
+
+                <label for="name">이름 * </label><input type="text" id="name" name="name" required>
+                <br><br>
+
+                <label for="position">직급 * </label><input type="text" id="position" name="position" required>
+                <br><br>
+
+
+                <label for="email_front">이메일 주소 *</label>
+                <input type="text" id="email_front" name="email_front" required>
+                <label>
+                    @
+                    <select id="email_end" name="email_end">
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="kakao.com">kakao.com</option>
+<!--                        <option value="직접입력">직접입력</option>-->
+                    </select>
+
+                    <input id="email" name="email" style="display: none"></input>
+                </label>
+
+<!--                <input type="text" id="custom_email" name="custom_email" style="display: none;" placeholder="이메일인풋창">-->
+
+                <br><br>
+
+
+                <label>
+                    연락처 *
+                    <select id="phone_front">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="016">016</option>
+                        <option value="017">017</option>
+                        <option value="018">018</option>
+                        <option value="019">019</option>
+                    </select>
+
+                    -
+                    <input id="phone_middle" name="phone_middle" required>
+
+                    -
+                    <input id="phone_last" name="phone_last" required>
+
+                    <input id="contact" name="contact" style="display: none"></input>
+
+                </label>
+
+                <br><br><br><br>
+
+<!--                <button type="reset">취소</button>-->
+<!--                <button type="button" onclick="register()">회원가입 신청</button>-->
+                <button type="submit">회원가입 신청</button>
+
+                <br><br>
+
+            </form>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:inline="javascript">
+
+    // 아이디 중복확인
+    function checkDuplicateId() {
+        let memberId = $('#memberId').val();
+        let idCheckElement = $('#id_check');
+
+        if (memberId.length < 4) {
+            idCheckElement.text("아이디를 확인해 주세요.");
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: `/member/check?memberId=${encodeURIComponent(memberId)}`,
+                success: function(data) {
+
+                    if (data === true) {
+                        idCheckElement.text("이미 존재하는 아이디입니다.");
+                    } else {
+                        idCheckElement.text("사용 가능한 아이디입니다.");
+                    }
+                },
+                error: function() {
+                    alert('서버 에러');
+                }
+            });
+        }
+    }
+
+    // 우편번호
+    function daumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                let addr = '';
+
+                if (data.userSelectedType === 'R') { // 도로명 주소
+                    addr = data.roadAddress;
+                } else { // 지번 주소
+                    addr = data.jibunAddress;
+                }
+
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                document.getElementById("addressDetail").focus();
+            }
+        }).open();
+    }
+
+
+
+    $(document).ready(function() {
+        updateEmailField();
+        updatePhoneField();
+        $("#email_front, #email_end").on("change", updateEmailField);
+        $("#phone_front, #phone_middle, #phone_end").on("change", updatePhoneField);
+    });
+
+    function updateEmailField() {
+        const email_front = $("#email_front").val();
+        const email_end = $("#email_end").val();
+        const email = email_front + "@" + email_end;
+        $("#email").val(email);
+    }
+
+    function updatePhoneField() {
+        const phone_front = $("phone_front").val();
+        const phone_middle = $("phone_middle").val();
+        const phone_last = $("phone_end").val();
+        const contact = phone_front + "-" + phone_middle + "-" + phone_last;
+        $("#contact").val(contact);
+    }
+
+
+    // TODO: 직접입력
+    // $(document).ready(function() {
+    //     $("#email_end").on("change", function() {
+    //         const selectedOption = $(this).val();
+    //         const customEmailInput = $("#custom_email");
+    //         if (selectedOption === "직접입력") {
+    //             customEmailInput.show();
+    //         } else {
+    //             customEmailInput.hide();
+    //         }
+    //     });
+    // });
+
+
+
+
+
+    // function register(){
+    //     const email_front = $("#email_front").val();
+    //     const email_end = $("#email_end").val();
+    //     const email = email_front + "@" + email_end;
+    //
+    //     const phone_front = $("#phone_front").val();
+    //     const phone_middle = $("#phone_middle").val();
+    //     const phone_last = $("#phone_last").val();
+    //     const contact = phone_front + "-" + phone_middle + "-" + phone_last;
+    //
+    //
+    //     const temp = {
+    //         memberId: $('#memberId').val(),
+    //         password: $('#password').val(),
+    //         companyName: $('#companyName').val(),
+    //         region: $('#region').val(),
+    //         city: $('#city').val(),
+    //         postCode: $('#postcode').val(),
+    //         address: $('#address').val(),
+    //         addressDetail: $('#addressDetail').val(),
+    //         store: $('#store').val(),
+    //         name: $('#name').val(),
+    //         position: $('#position').val(),
+    //         email: email,
+    //         contact: contact,
+    //     };
+    //
+    //     COMM.ajax({
+    //         url : "/member/signup",
+    //         type: "POST",
+    //         headers: {'Content-Type': 'application/json'},
+    //         data: JSON.stringify(temp),
+    //         success : function(data) {
+    //             if(data.code === 200){
+    //                 window.location.href="/member/signup/complete";
+    //             }
+    //         },
+    //         error : function(jqXHR){
+    //             console.log(jqXHR.status, jqXHR);
+    //         },
+    //     });
+    //
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

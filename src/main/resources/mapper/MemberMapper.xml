@@ -3,10 +3,10 @@
 <mapper namespace="com.hanwha.robotics.user.mapper.MemberMapper">
 
     <insert id="insertMember" parameterType="com.hanwha.robotics.user.dto.MemberRequest">
-        INSERT INTO
-            tb_member (member_id, password, name, email, create_dt, accept_yn, use_yn)
+        INSERT INTO tb_member
+            (member_id, password, company_name, region, city, post_code, address, address_detail, store, name, position, email, contact,  accept_yn, create_dt)
         VALUES
-            (#{memberId}, #{password}, #{name}, #{email}, current_timestamp,(SELECT member_accept FROM tb_policy), 'Y')
+            (#{memberId}, #{password}, #{companyName}, #{region}, #{city}, #{postCode}, #{address}, #{addressDetail}, #{store}, #{name}, #{position}, #{email}, #{contact}, (SELECT member_accept FROM tb_policy), current_timestamp)
     </insert>
 
     <update id="updatePassword" parameterType="String">
@@ -28,7 +28,7 @@
         SELECT *
         FROM tb_member
         WHERE member_id = #{memberId}
-        AND use_yn = 'Y'
+#         AND use_yn = 'Y'
     </select>
 
 

@@ -1,21 +1,11 @@
 package com.hanwha.robotics.user.controller;
 
-import com.hanwha.robotics.user.entity.Member;
-import com.hanwha.robotics.user.security.dto.LoginCompleteAuthentication;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.service.MemberService;
@@ -33,27 +23,42 @@ public class MemberController {
 	 */
 	@GetMapping("/login")
 	public String loginPage() {
-		return "contact/login";
+		return "member/login";
+	}
+
+	/**
+	 * 회원가입 약관페이지
+	 * @return
+	 */
+	@GetMapping("/signup/term")
+	public String signupTerm() {
+		return "member/signup_term";
 	}
 
 	/**
 	 * 회원가입 페이지
+	 * @param agree
 	 * @return
 	 */
 	@GetMapping("/signup")
-	public String signup() {
-		return "contact/signup";
+	public String signup(@RequestParam("agree") String agree) {
+		if("Y".equals(agree)) {
+			return "member/signup";
+		} else {
+			return "main";
+		}
 	}
 
+
 	/**
-	 * 회원가입
+	 * 회원가입 - 등록
 	 * @param request
 	 * @return
 	 */
 	@PostMapping("/signup")
-	public String register(MemberRequest request) {
+	public String register(@ModelAttribute MemberRequest request) {
 		memberService.registerMember(request);
-		return "main";
+		return "member/signup_complete";
 	}
 
 	/**
@@ -62,8 +67,9 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("/check")
-	public boolean checkMemberId(@RequestParam String memberId) {
-		return memberService.isMemberIdExists(memberId);
+	public ResponseEntity<Boolean> checkMemberId(@RequestParam String memberId) {
+		boolean isExists = memberService.isMemberIdExists(memberId);
+		return ResponseEntity.ok(isExists);
 	}
 
 	/**
@@ -72,16 +78,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-id")
 	public String findIdPage() {
-		return "contact/find_id";
-	}
-
-	/**
-	 * 비밀번호 찾기 페이지
-	 * @return
-	 */
-	@GetMapping("/find-pw")
-	public String findPwPage() {
-		return "contact/find_pw";
+		return "member/find_id";
 	}
 
 	/**
@@ -94,6 +91,17 @@ public class MemberController {
 		return ResponseEntity.ok().build();
 	}
 
+
+	/**
+	 * 비밀번호 찾기 페이지
+	 * @return
+	 */
+	@GetMapping("/find-pw")
+	public String findPwPage() {
+		return "member/find_pw";
+	}
+
+	// TODO: 비밀번호 재설정 링크 전송으로 변경
 	/**
 	 * 비밀번호 찾기 - 임시비밀번호 전송
 	 * @return
@@ -110,7 +118,7 @@ public class MemberController {
 	 */
 	@GetMapping("/reset/password")
 	public String resetPwPage() {
-		return "contact/reset_pw";
+		return "member/reset_pw";
 	}
 
 
@@ -123,6 +131,12 @@ public class MemberController {
 //		return ResponseEntity.ok().build();
 //	}
 
+	/**
+	 * 비밀번호 재설정
+	 * @param memberNo
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/reset/password")
 	public ResponseEntity<Void> resetPassword(
 			@AuthenticationPrincipal int memberNo,
@@ -131,6 +145,8 @@ public class MemberController {
 		memberService.resetPassword(memberNo, request);
 		return ResponseEntity.ok().build();
 	}
+
+	
 
 
 

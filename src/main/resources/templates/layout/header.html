@@ -132,20 +132,36 @@
                       </li>
 
 
-                      <li th:if="${#request.userPrincipal == null}">
-                        <a href="/member/login" class="header_inquiry">로그인</a>
-                      </li>
+<!--                      <li th:if="${#request.userPrincipal == null}">-->
+<!--                        <a href="/member/login" class="header_inquiry">로그인</a>-->
+<!--                      </li>-->
 
-                      <li th:if="${#request.userPrincipal != null}">
-                        <a href="/member/logout" class="header_inquiry">로그아웃</a>
-                        <a href="/member/reset/password">비밀번호 재설정 </a>
-                      </li>
+<!--                      <li th:if="${#request.userPrincipal != null}">-->
+<!--                        <a href="/member/logout" class="header_inquiry">로그아웃</a>-->
+<!--                        <a href="/member/reset/password">비밀번호 재설정 </a>-->
+<!--                      </li>-->
 
 
                     </ul>
                   </li>
                 </ul>
               </div>
+
+
+              <div th:if="${#request.userPrincipal == null}">
+                <a href="/member/signup/term">회원가입</a>
+                |
+                <a href="/member/login" class="header_inquiry">로그인</a>
+              </div>
+
+              <div th:if="${#request.userPrincipal != null}">
+                마이페이지
+                |
+                <a href="/member/logout" class="header_inquiry">로그아웃</a>
+              </div>
+
+
+
 
 
               <a class="selected_country" id="languageSelect" th:if="#{header.nation} == 'EN'" value="en">
