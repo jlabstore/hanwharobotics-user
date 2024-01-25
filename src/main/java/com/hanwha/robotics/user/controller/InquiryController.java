@@ -73,13 +73,13 @@ public class InquiryController {
         String inquiryType = (String) params.get("inquiryType");
         String targetMail = "";
         switch (inquiryType) {
-            case "제품 문의":
+            case "제품 구매 문의":
                 targetMail = productMail;
                 break;
             case "대리점 문의":
                 targetMail = distributorMail;
                 break;
-            case "사업협력/제휴 문의":
+            case "사업 제휴/협업 문의":
                 targetMail = cooperationMail;
                 break;
             case "교육 문의":
