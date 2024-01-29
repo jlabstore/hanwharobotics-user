@@ -148,6 +148,7 @@ $(document).ready(async function() {
     // $('.layer.privacy').load('/includes/layer_privacy.html');
     // $('.layer.copyright').load('/includes/layer_copyright.html');
     // $('.layer.family').load('/includes/layer_family.html');
+    // $('.layer.cookie').load('./includes/layer_cookie.html');
   // });
 
   $(document).on('click', 'header .btn_menu button', function(e) {
@@ -249,12 +250,26 @@ $(document).ready(async function() {
   /**
    * utils/common.js 에 동일한 기능 존재하여 주석 처리
    */
+  // $(document).on('click', 'button.sitemap_cookie', function(e) {
+  //   e.stopPropagation();
+
+  //   showLayer('cookie', $(this), headerMinHeight);
+  // });
+
+  /**
+   * utils/common.js 에 동일한 기능 존재하여 주석 처리
+   */
   // $(document).on('click', '.layer_bg, .layer .btn_close', function() {
   //   $('body').removeClass('scroll-lock');
   //  // $('.layer.inquiry').hide('fast');
   //   $('.layer').hide('fast');
   //   $('.layer_bg').hide();
   // });
+
+
+  $(document).on('click', '.mobile .block .checkbox', function() {
+    $(this).closest('.block').toggleClass('on');
+  });
 });
 
 // 스크롤 이벤트 리스너를 추가합니다.
