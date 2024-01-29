@@ -259,6 +259,10 @@ $(document).ready(async function() {
   //   $('.layer_bg').hide();
   // });
 
+
+  $(document).on('click', '.mobile .block .checkbox', function() {
+    $(this).closest('.block').toggleClass('on');
+  });
 });
 
 // 스크롤 이벤트 리스너를 추가합니다.
