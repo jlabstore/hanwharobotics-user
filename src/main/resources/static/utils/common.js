@@ -94,6 +94,27 @@ var setQueryStringParams = function(formId) {
 	});
 }
 
+function showLayer(layerName, target, headerMinHeight) {
+
+    const offset = $(window).scrollTop()+50;
+    if(layerName == 'cookie'){
+      $(`.layer.${layerName}`).show('fast');
+    }else{
+      $(`.layer.${layerName}`).css('top', offset+'px').show('fast');
+    }
+
+    $('.layer_bg').show();
+    target.removeClass('active');
+    $('html').removeClass('scroll-lock');
+
+    $('header .btn_menu button').removeClass('active');
+    $('.gnb_menu, .gnb_layer').removeClass('active');
+
+    $('.header__nav__items_sub').removeClass('active');
+    target.closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+    $('#header').removeClass('active');
+  }
+
 //이벤트 막기
 var preventClick = function(e){
 	e.preventDefault()
@@ -224,7 +245,16 @@ var layerCookieOpenBtn = function() {
     // e.stopPropagation();
 
     checkCookie();
-    showLayer('cookie', $(".layer.cookie"), headerMinHeight);
+    showLayer('cookie', $(".layer.cookie"));
+    // console.log('cookie Popup',$('.layer.cookie').css('display'))
+    // const layerCookie = $('.layer.cookie');
+    // if(layerCookie.css('display') === 'none') {
+    //   $('.layer.cookie').show('fast');
+    //   $('html').addClass('scroll-lock');
+    // } else {
+    //   $('.layer.cookie').hide('fast');
+    //   $('html').removeClass('scroll-lock');
+    // }
 
 }
 

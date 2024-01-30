@@ -8,22 +8,26 @@ const mailList = {
 
 let headerMinHeight = '90px';
 
-function showLayer(layerName, target, headerMinHeight) {
+// function showLayer(layerName, target, headerMinHeight) {
 
-  const offset = $(window).scrollTop()+50;
+//   const offset = $(window).scrollTop()+50;
+//   if(layerName == 'cookie'){
+//     $(`.layer.${layerName}`).show('fast');
+//   }else{
+//     $(`.layer.${layerName}`).css('top', offset+'px').show('fast');
+//   }
 
-  $(`.layer.${layerName}`).css('top', offset+'px').show('fast');
-  $('.layer_bg').show();
-  target.removeClass('active');
-  $('html').removeClass('scroll-lock');
+//   $('.layer_bg').show();
+//   target.removeClass('active');
+//   $('html').removeClass('scroll-lock');
 
-  $('header .btn_menu button').removeClass('active');
-  $('.gnb_menu, .gnb_layer').removeClass('active');
+//   $('header .btn_menu button').removeClass('active');
+//   $('.gnb_menu, .gnb_layer').removeClass('active');
 
-  $('.header__nav__items_sub').removeClass('active');
-  target.closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
-  $('#header').removeClass('active');
-}
+//   $('.header__nav__items_sub').removeClass('active');
+//   target.closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+//   $('#header').removeClass('active');
+// }
 
 // pc, table, mobile 여부
 $(window).on("load resize", function (e) {
