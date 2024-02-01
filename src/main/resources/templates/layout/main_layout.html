@@ -51,9 +51,12 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      var lang = getCookieLang()
+      if (lang == 'ko') {
         if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
             layerCookieOpenBtn();
         }
+      }
     });
   </script>
   <!-- Google Tag Manager (noscript) -->

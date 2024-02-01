@@ -58,8 +58,14 @@
   </script>
    <script>
     document.addEventListener('DOMContentLoaded', function () {
-        if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
-            layerCookieOpenBtn();
+        // if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
+        //     layerCookieOpenBtn();
+        // }
+        var lang = getCookieLang()
+        if (lang == 'ko') {
+          if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
+              layerCookieOpenBtn();
+          }
         }
     });
   </script>
