@@ -22,15 +22,15 @@
             <div class="column board_list">
                 <div class="table">
                     <div class="thead">
-                        <!-- <div class="th">번호</div> -->
                         <div class="th" th:text="#{no}"></div>
-                        <!-- <div class="th">제목</div> -->
-                        <div class="th" th:text="#{title}"></div>
 
                         <div class="th">작성자</div>
 
-                        <!-- <div class="th">등록일</div> -->
-                        <div class="th" th:text="#{updateDate}"></div>
+                        <div class="th" th:text="#{title}"></div>
+
+                        <div class="th">진행상황</div>
+
+                        <div class="th">등록일</div>
                     </div>
                     <div class="tbody newsroomTbody">
                         <div class="tr">
@@ -51,35 +51,61 @@
     </main>
 
 
-    <select>
-        <option value="title">제목</option>
-        <option value="content">내용</option>
-        <option value="name">작성자</option>
-    </select>
-    <input type="text" placeholder="검색어를 입력해주세요.">
-    <button onclick="search()">검색</button>
+<!--    <select>-->
+<!--        <option value="title">제목</option>-->
+<!--        <option value="content">내용</option>-->
+<!--        <option value="name">작성자</option>-->
+<!--    </select>-->
+<!--    <input type="text" placeholder="검색어를 입력해주세요.">-->
+<!--    <button onclick="search()">검색</button>-->
 
-    <a href="/qna/register">작성하기</a>
+    <a href="/qna/register">문의하기</a>
 
 
     <form id="form" >
-        <input type="hidden" name="size" id="size"  value="10"/>
-        <input type="hidden" name="page" id="page"  value="1"/>
+        <input type="hidden" name="size" id="size" value="10"/>
+        <input type="hidden" name="page" id="page" value="1"/>
     </form>
 
     <script id="list-tmpl" type="x-tmpl-mustache" class="hide">
         {{#list}}
             <div class="tr">
                 <a href="/qna/{{qnaNo}}" >
+
+
                     <div class="td">{{no}}</div>
+                    <div class="td">{{memberId}}</div>
+
                     <div class="td">
                         <span class="contents">
                             {{title}}
                         </span>
+                        <span class="endStatus">
+
+                            {{#isExposure}}
+                            {{/isExposure}}
+
+                            {{^isExposure}}<span class="round td_notice" th:text="비공개"></span>{{/isExposure}}
+
+
+                        </span>
                     </div>
-                    <div class="td">{{name}}</div>
+
+                    <div class="td">
+
+                        {{#isAnswered}}
+                            답변 완료
+                        {{/isAnswered}}
+                        {{^isAnswered}}
+                            답변 진행중
+                        {{/isAnswered}}
+
+                    </div>
                     <div class="td">{{createDt}} </div>
                 </a>
+
+
+
             </div>
         {{/list}}
         {{^list}}
@@ -106,6 +132,11 @@
             getList();
         });
 
+
+
+
+
+
         function getList(page){
             if(typeof page != "undefined" && page != null) $('#page').val(page);
 
@@ -113,10 +144,15 @@
                     url : "/qna"
                 },
                 function success(data){
-                    // $(data.contents).map(function(i, e){
-                    //     e['isLabel'] = e.categoryCd && e.categoryCd === 'NOTICE';
-                    // });
-                    console.log(data)
+
+                    data.contents.forEach(function(item) {
+                        item.isExposure = (item.exposureStatus === 'Y');
+                    });
+
+                    data.contents.forEach(function(item) {
+                        item.isAnswered = (item.endStatus === 'Y');
+                    });
+
 
                     var template = $("#list-tmpl").html();
                     var rendered = Mustache.render(template, {'list' : data.contents});
@@ -126,10 +162,16 @@
                         setPagination(data, $('.paging'));
                     }
 
+
+
                 }
             );
 
         }
+
+
+
+
 
 
 

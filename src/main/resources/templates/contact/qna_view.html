@@ -17,52 +17,73 @@
             </div>
 
             <div class="column">
-                <div class="board_title"></div>
-                <div class="board_date"></div>
-                <div class="board_contents"></div>
-
-
-
-
-
-                <div>
-                    <label>
-                        답변 입력
-                        <input id="replyContent" type="text">
-                    </label>
-                    <button onclick="register()">등록 </button>
-                </div>
+                번호 <div class="board_no"></div>
+                직성자 <div class="board_memberId"></div>
+                진행상황 <div class="board_endStatus"></div>
+                등록일 <div class="board_date"></div>
+                제목 <div class="board_title"></div>
+                <div class="board_exposureStatus"></div>
+                내용 <div class="board_contents"></div>
 
 
 
                 <div class="reply"></div>
 
 
-
                 <script id="reply-html" type="text/template">
                     {{#list}}
-                    <div class="reply-item">
-                        <p>{{replyContent}}</p>
-                        <p>{{replyType}}</p>
-                        <p>{{createDt}}</p>
-                    </div>
+                        <div class="reply-item">
+                            <p>{{replyContent}}</p>
+                            <p>{{replyType}}</p>
+                            <p>{{createDt}}</p>
+                        </div>
                     {{/list}}
                 </script>
 
 
+                <div>
+                    <label>
+                        답글
+                        <div class="board_memberId"></div>
+                        <input id="replyContent" type="text">
+                    </label>
+                    <button onclick="register()">답글 남기기 </button>
+                </div>
 
 
-                <div class="board_prev">
-                    <!-- <a href="javascript:void(0)" onClick="goBack()">
-                      목록으로
-                    </a> -->
+
+<!--                <div class="board_prev" th:if="${previousQna != null}">-->
+<!--                    <a th:href="@{'/qna/' + ${previousQna.qnaNo}}">&lt; 이전글</a>-->
+<!--                </div>-->
+
+<!--                <div class="board_prev" th:if="${nextQna != null}">-->
+<!--                    <a th:href="@{'/qna/' + ${nextQna.qnaNo}}">다음글 &gt;</a>-->
+<!--                </div>-->
+
+
+
+                <div class="board_prev" th:if="${previousQna != null}">
+                    <a th:href="@{'/qna/' + ${previousQna.qnaNo}}">&lt; 이전글</a>
+                </div>
+
+                <div class="board_next" th:if="${nextQna != null}">
+                    <a th:href="@{'/qna/' + ${nextQna.qnaNo}}">다음글 &gt;</a>
+                </div>
+
+
+
+<!--                <div class="board_prev"></div>-->
+<!--                <div class="board_next"></div>-->
+
+
+                <div>
                     <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}"></a>
                 </div>
+
+
+
             </div>
         </div>
-
-
-
 
 
 
@@ -73,11 +94,16 @@
 
 </body>
 
+
+
 <th:block layout:fragment="script">
+
     <script>
         $(document).ready(function () {
             getData();
         });
+
+
 
         function goBack(){
             var params = {};
@@ -107,26 +133,29 @@
                             alert("[[#{alert.postNotExist}]]");
                             window.history.back();
                         }else{
-                            $('.board_title').html(data.data.qnaDetail.title);
+                            $('.board_no').html(data.data.qnaDetail.qnaNo);
+                            $('.board_memberId').html(data.data.qnaDetail.memberId);
+                            $('.board_endStatus').html(data.data.qnaDetail.endStatus);
                             $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-','.'));
+
+                            $('.board_title').html(data.data.qnaDetail.title);
+                            $('.board_exposureStatus').html(data.data.qnaDetail.exposureStatus);
                             $('.board_contents').html(data.data.qnaDetail.content);
 
+
                             if(data.data.qnaReplies != null && data.data.qnaReplies.length > 0){
-                                var template = $("#reply-html").html();
-                                var rendered = Mustache.render(template, {'list' : data.data.qnaReplies});
+                                const template = $("#reply-html").html();
+                                const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
                                 $('.reply').html(rendered);
                             }
 
+                            if (data.data.previousQna !== null) {
+                                $('.board_prev a').attr('href', '/qna/' + data.data.previousQna.qnaNo);
+                            }
 
-
-                            // var userMemberNo = ;
-                            // var qnaAuthorMemberNo = data.data.qnaDetail.memberNo;
-                            //
-                            // if (userMemberNo !== qnaAuthorMemberNo) {
-                            //     $('#replyContent').prop('disabled', true);
-                            // }
-
-
+                            if (data.data.nextQna !== null) {
+                                $('.board_next a').attr('href', '/qna/' + data.data.nextQna.qnaNo);
+                            }
 
 
                         }
@@ -134,11 +163,13 @@
                 },
                 error : function(jqXHR, textStatus, errorThrown){
                     console.log(jqXHR.status, jqXHR);
+                    if(jqXHR.status === 403) {
+                        alert("작성자만 열람할 수 있습니다.");
+                        window.location.href = "/qna";
+                    }
                 }
             });
         }
-
-
 
 
         function register() {
@@ -149,7 +180,7 @@
                 qnaNo : qnaNo
             };
 
-            $.ajax({
+            COMM.ajax({
                 type: 'POST',
                 url: '/qna/reply',
                 data: JSON.stringify(jsonData),
@@ -172,10 +203,6 @@
             });
 
         }
-
-
-
-
 
 
 

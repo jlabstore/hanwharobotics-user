@@ -11,6 +11,6 @@ public enum NewsroomType {
     NOTICE("NEWSROOM_NOTICE"),
     PRESS("NEWSROOM_PRESS");
 
-    private String code;
+    private final String code;
  
 }

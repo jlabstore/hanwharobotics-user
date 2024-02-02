@@ -6,40 +6,44 @@
 <body>
 <div layout:fragment="content">
 
-    <br><br><br><br><br><br><br><br><br><br>
-
     <div>
-        비밀번호 재설정 - 이메일로 전송되는 링크
+        <br><br><br><br><br><br><br><br><br><br>
+        <h1>대리점 전용</h1><br>
+        <h1>회원탈퇴</h1><br>
+        회원을 탈퇴하시면 ~~
 
-        비밀번호 <input type="password" id="newPassword" name="password"/>
 
-        재입력 <input type="password" id="newPassword2" name="password"/>
 
-        <button type="button" onclick="resetPw()">확인</button>
+        <p th:text="${#request.userPrincipal.getName()}"/>
 
+
+
+        <br><br><br><br>
+
+        <a href="/member/profile">아니오, 탈퇴를 취소하겠습니다.</a>
+        <button onclick="deleteMember()">예, 탈퇴하겠습니다.</button>
+
+        <br><br>
     </div>
 
 
 </div>
+
+
 </body>
 </html>
 
-<script>
-    function resetPw() {
-        const password = $('#password').val();
+<script th:inline="javascript">
 
-        const jsonData = {
-            password : password
-        };
+    function deleteMember() {
 
         COMM.ajax({
-            type: 'PUT',
-            url: '/member/reset/password',
+            type: 'DELETE',
+            url: '/member/profile/delete',
             data: JSON.stringify(jsonData),
             contentType: 'application/json',
             success: function (data) {
-                alert('변경에 성공하였습니다.')
-                window.location.href = '/login-page';
+                window.location.href = '/';
             },
 
             error: function (xhr, textStatus) {
@@ -48,9 +52,13 @@
                     const errorMessage = xhr.responseJSON.message;
                     alert(errorMessage);
                 } else {
-                    alert('비밀번호 재설정에 실패했습니다.');
+                    alert('실패했습니다.');
                 }
             }
         });
     }
+
+
+
+
 </script>

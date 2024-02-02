@@ -1,16 +1,15 @@
-package com.hanwha.robotics.user.entity;
+package com.hanwha.robotics.user.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class MemberResponse {
 
-@Data
-@Builder
-public class Member {
-    private int memberNo;
     private String memberId;
-    private String password;
 
     private String companyName;
     private String region;
@@ -26,7 +25,4 @@ public class Member {
     private String email;
     private String contact;
 
-    private String acceptYn;
-
-    private LocalDateTime createDate;
 }

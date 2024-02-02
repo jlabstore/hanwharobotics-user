@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hanwha.robotics.user.security.LoginAuthenticationFilter;
 import com.hanwha.robotics.user.security.LoginAuthenticationProvider;
 import com.hanwha.robotics.user.security.LogoutAuthenticationFilter;
+import com.hanwha.robotics.user.service.impl.MemberLogService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +28,7 @@ public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
     private final LoginAuthenticationProvider loginAuthenticationProvider;
+    private final MemberLogService memberLogService;
 
     @Bean
     public AuthenticationManager configureAuthenticationManager(HttpSecurity http) throws Exception {
@@ -42,7 +44,7 @@ public class SecurityConfig {
     }
 
     public LogoutAuthenticationFilter logoutAuthenticationFilter() {
-        return new LogoutAuthenticationFilter();
+        return new LogoutAuthenticationFilter(memberLogService);
     }
 
     @Bean
@@ -55,12 +57,23 @@ public class SecurityConfig {
                 .headers().frameOptions().disable()
 
                 .and()
-                .authorizeHttpRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/**").permitAll()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/member/**").authenticated()
+                .antMatchers("/qna/**").authenticated()
+
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendRedirect("/login-page");
+                })
 
                 .and()
                 .addFilterBefore(loginAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(logoutAuthenticationFilter(), LogoutFilter.class)
+
+
+
         ;
         return http.build();
     }

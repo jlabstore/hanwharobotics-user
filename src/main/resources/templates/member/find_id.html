@@ -9,75 +9,15 @@
     <br><br><br><br><br><br><br><br><br><br>
 
     <div class="content">
-        <table th:align="center">
-            <tr>
-                <td class="td-main">
-                    <p class="title-area">
-                        <a href="/member/find-id">아이디 찾기</a>
-                    </p>
-                    <p style="border-bottom: black solid 3px;"></p>
-                </td>
-                <td class="td-main">
-                    <p class="title-area">
-                        <a href="/member/find-pw">비밀번호 찾기</a>
-                    </p>
-                    <p style="border-bottom: white solid 3px;"></p>
-                </td>
-            </tr>
-        </table>
 
-        <table th:align="center">
-            <tr>
-                <td class="td-title" colspan="2">이름</td>
-            </tr>
-            <tr>
-                <td class="td-input" colspan="2">
-                    <div class="login_area"><input class="isStatusOnInput" id="name" type="text"
-                                                   placeholder="가입하신 이름을 입력해 주세요"></div>
-                </td>
-            </tr>
+        아이디 찾기
 
+        회원가입시 입력한 이메일 주소를~~
 
-            <tr>
-                <td class="td-title" colspan="2">이메일</td>
-            </tr>
-            <tr>
-                <td class="td-input">
-                    <input class="isStatusOnInput" id="email" type="email" placeholder="가입하신 이메일을 입력해 주세요.">
-                </td>
-
-            </tr>
-            <tr>
-                <td class="td-button">
-                    <button class="btn btn-light" onclick="sendId()">아이디 발송</button>
-                </td>
-            </tr>
-<!--            <tr>-->
-<!--                <td class="td-title" colspan="2">인증번호</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td class="td-input">-->
-<!--                    <input class="isStatusOnInput" type="text" placeholder="인증번호를 입력 해 주세요.">-->
-<!--                </td>-->
-<!--                <td class="td-button">-->
-<!--                    <button class="btn btn-light" id="findId" onclick="verification()">인증하기</button>-->
-<!--                </td>-->
-<!--            </tr>-->
-        </table>
-
-
-<!--        <div>-->
-
-<!--            <div class="finIdResult">-->
-<!--                <span id="findIdResult">-->
-
-<!--                </span>-->
-<!--            </div>-->
-
-<!--        </div>-->
+        <label for="email">이메일 주소 </label><input class="isStatusOnInput" id="email" type="email" >
+        <button class="btn btn-light" onclick="sendId()">이메일 발송</button>
 
     </div>
-
 
 </div>
 
@@ -86,23 +26,32 @@
 
 <script>
 
+    // TODO: 디바운스
+    // let debounceTimeout;
+    //
+    // function debouncedSendId() {
+    //     clearTimeout(debounceTimeout);
+    //     debounceTimeout = setTimeout(function () {
+    //         sendId();
+    //     }, 60000);
+    // }
+
+
     function sendId() {
-        const name = $('#name').val();
         const email = $('#email').val();
 
         const jsonData = {
-            name: name,
             email: email
         };
 
         $.ajax({
             type: 'POST',
-            url: '/member/id/send',
+            url: '/find-id',
             data: JSON.stringify(jsonData),
             contentType: 'application/json',
             success: function (data) {
-                alert('임시 비밀번호가 발송되었습니다.')
-                window.location.href = '/member/login';
+                alert('아이디가 발송되었습니다.')
+                window.location.href = '/find-id/complete';
             },
 
             error: function (xhr, textStatus) {
@@ -119,3 +68,4 @@
 
 
 </script>
+

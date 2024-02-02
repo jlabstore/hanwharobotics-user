@@ -1,10 +1,15 @@
 package com.hanwha.robotics.user.service.impl;
 
+import java.util.HashMap;
 import java.util.Optional;
 
+import com.hanwha.robotics.user.common.enums.MemberLogType;
+import com.hanwha.robotics.user.common.handler.exception.BadRequestException;
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.MemberRequest;
+import com.hanwha.robotics.user.dto.MemberResponse;
 import com.hanwha.robotics.user.entity.Member;
+import com.hanwha.robotics.user.mapper.DeletedAccountMapper;
 import com.hanwha.robotics.user.mapper.MemberLogMapper;
 import com.hanwha.robotics.user.mapper.MemberMapper;
 import com.hanwha.robotics.user.service.MemberService;
@@ -12,6 +17,7 @@ import com.hanwha.robotics.user.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -19,7 +25,9 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	@Autowired
-	private MemberLogMapper memberLogMapper;
+	private MemberLogService memberLogService;
+	@Autowired
+	private DeletedAccountMapper deletedAccountMapper;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
@@ -47,37 +55,74 @@ public class MemberServiceImpl implements MemberService {
 			if (member.getAcceptYn().equals("N")) {
 				throw new RuntimeException("승인전 계정입니다.");
 			}
-			memberLogMapper.insertMemberLog(member);
+			memberLogService.insertMemberLog(member.getMemberNo(), MemberLogType.LOGIN);
 			return member;
 		}).orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
 	}
 
+	// 아이디 찾기
 	@Override
 	public void findId(MemberRequest request) {
-		Member member = Optional.ofNullable(memberMapper.selectByNameAndEmail(request.getName(), request.getEmail()))
-			.orElseThrow(() -> new RuntimeException("회원을 찾을 수 없음"));
+		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
+				.orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
 		String memberId = member.getMemberId();
 		mailUtil.sendMemberId(member.getEmail(), memberId);
 	}
 
+//	@Override
+//	public void findPassword(MemberRequest request) {
+//		Member member = Optional.ofNullable(
+//				memberMapper.selectByMemberIdAndEmail(request.getMemberId(), request.getEmail()))
+//			.orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
+//		String tempPassword = mailUtil.sendTempPassword(member.getEmail());
+//		String encodedPassword = passwordEncoder.encode(tempPassword);
+//		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
+//	}
+
 	@Override
-	public void findPassword(MemberRequest request) {
+	public void sendPasswordResetMail(MemberRequest request) {
+//		Member member = Optional.ofNullable(
+//						memberMapper.selectByMemberIdAndEmail(request.getMemberId(), request.getEmail()))
+//				.orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
 		Member member = Optional.ofNullable(
-				memberMapper.selectByMemberIdAndEmail(request.getMemberId(), request.getEmail()))
-			.orElseThrow(() -> new RuntimeException("회원을 찾을 수 없음"));
-		String tempPassword = mailUtil.sendTempPassword(member.getEmail());
-		String encodedPassword = passwordEncoder.encode(tempPassword);
-		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
+						memberMapper.selectByMemberId(request.getMemberId()))
+				.orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
+		mailUtil.sendPasswordResetLink(member.getEmail());
+
 	}
 
+	// 비밀번호 이메일 재설정
 	@Override
 	public void resetPassword(int memberNo, MemberRequest request) {
 		Member member = memberMapper.selectByMemberNo(memberNo);
+		String encodedPassword = passwordEncoder.encode(request.getNewPassword());
+		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
+	}
+
+	// 마이페이지 비밀번호 변경
+	@Override
+	public void changePassword(int memberNo, MemberRequest request) {
+		Member member = memberMapper.selectByMemberNo(memberNo);
 		if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
-			throw new RuntimeException("잘못된 비밀번호 입니다.");
+			throw new BadRequestException("기존 비밀번호와 일치하지 않습니다.");
 		}
 		String encodedPassword = passwordEncoder.encode(request.getNewPassword());
 		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void deleteAccount(int memberNo) {
+		memberMapper.deleteMember(memberNo);
+		deletedAccountMapper.insertDeletedAccount(memberNo);
+	}
+
+
+	@Override
+	public MemberResponse retrieve(int memberNo) {
+		return memberMapper.findByMemberNo(memberNo);
 	}
 
 }

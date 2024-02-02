@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class QnaReply {
-    private int replyNO;
+    private int replyNo;
     private int qnaNo;
-    private String adminName;
+    private String adminId;
     private String replyContent;
     private String replyType;
     private LocalDateTime createDt;

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Mapper
 public interface QnaMapper {
@@ -13,7 +14,15 @@ public interface QnaMapper {
     List<QnaResponse> selectQnaList(Map<String, Object> map);
     QnaResponse selectByQnaNo(int qnaNo);
 
-    void insertQna(QnaRequest request);
+    QnaResponse selectPrevQna(int qnaNo);
 
-    QnaResponse selectQnaByQnaNo(int qnaNo);
+    QnaResponse selectNextQna(int qnaNo);
+
+
+    int findPrevQna(int qnaNo);
+    int findNextQna(int qnaNo);
+
+
+
+    void insertQna(QnaRequest request);
 }

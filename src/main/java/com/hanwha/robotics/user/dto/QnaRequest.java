@@ -8,6 +8,10 @@ import lombok.Setter;
 public class QnaRequest {
     public int qnaNo;
     public int memberNo;
+    public String memberId;
+    public String email;
     public String title;
     public String content;
+    public String emailReceiveYn;
+    public String exposureStatus;
 }

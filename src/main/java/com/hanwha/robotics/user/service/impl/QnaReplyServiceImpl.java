@@ -17,6 +17,7 @@ public class QnaReplyServiceImpl implements QnaReplyService {
 
     @Override
     public void register(QnaReplyRequest request) {
+
         qnaReplyMapper.insertQnaReply(request);
     }
 

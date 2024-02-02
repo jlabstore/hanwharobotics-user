@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hanwha.robotics.user.mapper.MemberLogMapper">
 
-    <insert id="insertMemberLog" parameterType="com.hanwha.robotics.user.entity.Member">
-        INSERT INTO tb_member_log (member_no, access_dt)
-        VALUES (#{memberNo}, current_timestamp)
+    <insert id="insertMemberLog" parameterType="Map">
+        INSERT INTO tb_member_log (member_no, log_type, access_date)
+        VALUES (#{memberNo}, #{logType}, current_timestamp)
     </insert>
 
 </mapper>

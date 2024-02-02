@@ -1,17 +1,25 @@
 package com.hanwha.robotics.user.controller;
 
+import com.hanwha.robotics.user.common.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.service.MemberService;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/member")
 public class MemberController {
 
 	@Autowired
@@ -21,7 +29,7 @@ public class MemberController {
 	 * 로그인 페이지
 	 * @return
 	 */
-	@GetMapping("/login")
+	@GetMapping("/login-page")
 	public String loginPage() {
 		return "member/login";
 	}
@@ -37,36 +45,39 @@ public class MemberController {
 
 	/**
 	 * 회원가입 페이지
-	 * @param agree
 	 * @return
 	 */
 	@GetMapping("/signup")
-	public String signup(@RequestParam("agree") String agree) {
-		if("Y".equals(agree)) {
-			return "member/signup";
-		} else {
-			return "main";
-		}
+	public String signupPage() {
+		return "member/signup";
 	}
 
+	//	@GetMapping("/signup")
+//	public String signup(@RequestParam("agree") String agree) {
+//		if("Y".equals(agree)) {
+//			return "member/signup";
+//		} else {
+//			return "main";
+//		}
+//	}
 
 	/**
-	 * 회원가입 - 등록
+	 * 회원가입
 	 * @param request
 	 * @return
 	 */
 	@PostMapping("/signup")
-	public String register(@ModelAttribute MemberRequest request) {
+	public String signup(@ModelAttribute MemberRequest request) {
 		memberService.registerMember(request);
 		return "member/signup_complete";
 	}
 
 	/**
-	 * 회원Id 중복확인
+	 * 회원Id 중복확인 API
 	 * @param memberId
 	 * @return
 	 */
-	@GetMapping("/check")
+	@GetMapping("/id/check")
 	public ResponseEntity<Boolean> checkMemberId(@RequestParam String memberId) {
 		boolean isExists = memberService.isMemberIdExists(memberId);
 		return ResponseEntity.ok(isExists);
@@ -85,68 +96,32 @@ public class MemberController {
 	 * 아이디 찾기 - 이메일로 아이디 전송
 	 * @return
 	 */
-	@PostMapping("/id/send")
+	@PostMapping("/find-id")
 	public ResponseEntity<Void> sendMemberId(@RequestBody MemberRequest request) {
 		memberService.findId(request);
 		return ResponseEntity.ok().build();
 	}
 
+	/**
+	 * 아이디 찾기 완료 페이지
+	 * @return
+	 */
+	@GetMapping("/find-id/complete")
+	public String findIdCompletePage() {
+		return "member/find_id_complete";
+	}
 
 	/**
 	 * 비밀번호 찾기 페이지
 	 * @return
 	 */
 	@GetMapping("/find-pw")
-	public String findPwPage() {
+	public String resetPasswordPage() {
 		return "member/find_pw";
 	}
 
-	// TODO: 비밀번호 재설정 링크 전송으로 변경
-	/**
-	 * 비밀번호 찾기 - 임시비밀번호 전송
-	 * @return
-	 */
-	@PutMapping("/temp-password/send")
-	public ResponseEntity<Void> updatePassword(@RequestBody MemberRequest request) {
-		memberService.findPassword(request);
-		return ResponseEntity.ok().build();
-	}
-
-	/**
-	 * 비밀번호 재설정 페이지
-	 * @return
-	 */
-	@GetMapping("/reset/password")
-	public String resetPwPage() {
-		return "member/reset_pw";
-	}
 
 
-//	@PutMapping("/reset/password")
-//	public ResponseEntity<Void> resetPassword(
-//			@AuthenticationPrincipal String memberId,
-//			@RequestBody MemberRequest request
-//	) {
-//		memberService.resetPassword(memberId, request);
-//		return ResponseEntity.ok().build();
-//	}
-
-	/**
-	 * 비밀번호 재설정
-	 * @param memberNo
-	 * @param request
-	 * @return
-	 */
-	@PutMapping("/reset/password")
-	public ResponseEntity<Void> resetPassword(
-			@AuthenticationPrincipal int memberNo,
-			@RequestBody MemberRequest request
-	) {
-		memberService.resetPassword(memberNo, request);
-		return ResponseEntity.ok().build();
-	}
-
-	
 
 
 

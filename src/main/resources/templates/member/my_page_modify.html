@@ -4,137 +4,127 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body>
-    <div layout:fragment="content">
+<div layout:fragment="content">
 
-        <div>
-            <br><br><br><br><br><br><br><br><br><br>
-            <h1>회원가입</h1><br>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br>
+        대리점 전용
+        <h1>회원정보 수정</h1><br>
 
-            <form method="post" th:action="@{/signup}" modelAttribute="MemberRequest" onsubmit="return validateForm();">
+        <form method="post" th:action="@{/signup}" modelAttribute="MemberRequest" onsubmit="return validateForm();">
 
-                <label for="memberId">아이디 * </label><input type="text" id="memberId" name="memberId" required/>
-                <button type="button" onclick="checkDuplicateId()">중복확인</button>
+            아이디 <span th:text="${memberResponse.getMemberId()}"/>
+
+
+
+            <label for="password">비밀번호 * </label><input type="password" id="password" name="password" onkeyup="checkPasswordConditions()" required/><br>
+            <span id="pw_check" class="check_text" style="color: #ff0000;"></span><br>
+            <label for="password2">비밀번호 재입력 * </label><input type="password" id="password2" name="password2" onkeyup="checkPasswordMatch()" required/><br>
+            <span id="pw2_check" class="check_text" style="color: #ff0000;"></span>
+            <br><br>
+
+
+
+            <label for="companyName">업체명 * </label><input type="text" id="companyName" name="companyName">
+            <br><br>
+
+
+
+            <div th:if="#{header.nation} == 'KR'" >
+                <label for="region">Country/Region * </label>
+                <select id="region" name="region">
+                    <option value="Republic of Korea">Republic of Korea</option>
+                    <option value="USA">USA</option>
+                </select>
                 <br>
-                <span id="id_check" class="check_text" style="color: #ff0000;"></span>
-                <br><br>
+                <label for="city">City * </label><input type="text" id="city" name="city">
+            </div>
+            <br><br>
 
 
-<!--                <label for="password">비밀번호 * </label><input type="password" id="password" name="password" required/><br>-->
-<!--                영문과 숫자를 조합하여 만들어주세요.<br>-->
-<!--                <span id="pw_check" class="check_text"></span><br>-->
-<!--                <label for="password2">비밀번호 재입력 * </label><input type="password" id="password2" name="password2"/><br>-->
-<!--                <span id="pw2_check" class="check_text"></span>-->
-<!--                <br><br>-->
+            <div>
+
+                <label for="postcode">우편번호 *</label><input type="text" id="postcode" name="postcode">
+
+                <button type="button" onclick="daumPostcode()">우편번호 찾기</button>
+
+                <br>
+
+                <label for="address">주소 *</label><input type="text" id="address" name="address">
+                <br>
+
+                <label for="addressDetail">상세주소 *</label><input type="text" id="addressDetail" name="addressDetail">
+            </div>
+            <br><br>
 
 
-                <label for="password">비밀번호 * </label><input type="password" id="password" name="password" onkeyup="checkPasswordConditions()" required/><br>
-                <span id="pw_check" class="check_text" style="color: #ff0000;"></span><br>
-                <label for="password2">비밀번호 재입력 * </label><input type="password" id="password2" name="password2" onkeyup="checkPasswordMatch()" required/><br>
-                <span id="pw2_check" class="check_text" style="color: #ff0000;"></span>
-                <br><br>
+            <label for="store">로봇 구매처 / 대리점 * </label><input type="text" id="store" name="store" required>
+            <br><br>
+
+            <label for="name">이름 * </label><input type="text" id="name" name="name" required>
+            <br><br>
+
+            <label for="position">직급 * </label><input type="text" id="position" name="position" required>
+            <br><br>
 
 
+            <label for="email_front">이메일 주소 *</label>
+            <input type="text" id="email_front" name="email_front" required>
+            <label>
+                @
+                <select id="email_end" name="email_end">
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="hotmail.com">hotmail.com</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="kakao.com">kakao.com</option>
+                    <!--                        <option value="">직접입력</option>-->
+                </select>
+            </label>
+            <input id="email" name="email" style="display: none"></input>
 
-                <label for="companyName">업체명 * </label><input type="text" id="companyName" name="companyName">
-                <br><br>
+            <!--                <input type="text" id="custom_email" name="custom_email" style="display: none;" placeholder="이메일인풋창">-->
 
-
-
-                <div th:if="#{header.nation} == 'KR'" >
-                    <label for="region">Country/Region * </label>
-                    <select id="region" name="region">
-                        <option value="Republic of Korea">Republic of Korea</option>
-                        <option value="USA">USA</option>
-                    </select>
-                    <br>
-                    <label for="city">City * </label><input type="text" id="city" name="city">
-                </div>
-                <br><br>
-
-
-                <div>
-
-                    <label for="postcode">우편번호 *</label><input type="text" id="postcode" name="postcode">
-
-                    <button type="button" onclick="daumPostcode()">우편번호 찾기</button>
-
-                    <br>
-
-                    <label for="address">주소 *</label><input type="text" id="address" name="address">
-                    <br>
-
-                    <label for="addressDetail">상세주소 *</label><input type="text" id="addressDetail" name="addressDetail">
-                </div>
-                <br><br>
+            <br><br>
 
 
-                <label for="store">로봇 구매처 / 대리점 * </label><input type="text" id="store" name="store" required>
-                <br><br>
+            <label>
+                연락처 *
+                <select id="phone_front">
+                    <option value="010">010</option>
+                    <option value="011">011</option>
+                    <option value="016">016</option>
+                    <option value="017">017</option>
+                    <option value="018">018</option>
+                    <option value="019">019</option>
+                </select>
 
-                <label for="name">이름 * </label><input type="text" id="name" name="name" required>
-                <br><br>
+                -
+                <input id="phone_middle" name="phone_middle" required>
 
-                <label for="position">직급 * </label><input type="text" id="position" name="position" required>
-                <br><br>
+                -
+                <input id="phone_last" name="phone_last" required>
 
+                <input id="contact" name="contact" style="display: none">
 
-                <label for="email_front">이메일 주소 *</label>
-                <input type="text" id="email_front" name="email_front" required>
-                <label>
-                    @
-                    <select id="email_end" name="email_end">
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="hotmail.com">hotmail.com</option>
-                        <option value="nate.com">nate.com</option>
-                        <option value="kakao.com">kakao.com</option>
-<!--                        <option value="">직접입력</option>-->
-                    </select>
-                </label>
-                <input id="email" name="email" style="display: none"></input>
+            </label>
 
-<!--                <input type="text" id="custom_email" name="custom_email" style="display: none;" placeholder="이메일인풋창">-->
+            <br><br><br><br>
 
-                <br><br>
+            <!--                <button type="reset">취소</button>-->
+            <!--                <button type="button" onclick="register()">회원가입 신청</button>-->
+            <button type="submit">회원가입 신청</button>
 
+            <br><br>
 
-                <label>
-                    연락처 *
-                    <select id="phone_front">
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="016">016</option>
-                        <option value="017">017</option>
-                        <option value="018">018</option>
-                        <option value="019">019</option>
-                    </select>
+        </form>
 
-                    -
-                    <input id="phone_middle" name="phone_middle" required>
-
-                    -
-                    <input id="phone_last" name="phone_last" required>
-
-                    <input id="contact" name="contact" style="display: none">
-
-                </label>
-
-                <br><br><br><br>
-
-<!--                <button type="reset">취소</button>-->
-<!--                <button type="button" onclick="register()">회원가입 신청</button>-->
-                <button type="submit">회원가입 신청</button>
-
-                <br><br>
-
-            </form>
-
-
-
-        </div>
 
 
     </div>
+
+
+</div>
 
 
 </body>
@@ -174,6 +164,8 @@
     function checkPasswordConditions() {
         const password = document.getElementById('password').value;
         const pwCheckElement = document.getElementById('pw_check');
+
+        // 비밀번호는 8글자 이상이어야 하고, 영문과 숫자가 모두 포함되어야 합니다.
         if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password)) {
             pwCheckElement.textContent = '비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.';
         } else {

@@ -32,4 +32,11 @@
         LIMIT #{limit}
     </select>
 
+
+    <delete id="deleteMember" parameterType="int">
+        DELETE FROM tb_member
+        WHERE memberNo = #{memberNo}
+    </delete>
+
+
 </mapper>

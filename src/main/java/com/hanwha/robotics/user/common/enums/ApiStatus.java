@@ -9,8 +9,9 @@ public enum ApiStatus {
     
     OK(200),
     BAD_REQUEST(400),
-    SERVER_ERROR(500);
+    SERVER_ERROR(500),
+    FORBIDDEN(403);
 
-    private int value;
+    private final int value;
  
 }

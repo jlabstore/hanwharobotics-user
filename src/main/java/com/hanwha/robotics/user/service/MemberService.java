@@ -1,6 +1,7 @@
 package com.hanwha.robotics.user.service;
 
 import com.hanwha.robotics.user.dto.MemberRequest;
+import com.hanwha.robotics.user.dto.MemberResponse;
 import com.hanwha.robotics.user.entity.Member;
 
 public interface MemberService {
@@ -35,13 +36,28 @@ public interface MemberService {
      * 비밀번호 찾기 - 임시비밀번호 전송
      * @param request
      */
-    void findPassword(MemberRequest request);
+    void sendPasswordResetMail(MemberRequest request);
 
     /**
      * 비밀번호 재설정
      * @param memberNo
      * @param request
      */
+    void changePassword(int memberNo, MemberRequest request);
+
+    /**
+     * 비밀번호 이메일 재설정
+     * @param memberNo
+     * @param request
+     */
     void resetPassword(int memberNo, MemberRequest request);
+
+    /**
+     * 회원 탈퇴
+     * @param memberNo
+     */
+    void deleteAccount(int memberNo);
+
+    MemberResponse retrieve(int memberNo);
 
 }

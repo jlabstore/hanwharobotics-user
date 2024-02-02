@@ -149,17 +149,16 @@
 
 
               <div th:if="${#request.userPrincipal == null}">
-                <a href="/member/signup/term">회원가입</a>
+                <a href="/signup/term">회원가입</a>
                 |
-                <a href="/member/login" class="header_inquiry">로그인</a>
+                <a href="/login-page" class="header_inquiry">로그인</a>
               </div>
 
               <div th:if="${#request.userPrincipal != null}">
-                마이페이지
+                <a href="/member/profile">마이페이지</a>
                 |
                 <a href="/member/logout" class="header_inquiry">로그아웃</a>
               </div>
-
 
 
 

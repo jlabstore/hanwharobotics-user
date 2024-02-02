@@ -10,51 +10,20 @@
 
     <div class="content">
 
-        <table th:align="center">
-            <tr>
-                <td class="td-main">
-                    <p class="title-area">
-                        <a href="/member/find-id">아이디 찾기</a>
-                    </p>
-                    <p  style="border-bottom: white solid 3px;"></p>
-                </td>
-                <td class="td-main">
-                    <p class="title-area">
-                        <a href="/member/find-pw">비밀번호 찾기</a>
-                    </p>
-                    <p  style="border-bottom: black solid 3px;"></p>
-                </td>
-            </tr>
-        </table>
+        <div class="content">
 
-        <table th:align="center">
-            <tr>
-                <td class="td-title">아이디</td>
-            </tr>
-            <tr>
-                <td class="td-input">
-                    <div class="login_area"><input class="isStatusOnInput" id="memberId" type="text" placeholder="가입하신 아이디를 입력해 주세요"></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-title" colspan="2">이메일</td>
-            </tr>
-            <tr>
-                <td class="td-input">
-                    <input class="isStatusOnInput" id="email" type="email" placeholder="가입하신 이메일을 입력해 주세요.">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-input">
-                    <button class="btn btn-light" onclick="sendTempPw()">임시 비밀번호 발송</button>
-                </td>
-            </tr>
-        </table>
+            비밀번호 찾기
+
+            회원가입시 입력한 아이디를 ~~
+
+            <label for="memberId">아이디 </label><input class="isStatusOnInput" id="memberId" type="text" >
+
+            <button class="btn btn-light" onclick="sendTempPw()">이메일 발송 </button>
+
+        </div>
+
+
+
 
     </div>
 
@@ -68,20 +37,20 @@
 
     function sendTempPw() {
         const memberId = $('#memberId').val();
-        const email = $('#email').val();
+        // const email = $('#email').val();
 
         const jsonData = {
-            memberId: memberId,
-            email: email
+            memberId: memberId
+            // email: email
         };
 
-        $.ajax({
-            type: 'PUT',
-            url: '/member/temp-password/send',
+        COMM.ajax({
+            type: 'GET',
+            url: '/password/reset-page',
             data: JSON.stringify(jsonData),
             contentType: 'application/json',
             success: function (data) {
-                alert('임시 비밀번호가 발송되었습니다.')
+                alert('재설정 링크가 발송되었습니다.')
                 window.location.href = '/member/login';
             },
 
@@ -91,7 +60,7 @@
                     const errorMessage = xhr.responseJSON.message;
                     alert(errorMessage);
                 } else {
-                    alert('임시비밀번호 발송을 실패했습니다.');
+                    alert('비밀번호 재설정 링크 발송에 실패했습니다.');
                 }
             }
         });

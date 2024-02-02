@@ -13,9 +13,19 @@ import java.time.LocalDateTime;
 public class QnaResponse {
     private int qnaNo;
     private int memberNo;
+    private String memberId;
+    private String maskedMemberId;
+
     private String title;
     private String content;
+    private String emailReceiveYn;
+    private String endStatus;
+    private String exposureStatus;
     private LocalDate createDt;
 
-    private String name;
+    public void setMaskedMemberId() {
+        int maskLength = memberId.length() / 2;
+        this.memberId = memberId.substring(0, maskLength) + "*".repeat(maskLength);
+    }
+
 }

@@ -21,16 +21,20 @@
 
 
                 <div>
-                    제목 <input id="title" name="title" type="text">
-                    내용 <input id="content" name="content" type="text">
+                    작성자 <input id="memberId" th:value="${memberResponse.getMemberId()}" readonly>
+                    <br>
+
+                    <label for="email">이메일 </label><input id="email" name="email" type="text" th:value="${memberResponse.getEmail()}">
+                    <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" style="appearance: auto" value="Y"> 관리자가 답변을 남기면 이메일로 알림을 받습니다.
+                    <br>
+
+
+                    <label for="title">제목 </label><input id="title" name="title" type="text">
+                    <br>
+                    <label for="content">내용 </label><input id="content" name="content" type="text">
                 </div>
-                <button type="submit" onclick="register()">등록하기</button>
+                <button type="button" onclick="register()">문의글 남기기</button>
 
-
-
-                <div class="board_prev">
-                    <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}"></a>
-                </div>
             </div>
 
 
@@ -43,31 +47,26 @@
 <th:block layout:fragment="script">
     <script>
         $(document).ready(function () {
-            getData();
+            const emailReceiveYn = $('#emailReceiveYn').val();
+            if (emailReceiveYn === 'Y') {
+                $('#emailReceiveYn').prop('checked', true);
+            }
         });
 
-        function goBack(){
-            var params = {};
-            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-                function(str, key, value) {
-                    params[key] = value;
-                }
-            );
-            if(params["to"] !== undefined && params["to"]==="main"){
-                // location.href="/newsroom/notice";
-            }else{
-                history.back();
-            }
-        }
 
         function register() {
-
+            const email = $('#email').val();
+            const emailReceiveYn = $('#emailReceiveYn').prop('checked') ? 'Y' : 'N';
             const title = $('#title').val();
             const content = $('#content').val();
+            const memberId = $('#memberId').val();
 
             const jsonData = {
+                email: email,
+                emailReceiveYn: emailReceiveYn,
                 title: title,
-                content: content
+                content: content,
+                memberId: memberId
             };
 
             $.ajax({
@@ -76,22 +75,16 @@
                 data: JSON.stringify(jsonData),
                 contentType: 'application/json',
                 success: function (data) {
-                    alert('등록되었습니다.')
-                    // window.location.href = '/member/login';
+                    window.location.href = '/qna/' + data;
                 },
-
                 error: function (xhr, textStatus) {
-                    console.error('전송 실패:', textStatus);
-                    if (xhr.responseJSON) {
-                        const errorMessage = xhr.responseJSON.message;
-                        alert(errorMessage);
-                    } else {
-                        alert('등록에 실패했습니다.');
-                    }
+                    alert("등록에 실패하였습니다.");
+                    console.error('Error:', xhr.responseText);
+                    console.error('Status:', xhr.status);
                 }
             });
-
         }
+
 
 
 
