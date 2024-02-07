@@ -15,9 +15,9 @@ public class QnaReplyServiceImpl implements QnaReplyService {
     @Autowired
     private QnaReplyMapper qnaReplyMapper;
 
+    // TODO: 답글 입력은 작성 회원만 할 수 있게 체크
     @Override
     public void register(QnaReplyRequest request) {
-
         qnaReplyMapper.insertQnaReply(request);
     }
 

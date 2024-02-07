@@ -12,15 +12,15 @@ public class Member {
     private String memberId;
     private String password;
 
-    private String companyName;
+    private String companyNm;
     private String region;
     private String city;
-    private String postCode;
+    private String postCd;
     private String address;
     private String addressDetail;
 
     private String store;
-    private String name;
+    private String memberNm;
     private String position;
 
     private String email;
@@ -28,5 +28,5 @@ public class Member {
 
     private String acceptYn;
 
-    private LocalDateTime createDate;
+    private LocalDateTime createDt;
 }

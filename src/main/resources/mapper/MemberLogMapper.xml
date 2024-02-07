@@ -3,7 +3,7 @@
 <mapper namespace="com.hanwha.robotics.user.mapper.MemberLogMapper">
 
     <insert id="insertMemberLog" parameterType="Map">
-        INSERT INTO tb_member_log (member_no, log_type, access_date)
+        INSERT INTO tb_member_log (member_no, log_type, access_dt)
         VALUES (#{memberNo}, #{logType}, current_timestamp)
     </insert>
 

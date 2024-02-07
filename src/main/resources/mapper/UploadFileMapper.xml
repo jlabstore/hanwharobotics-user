@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanwha.robotics.user.mapper.UploadFileMapper">
+
+
+    <insert id="saveFile" parameterType="list">
+        INSERT INTO tb_qna_file
+            (qna_no, original_file_nm, file_nm, type_cd, create_dt, file_path)
+        VALUES
+        <foreach item="file" collection="list" separator=",">
+            (
+            #{file.qnaNo}
+            , #{file.originalFileNm}
+            , #{file.fileNm}
+            , #{file.typeCd}
+            , CURRENT_TIMESTAMP
+            , #{file.filePath}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>

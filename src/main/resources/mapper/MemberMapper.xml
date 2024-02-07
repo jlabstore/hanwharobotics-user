@@ -5,8 +5,8 @@
     <!-- 회원가입 -->
     <insert id="insertMember" parameterType="com.hanwha.robotics.user.dto.MemberRequest">
         INSERT INTO tb_member
-        (member_id, password, company_name, region, city, post_code, address, address_detail, store, member_name, position,
-         email, contact, accept_yn, create_date)
+        (member_id, password, company_nm, region, city, post_cd, address, address_detail, store, member_nm, position,
+         email, contact, accept_yn, create_dt)
         VALUES (#{memberId}, #{password}, #{companyName}, #{region}, #{city}, #{postCode}, #{address}, #{addressDetail},
                 #{store}, #{name}, #{position}, #{email}, #{contact}, (SELECT member_accept FROM tb_policy),
                 current_timestamp)

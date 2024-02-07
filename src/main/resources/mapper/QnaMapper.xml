@@ -79,16 +79,47 @@
     </select>
 
 
-    <insert id="insertQna" parameterType="com.hanwha.robotics.user.dto.QnaRequest">
+<!--    <insert id="insertQna" parameterType="com.hanwha.robotics.user.dto.QnaRequest">-->
+<!--        <selectKey keyProperty="qnaNo" resultType="int" order="AFTER">-->
+<!--            SELECT LAST_INSERT_ID() AS qnaNo-->
+<!--        </selectKey>-->
+
+<!--        INSERT INTO-->
+<!--            tb_qna (member_no, member_id, email, title, content, email_receive_yn, end_status, exposure_status, create_dt)-->
+<!--        VALUES-->
+<!--            (#{memberNo}, #{memberId}, #{email}, #{title}, #{content}, #{emailReceiveYn},'N', 'Y', current_timestamp)-->
+<!--    </insert>-->
+
+
+
+
+
+
+<!--    <insert id="insertQna" parameterType="com.hanwha.robotics.user.dto.QnaRequest">-->
+<!--        INSERT INTO-->
+<!--            tb_qna (member_no, member_id, email, email_receive_yn, title, content, qna_type1_cd, qna_type2_cd, end_status, exposure_status, create_dt)-->
+<!--        VALUES-->
+<!--            (#{memberNo}, #{memberId}, #{email}, #{emailReceiveYn}, #{title}, #{content}, #{qnaType1Cd}, #{qnaType2Cd}, 'N', 'Y', current_timestamp)-->
+<!--        <selectKey keyProperty="qnaNo" resultType="int" order="AFTER">-->
+<!--            SELECT LAST_INSERT_ID() AS qnaNo-->
+<!--        </selectKey>-->
+<!--    </insert>-->
+
+
+
+
+    <insert id="insertQna" parameterType="com.hanwha.robotics.user.entity.Qna">
+        INSERT INTO
+        tb_qna (member_no, member_id, email, email_receive_yn, title, content, qna_type1_cd, qna_type2_cd, end_status, exposure_status, create_dt)
+        VALUES
+        (#{memberNo}, #{memberId}, #{email}, #{emailReceiveYn}, #{title}, #{content}, #{qnaType1Cd}, #{qnaType2Cd}, 'N', 'Y', current_timestamp)
         <selectKey keyProperty="qnaNo" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID() AS qnaNo
         </selectKey>
-
-        INSERT INTO
-            tb_qna (member_no, member_id, email, title, content, email_receive_yn, end_status, exposure_status, create_dt)
-        VALUES
-            (#{memberNo}, #{memberId}, #{email}, #{title}, #{content}, #{emailReceiveYn},'N', 'Y', current_timestamp)
     </insert>
+
+
+
 
 
     <!--    <select id="selectQnaByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaResponse">-->
@@ -121,23 +152,32 @@
     </select>
 
 
-    <select id="findPrevQna" parameterType="int" resultType="int">
-        SELECT
-            qna_no
-        FROM tb_qna
-        WHERE qna_no &lt; #{qnaNo}
-        ORDER BY qna_no DESC
-            LIMIT 1
-    </select>
+<!--    <select id="findPrevQna" parameterType="int" resultType="int">-->
+<!--        SELECT-->
+<!--            qna_no-->
+<!--        FROM tb_qna-->
+<!--        WHERE qna_no &lt; #{qnaNo}-->
+<!--        ORDER BY qna_no DESC-->
+<!--            LIMIT 1-->
+<!--    </select>-->
 
-    <select id="findNextQna" parameterType="int" resultType="int">
-        SELECT
-            qna_no
-        FROM tb_qna
-        WHERE qna_no &gt; #{qnaNo}
-        ORDER BY qna_no ASC
-            LIMIT 1
-    </select>
+<!--    <select id="findNextQna" parameterType="int" resultType="int">-->
+<!--        SELECT-->
+<!--            qna_no-->
+<!--        FROM tb_qna-->
+<!--        WHERE qna_no &gt; #{qnaNo}-->
+<!--        ORDER BY qna_no ASC-->
+<!--            LIMIT 1-->
+<!--    </select>-->
+
+
+
+    <insert id="insertQnaRobot" parameterType="com.hanwha.robotics.user.entity.QnaRobot">
+        INSERT INTO
+            tb_qna_robot (qna_no, model_cd, serial_no, sw_version, application_cd)
+        VALUES
+            (#{qnaNo}, #{modelCd}, #{serialNo}, #{swVersion}, #{applicationCd})
+    </insert>
 
 
 

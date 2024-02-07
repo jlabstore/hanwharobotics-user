@@ -2,10 +2,7 @@ package com.hanwha.robotics.user.service;
 
 import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.dto.PageResponse;
-import com.hanwha.robotics.user.dto.QnaDetailResponse;
-import com.hanwha.robotics.user.dto.QnaReplyResponse;
-import com.hanwha.robotics.user.dto.QnaRequest;
-import com.hanwha.robotics.user.dto.QnaResponse;
+import com.hanwha.robotics.user.dto.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +35,12 @@ public interface QnaService {
 
     QnaDetailResponse getQnaDetail(int memberNo, int qnaNo);
 
+    /**
+     * QNA Code
+     * @return
+     */
+    QnaCodeResponse getQnaCode();
 
-
-
-    //
-//    QnaResponse getPrevQna(int qnaNo);
-//    QnaResponse getNextQna(int qnaNo);
 
 
 

@@ -4,7 +4,7 @@
 
     <insert id="insertQnaReply" parameterType="com.hanwha.robotics.user.dto.QnaReplyRequest">
         INSERT INTO
-            tb_qna_reply (qna_no, reply_content, reply_type, create_date)
+            tb_qna_reply (qna_no, reply_content, reply_type, create_dt)
         VALUES
             (#{qnaNo}, #{replyContent}, 'USER', current_timestamp)
     </insert>
@@ -16,12 +16,12 @@
             r.admin_id,
             r.reply_content,
             r.reply_type,
-            r.create_date,
+            r.create_dt,
             q.member_id
         FROM tb_qna_reply r
         LEFT JOIN tb_qna q on r.qna_no = q.qna_no
         WHERE r.qna_no = #{qnaNo}
-        ORDER BY create_date
+        ORDER BY create_dt
     </select>
 
 

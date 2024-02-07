@@ -11,5 +11,5 @@ public class MemberLog {
     private int logNo;
     private int memberNo;
     private MemberLogType logType;
-    private LocalDateTime accessDate;
+    private LocalDateTime accessDt;
 }

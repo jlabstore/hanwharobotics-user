@@ -14,7 +14,7 @@ public class MemberResponse {
     private String companyName;
     private String region;
     private String city;
-    private String postCode;
+    private String postCd;
     private String address;
     private String addressDetail;
 

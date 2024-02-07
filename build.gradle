@@ -54,6 +54,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	//file uplode
+	implementation 'commons-io:commons-io:20030203.000550'
+	implementation 'org.apache.commons:commons-lang3:3.8.1'
+
 }
 
 tasks.named('bootBuildImage') {

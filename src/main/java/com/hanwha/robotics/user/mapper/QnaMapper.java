@@ -2,6 +2,9 @@ package com.hanwha.robotics.user.mapper;
 
 import com.hanwha.robotics.user.dto.QnaRequest;
 import com.hanwha.robotics.user.dto.QnaResponse;
+import com.hanwha.robotics.user.entity.Qna;
+import com.hanwha.robotics.user.entity.QnaRobot;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -24,5 +27,13 @@ public interface QnaMapper {
 
 
 
-    void insertQna(QnaRequest request);
+//    void insertQna(QnaRequest request);
+
+
+//    int insertQna(QnaRequest request);
+
+    int insertQna(Qna qna);
+
+
+    void insertQnaRobot(QnaRobot qnaRobot);
 }

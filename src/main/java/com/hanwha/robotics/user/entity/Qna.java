@@ -14,6 +14,8 @@ public class Qna {
     private String email;
     private String title;
     private String content;
+    private String qnaType1Cd;
+    private String qnaType2Cd;
     private String emailReceiveYn;
     private String endStatus;
     private String exposureStatus;
