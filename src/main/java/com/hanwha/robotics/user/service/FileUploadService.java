@@ -29,29 +29,12 @@ public class FileUploadService {
     }
 
 
-//    @Transactional
-//    public void saveThumnailFile(int newsroomNo, FileUpload file){
-//        file.setNewsroomNo(newsroomNo);
-//        file.setThumnailYn("Y");
-//        List<FileUpload> files = new ArrayList<>();
-//        files.add(file);
-//        mapper.saveFile(files);
-//    }
-
 
     public List<UploadFile> getFileListByNo(int no) {
         return mapper.getFileListByNo(no);
     }
 
 
-//    public FileUpload getThumnailFileListByNo(int no) {
-//        return mapper.getThumnailFileListByNo(no);
-//    }
 
-
-    @Transactional
-    public void deleteFile(int newsroomNo) {
-        mapper.deleteFile(newsroomNo);
-    }
 
 }
