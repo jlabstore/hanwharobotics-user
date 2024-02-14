@@ -17,13 +17,25 @@
             </div>
 
             <div class="column">
-                번호 <div class="board_no"></div>
-                직성자 <div class="board_memberId"></div>
-                진행상황 <div class="board_endStatus"></div>
-                등록일 <div class="board_date"></div>
-                제목 <div class="board_title"></div>
-                <div class="board_exposureStatus"></div>
-                내용 <div class="board_contents"></div>
+                번호 <span class="board_no"></span>
+                작성자 <span class="board_memberId"></span>
+                진행상황 <span class="board_endStatus"></span>
+                등록일 <span class="board_date"></span>
+
+                <br>
+                문의 유형1<span class="qna_type1"></span>
+                <br>
+                문의 유형2<span class="qna_type2"></span>
+
+                <br>
+                문의제품 <span class="qna_robot"></span>
+
+
+                <br>
+                제목 <span class="board_title"></span>
+                <span class="board_exposureStatus"></span>
+                <br>
+                내용 <span class="board_contents"></span>
 
 
 
@@ -43,7 +55,7 @@
 
                 <div>
                     <label>
-                        답글
+                        답변
                         <div class="board_memberId"></div>
                         <input id="replyContent" type="text">
                     </label>
@@ -76,7 +88,12 @@
 <!--                <div class="board_next"></div>-->
 
 
+
+
+
                 <div>
+                    <a th:href="@{'/qna/edit/' + ${board_no}}">수정</a>
+                    <a onclick="deleteQna()" th:text="삭제"></a>
                     <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}"></a>
                 </div>
 
@@ -106,7 +123,7 @@
 
 
         function goBack(){
-            var params = {};
+            const params = {};
             window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
                 function(str, key, value) {
                     params[key] = value;
@@ -133,14 +150,33 @@
                             alert("[[#{alert.postNotExist}]]");
                             window.history.back();
                         }else{
+
+
                             $('.board_no').html(data.data.qnaDetail.qnaNo);
                             $('.board_memberId').html(data.data.qnaDetail.memberId);
-                            $('.board_endStatus').html(data.data.qnaDetail.endStatus);
+                            // $('.board_endStatus').html(data.data.qnaDetail.endStatus);
+                            $('.board_endStatus').html(data.data.qnaDetail.endStatus === 'N' ? '답변 진행 중' : '답변 종료');
                             $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-','.'));
 
                             $('.board_title').html(data.data.qnaDetail.title);
-                            $('.board_exposureStatus').html(data.data.qnaDetail.exposureStatus);
+                            $('.board_exposureStatus').html(data.data.qnaDetail.exposureStatus === 'N' ? '비공개' : '');
                             $('.board_contents').html(data.data.qnaDetail.content);
+
+                            $('.qna_type1').html(data.data.qnaDetail.qnaType1Nm);
+                            $('.qna_type2').html(data.data.qnaDetail.qnaType2Nm);
+
+
+                            data.data.qnaRobots.forEach(function(robot) {
+                                const robotDiv = $('<div class="robot-info"></div>');
+
+                                robotDiv.append('<span>모델명: ' + robot.modelCd + '</span>');
+                                robotDiv.append('<span>소프트웨어 버전: ' + robot.swVersion + '</span>');
+                                robotDiv.append('<span>어플리케이션' + robot.applicationCd + '</span>');
+
+                                $('.qna_robot').append(robotDiv);
+                            });
+
+
 
 
                             if(data.data.qnaReplies != null && data.data.qnaReplies.length > 0){
@@ -164,7 +200,7 @@
                 error : function(jqXHR, textStatus, errorThrown){
                     console.log(jqXHR.status, jqXHR);
                     if(jqXHR.status === 403) {
-                        alert("작성자만 열람할 수 있습니다.");
+                        alert("비공개 게시글 입니다.");
                         window.location.href = "/qna";
                     }
                 }

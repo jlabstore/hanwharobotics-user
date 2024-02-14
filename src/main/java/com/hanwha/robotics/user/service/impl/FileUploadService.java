@@ -1,4 +1,4 @@
-package com.hanwha.robotics.user.service;
+package com.hanwha.robotics.user.service.impl;
 
 import com.hanwha.robotics.user.entity.UploadFile;
 import com.hanwha.robotics.user.mapper.UploadFileMapper;
@@ -15,7 +15,7 @@ import java.util.List;
 public class FileUploadService {
 
     @Autowired
-    UploadFileMapper mapper;
+    private UploadFileMapper mapper;
 
     @Transactional
     public void saveFile(int qnaNo, List<UploadFile> files){

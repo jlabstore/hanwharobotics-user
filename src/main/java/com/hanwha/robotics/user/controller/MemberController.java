@@ -1,10 +1,13 @@
 package com.hanwha.robotics.user.controller;
 
 import com.hanwha.robotics.user.common.utils.MailUtil;
+import com.hanwha.robotics.user.mapper.CodeMapper;
+import com.hanwha.robotics.user.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +21,16 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private CodeService codeService;
 
 	/**
 	 * 로그인 페이지
@@ -48,21 +55,16 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("/signup")
-	public String signupPage() {
+	public String signupPage(Model model) {
+		List<Map<String, Object>> countries = codeService.getAllCountries(); // FIXME
+		List<Map<String, Object>> phoneCodes = codeService.getPhoneCodes();
+		model.addAttribute("countries", countries);
+		model.addAttribute("phoneCodes",phoneCodes);
 		return "member/signup";
 	}
 
-	//	@GetMapping("/signup")
-//	public String signup(@RequestParam("agree") String agree) {
-//		if("Y".equals(agree)) {
-//			return "member/signup";
-//		} else {
-//			return "main";
-//		}
-//	}
-
 	/**
-	 * 회원가입
+	 * 회원가입 등록
 	 * @param request
 	 * @return
 	 */
@@ -73,13 +75,24 @@ public class MemberController {
 	}
 
 	/**
-	 * 회원Id 중복확인 API
+	 * Id 중복확인
 	 * @param memberId
 	 * @return
 	 */
-	@GetMapping("/id/check")
+	@GetMapping("/check/id")
 	public ResponseEntity<Boolean> checkMemberId(@RequestParam String memberId) {
 		boolean isExists = memberService.isMemberIdExists(memberId);
+		return ResponseEntity.ok(isExists);
+	}
+
+	/**
+	 * 이메일 중복확인
+	 * @param email
+	 * @return
+	 */
+	@GetMapping("/check/email")
+	public ResponseEntity<Boolean> checkMemberEmail(@RequestParam String email) {
+		boolean isExists = memberService.isMemberEmailExists(email);
 		return ResponseEntity.ok(isExists);
 	}
 

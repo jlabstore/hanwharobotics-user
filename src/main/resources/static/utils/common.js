@@ -32,10 +32,10 @@ var COMM = {
         var params = {};
 
         //Search Data
-        // var keyword = $('#keyword').val(); //검색어
-        // var type = $('#type').val();       //구분
-        // if(keyword != undefined) params['keyword'] = keyword;
-        // if(type != undefined) params['type'] = type;
+        var keyword = $('#keyword').val(); //검색어
+        var type = $('#type').val();       //구분
+        if(keyword != undefined) params['keyword'] = keyword;
+        if(type != undefined) params['type'] = type;
 
         //Paging Data
         var size = $('#size').val();

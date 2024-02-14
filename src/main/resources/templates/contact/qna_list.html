@@ -14,9 +14,14 @@
                 <!-- <p class="desc">
                     한화로보틱스 제품과<br />서비스 업데이트 소식을<br />알려드립니다.
                 </p> -->
-<!--                <p class="desc" th:utext="#{notice}">-->
-<!--                </p>-->
+                <!--                <p class="desc" th:utext="#{notice}">-->
+                <!--                </p>-->
             </div>
+
+            <input type="text" id="keyword" placeholder="검색어를 입력하세요">
+            <button onclick="getList()">검색</button>
+
+            <a href="/qna/register">문의하기</a>
 
 
             <div class="column board_list">
@@ -50,19 +55,10 @@
 
     </main>
 
-
-<!--    <select>-->
-<!--        <option value="title">제목</option>-->
-<!--        <option value="content">내용</option>-->
-<!--        <option value="name">작성자</option>-->
-<!--    </select>-->
-<!--    <input type="text" placeholder="검색어를 입력해주세요.">-->
-<!--    <button onclick="search()">검색</button>-->
-
     <a href="/qna/register">문의하기</a>
 
 
-    <form id="form" >
+    <form id="form">
         <input type="hidden" name="size" id="size" value="10"/>
         <input type="hidden" name="page" id="page" value="1"/>
     </form>
@@ -105,7 +101,6 @@
                 </a>
 
 
-
             </div>
         {{/list}}
         {{^list}}
@@ -121,7 +116,6 @@
 </div>
 
 
-
 </body>
 
 <th:block layout:fragment="script">
@@ -132,52 +126,33 @@
             getList();
         });
 
-
-
-
-
-
-        function getList(page){
-            if(typeof page != "undefined" && page != null) $('#page').val(page);
+        function getList(page) {
+            if (typeof page != "undefined" && page != null) $('#page').val(page);
 
             COMM.ajaxPagingList({
-                    url : "/qna"
+                    url: "/qna"
                 },
-                function success(data){
+                function success(data) {
 
-                    data.contents.forEach(function(item) {
+                    data.contents.forEach(function (item) {
                         item.isExposure = (item.exposureStatus === 'Y');
                     });
 
-                    data.contents.forEach(function(item) {
+                    data.contents.forEach(function (item) {
                         item.isAnswered = (item.endStatus === 'Y');
                     });
 
 
-                    var template = $("#list-tmpl").html();
-                    var rendered = Mustache.render(template, {'list' : data.contents});
+                    const template = $("#list-tmpl").html();
+                    const rendered = Mustache.render(template, {'list': data.contents});
                     $('.tbody').html(rendered);
 
-                    if(data.totalElements !== 0){
+                    if (data.totalElements !== 0) {
                         setPagination(data, $('.paging'));
                     }
-
-
-
                 }
             );
-
         }
-
-
-
-
-
-
-
-
-
-
 
     </script>
 </th:block>

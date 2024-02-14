@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class SearchRequest {
     private String type;//검색유형
-    private String keyword;//검색어 
+    private String keyword;//검색어
     private String keyword2;//검색어2
     
     private Date searchDt;//단일 날짜 검색

@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanwha.robotics.user.common.dto.ApiResponse;
+import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.dto.MemberRequest;
+import com.hanwha.robotics.user.dto.ResetPasswordRequest;
 import com.hanwha.robotics.user.service.MemberService;
 import com.hanwha.robotics.user.service.PasswordResetTokenService;
 
@@ -25,11 +28,16 @@ public class PasswordResetController {
 	private PasswordResetTokenService passwordResetTokenService;
 
 	@PostMapping("/password/reset-page")
-	public String sendPasswordResetPage(@RequestBody MemberRequest request) {
+	@ResponseBody
+	public ResponseEntity<ApiResponse<Void>> sendPasswordResetPage(@RequestBody MemberRequest request) {
 		memberService.sendPasswordResetMail(request);
-		return "main";
+		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 
+	/**
+	 *  Reset Token 에 MemberId 를 넣어라
+	 *   1. 이상한 놈인지 파악하기 위함. (Auditing 을 하자!)
+	 */
 	@GetMapping("/password/reset")
 	public String resetPasswordPage(
 		@RequestParam String token
@@ -43,12 +51,11 @@ public class PasswordResetController {
 
 	@PutMapping("/password/reset")
 	@ResponseBody
-	public ResponseEntity<Void> resetPassword(
-		@AuthenticationPrincipal int memberNo,
-		@RequestBody MemberRequest request
+	public ResponseEntity<ApiResponse<Void>> resetPassword(
+		@RequestBody ResetPasswordRequest request
 	) {
-		memberService.resetPassword(memberNo, request);
-		return ResponseEntity.ok().build();
+		memberService.resetPassword(request);
+		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 
 }

@@ -29,8 +29,31 @@
 
                 <label for="password">비밀번호 * </label><input type="password" id="password" name="password" onkeyup="checkPasswordConditions()" required/><br>
                 <span id="pw_check" class="check_text" style="color: #ff0000;"></span><br>
-                <label for="password2">비밀번호 재입력 * </label><input type="password" id="password2" name="password2" onkeyup="checkPasswordMatch()" required/><br>
+                <label for="password2">비밀번호 다시입력 * </label><input type="password" id="password2" name="password2" onkeyup="checkPasswordMatch()" required/><br>
                 <span id="pw2_check" class="check_text" style="color: #ff0000;"></span>
+                <br><br>
+
+
+                <label for="email_front">이메일 주소 *</label>
+                <input type="text" id="email_front" name="email_front" required>
+                <label>
+                    @
+                    <select id="email_end" name="email_end">
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="kakao.com">kakao.com</option>
+<!--                        <option value="">직접입력</option>-->
+                    </select>
+                </label>
+                <input id="email" name="email" style="display: none"></input>
+
+                <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
+
+<!--                <input type="text" id="custom_email" name="custom_email" style="display: none;" placeholder="이메일인풋창">-->
+                <br>
+                <span id="email_check" class="check_text" style="color: #ff0000;"></span>
                 <br><br>
 
 
@@ -41,11 +64,13 @@
 
 
                 <div th:if="#{header.nation} == 'KR'" >
-                    <label for="region">Country/Region * </label>
-                    <select id="region" name="region">
-                        <option value="Republic of Korea">Republic of Korea</option>
-                        <option value="USA">USA</option>
+                    <label for="selectCountry">Country/Region * </label>
+
+
+                    <select id="selectCountry">
+                        <option th:each="country : ${countries}" th:value="${country['code']}" th:text="${country['code_en']}"></option>
                     </select>
+
                     <br>
                     <label for="city">City * </label><input type="text" id="city" name="city">
                 </div>
@@ -56,7 +81,9 @@
 
                     <label for="postcode">우편번호 *</label><input type="text" id="postcode" name="postcode">
 
-                    <button type="button" onclick="daumPostcode()">우편번호 찾기</button>
+                    <div th:if="#{header.nation} != 'KR'">
+                        <button type="button" onclick="daumPostcode()">우편번호 찾기</button>
+                    </div>
 
                     <br>
 
@@ -78,36 +105,16 @@
                 <br><br>
 
 
-                <label for="email_front">이메일 주소 *</label>
-                <input type="text" id="email_front" name="email_front" required>
-                <label>
-                    @
-                    <select id="email_end" name="email_end">
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="hotmail.com">hotmail.com</option>
-                        <option value="nate.com">nate.com</option>
-                        <option value="kakao.com">kakao.com</option>
-<!--                        <option value="">직접입력</option>-->
-                    </select>
-                </label>
-                <input id="email" name="email" style="display: none"></input>
 
-<!--                <input type="text" id="custom_email" name="custom_email" style="display: none;" placeholder="이메일인풋창">-->
-
-                <br><br>
 
 
                 <label>
                     연락처 *
-                    <select id="phone_front">
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="016">016</option>
-                        <option value="017">017</option>
-                        <option value="018">018</option>
-                        <option value="019">019</option>
+                    <select id="phone_code">
+                        <option th:each="phoneCode : ${phoneCodes}" th:value="${phoneCode['code_phone']}" th:text="${phoneCode['code_phone']}"></option>
                     </select>
+
+                    <input id="phone_front" name="phone_front" required>
 
                     -
                     <input id="phone_middle" name="phone_middle" required>
@@ -154,7 +161,7 @@
         } else {
             $.ajax({
                 type: 'GET',
-                url: `/id/check?memberId=${encodeURIComponent(memberId)}`,
+                url: `/check/id?memberId=${encodeURIComponent(memberId)}`,
                 success: function(data) {
 
                     if (data === true) {
@@ -197,6 +204,54 @@
 
 
 
+    $(document).ready(function() {
+        updateEmailField();
+        updatePhoneField();
+        $("#email_front, #email_end").on("change", updateEmailField);
+        $("#phone_front, #phone_middle, #phone_end").on("change", updatePhoneField);
+
+    });
+
+    function updateEmailField() {
+        const email_front = $("#email_front").val();
+        const email_end = $("#email_end").val();
+        const email = email_front + "@" + email_end;
+        $("#email").val(email);
+    }
+
+
+
+
+    // 이메일 중복확인
+    function checkDuplicateEmail() {
+        const email_front = $("#email_front").val();
+        const email = $('#email').val();
+        const emailCheckElement = $('#email_check');
+
+        if (email_front.length < 3 ) {
+            emailCheckElement.text("이메일을 정확히 입력해 주세요");
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: `/check/email?email=${encodeURIComponent(email)}`,
+                success: function(data) {
+
+                    if (data === true) {
+                        emailCheckElement.text("이미 존재하는 이메일입니다.");
+                    } else {
+                        emailCheckElement.text("사용 가능한 이메일 입니다.");
+                    }
+                },
+                error: function() {
+                    alert('서버 에러');
+                }
+            });
+        }
+    }
+
+
+
+
     // 우편번호
     function daumPostcode() {
         new daum.Postcode({
@@ -217,28 +272,16 @@
     }
 
 
-    $(document).ready(function() {
-        updateEmailField();
-        updatePhoneField();
-        $("#email_front, #email_end").on("change", updateEmailField);
-        $("#phone_front, #phone_middle, #phone_end").on("change", updatePhoneField);
 
-    });
-
-    function updateEmailField() {
-        const email_front = $("#email_front").val();
-        const email_end = $("#email_end").val();
-        const email = email_front + "@" + email_end;
-        $("#email").val(email);
-    }
 
 
 
     function updatePhoneField() {
-        const phone_front = $("phone_front").val();
-        const phone_middle = $("phone_middle").val();
-        const phone_last = $("phone_end").val();
-        const contact = phone_front + "-" + phone_middle + "-" + phone_last;
+        const phone_code = $("phone_code").val();
+        const phone = $("phone_front").val();
+        // const phone_middle = $("phone_middle").val();
+        // const phone_last = $("phone_end").val();
+        const contact = phone_code + ")" + phone;
         $("#contact").val(contact);
     }
 

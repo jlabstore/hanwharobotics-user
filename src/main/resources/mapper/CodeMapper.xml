@@ -39,6 +39,32 @@
         WHERE parent_code IN ('ROBOT_APPLICATION')
     </select>
 
+    <select id="selectAllInParentCode" parameterType="java.util.List" resultType="com.hanwha.robotics.user.entity.code.Code">
+        SELECT *
+        FROM tb_code
+        WHERE parent_code IN
+        (
+            <foreach collection="list" item="item" separator=",">
+                #{item}
+            </foreach>
+        )
+    </select>
+
+    <!-- 회원가입 국가 코드 -->
+    <select id="selectAllCountries" resultType="hashmap">
+        SELECT
+            *
+        FROM tb_country
+    </select>
+
+    <!-- 회원가입 국가 전화 코드 -->
+    <select id="selectPhoneCodes" resultType="hashmap">
+        SELECT DISTINCT code_phone
+        FROM tb_country
+        WHERE code_phone IS NOT NULL AND code_phone != ''
+        ORDER BY CAST(code_phone AS UNSIGNED);
+    </select>
+
 
 
 </mapper>

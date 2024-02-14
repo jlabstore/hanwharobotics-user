@@ -11,7 +11,7 @@ public class MemberResponse {
 
     private String memberId;
 
-    private String companyName;
+    private String companyNm;
     private String region;
     private String city;
     private String postCd;
@@ -19,7 +19,7 @@ public class MemberResponse {
     private String addressDetail;
 
     private String store;
-    private String name;
+    private String memberNm;
     private String position;
 
     private String email;

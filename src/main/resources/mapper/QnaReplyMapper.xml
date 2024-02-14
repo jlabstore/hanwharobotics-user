@@ -4,9 +4,9 @@
 
     <insert id="insertQnaReply" parameterType="com.hanwha.robotics.user.dto.QnaReplyRequest">
         INSERT INTO
-            tb_qna_reply (qna_no, reply_content, reply_type, create_dt)
+            tb_qna_reply (qna_no, reply_content, admin_id, reply_type, create_dt)
         VALUES
-            (#{qnaNo}, #{replyContent}, 'USER', current_timestamp)
+            (#{qnaNo}, #{replyContent}, '', 'USER', current_timestamp)
     </insert>
 
     <select id="selectByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaReplyResponse">

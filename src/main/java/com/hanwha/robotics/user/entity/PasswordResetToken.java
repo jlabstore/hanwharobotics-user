@@ -10,9 +10,11 @@ import lombok.Data;
 public class PasswordResetToken {
 
 	private int tokenNo;
+	private int memberNo;
 	private String token;
 	private LocalDateTime expiredDt;
 	private LocalDateTime createDt;
+	private String createBy;
 
 	public boolean isExpired() {
 		return this.expiredDt.isBefore(LocalDateTime.now());

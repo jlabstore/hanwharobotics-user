@@ -50,12 +50,15 @@ public class QnaController {
      * @param request
      * @return
      */
-    @PostMapping
-    public ResponseEntity<Object> getList(PageRequest pageRequest, HttpServletRequest request) {
-        String lang = commonUtil.getCookieLang(request);
-        PageResponse body = qnaService.getQnaList(pageRequest, lang);
-        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), body));
-    }
+   @PostMapping
+   public ResponseEntity<Object> getList(
+           PageRequest pageRequest,
+           HttpServletRequest request
+   ) {
+       String lang = commonUtil.getCookieLang(request);
+       PageResponse body = qnaService.getQnaList(pageRequest, lang);
+       return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), body));
+   }
 
     /**
      * Q&A 상세 페이지
@@ -68,11 +71,8 @@ public class QnaController {
     }
 
 
-
-    // FIXME: exposure_status 가 N 인 경우 페이지 안옮기고 비공개 게시글인경우 체크 (접근못하게 알랏)
-    // TODO: (이전글, 다음글)
     /**
-     * Q&A 상세 페이지 API
+     * Q&A 상세 페이지
      * @param qnaNo
      * @return
      */
@@ -84,6 +84,12 @@ public class QnaController {
     ) {
         QnaDetailResponse qnaDetailResponse = qnaService.getQnaDetail(memberNo, qnaNo);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaDetailResponse));
+    }
+
+
+    @GetMapping("/edit/{qnaNo}")
+    public String qnaEditPage(@PathVariable("qnaNo") int qnaNo) {
+        return "contact/qna_edit";
     }
 
 
@@ -144,12 +150,13 @@ public class QnaController {
 
     // FIXME: replyType enum
     @PostMapping("/reply")
-    public ResponseEntity<Void> replyRegister(
+    public ResponseEntity<Object> replyRegister(
             @AuthenticationPrincipal int memberNo,
             @RequestBody QnaReplyRequest request
     ) {
+        request.setMemberNo(memberNo);
         qnaReplyService.register(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
 

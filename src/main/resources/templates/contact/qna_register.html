@@ -48,6 +48,12 @@
                         <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">
                         <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">
 
+
+
+
+
+
+
                         <span id="applicationCd" class="application"></span>
 
                         <button type="button" onclick="addRobotInfo()">+</button>
@@ -130,6 +136,7 @@
             const selectBox = $('<select>');
             selectBox.addClass(selectClass);
 
+
             $.each(options, function (index, option) {
                 selectBox.append($('<option>', {
                     value: option.code,
@@ -165,6 +172,22 @@
 
 
         // 문의제품
+        // function populateSelectAndInputs(options, containerId) {
+        //     const container = $('.' + containerId);
+        //     container.empty();
+        //
+        //     const selectBox = $('<select>');
+        //     container.append(selectBox);
+        //
+        //     $.each(options, function (index, option) {
+        //         selectBox.append($('<option>', {
+        //             value: option.code,
+        //             text: option.description
+        //         }));
+        //     });
+        // }
+
+
         function populateSelectAndInputs(options, containerId) {
             const container = $('.' + containerId);
             container.empty();
@@ -172,13 +195,17 @@
             const selectBox = $('<select>');
             container.append(selectBox);
 
+            selectBox.append($('<option>', {
+                value: '',
+                text: '선택'
+            }));
+
             $.each(options, function (index, option) {
                 selectBox.append($('<option>', {
                     value: option.code,
                     text: option.description
                 }));
             });
-
         }
 
 
@@ -203,25 +230,36 @@
 
 
 
+        const formData = new FormData();
         // 파일 선택
         function handleFileUpload() {
             const fileInput = document.getElementById('fileInput');
             const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
 
-            // 파일 개수 체크
-            if (fileInput.files.length > 5) {
+            const currentFileCount = formData.getAll('files[]').length;
+
+            const additionalFileCount = fileInput.files.length;
+
+            if (currentFileCount + additionalFileCount > 5) {
                 alert('최대 5개까지만 첨부 가능합니다.');
+                fileInput.value = '';
                 return;
             }
 
-            // 파일이 선택되었을 때만 처리
-            if (fileInput.files.length > 0) {
-                // 파일명을 표시
-                const fileNameDiv = document.createElement('div');
-                fileNameDiv.innerHTML = `${fileInput.files[fileInput.files.length - 1].name} <button onclick="removeFile(${fileInput.files.length - 1})">x</button>`;
-                fileDisplayContainer.appendChild(fileNameDiv);
+            if (additionalFileCount > 0) {
+                for (let i = 0; i < additionalFileCount; i++) {
+                    const fileNameDiv = document.createElement('div');
+                    fileNameDiv.innerHTML = `${fileInput.files[i].name} <button onclick="removeFile(${i})">x</button>`;
+                    fileDisplayContainer.appendChild(fileNameDiv);
+
+                    formData.append(`files[]`, fileInput.files[i]);
+                }
             }
         }
+
+
+
+
 
         // 파일 삭제
         function removeFile(index) {
@@ -238,7 +276,32 @@
 
         // 등록
         function register() {
-            const formData = new FormData();
+
+
+            const qnaType2Selected = $('.qnaType2 input:checked').length > 0;
+            if (!qnaType2Selected) {
+                alert('문의 유형2를 선택해주세요.');
+                return;
+            }
+
+
+
+
+            // // 로봇 모델에 대한 입력값이 있는지 확인
+            // const robotInfoInputs = $('.robotInfoContainer input').toArray();
+            // const robotModelValues = $('.robotInfoContainer select').map(function () {
+            //     return $(this).val();
+            // }).toArray();
+            //
+            // // 로봇 모델의 선택값이나 인풋값이 하나라도 있는지 확인
+            // const robotInfoFilled = robotModelValues.some(value => value !== '') || robotInfoInputs.some(input => input.value !== '');
+            //
+            //
+
+
+
+
+            // const formData = new FormData();
             formData.append('email', $('#email').val());
             formData.append('emailReceiveYn', $('#emailReceiveYn').prop('checked') ? 'Y' : 'N');
             formData.append('title', $('#title').val());
@@ -283,7 +346,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    alert("게시글이 정상정으로 등록되었습니다.");
+                    alert("게시글이 정상적으로 등록되었습니다.");
                     window.location.href = '/qna/' + data;
                 },
                 error: function (xhr, textStatus) {

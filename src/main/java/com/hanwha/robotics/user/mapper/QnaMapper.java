@@ -13,23 +13,22 @@ import java.util.Optional;
 
 @Mapper
 public interface QnaMapper {
-    int countQnaList();
+    int countQnaList(Map<String, Object> map);
+
     List<QnaResponse> selectQnaList(Map<String, Object> map);
+
+
     QnaResponse selectByQnaNo(int qnaNo);
 
     QnaResponse selectPrevQna(int qnaNo);
 
     QnaResponse selectNextQna(int qnaNo);
 
-
-    int findPrevQna(int qnaNo);
-    int findNextQna(int qnaNo);
+    List<QnaRobot> selectRobotByQnaNo(int qnaNo);
 
 
 
 //    void insertQna(QnaRequest request);
-
-
 //    int insertQna(QnaRequest request);
 
     int insertQna(Qna qna);

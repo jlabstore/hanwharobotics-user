@@ -4,7 +4,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.hanwha.robotics.user.entity.Qna;
+import com.hanwha.robotics.user.entity.QnaRobot;
 import com.hanwha.robotics.user.entity.code.ParentCode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,37 +33,35 @@ public class QnaServiceImpl implements QnaService {
 
 	@Autowired
 	private QnaMapper qnaMapper;
-
 	@Autowired
 	private CodeMapper codeMapper;
-
 	@Autowired
 	private QnaReplyService qnaReplyService;
-
 	@Autowired
 	private FileUtil fileUtil;
-
 	@Autowired
 	private UploadFileMapper uploadFileMapper;
 
-	//    @Override
-	//    public PageResponse getQnaList(PageRequest page, String searchType, String keyword, String lang) {
-	//        Map<String, Object> map = new HashMap<>();
-	//        map.put("page", page);
-	//        map.put("keyword", keyword);
-	//        // map.put("lang", lang);
-	//
-	//        int totalCount = qnaMapper.countQnaList();
-	//        List<QnaResponse> responseList = qnaMapper.selectQnaList(map);
-	//        return new PageResponse(responseList, totalCount, page);
-	//    }
+	@Override
+	public QnaCodeResponse getQnaCode() {
+		var parentCodeList = List.of(
+				ParentCode.QNA_TYPE1,
+				ParentCode.QNA_TYPE2,
+				ParentCode.ROBOT_MODEL,
+				ParentCode.ROBOT_APPLICATION
+		);
+		Map<ParentCode, List<Code>> codeGroup = codeMapper.selectAllInParentCode(parentCodeList)
+				.stream()
+				.collect(Collectors.groupingBy(Code::getParentCode));
+		return new QnaCodeResponse(codeGroup);
+	}
 
 	@Override
 	public PageResponse getQnaList(PageRequest page, String lang) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("page", page);
 
-		int totalCount = qnaMapper.countQnaList();
+		int totalCount = qnaMapper.countQnaList(map);
 		List<QnaResponse> responseList = qnaMapper.selectQnaList(map);
 		responseList.forEach(QnaResponse::setMaskedMemberId);
 		return new PageResponse(responseList, totalCount, page);
@@ -73,27 +73,26 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 
-
-	@Transactional
 	@Override
+	@Transactional
 	public int register(QnaRequest request) {
-
 		Qna qna = request.toEntity();
 		qnaMapper.insertQna(qna);
 		int qnaNo = qna.getQnaNo();
 
 		request.getQnaRobots()
-				.stream()
-				.peek(robot -> robot.setQnaNo(qnaNo))
-				.forEach(robot -> qnaMapper.insertQnaRobot(robot));
+			.stream()
+			.peek(robot -> robot.setQnaNo(qnaNo))
+			.forEach(robot -> qnaMapper.insertQnaRobot(robot));
 
 		List<UploadFile> uploadFiles = request.getFiles()
-				.stream()
-				.map(file -> fileUtil.uploadFile(file))
-				.peek(file -> file.setQnaNo(qnaNo))
-				.collect(Collectors.toList());
-		uploadFileMapper.saveFile(uploadFiles);
-
+			.stream()
+			.map(file -> fileUtil.uploadFile(file))
+			.peek(file -> file.setQnaNo(qnaNo))
+			.collect(Collectors.toList());
+		if (!uploadFiles.isEmpty()) {
+			uploadFileMapper.saveFile(uploadFiles);
+		}
 		return qnaNo;
 	}
 
@@ -105,6 +104,9 @@ public class QnaServiceImpl implements QnaService {
 			throw new ForbiddenException("비공개 게시글입니다.");
 		}
 
+		qnaDetail.setMaskedMemberId();
+
+		List<QnaRobot> qnaRobots = qnaMapper.selectRobotByQnaNo(qnaNo);
 		List<QnaReplyResponse> qnaReplies = qnaReplyService.getQnaReplies(qnaNo);
 
 		Optional<QnaResponse> previousQna = Optional.ofNullable(qnaMapper.selectPrevQna(qnaNo));
@@ -112,26 +114,13 @@ public class QnaServiceImpl implements QnaService {
 
 		return new QnaDetailResponse(
 			qnaDetail,
+			qnaRobots,
 			qnaReplies,
 			previousQna.map(QnaResponse::getQnaNo).orElse(null),
 			nextQna.map(QnaResponse::getQnaNo).orElse(null)
 		);
 	}
 
-	// FIXME: 리팩
-	@Override
-	public QnaCodeResponse getQnaCode() {
 
-//		 List<Code> codes = Collections.emptyList();
-//		 Map<ParentCode, List<Code>> collect = codes.stream()
-//		 	.collect(Collectors.groupingBy(Code::getParentCode));
-//		 new QnaCodeResponse(collect);
-
-		List<Code> qnaType1List = codeMapper.selectQnaType1();
-		List<Code> qnaType2List = codeMapper.selectQnaType2();
-		List<Code> robotModelList = codeMapper.selectRobotModel();
-		List<Code> applicationList = codeMapper.selectApplication();
-		return new QnaCodeResponse(qnaType1List, qnaType2List, robotModelList, applicationList);
-	}
 
 }

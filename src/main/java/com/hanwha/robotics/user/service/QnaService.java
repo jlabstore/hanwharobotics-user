@@ -14,10 +14,7 @@ public interface QnaService {
      * @param lang
      * @return
      */
-//    PageResponse getQnaList(PageRequest page, String searchType, String keyword, String lang);
-
-    PageResponse getQnaList(PageRequest page, String lang);
-
+   PageResponse getQnaList(PageRequest page, String lang);
 
     /**
      * Q&A 상세

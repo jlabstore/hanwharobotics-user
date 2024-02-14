@@ -11,14 +11,18 @@
         <h1>대리점 전용</h1>
         <h1>마이페이지</h1><br>
 
-        <form method="put" th:action="@{/member/modify}" modelAttribute="MemberRequest">
+        <form method="put" th:action="@{/member/edit}" modelAttribute="MemberRequest">
 
 
             아이디 <span th:text="${memberResponse.getMemberId()}"/>
 
             <br><br>
 
-            업체명 <span th:text="${memberResponse.getCompanyName()}"/>
+            이메일 주소 <span th:text="${memberResponse.getEmail()}"/>
+
+            <br><br>
+
+            업체명 <span th:text="${memberResponse.getCompanyNm()}"/>
 
             <br><br>
 
@@ -34,7 +38,7 @@
 
             <div>
 
-                우편번호 <span th:text="${memberResponse.getPostCode()}"/>
+                우편번호 <span th:text="${memberResponse.getPostCd()}"/>
 
                 <br>
                 주소 <span th:text="${memberResponse.getAddress()}"/>
@@ -49,15 +53,13 @@
             로봇 구매처 / 대리점 <span th:text="${memberResponse.getStore()}"/>
             <br><br>
 
-            이름 <span th:text="${memberResponse.getName()}"/>
+            이름 <span th:text="${memberResponse.getMemberNm()}"/>
             <br><br>
 
             직급 <span th:text="${memberResponse.getPosition()}"/>
             <br><br>
 
-            이메일 주소 <span th:text="${memberResponse.getEmail()}"/>
 
-            <br><br>
 
 
             연락처 <span th:text="${memberResponse.getContact()}"/>
@@ -65,8 +67,8 @@
             <br><br><br><br>
 
             <a href="/member/profile/delete">회원탈퇴</a>
-            <a href="/member/change/password">비밀번호 재설정</a>
-            <a href="/member/profile/modify">회원정보 수정</a>
+<!--            <a href="/member/change/password">비밀번호 재설정</a>-->
+            <a href="/member/profile/edit">회원정보 수정</a>
 
 
             <br><br>

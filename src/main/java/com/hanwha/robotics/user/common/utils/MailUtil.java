@@ -18,6 +18,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.hanwha.robotics.user.common.enums.NewsroomType;
+import com.hanwha.robotics.user.entity.Member;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 
 @Component
@@ -112,8 +113,8 @@ public class MailUtil {
 //		return resetToken;
 //	}
 
-	public String sendPasswordResetLink(String email) {
-		String resetToken = generateResetToken();
+	public String sendPasswordResetLink(Member member) {
+		String resetToken = generateResetToken(member);
 
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -122,7 +123,7 @@ public class MailUtil {
 			String resetLink = "http://localhost:8081/password/reset?token=" +
 					URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
 
-			messageHelper.setTo(email);
+			messageHelper.setTo(member.getEmail());
 			messageHelper.setSubject("한화 로보틱스 비밀번호 재설정");
 			messageHelper.setText("비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">resetLink</a>", true);
 
@@ -134,11 +135,13 @@ public class MailUtil {
 	}
 
 
-	private String generateResetToken() {
+	private String generateResetToken(Member member) {
 		String resetToken = UUID.randomUUID().toString().replace("-", "").substring(0, 12);
 		Map<String, Object> map = new HashMap<>();
+		map.put("memberNo", member.getMemberNo());
 		map.put("token", resetToken);
 		map.put("expiredDt", LocalDateTime.now().plusMinutes(10));
+		map.put("creator", member.getMemberId());
 		passwordResetTokenMapper.insertToken(map);
 		return resetToken;
 	}
