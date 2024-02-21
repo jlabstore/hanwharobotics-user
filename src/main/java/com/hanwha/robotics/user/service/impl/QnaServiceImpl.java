@@ -3,10 +3,13 @@ package com.hanwha.robotics.user.service.impl;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.hanwha.robotics.user.common.utils.MailUtil;
+import com.hanwha.robotics.user.dto.*;
 import com.hanwha.robotics.user.entity.Qna;
 import com.hanwha.robotics.user.entity.QnaRobot;
 import com.hanwha.robotics.user.entity.code.ParentCode;
 
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +18,6 @@ import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.dto.PageResponse;
 import com.hanwha.robotics.user.common.handler.exception.ForbiddenException;
 import com.hanwha.robotics.user.common.utils.FileUtil;
-import com.hanwha.robotics.user.dto.QnaCodeResponse;
-import com.hanwha.robotics.user.dto.QnaDetailResponse;
-import com.hanwha.robotics.user.dto.QnaReplyResponse;
-import com.hanwha.robotics.user.dto.QnaRequest;
-import com.hanwha.robotics.user.dto.QnaResponse;
 import com.hanwha.robotics.user.entity.UploadFile;
 import com.hanwha.robotics.user.entity.code.Code;
 import com.hanwha.robotics.user.mapper.CodeMapper;
@@ -36,11 +34,14 @@ public class QnaServiceImpl implements QnaService {
 	@Autowired
 	private CodeMapper codeMapper;
 	@Autowired
+	private UploadFileMapper uploadFileMapper;
+	@Autowired
 	private QnaReplyService qnaReplyService;
 	@Autowired
 	private FileUtil fileUtil;
 	@Autowired
-	private UploadFileMapper uploadFileMapper;
+	private MailUtil mailUtil;
+
 
 	@Override
 	public QnaCodeResponse getQnaCode() {
@@ -55,6 +56,8 @@ public class QnaServiceImpl implements QnaService {
 				.collect(Collectors.groupingBy(Code::getParentCode));
 		return new QnaCodeResponse(codeGroup);
 	}
+
+
 
 	@Override
 	public PageResponse getQnaList(PageRequest page, String lang) {
@@ -93,8 +96,12 @@ public class QnaServiceImpl implements QnaService {
 		if (!uploadFiles.isEmpty()) {
 			uploadFileMapper.saveFile(uploadFiles);
 		}
+
+		mailUtil.sendNewQnaToAdmin();
 		return qnaNo;
 	}
+
+
 
 	@Override
 	public QnaDetailResponse getQnaDetail(int memberNo, int qnaNo) {
@@ -120,6 +127,73 @@ public class QnaServiceImpl implements QnaService {
 			nextQna.map(QnaResponse::getQnaNo).orElse(null)
 		);
 	}
+
+
+	@Override
+	public QnaDetailEditResponse getQnaDetailEdit(int qnaNo) {
+		QnaResponse qnaDetail = QnaResponse.of(qnaMapper.selectQnaByQnaNo(qnaNo));
+		List<QnaRobot> qnaRobots = qnaMapper.selectRobotByQnaNo(qnaNo);
+		List<UploadFile> qnaFiles = uploadFileMapper.selectByQnaNo(qnaNo);
+		return new QnaDetailEditResponse(qnaDetail, qnaRobots, qnaFiles);
+	}
+
+	@Override
+	@Transactional
+	public void updateQna(int memberNo, QnaUpdateRequest req) {
+
+		var qnaNo = req.qnaNo;
+		if(memberNo != qnaMapper.selectByQnaNo(qnaNo).getMemberNo()) {
+			throw new RuntimeException("본인글만 삭제 가능합니다.");
+		}
+
+		// qna 정보 업데이트
+		qnaMapper.updateQna(req);
+
+		// 로봇 delete 후 insert
+		qnaMapper.deleteRobotByQnaNo(qnaNo);
+		req.getQnaRobots()
+			.stream()
+			.peek(robot -> robot.setQnaNo(qnaNo))
+			.forEach(robot -> qnaMapper.insertQnaRobot(robot));
+
+		// 파일 수정
+		if(!req.getDeleteFileIds().isEmpty()) {
+			List<UploadFile> deletedFiles = uploadFileMapper.selectByIds(req.getDeleteFileIds());
+			uploadFileMapper.deleteByIds(req.getDeleteFileIds());
+			deletedFiles.forEach(file -> fileUtil.deleteFile(file.getFilePath()));
+		}
+
+
+
+		List<UploadFile> uploadFiles = req.getFiles()
+			.stream()
+			.map(file -> fileUtil.uploadFile(file))
+			.peek(file -> file.setQnaNo(qnaNo))
+			.collect(Collectors.toList());
+		if (!uploadFiles.isEmpty()) {
+			uploadFileMapper.saveFile(uploadFiles);
+		}
+	}
+
+
+	@Override
+	public void deleteQna(int memberNo, int qnaNo) {
+		// FIXME
+		if (memberNo != qnaMapper.selectByQnaNo(qnaNo).getMemberNo()) {
+			throw new RuntimeException("본인글만 삭제 가능합니다.");
+		}
+		qnaMapper.deleteQna(qnaNo);
+	}
+
+//	@Override
+//	public QnaResponse getQnaEditDetail(int qnaNo) {
+//		Qna qna = qnaMapper.selectQnaByQnaNo(qnaNo);
+//		return QnaResponse.of(qna);
+//	}
+
+
+
+
 
 
 

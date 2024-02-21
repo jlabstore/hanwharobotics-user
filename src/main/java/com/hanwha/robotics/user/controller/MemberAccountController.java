@@ -54,7 +54,7 @@ public class MemberAccountController {
 
         model.addAttribute("memberResponse", response);
 
-        return "my_page_edit";
+        return "/member/my_page_edit";
     }
 
     /**
@@ -89,12 +89,12 @@ public class MemberAccountController {
      * @return
      */
     @PutMapping("/change/password")
-    public ResponseEntity<Void> changePassword(
+    public ResponseEntity<Object> changePassword(
             @AuthenticationPrincipal int memberNo,
             @RequestBody MemberRequest request
     ) {
         memberService.changePassword(memberNo, request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
 

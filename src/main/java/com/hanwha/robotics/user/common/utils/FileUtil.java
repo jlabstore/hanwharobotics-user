@@ -115,4 +115,25 @@ public class FileUtil {
         return dir.getPath();
     }
 
+
+
+
+
+    /**
+     * 파일 삭제
+     * @param filePath 삭제할 파일의 경로
+     * @return 삭제 성공 여부
+     */
+    public boolean deleteFile(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            try {
+                return file.delete();
+            } catch (SecurityException e) {
+                throw new RuntimeException("파일 삭제 권한이 없습니다.", e);
+            }
+        } else {
+            throw new RuntimeException("파일이 존재하지 않습니다.");
+        }
+    }
 }

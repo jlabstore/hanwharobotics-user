@@ -3,7 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
+
 <body>
+
+
 <div layout:fragment="content">
 
 
@@ -11,6 +14,8 @@
         <div class="board board-type1">
             <div class="column">
                 <h1>Q&A</h1>
+                한화로보틱스에 대해 궁금한 점이 있으시면 문의해주세요.
+                <hr>
                 <!-- <p class="desc">
                     한화로보틱스 제품과<br />서비스 업데이트 소식을<br />알려드립니다.
                 </p> -->
@@ -21,7 +26,7 @@
             <input type="text" id="keyword" placeholder="검색어를 입력하세요">
             <button onclick="getList()">검색</button>
 
-            <a href="/qna/register">문의하기</a>
+            <button class="openModalBtn">문의하기</button>
 
 
             <div class="column board_list">
@@ -55,7 +60,7 @@
 
     </main>
 
-    <a href="/qna/register">문의하기</a>
+    <button class="openModalBtn">문의하기</button>
 
 
     <form id="form">
@@ -69,7 +74,21 @@
                 <a href="/qna/{{qnaNo}}" >
 
 
-                    <div class="td">{{no}}</div>
+                    <div class="td">
+
+<!--                        {{no}}-->
+
+                        {{#isFixed}}
+                            FAQ
+                        {{/isFixed}}
+                        {{^isFixed}}
+                            {{no}}
+                        {{/isFixed}}
+
+                    </div>
+
+
+
                     <div class="td">{{memberId}}</div>
 
                     <div class="td">
@@ -81,7 +100,9 @@
                             {{#isExposure}}
                             {{/isExposure}}
 
-                            {{^isExposure}}<span class="round td_notice" th:text="비공개"></span>{{/isExposure}}
+                            {{^isExposure}}
+                                <span class="round td_notice" th:text="비공개"></span>
+                            {{/isExposure}}
 
 
                         </span>
@@ -113,6 +134,16 @@
         {{/list}}
     </script>
 
+
+    <div id="qnaPopup" class="popup">
+        <span class="close">&times;</span>
+        <h2>FAQ 및 제품 매뉴얼을 확인하셨나요?</h2>
+        <div id="qnaPopupForm">
+            <a >제품 메뉴얼 확인</a>
+            <a href="/qna/register" >문의글 남기기</a>
+        </div>
+    </div>
+
 </div>
 
 
@@ -126,6 +157,23 @@
             getList();
         });
 
+
+
+        document.querySelectorAll('.openModalBtn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.getElementById('qnaPopup').style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.close').forEach(function(close) {
+            close.addEventListener('click', function() {
+                this.closest('.popup').style.display = 'none';
+            });
+        });
+
+
+
+
         function getList(page) {
             if (typeof page != "undefined" && page != null) $('#page').val(page);
 
@@ -136,10 +184,8 @@
 
                     data.contents.forEach(function (item) {
                         item.isExposure = (item.exposureStatus === 'Y');
-                    });
-
-                    data.contents.forEach(function (item) {
                         item.isAnswered = (item.endStatus === 'Y');
+                        item.isFixed = (item.fixedStatus === 'Y');
                     });
 
 
@@ -154,6 +200,29 @@
             );
         }
 
+
     </script>
+
+
+
+
 </th:block>
+
+
+<style>
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        display: none;
+    }
+
+</style>
+
+
 </html>

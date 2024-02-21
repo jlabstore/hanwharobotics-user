@@ -2,27 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hanwha.robotics.user.mapper.QnaReplyMapper">
 
+    <!-- 답글 등록 -->
     <insert id="insertQnaReply" parameterType="com.hanwha.robotics.user.dto.QnaReplyRequest">
         INSERT INTO
             tb_qna_reply (qna_no, reply_content, admin_id, reply_type, create_dt)
         VALUES
-            (#{qnaNo}, #{replyContent}, '', 'USER', current_timestamp)
+            (#{qnaNo}, #{replyContent}, '', 'USER', current_timestamp);
     </insert>
 
+    <!-- 답글 목록 -->
     <select id="selectByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaReplyResponse">
         SELECT
             r.reply_no,
             r.qna_no,
-            r.admin_id,
+#             r.admin_id,
             r.reply_content,
             r.reply_type,
             r.create_dt,
             q.member_id
         FROM tb_qna_reply r
-        LEFT JOIN tb_qna q on r.qna_no = q.qna_no
+        LEFT JOIN tb_qna q ON r.qna_no = q.qna_no
         WHERE r.qna_no = #{qnaNo}
-        ORDER BY create_dt
+        ORDER BY create_dt;
     </select>
+
+    <!-- 최신 답글 타입 -->
+    <select id="selectReplyType" parameterType="int" resultType="String">
+        SELECT
+            reply_type
+        FROM tb_qna_reply
+        WHERE qna_no = #{qnaNo}
+        ORDER BY create_dt DESC
+        LIMIT 1;
+    </select>
+
+    <!-- 답글 수정 -->
+    <update id="updateQnaReply" parameterType="com.hanwha.robotics.user.dto.QnaReplyRequest">
+        UPDATE tb_qna_reply
+        SET
+            reply_content = #{replyContent},
+            update_dt = current_timestamp
+        WHERE reply_no = #{replyNo}
+    </update>
+
+
+    <!-- 답글 삭제 -->
+    <delete id="deleteQnaReply" parameterType="int">
+        DELETE FROM tb_qna_reply
+        WHERE reply_no = #{replyNo}
+    </delete>
+
+
 
 
 

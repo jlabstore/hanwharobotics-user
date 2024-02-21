@@ -4,20 +4,22 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 
+import com.hanwha.robotics.user.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import com.hanwha.robotics.user.common.enums.NewsroomType;
 import com.hanwha.robotics.user.entity.Member;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 
@@ -39,6 +41,9 @@ public class MailUtil {
 	@Autowired
 	private PasswordResetTokenMapper passwordResetTokenMapper;
 
+	@Autowired
+	private AdminMapper adminMapper;
+
 	public Boolean sendMail(Map<String,Object> params){
 		Boolean result = false;
 		try{
@@ -56,36 +61,6 @@ public class MailUtil {
 		return result;
 	}
 
-//    public String sendTempPassword(String email) {
-//        String tempPassword = UUID.randomUUID().toString().replace("-", "").substring(0, 12);
-//		try {
-//			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-//			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-//			messageHelper.setTo(email); // 메일 수신자
-//			messageHelper.setSubject("문의하신 한화로보틱스 임시 패스워드 안내 입니다."); // 메일 제목
-//			messageHelper.setText("임시비밀번호는 " + tempPassword + "입니다."); // 메일 본문 내용, HTML 여부
-//			javaMailSender.send(mimeMessage);
-//		} catch (Exception e) {
-//			throw new RuntimeException("임시 패스워드 이메일 발송 실패", e);
-//		}
-//        return tempPassword;
-//    }
-
-
-
-	public void sendMemberId(String email, String memberId) {
-		try {
-			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-			messageHelper.setTo(email); // 메일 수신자
-			messageHelper.setSubject("문의하신 한화로보틱스 아이디 안내 입니다."); // 메일 제목
-			messageHelper.setText("아이디는 " + memberId + " 입니다."); // 메일 본문 내용, HTML 여부
-			javaMailSender.send(mimeMessage);
-		} catch (Exception e) {
-			throw new RuntimeException("아이디 발송 실패", e);
-		}
-	}
-    
 	public String setContext(Map<String, Object> params) {
 		Context context = new Context();
 		context.setVariables(params);
@@ -93,47 +68,54 @@ public class MailUtil {
 	}
 
 
-//	public String sendPasswordResetLink(String email) {
-//		String resetToken = generateResetToken();
-//
-//		try {
-//			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-//			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-//
-//			String resetLink = "https://localhost:8081/password/reset?token=" + resetToken;
-//			messageHelper.setTo(email);
-//			messageHelper.setSubject("한화 로보틱스 비밀번호 재설정");
-//			messageHelper.setText("비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">" + resetLink + "</a>", true);
-//
-//			javaMailSender.send(mimeMessage);
-//		} catch (Exception e) {
-//			throw new RuntimeException("에러발생", e);
-//		}
-//
-//		return resetToken;
-//	}
 
-	public String sendPasswordResetLink(Member member) {
-		String resetToken = generateResetToken(member);
-
+	private void sendEmail(List<String> targets, String subject, String text) {
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
 
-			String resetLink = "http://localhost:8081/password/reset?token=" +
-					URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
-
-			messageHelper.setTo(member.getEmail());
-			messageHelper.setSubject("한화 로보틱스 비밀번호 재설정");
-			messageHelper.setText("비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">resetLink</a>", true);
-
+			String[] emailArray = targets.toArray(new String[0]);
+			messageHelper.setTo(emailArray);
+			messageHelper.setSubject(subject);
+			messageHelper.setText(text, true);
 			javaMailSender.send(mimeMessage);
 		} catch (Exception e) {
-			throw new RuntimeException("에러발생", e);
+			throw new RuntimeException("메일발송 에러발생", e);
 		}
-		return resetToken;
 	}
 
+	@Async
+	public void sendMemberId(String email, String memberId) {
+//		try {
+//			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+//			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+//			messageHelper.setTo(email); // 메일 수신자
+//			messageHelper.setSubject("문의하신 한화로보틱스 아이디 안내 입니다.");
+//			messageHelper.setText("아이디는 " + memberId + " 입니다.");
+//			javaMailSender.send(mimeMessage);
+//		} catch (Exception e) {
+//			throw new RuntimeException("아이디 발송 실패", e);
+//		}
+
+		this.sendEmail(
+				List.of(email),
+				"문의하신 한화로보틱스 아이디 안내입니다.",
+				"아이디는 " + memberId + " 입니다."
+		);
+	}
+
+	@Async
+	public void sendPasswordResetLink(Member member) {
+		String resetToken = generateResetToken(member);
+		String resetLink = "http://localhost:8081/password/reset?token=" +
+			URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
+
+		this.sendEmail(
+			List.of(member.getEmail()),
+			"한화 로보틱스 비밀번호 재설정",
+			"비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">resetLink</a>"
+		);
+	}
 
 	private String generateResetToken(Member member) {
 		String resetToken = UUID.randomUUID().toString().replace("-", "").substring(0, 12);
@@ -146,4 +128,29 @@ public class MailUtil {
 		return resetToken;
 	}
 
+	@Async
+	public void sendNewQnaToAdmin() {
+		try {
+			this.sendEmail(
+				adminMapper.selectAdminEmail(),
+				"Q&A 게시판에 새로운 글이 등록되었습니다.",
+				"Q&A 게시판에 새로운 글이 등록되었습니다."
+			);
+		} catch (Exception e) {
+			throw new RuntimeException("관리자 이메일 발송 실패", e);
+		}
+	}
+
+	@Async
+	public void sendNewQnaReplyToAdmin() {
+		try {
+			this.sendEmail(
+				adminMapper.selectAdminEmail(),
+				"Q&A 게시글에 새로운 답글이 등록되었습니다.",
+				"Q&A 게시글에 새로운 답글이 등록되었습니다."
+			);
+		} catch (Exception e) {
+			throw new RuntimeException("관리자 이메일 발송 실패", e);
+		}
+	}
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanwha.robotics.user.mapper.AdminMapper">
+
+    <select id="selectAdminEmail" resultType="String">
+        SELECT
+            email
+        FROM tb_admin
+        WHERE email_receive_yn = 'Y'
+    </select>
+
+
+</mapper>

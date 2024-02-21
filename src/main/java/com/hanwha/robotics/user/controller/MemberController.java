@@ -1,5 +1,7 @@
 package com.hanwha.robotics.user.controller;
 
+import com.hanwha.robotics.user.common.dto.ApiResponse;
+import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.mapper.CodeMapper;
 import com.hanwha.robotics.user.service.CodeService;
@@ -68,9 +70,20 @@ public class MemberController {
 	 * @param request
 	 * @return
 	 */
+//	@PostMapping("/signup")
+//	public String signup(@ModelAttribute MemberRequest request) {
+//		memberService.registerMember(request);
+//		return "member/signup_complete";
+//	}
+
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute MemberRequest request) {
+	public ResponseEntity<Object> signup(@RequestBody MemberRequest request) {
 		memberService.registerMember(request);
+		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
+	}
+
+	@GetMapping("/signup/complete")
+	public String signupCompletePage() {
 		return "member/signup_complete";
 	}
 
@@ -129,8 +142,23 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("/find-pw")
-	public String resetPasswordPage() {
+	public String resetPwPage() {
 		return "member/find_pw";
+	}
+
+	/**
+	 * 비밀번호 찾기 페이지
+	 * @return
+	 */
+	@GetMapping("/find-pw/complete")
+	public String resetPwCompletePage() {
+		return "member/find_pw_complete";
+	}
+
+
+	@GetMapping("/delete/complete")
+	public String deleteAccountCompletePage() {
+		return "member/delete_account_complete";
 	}
 
 

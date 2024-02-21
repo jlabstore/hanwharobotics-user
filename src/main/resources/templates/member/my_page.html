@@ -8,25 +8,26 @@
 
     <div>
         <br><br><br><br><br><br><br><br><br><br>
-        <h1>대리점 전용</h1>
-        <h1>마이페이지</h1><br>
+        <h1>마이페이지</h1>
+
+        <br>
+        <hr>
 
         <form method="put" th:action="@{/member/edit}" modelAttribute="MemberRequest">
 
 
             아이디 <span th:text="${memberResponse.getMemberId()}"/>
-
-            <br><br>
+            <br><br><hr>
 
             이메일 주소 <span th:text="${memberResponse.getEmail()}"/>
 
-            <br><br>
+            <br><br><hr>
 
             업체명 <span th:text="${memberResponse.getCompanyNm()}"/>
 
-            <br><br>
+            <br><br><hr>
 
-            <div th:if="#{header.nation} == 'KR'" >
+            <div th:if="${memberResponse.getRegion()} != 'KR'" >
                 Country/Region
                 <span th:text="${memberResponse.getRegion()}"/>
                 <br>
@@ -34,7 +35,7 @@
                 <span th:text="${memberResponse.getCity()}"/>
             </div>
 
-            <br><br>
+            <br><br><hr>
 
             <div>
 
@@ -47,24 +48,22 @@
 
             </div>
 
-            <br><br>
+            <br><br><hr>
 
 
             로봇 구매처 / 대리점 <span th:text="${memberResponse.getStore()}"/>
-            <br><br>
+            <br><br><hr>
 
             이름 <span th:text="${memberResponse.getMemberNm()}"/>
-            <br><br>
+            <br><br><hr>
 
             직급 <span th:text="${memberResponse.getPosition()}"/>
-            <br><br>
-
-
-
+            <br><br><hr>
 
             연락처 <span th:text="${memberResponse.getContact()}"/>
+            <br><br><hr>
 
-            <br><br><br><br>
+            <br><br>
 
             <a href="/member/profile/delete">회원탈퇴</a>
 <!--            <a href="/member/change/password">비밀번호 재설정</a>-->

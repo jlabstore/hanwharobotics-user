@@ -9,13 +9,17 @@
     <br><br><br><br><br><br><br><br><br><br>
 
     <div>
-        비밀번호 재설정 - 이메일로 전송되는 링크
+        <h1>비밀번호 재설정</h1> - 이메일로 전송되는 링크
+        <hr>
 
-        비밀번호 <input type="password" id="newPassword" name="password"/>
+        새로운 비밀번호를 입력해주세요.
 
-        재입력 <input type="password" id="newPassword2" name="password"/>
+        비밀번호 <input type="password" id="newPassword" name="password"/><br>
+        영문과 숫자를 조합하여 만들어 주세요.
 
-        <button type="button" onclick="resetPw()">확인</button>
+        비밀번호 다시입력 <input type="password" id="newPassword2" name="password"/><br>
+
+        <button type="button" onclick="resetPw()">비밀번호 변경</button>
 
     </div>
 
@@ -68,7 +72,7 @@
             contentType: 'application/json',
             success: function (data) {
                 alert('변경에 성공하였습니다.')
-                window.location.href = '/login-page';
+                window.location.href = '/password/reset/complete';
             },
 
             error: function (xhr, textStatus) {

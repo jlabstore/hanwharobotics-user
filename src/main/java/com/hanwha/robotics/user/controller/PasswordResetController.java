@@ -35,8 +35,8 @@ public class PasswordResetController {
 	}
 
 	/**
-	 *  Reset Token 에 MemberId 를 넣어라
-	 *   1. 이상한 놈인지 파악하기 위함. (Auditing 을 하자!)
+	 *  Reset Token 에 MemberId 를 넣기
+	 *   1. 이상한 사람 인지 파악하기 위함. (Auditing)
 	 */
 	@GetMapping("/password/reset")
 	public String resetPasswordPage(
@@ -56,6 +56,11 @@ public class PasswordResetController {
 	) {
 		memberService.resetPassword(request);
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
+	}
+
+	@GetMapping("/password/reset/complete")
+	public String resetPwCompletePage() {
+		return "/member/reset_pw_complete";
 	}
 
 }

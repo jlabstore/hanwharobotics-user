@@ -14,7 +14,6 @@
         <hr>
 
         아이디 <span th:text="${memberResponse.getMemberId()}"/>
-
         <br><br>
 
         비밀번호 변경 <button id="openModalBtn"> 비밀번호 변경 </button>
@@ -63,7 +62,6 @@
 
 
 
-
         <label for="email_front">이메일 주소 *</label>
         <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>
         <label>
@@ -94,7 +92,6 @@
 
 
 
-
         <div th:if="${memberResponse.getRegion()} != 'KR'" >
 <!--                <label for="selectCountry">Country/Region * </label>-->
 
@@ -105,12 +102,8 @@
             Country/Region
             <input th:value="${memberResponse.getRegion()}"/>
 
-
-
             <br>
             <label for="city">City * </label><input type="text" id="city" name="city" th:value="${memberResponse.getCity()}" >
-
-
 
 
         </div>
@@ -188,13 +181,13 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script th:inline="javascript">
 
-    $(document).ready(function() {
-        updateEmailField();
-        updatePhoneField();
-        $("#email_front, #email_end").on("change", updateEmailField);
-        $("#phone_code, #phone").on("change", updatePhoneField);
-
-    });
+    // $(document).ready(function() {
+    //     updateEmailField();
+    //     updatePhoneField();
+    //     $("#email_front, #email_end").on("change", updateEmailField);
+    //     $("#phone_code, #phone").on("change", updatePhoneField);
+    //
+    // });
 
     // 이메일 중복확인
     function checkDuplicateEmail() {
@@ -303,29 +296,35 @@
         document.getElementById('passwordChange').style.display = 'block';
     });
 
-    // 비밀번호 일치 체크
+    // 기존 일치 체크
     function checkPasswordChange() {
         const password = $("#password").val();
         const requestData = {
             password: password
         };
 
-        COMM.ajax({
-            url : "/member/check/password",
-            type: "POST",
-            headers: {'Content-Type': 'application/json'},
-            data: JSON.stringify(requestData),
-            success : function(data) {
-                if(data.code === 200){
-                    document.getElementById('passwordChange2').style.display = 'block';
-                }
-            },
-            error : function(jqXHR){
-                const errorResponse = JSON.parse(jqXHR.responseText);
-                alert(errorResponse.message);
-                console.log(jqXHR.status, jqXHR);
-            },
-        });
+        if (password == null || password === '') {
+            alert("기존 비밀번호를 입력하세요.");
+        } else {
+            COMM.ajax({
+                url : "/member/check/password",
+                type: "POST",
+                headers: {'Content-Type': 'application/json'},
+                data: JSON.stringify(requestData),
+                success : function(data) {
+                    if(data.code === 200){
+                        document.getElementById('passwordChange').style.display = 'none';
+                        $("#password").val('');
+                        document.getElementById('passwordChange2').style.display = 'block';
+                    }
+                },
+                error : function(jqXHR){
+                    const errorResponse = JSON.parse(jqXHR.responseText);
+                    alert(errorResponse.message);
+                    console.log(jqXHR.status, jqXHR);
+                },
+            });
+        }
 
     }
 
@@ -351,7 +350,10 @@
             data: JSON.stringify(requestData),
             success : function(data) {
                 if(data.code === 200){
-
+                    document.getElementById('passwordChange2').style.display = 'none';
+                    $("#newPassword").val('');
+                    $("#newPassword2").val('');
+                    document.getElementById('passwordChange3').style.display = 'block';
                 }
             },
             error : function(jqXHR){
@@ -360,9 +362,6 @@
                 console.log(jqXHR.status, jqXHR);
             },
         });
-
-
-
 
 
     }

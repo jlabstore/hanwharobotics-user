@@ -1,5 +1,7 @@
 package com.hanwha.robotics.user.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.dto.PageResponse;
@@ -9,7 +11,9 @@ import com.hanwha.robotics.user.dto.*;
 import com.hanwha.robotics.user.service.MemberService;
 import com.hanwha.robotics.user.service.QnaReplyService;
 import com.hanwha.robotics.user.service.QnaService;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -30,12 +36,11 @@ public class QnaController {
     @Autowired
     private MemberService memberService;
     @Autowired
-    private QnaReplyService qnaReplyService;
-    @Autowired
     private CommonUtil commonUtil;
 
     /**
      * Q&A 리스트 페이지
+     *
      * @return
      */
     @GetMapping
@@ -44,24 +49,27 @@ public class QnaController {
     }
 
     // TODO: lang
+
     /**
-     * Q&A 리스트 API
+     * Q&A 리스트
+     *
      * @param pageRequest
      * @param request
      * @return
      */
-   @PostMapping
-   public ResponseEntity<Object> getList(
-           PageRequest pageRequest,
-           HttpServletRequest request
-   ) {
-       String lang = commonUtil.getCookieLang(request);
-       PageResponse body = qnaService.getQnaList(pageRequest, lang);
-       return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), body));
-   }
+    @PostMapping
+    public ResponseEntity<Object> getList(
+            PageRequest pageRequest,
+            HttpServletRequest request
+    ) {
+        String lang = commonUtil.getCookieLang(request);
+        PageResponse body = qnaService.getQnaList(pageRequest, lang);
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), body));
+    }
 
     /**
      * Q&A 상세 페이지
+     *
      * @param qnaNo
      * @return
      */
@@ -70,31 +78,25 @@ public class QnaController {
         return "contact/qna_view";
     }
 
-
     /**
      * Q&A 상세 페이지
+     *
      * @param qnaNo
      * @return
      */
     @PostMapping("/{qnaNo}")
     @ResponseBody
     public ResponseEntity<Object> qnaViewAPI(
-            @PathVariable int qnaNo,
-            @AuthenticationPrincipal int memberNo
+            @AuthenticationPrincipal int memberNo,
+            @PathVariable int qnaNo
     ) {
         QnaDetailResponse qnaDetailResponse = qnaService.getQnaDetail(memberNo, qnaNo);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaDetailResponse));
     }
 
-
-    @GetMapping("/edit/{qnaNo}")
-    public String qnaEditPage(@PathVariable("qnaNo") int qnaNo) {
-        return "contact/qna_edit";
-    }
-
-
     /**
      * Q&A 등록 페이지
+     *
      * @return
      */
     @GetMapping("/register")
@@ -109,11 +111,20 @@ public class QnaController {
         return "contact/qna_register";
     }
 
-    @GetMapping ("/code")
+    @GetMapping("/code")
     public ResponseEntity<Object> getQnaCode() {
-        // TODO:
         QnaCodeResponse qnaCodeResponse = qnaService.getQnaCode();
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaCodeResponse));
+    }
+
+    @GetMapping("/code/{qnaNo}")
+    public ResponseEntity<Map<String, Object>> getQnaEditCode(@PathVariable int qnaNo) {
+        Map<String, Object> responseData = new HashMap<>();
+        QnaCodeResponse qnaCodeResponse = qnaService.getQnaCode();
+        QnaDetailEditResponse qnaDetailEditResponse = qnaService.getQnaDetailEdit(qnaNo);
+        responseData.put("qnaCodeResponse", qnaCodeResponse);
+        responseData.put("qnaDetailEditResponse", qnaDetailEditResponse);
+        return ResponseEntity.ok().body(responseData);
     }
 
 
@@ -128,37 +139,57 @@ public class QnaController {
             @AuthenticationPrincipal int memberNo,
             @ModelAttribute QnaRequest request
     ) {
-        // FIXME:
         request.setMemberNo(memberNo);
         int qnaNo = qnaService.register(request);
         return ResponseEntity.ok().body(qnaNo);
-//        return ResponseEntity.ok().header("Location", "/qna/" + qnaNo).build();
+        //        return ResponseEntity.ok().header("Location", "/qna/" + qnaNo).build();
     }
 
 
-//    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public String registerQna(
-//            @AuthenticationPrincipal int memberNo,
-//            @ModelAttribute QnaRequest request
-//    ) {
-//        request.setMemberNo(memberNo);
-//        int qnaNo = qnaService.register(request);
-//        return "redirect:/qna/" + qnaNo;
-//    }
-
-
-
-    // FIXME: replyType enum
-    @PostMapping("/reply")
-    public ResponseEntity<Object> replyRegister(
-            @AuthenticationPrincipal int memberNo,
-            @RequestBody QnaReplyRequest request
+    /**
+     * Q&A 수정 페이지
+     * @param qnaNo
+     * @return
+     */
+    @GetMapping("/edit/{qnaNo}")
+    public String qnaEditPage(
+            @PathVariable("qnaNo") int qnaNo,
+            Model model
     ) {
-        request.setMemberNo(memberNo);
-        qnaReplyService.register(request);
+        QnaCodeResponse qnaCodeResponse = qnaService.getQnaCode();
+        QnaDetailEditResponse qnaDetailEditResponse = qnaService.getQnaDetailEdit(qnaNo);
+
+
+        model.addAttribute("qnaCodeResponse", qnaCodeResponse);
+        model.addAttribute("qnaDetailEditResponse", qnaDetailEditResponse);
+        return "contact/qna_edit";
+    }
+
+    @PutMapping("/edit/{qnaNo}")
+    public ResponseEntity<Object> updateQna(
+            @AuthenticationPrincipal int memberNo,
+            @PathVariable("qnaNo") int qnaNo,
+            @ModelAttribute QnaUpdateRequest request
+    ) {
+        request.setQnaNo(qnaNo);
+        qnaService.updateQna(memberNo, request);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
-
+    /**
+     * Q&A 삭제
+     *
+     * @param memberNo
+     * @param qnaNo
+     * @return
+     */
+    @DeleteMapping("/{qnaNo}")
+    public ResponseEntity<Object> deleteQna(
+            @AuthenticationPrincipal int memberNo,
+            @PathVariable("qnaNo") int qnaNo
+    ) {
+        qnaService.deleteQna(memberNo, qnaNo);
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
+    }
 
 }

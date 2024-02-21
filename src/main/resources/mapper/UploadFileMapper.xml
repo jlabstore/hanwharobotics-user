@@ -19,5 +19,23 @@
         </foreach>
     </insert>
 
+    <select id="selectByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.entity.UploadFile">
+        SELECT *
+        FROM tb_qna_file
+        WHERE qna_no = #{qnaNo}
+    </select>
+
+    <select id="selectByIds" parameterType="list">
+        SELECT *
+        FROM tb_qna_file
+        WHERE file_no = #{fileNo}
+    </select>
+
+    <delete id="deleteByIds" parameterType="int">
+        DELETE FROM tb_qna_file
+        WHERE file_no = #{fileNo}
+    </delete>
+
+
 
 </mapper>

@@ -28,11 +28,8 @@
                     <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" style="appearance: auto" value="Y"> 관리자가 답변을 남기면 이메일로 알림을 받습니다.
                     <hr>
 
-                    문의유형 1 *
+                    문의유형 *
                     <div class="qnaType1" id="qnaType1"></div>
-                    <hr>
-
-                    문의유형 2 *
                     <div class="qnaType2" id="qnaType2"></div>
                     <hr>
 
@@ -266,12 +263,16 @@
             const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
             fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
 
-            // 파일 입력 초기화 (해당 파일 제거)
             const fileInput = document.getElementById('fileInput');
-            const files = Array.from(fileInput.files);
-            files.splice(index, 1);
-            fileInput.files = new FileList({ items: files });
+            const files = Array.from(fileInput.files).filter((file, i) => i !== index);
+            fileInput.value = '';
+            files.forEach(file => {
+                fileInput.files.append(file);
+            });
         }
+
+
+
 
 
         // 등록
@@ -283,7 +284,6 @@
                 alert('문의 유형2를 선택해주세요.');
                 return;
             }
-
 
 
 
@@ -356,7 +356,6 @@
                 }
             });
         }
-
 
 
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 public class QnaReplyRequest {
     private int memberNo;
     private int qnaNo;
+    private int replyNo;
     private String replyContent;
     private String replyType;
 }

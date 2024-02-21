@@ -18,4 +18,6 @@ public class QnaDetailResponse {
 	private Integer previousQnaNo;
 	private Integer nextQnaNo;
 
+//	private Boolean EditAndDelete;
+
 }

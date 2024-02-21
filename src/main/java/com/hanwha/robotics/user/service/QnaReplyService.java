@@ -20,4 +20,8 @@ public interface QnaReplyService {
      * @return
      */
     List<QnaReplyResponse> getQnaReplies(int qnaNo);
+
+    void update(QnaReplyRequest request);
+
+    void delete(int replyNo);
 }

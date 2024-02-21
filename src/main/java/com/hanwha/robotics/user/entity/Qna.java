@@ -19,5 +19,7 @@ public class Qna {
     private String emailReceiveYn;
     private String endStatus;
     private String exposureStatus;
+    private String fixedStatus;
     private LocalDateTime createDt;
+    private LocalDateTime updateDt;
 }

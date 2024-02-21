@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+<div layout:fragment="content">
+
+    <main class="sub notice-view">
+        <div class="board board-type1">
+            <div class="column">
+                <h1>Q&A</h1>
+                <!-- <p class="desc">
+                  한화로보틱스 제품과<br />서비스 업데이트 소식을<br />알려드립니다.
+                </p> -->
+                <!--                <p class="desc" th:utext="#{notice}">-->
+            </div>
+
+            <div>
+
+                <div>
+
+                    <label for="memberId">작성자 </label><input id="memberId" th:value="${qnaDetailEditResponse.getQnaDetail().getMemberId()}" readonly>
+                    <hr>
+
+                    <label for="email">이메일 </label><input id="email" name="email" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getEmail()}">
+                    <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" style="appearance: auto" th:value="${qnaDetailEditResponse.getQnaDetail().getEmailReceiveYn()}"> 관리자가 답변을 남기면 이메일로 알림을 받습니다.
+                    <hr>
+
+                    문의유형 *
+                    <div th:text="${qnaDetailEditResponse.getQnaDetail().getQnaType1Nm()}"></div>
+
+                    <div class="qnaType1" id="qnaType1"></div>
+                    <div class="qnaType2" id="qnaType2"></div>
+                    <hr>
+
+                    문의제품
+                    모델명
+                    로봇암 시리얼넘버
+                    소프트웨어 버전
+                    어플리케이션
+                    <br>
+                    <div class="robotInfoContainer">
+                        <span id="modelCd" class="robotModel"></span>
+
+                        <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">
+                        <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">
+
+                        <span id="applicationCd" class="application"></span>
+
+                        <button type="button" onclick="addRobotInfo()">+</button>
+                        <button type="button" onclick="removeRobotInfo()">-</button>
+                    </div>
+
+                    <hr>
+
+
+                    <label for="title">제목 </label><input id="title" name="title" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getTitle()}">
+                    <hr>
+                    <label for="content">내용 </label><input id="content" name="content" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getContent()}">
+
+                    <br>
+                    문의 내용에 따라 제품 로그, 제품 구동 영상, VOC 리포트 등을 추가로 요청할 수 있으며 메일을 통해 전달 부탁드립니다.
+
+
+                    <hr>
+
+                    첨부파일
+
+
+<!--                    &lt;!&ndash; 파일이 보여지는 영역 &ndash;&gt;-->
+<!--                    <div class="fileDisplayContainer"></div>-->
+
+
+                    <div class="serverFileDisplayContainer">
+                        <th:block th:each="file, fileIndex : ${qnaDetailEditResponse.qnaFiles}">
+                            <span th:text="${file.originalFileNm}" th:data-file-no="${file.fileNo}"></span>
+                            <button type="button" onclick="addDeleteList(this)">x</button>
+                        </th:block>
+                    </div>
+
+
+
+                    <div class="fileDisplayContainer">
+                    </div>
+
+                    <!-- 첨부파일 -->
+                    <div class="fileContainer">
+                        <input type="file" name="attachment" id="fileInput" onchange="handleFileUpload()">
+                    </div>
+                    첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다.<br>
+                    exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.
+
+
+                </div>
+
+                <hr><br>
+                <button type="button" onclick="editConfirm()">수정 하기</button>
+                <button type="button" onclick="goBack()">취소</button>
+
+
+            </div>
+
+
+        </div>
+    </main>
+</div>
+
+</body>
+
+
+<th:block layout:fragment="script">
+    <script>
+
+        const qnaType1Nm = "[[${qnaDetailEditResponse.getQnaDetail().getQnaType1Nm()}]]";
+        const qnaType2Nm = "[[${qnaDetailEditResponse.getQnaDetail().getQnaType2Nm()}]]";
+
+        const paths = window.location.pathname.split('/');
+
+        $(document).ready(function () {
+            getCode();
+
+            getEditCode();
+
+            const emailReceiveYn = $('#emailReceiveYn').val();
+            if (emailReceiveYn === 'Y') {
+                $('#emailReceiveYn').prop('checked', true);
+            }
+            else {
+                $('#emailReceiveYn').prop('checked', false);
+            }
+
+            $('#emailReceiveYn').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#emailReceiveYn').val('Y');
+                } else {
+                    $('#emailReceiveYn').val('N');
+                }
+            });
+        });
+
+
+
+        function goBack(){
+            const params = {};
+            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function(str, key, value) {
+                    params[key] = value;
+                }
+            );
+            if(params["to"] !== undefined && params["to"]==="main"){
+                // location.href="/newsroom/notice";
+            }else{
+                history.back();
+            }
+        }
+
+
+        // 코드 가져오기
+        function getCode() {
+            COMM.ajax({
+                type: 'GET',
+                url: "/qna/code",
+                success: function (data) {
+                    populateSelectBox(data.data.qnaType1List, 'qnaType1');
+                    populateRadioButtons(data.data.qnaType2List, 'qnaType2');
+
+                    // populateSelectAndInputs(data.data.robotModelList, 'robotModel');
+                    // populateSelectAndInputs(data.data.applicationList, 'application');
+
+                },
+            });
+        }
+
+
+        // 문의유형1
+        function populateSelectBox(options, selectClass) {
+            const selectBox = $('<select>');
+            selectBox.addClass(selectClass);
+
+            $.each(options, function (index, option) {
+                const optionElement = $('<option>', {
+                    value: option.code,
+                    text: option.description
+                });
+                if (option.code === qnaType1Nm) {
+                    optionElement.prop('selected', true);
+                }
+                selectBox.append(optionElement);
+            });
+
+            $('.' + selectClass).html(selectBox);
+        }
+
+
+        // 문의유형2
+        function populateRadioButtons(options, containerId) {
+            const container = $('#' + containerId);
+            container.empty();
+
+            $.each(options, function (index, option) {
+                const radioBtn = $('<input>', {
+                    type: 'radio',
+                    name: 'qnaType2',
+                    value: option.code,
+                    style: 'appearance: auto'
+                });
+
+                const label = $('<label>', {
+                    for: option.code,
+                    text: option.description
+                });
+
+                if (option.code === qnaType2Nm) {
+                    radioBtn.prop('checked', true);
+                }
+
+                container.append(radioBtn).append(label);
+            });
+        }
+
+
+
+
+        // 코드 가져오기
+        // function getEditCode() {
+        //     COMM.ajax({
+        //         type: 'GET',
+        //         url: "/qna/code/" + + paths[paths.length-1],
+        //         success: function (data) {
+        //             populateSelectAndInputs(data.qnaCodeResponse.robotModelList, 'robotModel');
+        //             populateSelectAndInputs(data.qnaCodeResponse.applicationList, 'application');
+        //
+        //
+        //             const qnaRobots = data.qnaDetailEditResponse.qnaRobots;
+        //             qnaRobots.forEach(function(robot) {
+        //                 const newRobotInfo = $('.robotInfoContainer:first').clone();
+        //                 newRobotInfo.find('.robotModel select').val(robot.modelCd);
+        //                 newRobotInfo.find('.serialNo').val(robot.serialNo);
+        //                 newRobotInfo.find('.swVersion').val(robot.swVersion);
+        //                 newRobotInfo.find('.application select').val(robot.applicationCd);
+        //                 $('.robotInfoContainer:last').after(newRobotInfo);
+        //             });
+        //
+        //         },
+        //     });
+        // }
+
+
+
+
+        function getEditCode() {
+            COMM.ajax({
+                type: 'GET',
+                url: "/qna/code/" + paths[paths.length-1],
+                success: function (data) {
+                    populateSelectAndInputs(data.qnaCodeResponse.robotModelList, 'robotModel');
+                    populateSelectAndInputs(data.qnaCodeResponse.applicationList, 'application');
+
+                    const qnaRobots = data.qnaDetailEditResponse.qnaRobots;
+                    const robotInfoContainer = $('.robotInfoContainer');
+
+                    // 기존에 존재하는 로봇 정보 개수
+                    const existingRobotInfoCount = robotInfoContainer.length;
+
+                    // 불러온 로봇 정보의 개수에 따라 기본 로봇 정보의 개수 결정
+                    const defaultRobotInfoCount = qnaRobots.length > 0 ? qnaRobots.length : 1;
+
+                    // 불러온 로봇 정보가 없는 경우, 기존의 로봇 정보를 모두 삭제
+                    if (qnaRobots.length === 0) {
+                        robotInfoContainer.remove();
+                    }
+
+                    // 기본 로봇 정보를 추가
+                    for (let i = existingRobotInfoCount; i < defaultRobotInfoCount; i++) {
+                        const newRobotInfo = $('.robotInfoContainer:first').clone();
+                        robotInfoContainer.last().after(newRobotInfo);
+                    }
+
+                    // 불러온 로봇 정보를 추가
+                    qnaRobots.forEach(function(robot, index) {
+                        const currentRobotInfoContainer = $('.robotInfoContainer').eq(index);
+                        currentRobotInfoContainer.find('.robotModel select').val(robot.modelCd);
+                        currentRobotInfoContainer.find('.serialNo').val(robot.serialNo);
+                        currentRobotInfoContainer.find('.swVersion').val(robot.swVersion);
+                        currentRobotInfoContainer.find('.application select').val(robot.applicationCd);
+                    });
+                },
+            });
+        }
+
+
+
+
+        // 문의제품
+        function populateSelectAndInputs(options, containerId) {
+            const container = $('.' + containerId);
+            container.empty();
+
+            const selectBox = $('<select>');
+            container.append(selectBox);
+
+            selectBox.append($('<option>', {
+                value: '',
+                text: '선택'
+            }));
+
+            $.each(options, function (index, option) {
+                selectBox.append($('<option>', {
+                    value: option.code,
+                    text: option.description
+                }));
+            });
+
+        }
+
+
+
+        let robotInfoCounter = 1;
+
+        function addRobotInfo() {
+            if (robotInfoCounter < 10) {
+                const newRobotInfo = $('.robotInfoContainer:first').clone();
+                newRobotInfo.find('input').val('');
+                $('.robotInfoContainer:last').after(newRobotInfo);
+                robotInfoCounter++;
+            }
+        }
+
+        function removeRobotInfo() {
+            if (robotInfoCounter > 1) {
+                $('.robotInfoContainer:last').remove();
+                robotInfoCounter--;
+            }
+        }
+
+
+        const formData = new FormData();
+
+        // 파일 선택
+        function handleFileUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
+
+            const currentFileCount = formData.getAll('files[]').length;
+
+            const additionalFileCount = fileInput.files.length;
+
+            if (currentFileCount + additionalFileCount > 5) {
+                alert('최대 5개까지만 첨부 가능합니다.');
+                fileInput.value = '';
+                return;
+            }
+
+            if (additionalFileCount > 0) {
+                for (let i = 0; i < additionalFileCount; i++) {
+                    const fileNameDiv = document.createElement('div');
+                    fileNameDiv.innerHTML = `${fileInput.files[i].name} <button onclick="removeFile(${i})">x</button>`;
+                    fileDisplayContainer.appendChild(fileNameDiv);
+
+                    formData.append(`files[]`, fileInput.files[i]);
+                }
+            }
+        }
+
+
+
+        // 새로운 첨부 파일 삭제
+        function removeFile(index) {
+            const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
+            fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
+
+            const fileInput = document.getElementById('fileInput');
+            const files = Array.from(fileInput.files).filter((file, i) => i !== index);
+            fileInput.value = '';
+            files.forEach(file => {
+                fileInput.files.append(file);
+            });
+        }
+
+
+
+        // TODO: 삭제버튼 눌렀을때 리스트에 넘어가게
+        let deleteFileIds = [];
+
+        // 기존 파일 삭제
+        function addDeleteList(button) {
+            const fileNo = button.previousElementSibling.getAttribute("data-file-no");
+            const fileElement = button.previousElementSibling;
+            console.log("삭제할 파일 번호: " + fileNo);
+
+            // 파일을 삭제할 때만 해당 파일 번호를 deleteFileIds에 추가
+            if (fileElement.style.display !== "none") {
+                fileElement.style.display = "none";
+                button.style.display = "none";
+                const index = deleteFileIds.indexOf(fileNo);
+                if (index !== -1) {
+                    deleteFileIds.splice(index, 1);
+                }
+            } else {
+                const index = deleteFileIds.indexOf(fileNo);
+                if (index === -1) {
+                    deleteFileIds.push(fileNo);
+                }
+            }
+        }
+
+        // 기존 파일 삭제시 id 넘기기
+        function getDeleteFileIds() {
+            return deleteFileIds;
+        }
+
+
+
+
+
+
+        // 수정
+        function editConfirm() {
+
+            const paths = window.location.pathname.split('/');
+
+            // const formData = new FormData();
+            formData.append('email', $('#email').val());
+            formData.append('emailReceiveYn', $('#emailReceiveYn').prop('checked') ? 'Y' : 'N');
+            formData.append('title', $('#title').val());
+            formData.append('content', $('#content').val());
+            formData.append('memberId', $('#memberId').val());
+
+            formData.append('qnaType1Cd', $('.qnaType1').find('select').val());
+            formData.append('qnaType2Cd', $('.qnaType2').find('input:checked').val());
+
+            const qnaRobots = [];
+            $('.robotInfoContainer').each(function () {
+                const modelCd = $(this).find('.robotModel select').val();
+                const serialNo = $(this).find('.serialNo').val();
+                const swVersion = $(this).find('.swVersion').val();
+                const applicationCd = $(this).find('.application select').val();
+
+                const robotInfo = {
+                    modelCd: modelCd,
+                    serialNo: serialNo,
+                    swVersion: swVersion,
+                    applicationCd: applicationCd
+                };
+                qnaRobots.push(robotInfo);
+            });
+
+            for(let i = 0; i < qnaRobots.length; i++) {
+                formData.append(`qnaRobots[${i}].modelCd`, qnaRobots[i].modelCd);
+                formData.append(`qnaRobots[${i}].serialNo`, qnaRobots[i].serialNo);
+                formData.append(`qnaRobots[${i}].swVersion`, qnaRobots[i].swVersion);
+                formData.append(`qnaRobots[${i}].applicationCd`, qnaRobots[i].applicationCd);
+            }
+
+
+            // 삭제하는 파일
+            const deleteFileIds = getDeleteFileIds();
+            for (let i = 0; i < deleteFileIds.length; i++) {
+                formData.append('deleteFileIds[]', deleteFileIds[i]);
+            }
+
+            // 새로 추가된 파일
+            const fileInput = document.getElementById('fileInput');
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append(`files[${i}]`, fileInput.files[i]);
+            }
+
+            COMM.ajax({
+                type: 'PUT',
+                url: '/qna/edit/' + paths[paths.length-1],
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    alert("게시글이 정상적으로 수정되었습니다.");
+                    window.location.href = '/qna/' + paths[paths.length-1];
+                },
+                error: function (xhr, textStatus) {
+                    alert("수정에 실패하였습니다.");
+                    console.error('Error:', xhr.responseText);
+                    console.error('Status:', xhr.status);
+                }
+            });
+        }
+
+
+
+
+
+
+
+    </script>
+
+
+</th:block>
+</html>

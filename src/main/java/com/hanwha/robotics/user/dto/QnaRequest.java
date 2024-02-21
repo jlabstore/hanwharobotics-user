@@ -1,14 +1,15 @@
 package com.hanwha.robotics.user.dto;
 
-import com.hanwha.robotics.user.entity.Member;
-import com.hanwha.robotics.user.entity.Qna;
-import com.hanwha.robotics.user.entity.QnaRobot;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
+import com.hanwha.robotics.user.entity.Qna;
+import com.hanwha.robotics.user.entity.QnaRobot;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ public class QnaRequest {
     private List<QnaRobot> qnaRobots;
 
     @Getter
-    private List<MultipartFile> files = Collections.emptyList();
+    private ArrayList<MultipartFile> files = new ArrayList<>();
 
     public Qna toEntity() {
         return Qna.builder()
