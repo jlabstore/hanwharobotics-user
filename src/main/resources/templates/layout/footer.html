@@ -61,21 +61,26 @@
   </div>
 
   <div class="column column1">
-    <!-- <ul class="sitemap">
-      <li><a href="#">회사방침</a></li>
-      <li><a href="#">개인정보처리(취급)방침</a></li>
-      <li><a href="#">이메일무단수집거부</a></li>
-      <li><a href="#">저작권침해행위거부</a></li>
-    </ul> -->
+    <ul class="sitemap" th:if="#{header.nation} == 'EN'">
+      <li><button class="sitemap_company" onclick="layerCompanyOpenBtn()">회사방침</button></li>
+      <li><button class="sitemap_privacy" onclick="layerPrivacyOpenBtn()">개인정보처리(취급)방침</button></li>
+      <li><button class="sitemap_email" onclick="layerEmailOpenBtn()">이메일무단수집거부</button></li>
+      <li><button class="sitemap_copyright" onclick="layerCopyrightOpenBtn()">저작권침해행위거부</button></li>
+      <li><button class="sitemap_cookie" onclick="location.href='/cookie'">쿠키 설정 센터</button></li>
+    </ul>
 
     <div class="link">
-      <div class="select_wrap">
+      <!-- <div class="select_wrap" th:unless="#{header.nation} == 'EN'">
         <select id="siteSelector">
           <option selected>Family Site</option>
           <option value="https://hanwha.co.kr" th:utext="#{footer.hanwhagroupKo}"></option>
           <option value="https://hanwha.com" th:utext="#{footer.hanwhagroupEn}"></option>
           <option value="https://hanwha.com/zh" th:utext="#{footer.hanwhagroupCh}"></option>
         </select>
+      </div> -->
+      <!-- <div class="select_wrap popup" th:if="#{header.nation} == 'EN'"> -->
+      <div class="select_wrap popup">
+        <div class="select_value" onclick="layerFamilyOpenBtn()">Family Site</div>
       </div>
 
       <div class="sns">

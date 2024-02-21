@@ -1,4 +1,3 @@
-
 var COMM = {
 	ajax: function(ajaxConfig, errorCallback) {
         var defaultConf = {
@@ -95,7 +94,28 @@ var setQueryStringParams = function(formId) {
 	});
 }
 
-//이벤트 막기 
+function showLayer(layerName, target, headerMinHeight) {
+
+    const offset = $(window).scrollTop()+50;
+    if(layerName == 'cookie'){
+      $(`.layer.${layerName}`).show('fast');
+    }else{
+      $(`.layer.${layerName}`).css('top', offset+'px').show('fast');
+    }
+
+    $('.layer_bg').show();
+    target.removeClass('active');
+    $('html').removeClass('scroll-lock');
+
+    $('header .btn_menu button').removeClass('active');
+    $('.gnb_menu, .gnb_layer').removeClass('active');
+
+    $('.header__nav__items_sub').removeClass('active');
+    target.closest('#header').stop().animate({'height': headerMinHeight}, 'fast');
+    $('#header').removeClass('active');
+  }
+
+//이벤트 막기
 var preventClick = function(e){
 	e.preventDefault()
 }
@@ -127,15 +147,23 @@ var setPagination = function(data, elemnt){
 var layerInquiryBtn = function(data){
 
     var lang = getCookieLang()
-    console.log('lang==', lang)
     if (lang == 'en') {
         alert('Coming Soon');
     } else {
         $('body').addClass('scroll-lock');
-        var type  = data == 1 ? '대리점 문의' : '제품문의';
+        // var type  = data == 1 ? '대리점 문의' : '제품 문의';
+        var type = "";
+        if(data == 1) {
+            type = '대리점 문의';
+        } else if (data == 2) {
+            type = '제품 문의';
+        } else {
+            type = "";
+        }
 
         //init
         $('#inquiryType').val(type);
+        // $('#inquiryType').val('');
         $('#name').val('');
         $('#tel').val('');
         $('#email').val('');
@@ -143,18 +171,103 @@ var layerInquiryBtn = function(data){
         $('#inquiry').val('');
         $('#position').val('');
 
+        // $('#inquiryType').val(type);
+
         //show
-        $('.layer.inquiry').show('fast');;
-        $('.layer_bg').show();
-        $('#loading-prograss').hide();
+        // $('.layer.inquiry').show('fast');
+        // $('.layer_bg').show();
+        // $('#loading-prograss').hide();
+
+        // e.stopPropagation();
+        showLayer('inquiry', $('.layer.inquiry'), headerMinHeight);
     }
 }
 
+// 푸터 팝업 열기
+var layerCompanyOpenBtn = function() {
+    // $('.layer.company').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('company', $('.layer.company'), headerMinHeight);
+}
+var layerPrivacyOpenBtn = function() {
+    // $('.layer.privacy').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('privacy', $('.layer.privacy'), headerMinHeight);
+}
+var layerCopyrightOpenBtn = function() {
+    // $('.layer.copyright').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('copyright', $('.layer.copyright'), headerMinHeight);
+}
+var layerEmailOpenBtn = function() {
+    // $('.layer.email').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('email', $('.layer.email'), headerMinHeight);
+}
+var layerFamilyOpenBtn = function() {
+    // $('.layer.family').show('fast');
+    // $('.layer_bg').show();
+    // $('#loading-prograss').hide();
+
+    // e.stopPropagation();
+    showLayer('family', $('.layer.family'), headerMinHeight);
+}
+
+var checkCookie = function () {
+    console.log('cookie popup')
+
+    if(localStorage.chk1Yn != undefined && localStorage.chk1Yn != null && localStorage.chk1Yn) {
+        document.getElementById('chk2').checked = localStorage.chk2Yn === 'true'
+        document.getElementById('chk3').checked = localStorage.chk3Yn  === 'true'
+    }
+
+    // 모두 거부 상태
+    if(localStorage.chk1Yn != undefined && localStorage.chk1Yn != null && !localStorage.chk1Yn) {
+        document.getElementById('chk1').checked = true
+        document.getElementById('chk2').checked = false
+        document.getElementById('chk2').checked = false
+    }
+}
+
+var layerCookieOpenBtn = function() {
+    // e.stopPropagation();
+
+    checkCookie();
+    showLayer('cookie', $(".layer.cookie"));
+    // console.log('cookie Popup',$('.layer.cookie').css('display'))
+    // const layerCookie = $('.layer.cookie');
+    // if(layerCookie.css('display') === 'none') {
+    //   $('.layer.cookie').show('fast');
+    //   $('html').addClass('scroll-lock');
+    // } else {
+    //   $('.layer.cookie').hide('fast');
+    //   $('html').removeClass('scroll-lock');
+    // }
+
+}
 
 // 문의하기 팝업 레이어 닫기
-var closeInquiryLayer = function(){
+var closeInquiryLayer = function(id){
     $('body').removeClass('scroll-lock');
-    $('.layer.inquiry').hide('fast');
+    // $('.layer.inquiry').hide('fast');
+    if(id){
+        $('#'+ id).hide('fast');
+
+    }else{
+        $('.layer').hide('fast');
+    }
     $('.layer_bg').hide();
 }
 
@@ -184,3 +297,89 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('html').classList.add('en');
     }
 });
+
+
+// function saveCookie(data) {
+//     var chk1Yn = document.getElementById("chk1").checked
+//     var chk2Yn = document.getElementById("chk2").checked
+//     var chk3Yn = document.getElementById("chk3").checked
+
+//     localStorage.setItem("chk1Yn", chk1Yn);
+//     localStorage.setItem("chk2Yn", chk2Yn);
+//     localStorage.setItem("chk3Yn", chk3Yn);
+
+//     if(data == 1){
+//         closeInquiryLayer()
+//     } else if (data == 2) {
+//         location.reload();
+//     }
+// }
+// function denyCookie(data) {
+//     var chk1Yn = document.getElementById("chk1").checked
+//     var chk2Yn = document.getElementById("chk2").checked
+//     var chk3Yn = document.getElementById("chk3").checked
+
+//     chk1Yn = false;
+//     chk2Yn = false;
+//     chk3Yn = false;
+
+//     localStorage.setItem("chk1Yn", chk1Yn);
+//     localStorage.setItem("chk2Yn", chk2Yn);
+//     localStorage.setItem("chk3Yn", chk3Yn);
+
+//     if(data == 1){
+//         closeInquiryLayer()
+//     } else if (data == 2) {
+//         location.reload();
+//     }
+// }
+// function saveCookieAll(data) {
+//     var chk1Yn = document.getElementById("chk1").checked
+//     var chk2Yn = document.getElementById("chk2").checked
+//     var chk3Yn = document.getElementById("chk3").checked
+
+//     chk1Yn = true;
+//     chk2Yn = true;
+//     chk3Yn = true;
+
+//     localStorage.setItem("chk1Yn", chk1Yn);
+//     localStorage.setItem("chk2Yn", chk2Yn);
+//     localStorage.setItem("chk3Yn", chk3Yn);
+
+//     if(data == 1){
+//         closeInquiryLayer()
+//     } else if (data == 2) {
+//         location.reload();
+//     }
+// }
+function updateCookieValues(chk1Yn, chk2Yn, chk3Yn) {
+    localStorage.setItem("chk1Yn", chk1Yn);
+    localStorage.setItem("chk2Yn", chk2Yn);
+    localStorage.setItem("chk3Yn", chk3Yn);
+}
+
+function handleCookieAction(data, chk1Yn, chk2Yn, chk3Yn) {
+    updateCookieValues(chk1Yn, chk2Yn, chk3Yn);
+
+    if (data === 1) {
+        closeInquiryLayer();
+    } else if (data === 2) {
+        location.reload();
+    }
+}
+
+function saveCookie(data) {
+    var chk1Yn = document.getElementById("chk1").checked;
+    var chk2Yn = document.getElementById("chk2").checked;
+    var chk3Yn = document.getElementById("chk3").checked;
+
+    handleCookieAction(data, chk1Yn, chk2Yn, chk3Yn);
+}
+
+function denyCookie(data) {
+    handleCookieAction(data, false, false, false);
+}
+
+function saveCookieAll(data) {
+    handleCookieAction(data, true, true, true);
+}
