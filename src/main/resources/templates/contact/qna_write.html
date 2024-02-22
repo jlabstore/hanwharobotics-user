@@ -22,11 +22,9 @@
                         <span class="qna-write-form-section-title">작성자</span>
 <!--                        <input id="memberId" th:value="${memberResponse.getMemberId()}" readonly>-->
                         <div class="qna-write-form-section-content">
-                            <input class="qna-write-default-input" type="text" value="qausaggg" name="name" id="memberId" th:value="${memberResponse.getMemberId()}" readonly/>
+                            <input class="qna-write-default-input" type="text" name="name" id="memberId" th:value="${memberResponse.getMemberId()}" readonly/>
                         </div>
                     </div>
-
-
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">이메일</span>
@@ -42,14 +40,10 @@
                         </div>
                     </div>
 
-
 <!--                    <label for="email">이메일 </label><input id="email" name="email" type="text" th:value="${memberResponse.getEmail()}">-->
 <!--                    <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" style="appearance: auto" value="Y"> 관리자가 답변을 남기면 이메일로 알림을 받습니다.-->
 <!--                    -->
 <!--                    -->
-
-
-
 
 
 
@@ -64,25 +58,16 @@
                     </div>
 
 
-
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">문의유형 2<strong>*</strong></span>
                         <div class="qna-write-form-section-content">
-                            <div class="qna-write-custom-radio">
+<!--                            <div class="qna-write-custom-radio">-->
 
-<!--                                <label class="radio">-->
-<!--                                    <input type="radio" name="group1"  />-->
-<!--                                    <span></span>-->
-<!--                                    <p>하드웨어</p>-->
-<!--                                </label>-->
+                                <div class="qna-write-custom-radio qnaType2" id="qnaType2"></div>
 
-
-                                <span class="qnaType2" id="qnaType2"></span>
-
-                            </div>
+<!--                            </div>-->
                         </div>
                     </div>
-
 
 
 
@@ -106,34 +91,15 @@
 
                                 <div class="qna-write-inquiry-product-item">
 
-
-<!--                                    <select class="qna-write-custom-select" name="inquiry2" id="inquiry2">-->
-<!--                                        <option value="1">HCR-5</option>-->
-<!--                                        <option value="2">HCR-6</option>-->
-<!--                                        <option value="3">HCR-7</option>-->
-<!--                                        <option value="4">HCR-8</option>-->
-<!--                                    </select>-->
-
-
-                                    <span id="modelCd" class="robotModel">
-
+                                    <span id="modelCd" class="robotModel" style="width: calc(20%);">
                                     </span>
-
-
-
-                                    <input class="qna-write-custom-input" type="text" value="" name="serial1" id="serial1" />
+                                    <input class="qna-write-custom-input serialNo" type="text" value="" name="serial1" id="serial1" />
 <!--                                    <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
-
-                                    <input class="qna-write-custom-input" type="text" value="" name="software1" id="software1" />
+                                    <input class="qna-write-custom-input swVersion" type="text" value="" name="software1" id="software1" />
 <!--                                    <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">-->
-
-
 <!--                                    <select class="qna-write-custom-select app" name="inquiry3" id="inquiry3">-->
-
 <!--                                    </select>-->
-
-                                    <span id="applicationCd" class="application"></span>
-
+                                    <span id="applicationCd" class="application" style="width: calc(24%);"></span>
 
 
 
@@ -185,8 +151,6 @@
 
 
 
-
-
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">제목</span>
                         <div class="qna-write-form-section-content">
@@ -229,15 +193,20 @@
 
                             <div class="qna-write-file-list">
                                 <div class="qna-write-file-list-item">
+
                                 </div>
                             </div>
+
                             <span>첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다. exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.</span>
                         </div>
                     </div>
 
 
-                </div>
 
+
+
+
+                </div>
 
 
                 <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button>
@@ -331,12 +300,12 @@
 
 
 
-
+        // 문의제품 - 모델명
         function populateSelectAndInputs(options, containerId) {
             const container = $('.' + containerId);
             container.empty();
 
-            const selectBox = $('<select class="qna-write-custom-select" name="inquiry2" id="inquiry2">');
+            const selectBox = $('<select class="qna-write-custom-select" name="inquiry2" id="inquiry2" style="width: 100%">');
             container.append(selectBox);
 
             selectBox.append($('<option>', {
@@ -353,15 +322,12 @@
         }
 
 
-
-
-
-
+        // 문의제품 - 어플리케이션
         function populateSelectAndInputsApp(options, containerId) {
             const container = $('.' + containerId);
             container.empty();
 
-            const selectBox = $('<select class="qna-write-custom-select app" name="inquiry3" id="inquiry3">');
+            const selectBox = $('<select class="qna-write-custom-select app" name="inquiry3" id="inquiry3" style="width: 100%">');
             container.append(selectBox);
 
             selectBox.append($('<option>', {
@@ -375,42 +341,83 @@
                     text: option.description
                 }));
             });
-        }
-
-
-
-
-
-
-
-        let robotInfoCounter = 1;
-
-        function addRobotInfo() {
-            if (robotInfoCounter < 10) {
-                const newRobotInfo = $('.qna-write-inquiry-product-box:first').clone();
-                newRobotInfo.find('input').val('');
-                $('.qna-write-inquiry-product-box:last').after(newRobotInfo);
-                robotInfoCounter++;
-            }
-        }
-
-        function removeRobotInfo() {
-            if (robotInfoCounter > 1) {
-                $('.qna-write-inquiry-product-box:last').remove();
-                robotInfoCounter--;
-            }
         }
 
 
         const formData = new FormData();
 
-        // 파일 선택
+        let robotInfoCounter = 1;
+
+        function addRobotInfo() {
+            if (robotInfoCounter < 10) {
+                const newRobotInfo = $('.qna-write-inquiry-product-item:first').clone();
+                newRobotInfo.find('input').val('');
+                $('.qna-write-inquiry-product-item:last').after(newRobotInfo);
+                robotInfoCounter++;
+            }
+        }
+
+
+        function removeRobotInfo() {
+            if (robotInfoCounter > 1) {
+                $('.qna-write-inquiry-product-item:last').remove();
+                robotInfoCounter--;
+            }
+        }
+
+
+
+
+
+
+
+        // 파일
+        // function handleFileUpload() {
+        //     const fileInput = document.getElementById('fileInput');
+        //     const fileDisplayContainer = document.querySelector('.qna-write-file-list-item');
+        //     const currentFileCount = formData.getAll('files[]').length;
+        //
+        //     const additionalFileCount = fileInput.files.length;
+        //
+        //     if (currentFileCount + additionalFileCount > 5) {
+        //         alert('최대 5개까지만 첨부 가능합니다.');
+        //         fileInput.value = '';
+        //         return;
+        //     }
+        //
+        //     if (additionalFileCount > 0) {
+        //         for (let i = 0; i < additionalFileCount; i++) {
+        //             const fileNameDiv = document.createElement('div');
+        //             fileNameDiv.innerHTML = `<button onclick="removeFile(${i})"><img src="../images/pc/btn_close.svg" alt="" /></button> ${fileInput.files[i].name} `;
+        //             fileDisplayContainer.appendChild(fileNameDiv);
+        //             formData.append(`files[]`, fileInput.files[i]);
+        //         }
+        //     }
+        // }
+
+
+        // 파일 삭제
+        // function removeFile(index) {
+        //     const fileDisplayContainer = document.querySelector('.qna-write-file-list-item');
+        //     fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
+        //
+        //     const fileInput = document.getElementById('fileInput');
+        //     const files = Array.from(fileInput.files).filter((file, i) => i !== index);
+        //     fileInput.value = '';
+        //     files.forEach(file => {
+        //         fileInput.files.append(file);
+        //     });
+        // }
+
+
+
+
+
+        // 파일 업로드
         function handleFileUpload() {
             const fileInput = document.getElementById('fileInput');
-            const fileDisplayContainer = document.querySelector('.qna-write-file-list-item');
-
+            const fileDisplayContainer = document.querySelector('.qna-write-file-list');
             const currentFileCount = formData.getAll('files[]').length;
-
             const additionalFileCount = fileInput.files.length;
 
             if (currentFileCount + additionalFileCount > 5) {
@@ -422,9 +429,11 @@
             if (additionalFileCount > 0) {
                 for (let i = 0; i < additionalFileCount; i++) {
                     const fileNameDiv = document.createElement('div');
-                    fileNameDiv.innerHTML = `${fileInput.files[i].name} <button onclick="removeFile(${i})"><img src="../images/pc/btn_close.svg" alt="" /></button>`;
-                    fileDisplayContainer.appendChild(fileNameDiv);
+                    fileNameDiv.innerHTML = `<div class="qna-write-file-list-item"><button type="button" onclick="removeFile(${currentFileCount + i})"><img src="../images/pc/btn_close.svg" alt="" /></button> <span>${fileInput.files[i].name}</span></div> `;
 
+                    console.log("확인"+currentFileCount + i)
+
+                    fileDisplayContainer.appendChild(fileNameDiv);
                     formData.append(`files[]`, fileInput.files[i]);
                 }
             }
@@ -433,40 +442,46 @@
 
         // 파일 삭제
         function removeFile(index) {
-            const fileDisplayContainer = document.querySelector('.qna-write-file-list-item');
+            const fileDisplayContainer = document.querySelector('.qna-write-file-list');
             fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
 
+
             const fileInput = document.getElementById('fileInput');
-            const files = Array.from(fileInput.files).filter((file, i) => i !== index);
+            const files = Array.from(fileInput.files);
+
+            files.splice(index, 1);
             fileInput.value = '';
-            files.forEach(file => {
-                fileInput.files.append(file);
+
+            formData.delete(`files[]`);
+
+            files.forEach((file) => {
+                formData.append(`files[]`, file);
             });
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // 등록
         function register() {
 
-
             const qnaType2Selected = $('.qnaType2 input:checked').length > 0;
             if (!qnaType2Selected) {
-                alert('문의 유형2를 선택해주세요.');
+                alert('문의 유형을 선택해주세요.');
                 return;
             }
-
-
-            // // 로봇 모델에 대한 입력값이 있는지 확인
-            // const robotInfoInputs = $('.robotInfoContainer input').toArray();
-            // const robotModelValues = $('.robotInfoContainer select').map(function () {
-            //     return $(this).val();
-            // }).toArray();
-            //
-            // // 로봇 모델의 선택값이나 인풋값이 하나라도 있는지 확인
-            // const robotInfoFilled = robotModelValues.some(value => value !== '') || robotInfoInputs.some(input => input.value !== '');
-            //
-            //
-
 
             // const formData = new FormData();
             formData.append('email', $('#email').val());
@@ -479,9 +494,9 @@
             formData.append('qnaType2Cd', $('.qnaType2').find('input:checked').val());
 
             const qnaRobots = [];
-            $('.qna-write-inquiry-product-box').each(function () {
+            $('.qna-write-inquiry-product-item').each(function () {
                 const modelCd = $(this).find('.robotModel select').val();
-                const serialNo = $(this).find('#serial1').val();
+                const serialNo = $(this).find('.serialNo').val();
                 const swVersion = $(this).find('.swVersion').val();
                 const applicationCd = $(this).find('.application select').val();
 
@@ -525,8 +540,13 @@
         }
 
 
+
+
     </script>
 
 
+
+
 </th:block>
+
 </html>

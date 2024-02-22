@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+<div layout:fragment="content">
+
+    <section class="inquiry_more"></section>
+
+    <main class="login">
+        <div class="login-container">
+            <h1>비밀번호 재설정</h1>
+            <section class="login-content">
+                <article class="login-main">
+                    <form>
+                        <div class="login-main-container re-complete">
+                            <div class="login-find-id-complete-msg">
+                                <h3>
+                                    비밀번호 재설정이 완료되었습니다.<br/>
+                                    새로운 비밀번호로 로그인해주세요.
+                                </h3>
+                            </div>
+                            <div class="login-find-id-complete-btn-group">
+                                <a class="login-find-id-complete-btn color-orange" href="/login-page">로그인</a>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>
+

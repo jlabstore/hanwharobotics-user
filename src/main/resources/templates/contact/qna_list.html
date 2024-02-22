@@ -38,13 +38,6 @@
 
 
 
-
-
-
-
-
-
-
                 <div class="table">
                     <div class="thead">
                         <div class="th" th:text="#{no}"></div>
@@ -154,15 +147,13 @@
 
 <th:block layout:fragment="script">
     <script>
+
         $(document).ready(function () {
-            //뒤로가기 or 새로고침시 검색어 유지
             setQueryStringParams();
             getList();
-
-            // $('.layer_inner').hide();
-
         });
 
+        // const loginMemberNo =  Number("[[${#request.userPrincipal.getName()}]]");
 
 
         function getList(page) {
@@ -190,6 +181,19 @@
                 }
             );
         }
+
+
+
+        // function goToQnaDetail(qnaNo) {
+        //     const qnaItem = data.contents.find(item => item.qnaNo === qnaNo);
+        //     if (qnaItem) {
+        //         if ((qnaItem.exposureStatus === 'Y') && (loginMemberNo !== qnaItem.memberNo)) {
+        //             alert("비공개 게시글입니다.");
+        //         } else {
+        //             window.location.href = `/qna/${qnaNo}`;
+        //         }
+        //     }
+        // }
 
 
     </script>

@@ -124,7 +124,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-id/complete")
 	public String findIdCompletePage() {
-		return "member/find_id_complete";
+		return "member/login_find_id_complete";
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-pw")
 	public String resetPwPage() {
-		return "member/login_find_pw";
+		return "member/login_find_pwd";
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-pw/complete")
 	public String resetPwCompletePage() {
-		return "member/find_pw_complete";
+		return "member/login_find_pwd_complete";
 	}
 
 
