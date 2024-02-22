@@ -1,7 +1,5 @@
 package com.hanwha.robotics.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.dto.PageResponse;
@@ -9,7 +7,6 @@ import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.utils.CommonUtil;
 import com.hanwha.robotics.user.dto.*;
 import com.hanwha.robotics.user.service.MemberService;
-import com.hanwha.robotics.user.service.QnaReplyService;
 import com.hanwha.robotics.user.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -108,7 +105,7 @@ public class QnaController {
         QnaCodeResponse qnaCodeResponse = qnaService.getQnaCode();
         model.addAttribute("memberResponse", memberResponse);
         model.addAttribute("qnaCodeResponse", qnaCodeResponse);
-        return "contact/qna_register";
+        return "contact/qna_write";
     }
 
     @GetMapping("/code")

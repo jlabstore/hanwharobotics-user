@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.hanwha.robotics.user.common.enums.MemberLogType;
 import com.hanwha.robotics.user.common.handler.exception.BadRequestException;
+import com.hanwha.robotics.user.common.handler.exception.NotFoundException;
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.dto.MemberResponse;
@@ -76,7 +77,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void findId(MemberRequest request) {
 		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
-				.orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
+				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
 		String memberId = member.getMemberId();
 		mailUtil.sendMemberId(member.getEmail(), memberId);
 	}
@@ -86,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void sendPasswordResetMail(MemberRequest request) {
 		Member member = Optional.ofNullable(memberMapper.selectByMemberId(request.getMemberId()))
-				.orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
+				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
 		mailUtil.sendPasswordResetLink(member);
 	}
 

@@ -58,6 +58,9 @@ dependencies {
 	implementation 'commons-io:commons-io:20030203.000550'
 	implementation 'org.apache.commons:commons-lang3:3.8.1'
 
+	// validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 }
 
 tasks.named('bootBuildImage') {

@@ -1,6 +1,7 @@
 package com.hanwha.robotics.user.common.handler;
 
 import com.hanwha.robotics.user.common.handler.exception.BadRequestException;
+import com.hanwha.robotics.user.common.handler.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,11 @@ public class ExceptionAdviceHandler {
 	@ExceptionHandler(BadRequestException.class)
 	public ResponseEntity<Object> handleBadRequestException(BadRequestException e) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+	}
+
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<Object> handleNotFoundException(NotFoundException e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}
 
 }

@@ -2,27 +2,17 @@ package com.hanwha.robotics.user.controller;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
-import com.hanwha.robotics.user.common.utils.MailUtil;
-import com.hanwha.robotics.user.mapper.CodeMapper;
 import com.hanwha.robotics.user.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.service.MemberService;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +30,7 @@ public class MemberController {
 	 */
 	@GetMapping("/login-page")
 	public String loginPage() {
-		return "member/login";
+		return "member/login_main";
 	}
 
 	/**
@@ -115,7 +105,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-id")
 	public String findIdPage() {
-		return "member/find_id";
+		return "member/login_find_id";
 	}
 
 	/**
@@ -123,7 +113,7 @@ public class MemberController {
 	 * @return
 	 */
 	@PostMapping("/find-id")
-	public ResponseEntity<Void> sendMemberId(@RequestBody MemberRequest request) {
+	public ResponseEntity<Void> sendMemberId(@Valid @RequestBody MemberRequest request) {
 		memberService.findId(request);
 		return ResponseEntity.ok().build();
 	}
@@ -143,7 +133,7 @@ public class MemberController {
 	 */
 	@GetMapping("/find-pw")
 	public String resetPwPage() {
-		return "member/find_pw";
+		return "member/login_find_pw";
 	}
 
 	/**

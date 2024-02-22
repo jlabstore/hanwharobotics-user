@@ -64,10 +64,10 @@
                     </ul>
                   </li>
                   <li>
-                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.co.kr/'">ROBOTS</span>
-                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'">ROBOTS</span>
-                    <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOTS</a> -->
-                    <!-- <span class="header__nav__link on">ROBOTS</span>
+                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.co.kr/'">ROBOT</span>
+                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'">ROBOT</span>
+                    <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOT</a> -->
+                    <!-- <span class="header__nav__link on">ROBOT</span>
                     <ul class="header__nav__items_sub">
                       <li>
                         <a href="#" class="on" target="_blank">Products</a>
@@ -149,15 +149,21 @@
 
 
               <div th:if="${#request.userPrincipal == null}">
-                <a href="/signup/term">회원가입</a>
-                |
-                <a href="/login-page" class="header_inquiry">로그인</a>
+<!--                <a href="/signup/term">회원가입</a>-->
+<!--                |-->
+<!--                <a href="/login-page" class="header_inquiry">로그인</a>-->
+                <a href="/login-page" class="login">
+                  <span>login</span>
+                </a>
               </div>
 
               <div th:if="${#request.userPrincipal != null}">
-                <a href="/member/profile">마이페이지</a>
-                |
+<!--                <a href="/member/profile">마이페이지</a>-->
+<!--                |-->
                 <a href="/member/logout" class="header_inquiry">로그아웃</a>
+                <a href="/member/profile" class="login">
+                  <span>login</span>
+                </a>
               </div>
 
 

@@ -49,7 +49,9 @@ public class MailUtil {
 		try{
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false , "UTF-8");
-			messageHelper.setTo(target); // 메일 수신자
+			String targetMail = (String) params.get("targetMail");
+			messageHelper.setTo(targetMail); // 메일 수신자
+			// messageHelper.setTo(target); // 메일 수신자
 			messageHelper.setSubject("한화로보틱스 문의 메일"); // 메일 제목
 			messageHelper.setText(setContext(params), true); // 메일 본문 내용, HTML 여부
 			javaMailSender.send(mimeMessage);

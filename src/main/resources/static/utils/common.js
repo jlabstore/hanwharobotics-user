@@ -94,7 +94,7 @@ var setQueryStringParams = function(formId) {
 	});
 }
 
-function showLayer(layerName, target, headerMinHeight) {
+function showLayer(layerName, target, headerMinHeight, bgColor = '#fff', opacity = 0.1) {
 
     const offset = $(window).scrollTop()+50;
     if(layerName == 'cookie'){
@@ -103,7 +103,8 @@ function showLayer(layerName, target, headerMinHeight) {
       $(`.layer.${layerName}`).css('top', offset+'px').show('fast');
     }
 
-    $('.layer_bg').show();
+    // $('.layer_bg').show();
+    $('.layer_bg').css('background-color', bgColor).css('opacity', opacity).show();
     target.removeClass('active');
     $('html').removeClass('scroll-lock');
 
@@ -224,6 +225,23 @@ var layerFamilyOpenBtn = function() {
     // e.stopPropagation();
     showLayer('family', $('.layer.family'), headerMinHeight);
 }
+
+
+var layerQnaOpenBtn = function () {
+    showLayer('qna', $(this), headerMinHeight, '#000', 0.2);
+
+}
+
+
+
+// $(document).on('click', 'button.inquiry.qna', function(e) {
+//     e.stopPropagation();
+//     showLayer('qna', $(this), headerMinHeight, '#000', 0.2);
+// });
+
+
+
+
 
 var checkCookie = function () {
     console.log('cookie popup')

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+<div layout:fragment="content">
+
+        <main class="login">
+            <div class="login-container">
+                <h1>비밀번호 찾기</h1>
+                <section class="login-content">
+                    <article class="login-main">
+<!--                        <form>-->
+                            <div class="login-main-container">
+                                <p class="login-find-txt">
+                                    회원님의 아이디를 입력해주세요.<br/>
+                                    회원가입시 입력한 이메일 주소로 비밀번호 재설정 메일을 보내드립니다.
+                                </p>
+                                <div class="login-find-input-wrapper">
+                                    <input type="text" id="id" name="id" placeholder="아이디" />
+                                    <button type="button" class="login-find-submit" onclick="sendResetPw()">이메일 발송</button>
+                                </div>
+                            </div>
+<!--                        </form>-->
+                    </article>
+                </section>
+            </div>
+        </main>
+
+
+</div>
+
+</body>
+</html>
+
+<script>
+
+
+    function sendResetPw() {
+        const memberId = $('#id').val();
+        // const email = $('#email').val();
+
+        const jsonData = {
+            memberId: memberId
+            // email: email
+        };
+
+        COMM.ajax({
+            type: 'POST',
+            url: '/password/reset-page',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+            success: function (data) {
+                // alert('재설정 링크가 발송되었습니다.')
+                window.location.href = '/find-pw/complete';
+            },
+
+            error: function (xhr, textStatus) {
+                console.error('전송 실패:', textStatus);
+                if (xhr.responseJSON) {
+                    const errorMessage = xhr.responseJSON.message;
+                    alert(errorMessage);
+                } else {
+                    alert('비밀번호 재설정 링크 발송에 실패했습니다.');
+                }
+            }
+        });
+    }
+
+
+</script>

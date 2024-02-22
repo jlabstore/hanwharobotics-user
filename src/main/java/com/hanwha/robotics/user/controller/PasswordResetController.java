@@ -43,7 +43,7 @@ public class PasswordResetController {
 		@RequestParam String token
 	) {
 		if (passwordResetTokenService.validate(token)) {
-			return "/member/reset_pw";
+			return "/member/login_pwd_re";
 		} else {
 			return "main"; // FIXME : 실패하면 어디로 보내야할까,,
 		}

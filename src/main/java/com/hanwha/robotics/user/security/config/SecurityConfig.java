@@ -72,8 +72,6 @@ public class SecurityConfig {
                 .addFilterBefore(loginAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(logoutAuthenticationFilter(), LogoutFilter.class)
 
-
-
         ;
         return http.build();
     }
