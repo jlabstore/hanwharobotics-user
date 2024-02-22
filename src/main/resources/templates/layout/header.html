@@ -46,7 +46,13 @@
 
                     <ul class="header__nav__items_sub">
                       <li>
-                        <a href="/about" class="header_about" th:utext="#{hanwharobotics.large}"></a>
+                        <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)" class="header_about" th:utext="#{hanwharobotics.large}"></a>
+                        <!-- <a th:if="#{header.nation} == 'KR'" href="/about" class="header_about" th:utext="#{hanwharobotics.large}"></a>
+                        <a th:if="#{header.nation} == 'EN'" href="/about/about" class="header_about" th:utext="#{hanwharobotics.large}"></a> -->
+                        <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
+                      </li>
+                      <li th:if="#{header.nation} == 'EN'">
+                        <a href="/about/managementPolicy" class="header_about" th:utext="#{header.managementPolicy}"></a>
                         <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
                       </li>
                       <li>
@@ -84,8 +90,8 @@
                     </ul> -->
                   </li>
                   <li>
-                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp'">AGVS/AMRS</span>
-                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'">AGVS/AMRS</span>
+                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp'">AGV/AMR</span>
+                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'">AGV/AMR</span>
                     <!-- <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp"  style="opacity: 100%;"  target="_blank">AGVS</a> -->
                     <!-- <span class="header__nav__link">AGVS</span>
 
@@ -213,6 +219,17 @@
                 window.location.href = domain +  window.location.pathname + "?lang=en"
               }
 
+            }
+
+            function goAbout(type) {
+                console.log('타입', type);
+                if (type == 'EN') {
+                    // 국문페이지
+                    location.href = '/about?lang=ko';
+                } else if (type == 'KR') {
+                    // 영문페이지
+                    location.href = '/about?lang=en';
+                }
             }
           </script>
         </div>
