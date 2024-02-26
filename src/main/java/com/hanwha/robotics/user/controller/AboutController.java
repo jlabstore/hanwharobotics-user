@@ -16,6 +16,7 @@ public class AboutController {
      */
     @GetMapping("")
     public String about(@RequestParam String lang){
+    // public String about(){
         if ("en".equals(lang)) {
             // 영문페이지
             return "about/about";
@@ -23,6 +24,7 @@ public class AboutController {
             // 국문페이지
             return "about/aboutKr";
 		}
+        // return "about/aboutKr";
     }
 
     // /**

@@ -104,6 +104,7 @@ function showLayer(layerName, target, headerMinHeight) {
     }
 
     $('.layer_bg').show();
+    $('.layer_bg').css('background-color', bgColor).css('opacity', opacity).show();
     target.removeClass('active');
     $('html').removeClass('scroll-lock');
 

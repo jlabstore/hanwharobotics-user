@@ -1246,6 +1246,9 @@ header .more_btn  a.distributor {
 		margin-top: 0;
 	}
 
+	.en footer .column1 .sitemap {
+		top: 85px;
+	}
 
 	footer .column1 .link {
 		/* margin-top: 72px; */
@@ -2068,7 +2071,7 @@ header .more_btn  a.distributor {
 	}
 
 	footer .address {
-		margin-top: 100px;
+		margin-top: 140px;
 		/* margin-top: 30px; */
 		/* padding-top: 200px; */
 		font-family: HanwhaGothicL_OTF;
@@ -2099,7 +2102,7 @@ header .more_btn  a.distributor {
 
 	footer .column1 .sitemap {
 		position: absolute;
-		top: 128px;
+		top: 115px;
 		left: 20px !important;
 		display: flex;
 		width: 90%;
@@ -2107,6 +2110,10 @@ header .more_btn  a.distributor {
 		/* gap: 0; */
 		flex-wrap: wrap;
 		margin-top: 0;
+	}
+
+	.en footer .column1 .sitemap {
+		top: 120px;
 	}
 
 
