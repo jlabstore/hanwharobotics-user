@@ -105,17 +105,29 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public QnaDetailResponse getQnaDetail(int memberNo, int qnaNo) {
+
 		QnaResponse qnaDetail = this.getQna(qnaNo);
 
+		// 비공개게시글 본인 여부 체크
 		if ("N".equals(qnaDetail.getExposureStatus()) && memberNo != qnaDetail.getMemberNo()) {
 			throw new ForbiddenException("비공개 게시글입니다.");
 		}
 
-		qnaDetail.setMaskedMemberId();
 
+		// 로봇 리스트
 		List<QnaRobot> qnaRobots = qnaMapper.selectRobotByQnaNo(qnaNo);
 		List<QnaReplyResponse> qnaReplies = qnaReplyService.getQnaReplies(qnaNo);
 
+
+		// FIXME
+		// 아이디 마스킹
+		qnaDetail.setMaskedMemberId();
+		for (QnaReplyResponse reply : qnaReplies) {
+			reply.setMaskedMemberId();
+		}
+
+
+		// 이전글, 다음글
 		Optional<QnaResponse> previousQna = Optional.ofNullable(qnaMapper.selectPrevQna(qnaNo));
 		Optional<QnaResponse> nextQna = Optional.ofNullable(qnaMapper.selectNextQna(qnaNo));
 
@@ -156,15 +168,7 @@ public class QnaServiceImpl implements QnaService {
 			.peek(robot -> robot.setQnaNo(qnaNo))
 			.forEach(robot -> qnaMapper.insertQnaRobot(robot));
 
-		// 파일 수정
-		if(!req.getDeleteFileIds().isEmpty()) {
-			List<UploadFile> deletedFiles = uploadFileMapper.selectByIds(req.getDeleteFileIds());
-			uploadFileMapper.deleteByIds(req.getDeleteFileIds());
-			deletedFiles.forEach(file -> fileUtil.deleteFile(file.getFilePath()));
-		}
-
-
-
+		// 파일 업로드
 		List<UploadFile> uploadFiles = req.getFiles()
 			.stream()
 			.map(file -> fileUtil.uploadFile(file))
@@ -173,26 +177,23 @@ public class QnaServiceImpl implements QnaService {
 		if (!uploadFiles.isEmpty()) {
 			uploadFileMapper.saveFile(uploadFiles);
 		}
+
+		// 파일 삭제
+		if(!req.getDeleteFileIds().isEmpty()) {
+			List<UploadFile> deletedFiles = uploadFileMapper.selectByIds(req.getDeleteFileIds());
+			uploadFileMapper.deleteByIds(req.getDeleteFileIds());
+			deletedFiles.forEach(file -> fileUtil.deleteFile(file.getFilePath()));
+		}
 	}
 
 
 	@Override
 	public void deleteQna(int memberNo, int qnaNo) {
-		// FIXME
 		if (memberNo != qnaMapper.selectByQnaNo(qnaNo).getMemberNo()) {
 			throw new RuntimeException("본인글만 삭제 가능합니다.");
 		}
 		qnaMapper.deleteQna(qnaNo);
 	}
-
-//	@Override
-//	public QnaResponse getQnaEditDetail(int qnaNo) {
-//		Qna qna = qnaMapper.selectQnaByQnaNo(qnaNo);
-//		return QnaResponse.of(qna);
-//	}
-
-
-
 
 
 

@@ -15,12 +15,12 @@
                 </p>
             </div>
 
-
             <div class="column board_list">
                 <div class="qna-write-form">
+
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">작성자</span>
-<!--                        <input id="memberId" th:value="${memberResponse.getMemberId()}" readonly>-->
+                        <!--                        <input id="memberId" th:value="${memberResponse.getMemberId()}" readonly>-->
                         <div class="qna-write-form-section-content">
                             <input class="qna-write-default-input" type="text" name="name" id="memberId" th:value="${memberResponse.getMemberId()}" readonly/>
                         </div>
@@ -40,41 +40,21 @@
                         </div>
                     </div>
 
-<!--                    <label for="email">이메일 </label><input id="email" name="email" type="text" th:value="${memberResponse.getEmail()}">-->
-<!--                    <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" style="appearance: auto" value="Y"> 관리자가 답변을 남기면 이메일로 알림을 받습니다.-->
-<!--                    -->
-<!--                    -->
-
-
-
-
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">문의유형<strong>*</strong></span>
-                        <div class="qna-write-form-section-content" >
-
+                        <span class="qna-write-form-section-title">문의유형 1<strong>*</strong></span>
+                        <div class="qna-write-form-section-content">
                             <span class="qnaType1" id="qnaType1"></span>
-
                         </div>
                     </div>
-
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">문의유형 2<strong>*</strong></span>
                         <div class="qna-write-form-section-content">
-<!--                            <div class="qna-write-custom-radio">-->
-
-                                <div class="qna-write-custom-radio qnaType2" id="qnaType2"></div>
-
-<!--                            </div>-->
+                            <!--                            <div class="qna-write-custom-radio">-->
+                            <div class="qna-write-custom-radio qnaType2" id="qnaType2"></div>
+                            <!--                            </div>-->
                         </div>
                     </div>
-
-
-
-
-
-
-
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">문의제품</span>
@@ -86,23 +66,42 @@
                                 <p>어플리케이션</p>
                                 <p>추가/삭제</p>
                             </div>
-                            <div class="qna-write-inquiry-product-box" >
 
+                            <div class="qna-write-inquiry-product-box" >
 
                                 <div class="qna-write-inquiry-product-item">
 
-                                    <span id="modelCd" class="robotModel" style="width: calc(20%);">
+                                    <span id="modelCd" class="robotModel" style="width: calc(15%);">
                                     </span>
+
                                     <input class="qna-write-custom-input serialNo" type="text" value="" name="serial1" id="serial1" />
-<!--                                    <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
-                                    <input class="qna-write-custom-input swVersion" type="text" value="" name="software1" id="software1" />
+
+                                    <!--                                    <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
+<!--                                    <input class="qna-write-custom-input swVersion" type="text" value="" name="software1" id="software1" />-->
+
+                                    <div class="qna-write-software">
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software1" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <span>.</span>
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software2" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software3" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software4" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <span>.</span>
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software5" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software6" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software7" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <span>.</span>
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software8" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software9" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        <input class="qna-write-custom-input" type="text" name="software1" id="software10" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                    </div>
+
 <!--                                    <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">-->
-<!--                                    <select class="qna-write-custom-select app" name="inquiry3" id="inquiry3">-->
-<!--                                    </select>-->
-                                    <span id="applicationCd" class="application" style="width: calc(24%);"></span>
 
 
+                                    <!--                                    <select class="qna-write-custom-select app" name="inquiry3" id="inquiry3">-->
+                                    <!--                                    </select>-->
 
+                                    <span id="applicationCd" class="application" style="width: calc(22%);"></span>
 
 
 
@@ -118,38 +117,29 @@
 
 
 
+
+
                             </div>
                         </div>
                     </div>
 
+                    <!--                    문의제품-->
+                    <!--                    모델명-->
+                    <!--                    로봇암 시리얼넘버-->
+                    <!--                    소프트웨어 버전-->
+                    <!--                    어플리케이션-->
+                    <!--                    <br>-->
+                    <!--                    <div class="robotInfoContainer">-->
+                    <!--                        <span id="modelCd" class="robotModel"></span>-->
 
+                    <!--                        <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
+                    <!--                        <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">-->
 
+                    <!--                        <span id="applicationCd" class="application"></span>-->
 
-
-
-
-
-<!--                    문의제품-->
-<!--                    모델명-->
-<!--                    로봇암 시리얼넘버-->
-<!--                    소프트웨어 버전-->
-<!--                    어플리케이션-->
-<!--                    <br>-->
-<!--                    <div class="robotInfoContainer">-->
-<!--                        <span id="modelCd" class="robotModel"></span>-->
-
-<!--                        <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
-<!--                        <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">-->
-
-<!--                        <span id="applicationCd" class="application"></span>-->
-
-<!--                        <button type="button" onclick="addRobotInfo()">+</button>-->
-<!--                        <button type="button" onclick="removeRobotInfo()">-</button>-->
-<!--                    </div>-->
-
-
-
-
+                    <!--                        <button type="button" onclick="addRobotInfo()">+</button>-->
+                    <!--                        <button type="button" onclick="removeRobotInfo()">-</button>-->
+                    <!--                    </div>-->
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">제목</span>
@@ -157,8 +147,6 @@
                             <input class="qna-write-custom-input full" type="text" name="title" id="title" />
                         </div>
                     </div>
-
-
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">내용</span>
@@ -168,19 +156,6 @@
                         </div>
                     </div>
 
-
-
-<!--                    <label for="content">내용 </label><input id="content" name="content" type="text">-->
-
-
-
-
-
-
-
-
-
-
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">첨부파일</span>
                         <div class="qna-write-form-file-wrapper">
@@ -189,7 +164,6 @@
                                 <input type="file" name="file" id="fileInput" onchange="handleFileUpload()"/>
                                 <label for="fileInput">파일찾기</label>
                             </div>
-
 
                             <div class="qna-write-file-list">
                                 <div class="qna-write-file-list-item">
@@ -202,15 +176,9 @@
                     </div>
 
 
-
-
-
-
                 </div>
 
-
                 <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button>
-
 
             </div>
         </div>
@@ -238,20 +206,22 @@
                 type: 'GET',
                 url: "/qna/code",
                 success: function (data) {
-                    populateSelectBox(data.data.qnaType1List, 'qnaType1');
-                    populateRadioButtons(data.data.qnaType2List, 'qnaType2');
+                    if(data.data != null) {
+                        populateSelectBox(data.data["qnaType1List"], 'qnaType1');
+                        populateRadioButtons(data.data["qnaType2List"], 'qnaType2');
 
-                    populateSelectAndInputs(data.data.robotModelList, 'robotModel');
-                    populateSelectAndInputsApp(data.data.applicationList, 'application');
+                        populateSelectAndInputs(data.data["robotModelList"], 'robotModel');
+                        populateSelectAndInputsApp(data.data["applicationList"], 'application');
+                    }
                 },
             });
         }
+
 
         // 문의유형1
         function populateSelectBox(options, selectClass) {
             const selectBox = $('<select class="qna-write-custom-select">');
             selectBox.addClass(selectClass);
-
 
             $.each(options, function (index, option) {
                 selectBox.append($('<option>', {
@@ -262,7 +232,6 @@
 
             $('.' + selectClass).html(selectBox);
         }
-
 
 
         // 문의유형2
@@ -293,9 +262,6 @@
                 container.append(label);
             });
         }
-
-
-
 
 
 
@@ -368,109 +334,91 @@
 
 
 
+        var fileList = []; // 파일 목록을 저장할 배열
 
-
-
-        // 파일
-        // function handleFileUpload() {
-        //     const fileInput = document.getElementById('fileInput');
-        //     const fileDisplayContainer = document.querySelector('.qna-write-file-list-item');
-        //     const currentFileCount = formData.getAll('files[]').length;
-        //
-        //     const additionalFileCount = fileInput.files.length;
-        //
-        //     if (currentFileCount + additionalFileCount > 5) {
-        //         alert('최대 5개까지만 첨부 가능합니다.');
-        //         fileInput.value = '';
-        //         return;
-        //     }
-        //
-        //     if (additionalFileCount > 0) {
-        //         for (let i = 0; i < additionalFileCount; i++) {
-        //             const fileNameDiv = document.createElement('div');
-        //             fileNameDiv.innerHTML = `<button onclick="removeFile(${i})"><img src="../images/pc/btn_close.svg" alt="" /></button> ${fileInput.files[i].name} `;
-        //             fileDisplayContainer.appendChild(fileNameDiv);
-        //             formData.append(`files[]`, fileInput.files[i]);
-        //         }
-        //     }
-        // }
-
-
-        // 파일 삭제
-        // function removeFile(index) {
-        //     const fileDisplayContainer = document.querySelector('.qna-write-file-list-item');
-        //     fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
-        //
-        //     const fileInput = document.getElementById('fileInput');
-        //     const files = Array.from(fileInput.files).filter((file, i) => i !== index);
-        //     fileInput.value = '';
-        //     files.forEach(file => {
-        //         fileInput.files.append(file);
-        //     });
-        // }
-
-
-
-
-
-        // 파일 업로드
+        // fileList에 파일을 추가하고 다시 그리기
         function handleFileUpload() {
-            const fileInput = document.getElementById('fileInput');
-            const fileDisplayContainer = document.querySelector('.qna-write-file-list');
-            const currentFileCount = formData.getAll('files[]').length;
-            const additionalFileCount = fileInput.files.length;
+            console.log("업로드")
 
-            if (currentFileCount + additionalFileCount > 5) {
-                alert('최대 5개까지만 첨부 가능합니다.');
-                fileInput.value = '';
+            const fileInput = document.getElementById('fileInput');
+
+            // 파일이 선택되었는지 확인
+            if (fileInput.files.length === 0) {
+                alert('파일을 선택해주세요.');
+                fileInput.value = null; // 파일 input 초기화
                 return;
             }
 
-            if (additionalFileCount > 0) {
-                for (let i = 0; i < additionalFileCount; i++) {
-                    const fileNameDiv = document.createElement('div');
-                    fileNameDiv.innerHTML = `<div class="qna-write-file-list-item"><button type="button" onclick="removeFile(${currentFileCount + i})"><img src="../images/pc/btn_close.svg" alt="" /></button> <span>${fileInput.files[i].name}</span></div> `;
+            // 파일 추가 여부 및 최대 개수 확인
+            if (fileList.length + fileInput.files.length > 5) {
+                alert('최대 5개까지만 첨부 가능합니다.');
+                fileInput.value = null; // 파일 input 초기화
+                return;
+            }
 
-                    console.log("확인"+currentFileCount + i)
+            // 파일 크기 확인
+            for (var i = 0; i < fileInput.files.length; i++) {
+                const fileSize = fileInput.files[i].size; // 파일 크기 (단위: bytes)
+                const maxSize = 5 * 1024 * 1024; // 5MB
 
-                    fileDisplayContainer.appendChild(fileNameDiv);
-                    formData.append(`files[]`, fileInput.files[i]);
+                if (fileSize > maxSize) {
+                    alert('파일 크기는 최대 5MB까지만 허용됩니다.');
+                    fileInput.value = null; // 파일 input 초기화
+                    return;
                 }
             }
+
+            // fileList에 파일 추가
+            for (var i = 0; i < fileInput.files.length; i++) {
+                fileList.push(fileInput.files[i]);
+            }
+
+            // 파일 그리기
+            drawFileList();
+
+            console.log(fileList)
         }
 
 
-        // 파일 삭제
+        // fileList에 파일을 삭제하고 다시 그리기
         function removeFile(index) {
-            const fileDisplayContainer = document.querySelector('.qna-write-file-list');
-            fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
+            console.log("삭제")
 
+            //파일 제거
+            if (index >= 0 && index < fileList.length) {
+                fileList.splice(index, 1);
+            }
+
+            //파일 그리기
+            drawFileList();
+        }
+
+        /* fileList를 참조하여 첨부 파일목록을 그린다. */
+        function drawFileList(){
+            console.log("드로우")
+
+            const fileDisplayContainer = document.querySelector('.qna-write-file-list');
+
+            // 파일 목록을 싹 지우고 다시 그리기
+            fileDisplayContainer.innerHTML = '';
+
+            for (let i = 0; i < fileList.length; i++) {
+                //다시 그리자
+                const fileNameDiv = document.createElement('div');
+                fileNameDiv.innerHTML =
+                    `<div class="qna-write-file-list-item">
+                    <button type="button" onclick="removeFile(${i})">
+                        <img src="../images/pc/btn_close.svg" alt="" />
+                    </button>
+                    <span>${fileList[i].name}</span>
+                </div>`;
+                fileDisplayContainer.appendChild(fileNameDiv);
+                // formData.append(`files[]`, fileInput.files[i]);
+            }
 
             const fileInput = document.getElementById('fileInput');
-            const files = Array.from(fileInput.files);
-
-            files.splice(index, 1);
-            fileInput.value = '';
-
-            formData.delete(`files[]`);
-
-            files.forEach((file) => {
-                formData.append(`files[]`, file);
-            });
+            fileInput.value = null; // 파일 input 초기화
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -497,7 +445,19 @@
             $('.qna-write-inquiry-product-item').each(function () {
                 const modelCd = $(this).find('.robotModel select').val();
                 const serialNo = $(this).find('.serialNo').val();
-                const swVersion = $(this).find('.swVersion').val();
+
+                const v1 = $(this).find('#software1').val();
+                const v2 = $(this).find('#software2').val();
+                const v3 = $(this).find('#software3').val();
+                const v4 = $(this).find('#software4').val();
+                const v5 = $(this).find('#software5').val();
+                const v6 = $(this).find('#software6').val();
+                const v7 = $(this).find('#software7').val();
+                const v8 = $(this).find('#software8').val();
+                const v9 = $(this).find('#software9').val();
+                const v10 = $(this).find('#software10').val();
+                const swVersion = v1+"."+v2+v3+v4+"."+v5+v6+v7+"."+v8+v9+v10;
+
                 const applicationCd = $(this).find('.application select').val();
 
                 const robotInfo = {
@@ -516,9 +476,12 @@
                 formData.append(`qnaRobots[${i}].applicationCd`, qnaRobots[i].applicationCd);
             }
 
-            const fileInput = document.getElementById('fileInput');
-            for (let i = 0; i < fileInput.files.length; i++) {
-                formData.append(`files[${i}]`, fileInput.files[i]);
+            // files를 초기화
+            formData.delete('files');
+
+            // fileList를 formData에 추가
+            for (let i = 0; i < fileList.length; i++) {
+                formData.append('files', fileList[i]);
             }
 
             $.ajax({
@@ -548,5 +511,6 @@
 
 
 </th:block>
+
 
 </html>

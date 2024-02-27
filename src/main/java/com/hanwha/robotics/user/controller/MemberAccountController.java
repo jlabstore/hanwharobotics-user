@@ -36,7 +36,7 @@ public class MemberAccountController {
     public String myPage(@AuthenticationPrincipal int memberNo, Model model) {
         MemberResponse response = memberService.retrieve(memberNo);
         model.addAttribute("memberResponse", response);
-        return "member/my_page";
+        return "member/mypage_main";
     }
 
 	/**
@@ -54,7 +54,7 @@ public class MemberAccountController {
 
         model.addAttribute("memberResponse", response);
 
-        return "/member/my_page_edit";
+        return "member/mypage_edit";
     }
 
     /**
@@ -104,7 +104,7 @@ public class MemberAccountController {
      */
     @GetMapping("/profile/delete")
     public String deleteAccountPage() {
-        return "member/delete_account";
+        return "member/mypage_withdrawal";
     }
 
     /**

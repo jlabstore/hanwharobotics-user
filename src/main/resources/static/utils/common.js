@@ -97,6 +97,12 @@ var setQueryStringParams = function(formId) {
 function showLayer(layerName, target, headerMinHeight, bgColor = '#fff', opacity = 0.1) {
 
     const offset = $(window).scrollTop()+50;
+
+
+    $('.layer').hide('fast');
+    $('.layer_bg').hide();
+
+
     if(layerName == 'cookie'){
       $(`.layer.${layerName}`).show('fast');
     }else{
@@ -232,12 +238,50 @@ var layerQnaOpenBtn = function () {
 
 }
 
-
-
 // $(document).on('click', 'button.inquiry.qna', function(e) {
 //     e.stopPropagation();
 //     showLayer('qna', $(this), headerMinHeight, '#000', 0.2);
 // });
+
+
+
+
+var layerMyPagePwdEditOpenBtn = function () {
+    showLayer('pwd-edit', $(this), headerMinHeight, '#000', 0.2);
+}
+
+var layerPwdEditBtn = function () {
+    showLayer('pwd-edit-confirm', $(this), headerMinHeight, '#000', 0.2);
+}
+
+var layerPwdEditCompleteBtn = function () {
+    showLayer('pwd-edit-complete', $(this), headerMinHeight, '#000', 0.2);
+}
+
+
+
+// $(document).on('click', 'button.mypage-pwd-edit', function(e) {
+//     e.stopPropagation();
+//
+//     showLayer('pwd-edit', $(this), headerMinHeight, '#000', 0.2);
+// });
+//
+// $(document).on('click', 'button.round-btn.pwd-edit-step-1', function(e) {
+//     e.stopPropagation();
+//
+//     showLayer('pwd-edit-confirm', $(this), headerMinHeight, '#000', 0.2);
+// });
+//
+// $(document).on('click', 'button.round-btn.pwd-edit-step-2', function(e) {
+//     e.stopPropagation();
+//
+//     showLayer('pwd-edit-complete', $(this), headerMinHeight, '#000', 0.2);
+// });
+
+
+
+
+
 
 
 

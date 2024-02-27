@@ -1,0 +1,19 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="div(layerInquiryClass)">
+<div th:class="${layerInquiryClass}">
+
+    <div class="layer_inner">
+        <div class="pwd-edit-popup">
+            <div class="text-group">
+                <button class="btn_close" onclick="closeInquiryLayer()"><span>close</span></button>
+                <h1>비밀번호 변경이 완료되었습니다.</h1>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="round-btn pwd-edit-complete" onclick="closeInquiryLayer()">확인</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

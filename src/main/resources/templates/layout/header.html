@@ -149,6 +149,14 @@
 
 
                     </ul>
+
+
+                  <li class="header__nav__login">
+                    <a href="#" class="header__nav__link">로그인/회원가입</a>
+                  </li>
+
+
+
                   </li>
                 </ul>
               </div>
@@ -166,7 +174,7 @@
               <div th:if="${#request.userPrincipal != null}">
 <!--                <a href="/member/profile">마이페이지</a>-->
 <!--                |-->
-                <a href="/member/logout" class="header_inquiry">로그아웃</a>
+<!--                <a href="/member/logout" class="header_inquiry">로그아웃</a>-->
                 <a href="/member/profile" class="login">
                   <span>login</span>
                 </a>

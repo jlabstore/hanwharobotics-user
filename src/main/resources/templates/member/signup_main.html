@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+    <div layout:fragment="content">
+
+        <div>
+
+            <section class="inquiry_more"></section>
+
+
+
+
+            <main class="mypage signup-main">
+<!--                <form>-->
+                    <div class="mypage-container">
+                        <h1>회원가입</h1>
+                        <section class="mypage-contents edit">
+
+
+
+                            <div class="mypage-section">
+                                <h2>아이디<strong>*</strong></h2>
+                                <div>
+                                    <div>
+                                        <input type="text" name="id" id="memberId" required />
+                                        <button type="button" class="signup-main-id-check" onclick="checkDuplicateId()">중복확인</button>
+                                    </div>
+                                    <!-- 중복확인 결과 메시지 추가 -->
+                                     <label class="signup-message-warning check_text" id="id_check"></label>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="mypage-section">
+                                <h2>비밀번호<strong>*</strong></h2>
+                                <input type="password" name="pwd1" id="password" onkeyup="checkPasswordConditions()" required placeholder="영문과 숫자를 조합하여 만들어주세요." />
+<!--                                <label class="signup-message-warning check_text" id="pw_check"></label>-->
+                            </div>
+
+
+
+                            <div class="mypage-section">
+                                <h2>비밀번호 재입력<strong>*</strong></h2>
+                                <input type="password" name="pwd2" id="password2" value="" onkeyup="checkPasswordMatch()" required />
+<!--                                <label class="signup-message-warning check_text" id="pw2_check"></label>-->
+                            </div>
+
+
+
+
+
+
+                            <div class="mypage-section">
+                                <h2>이메일<strong>*</strong></h2>
+                                <div class="signup-main-email-container">
+                                    <div class="signup-main-email-wrapper">
+                                        <div class="mypage-edit-email">
+                                            <input type="text" name="email-local" id="email-local" class="email_front" required />
+                                            <span>@</span>
+                                            <select name="email-domain" id="email-domain" class="email_end">
+                                                <option value="gmail.com">gmail.com</option>
+                                                <option value="naver.com">naver.com</option>
+                                                <option value="hotmail.com">hotmail.com</option>
+                                                <option value="nate.com">nate.com</option>
+                                                <option value="kakao.com">kakao.com</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
+                                    </div>
+                                    <input id="email" name="email" style="display: none"></input>
+                                    <!-- 중복확인 결과 메시지 추가 -->
+                                     <label class="signup-message-warning check_text" id="email_check"></label>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="mypage-section">
+                                <h2>업체명<strong>*</strong></h2>
+                                <input type="text" name="company_name" id="company_name" class="companyNm" required />
+                            </div>
+
+
+
+
+
+
+
+                            <div class="mypage-section"  th:if="#{header.nation} == 'KR'" >
+                                <h2>Country/Region<strong>*</strong></h2>
+
+                                <select class="signup-select-country" name="email-domain" id="selectCountry">
+                                    <option th:each="country : ${countries}" th:value="${country['code']}" th:text="${country['code_en']}"></option>
+                                </select>
+                            </div>
+
+
+                            <div class="mypage-section"  th:if="#{header.nation} == 'KR'" >
+                                <h2>City<strong>*</strong></h2>
+                                <input type="text" name="city" id="city" value="" required />
+                            </div>
+
+
+
+
+                            <div class="mypage-section">
+                                <h2>우편번호<strong>*</strong></h2>
+                                <div class="mypage-edit-zipcode">
+                                    <input type="text" name="zipcode" id="postcode" required />
+                                    <button type="button" onclick="daumPostcode()" th:if="#{header.nation} != 'KR'">우편번호 찾기</button>
+                                </div>
+                            </div>
+
+
+                            <div class="mypage-section">
+                                <h2>주소<strong>*</strong></h2>
+                                <input type="text" name="address" id="address" required />
+                            </div>
+
+
+
+                            <div class="mypage-section">
+                                <h2>상세주소<strong>*</strong></h2>
+                                <input type="text" name="address_detail" id="address_detail" required />
+                            </div>
+
+
+
+
+                            <div class="mypage-section">
+                                <h2>로봇구매처/대리점<strong>*</strong></h2>
+                                <input type="text" name="agency" id="agency" class="store" value="" required />
+                            </div>
+
+
+                            <div class="mypage-section">
+                                <h2>이름<strong>*</strong></h2>
+                                <input type="text" name="name" id="name" class="memberNm" required />
+                            </div>
+
+
+                            <div class="mypage-section">
+                                <h2>직급</h2>
+                                <input type="text" name="rank" id="rank" class="position" value="" required />
+                            </div>
+
+
+
+                            <div class="mypage-section">
+                                <h2>연락처<strong>*</strong></h2>
+                                <div class="mypage-edit-phone signup-main-phone">
+                                    <select name="telecom" id="telecom" class="phone_code">
+                                        <option th:each="phoneCode : ${phoneCodes}" th:value="${phoneCode['code_phone']}" th:text="${phoneCode['code_phone']}"></option>
+                                    </select>
+                                    <input type="text" name="phone" id="phone" value="" required />
+
+                                    <input id="contact" name="contact" style="display: none">
+                                </div>
+                            </div>
+
+
+
+
+                        </section>
+                    </div>
+                    <button type="submit" class="mypage-btn color-orange edit" onclick="register()">회원가입 신청</button>
+<!--                </form>-->
+            </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:inline="javascript">
+
+    // 아이디 중복확인
+    function checkDuplicateId() {
+        const memberId = $('#memberId').val();
+        const idCheckElement = $('#id_check');
+
+        if(!(/^[a-zA-Z0-9]*$/).test(memberId) || /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(memberId)) {
+            idCheckElement.text("아이디는 영문 소문자 및 숫자만 허용되며, 한글은 입력할 수 없습니다.");
+        } else if (memberId.length < 5 ) {
+            idCheckElement.text("아이디는 4~12 글자 이어야 합니다.");
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: `/check/id?memberId=${encodeURIComponent(memberId)}`,
+                success: function(data) {
+
+                    if (data === true) {
+                        idCheckElement.text("이미 존재하는 아이디입니다.");
+                    } else {
+                        idCheckElement.text("사용 가능한 아이디입니다.");
+                    }
+                },
+                error: function() {
+                    alert('서버 에러');
+                }
+            });
+        }
+    }
+
+
+
+
+
+
+    // 비밀번호 체크
+    function checkPasswordConditions() {
+        const password = document.getElementById('password').value;
+        const pwCheckElement = document.getElementById('pw_check');
+        if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password)) {
+            pwCheckElement.textContent = '비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.';
+        } else {
+            pwCheckElement.textContent = '';
+        }
+    }
+
+    // 비밀번호 재입력 일치 여부
+    function checkPasswordMatch() {
+        const password = document.getElementById('password').value;
+        const password2 = document.getElementById('password2').value;
+        const pw2CheckElement = document.getElementById('pw2_check');
+
+        if (password !== password2) {
+            pw2CheckElement.textContent = '비밀번호가 일치하지 않습니다.';
+        } else {
+            pw2CheckElement.textContent = '';
+        }
+    }
+
+
+
+
+    $(document).ready(function() {
+        updateEmailField();
+        // updatePhoneField();
+        $(".email_front, .email_end").on("change", updateEmailField);
+        // $("#phone_front, #phone_middle, #phone_end").on("change", updatePhoneField);
+
+    });
+
+    function updateEmailField() {
+        const email_front = $(".email_front").val();
+        const email_end = $(".email_end").val();
+        const email = email_front + "@" + email_end;
+        $("#email").val(email);
+    }
+
+
+    // TODO: 직접입력
+    // $(document).ready(function() {
+    //     $("#email_end").on("change", function() {
+    //         const selectedOption = $(this).val();
+    //         const customEmailInput = $("#custom_email");
+    //         if (selectedOption === "직접입력") {
+    //             customEmailInput.show();
+    //         } else {
+    //             customEmailInput.hide();
+    //         }
+    //     });
+    // });
+
+
+
+    // 이메일 중복확인
+    function checkDuplicateEmail() {
+        const email_front = $(".email_front").val();
+        const email = $('#email').val();
+        const emailCheckElement = $('#email_check');
+
+        if (email_front.length < 3 ) {
+            emailCheckElement.text("이메일을 정확히 입력해 주세요");
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: `/check/email?email=${encodeURIComponent(email)}`,
+                success: function(data) {
+
+                    if (data === true) {
+                        emailCheckElement.text("이미 존재하는 이메일입니다.");
+                    } else {
+                        emailCheckElement.text("사용 가능한 이메일 입니다.");
+                    }
+                },
+                error: function() {
+                    alert('서버 에러');
+                }
+            });
+        }
+    }
+
+
+
+
+
+
+    // 우편번호
+    function daumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                let addr = '';
+
+                if (data.userSelectedType === 'R') { // 도로명 주소
+                    addr = data.roadAddress;
+                } else { // 지번 주소
+                    addr = data.jibunAddress;
+                }
+
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                document.getElementById("address_detail").focus();
+            }
+        }).open();
+    }
+
+
+    // 연락처 숫자만 입력
+    document.getElementById('phone').addEventListener('keyup', function() {
+        checkNumericInput(this);
+    });
+
+    function checkNumericInput(inputElement) {
+        const inputValue = inputElement.value;
+        if (!/^[0-9]*$/.test(inputValue)) {
+            inputElement.value = inputValue.replace(/[^0-9]/g, '');
+        }
+    }
+
+
+    // function updatePhoneField() {
+    //     const phone_code = $("phone_code").val();
+    //     const phone = $("phone_front").val();
+    //     // const phone_middle = $("phone_middle").val();
+    //     // const phone_last = $("phone_end").val();
+    //     const contact = phone_code + ")" + phone;
+    //     $("#contact").val(contact);
+    // }
+
+
+
+
+
+    function validateForm() {
+        const memberId = $('#memberId').val();
+        const idCheckElement = $('#id_check');
+        const password = document.getElementById('password').value;
+        const pwCheckElement = document.getElementById('pw_check');
+        const password2 = document.getElementById('password2').value;
+        const pw2CheckElement = document.getElementById('pw2_check');
+
+        // const submitButton = document.getElementById('submit_button');
+
+        // 아이디 체크
+        if (memberId.length < 6 ) {
+            idCheckElement.text("아이디는 5~12글자 이어야 합니다.");
+            return false;
+        } else if(!(/^[a-zA-Z0-9]*$/).test(memberId) || /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(memberId)) {
+            idCheckElement.text("아이디는 영문 소문자 및 숫자만 허용되며, 한글은 입력할 수 없습니다.");
+            return false;
+        }
+
+        // 비밀번호 체크
+        if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password)) {
+            pwCheckElement.textContent = '비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.';
+            return false;
+        }
+
+        // 비밀번호 재입력 체크
+        if (password !== password2) {
+            pw2CheckElement.textContent = '비밀번호가 일치하지 않습니다.';
+            return false;
+        }
+
+        // submitButton.textContent = '입력한 정보가 정확합니다';
+
+
+        return true;
+    }
+
+
+    function register(){
+
+        validateForm();
+
+        const email = $("#email").val();
+        const selectedRegion = $('#selectCountry').val();
+        const phone_code = $(".phone_code").val();
+        const phone = $("#phone").val();
+        const contact = phone_code + ")" + phone;
+
+        const memberId = $('#memberId').val();
+        const idCheckElement = $('#id_check');
+        if (!memberId) {
+            alert("아이디 중복 확인을 해주세요.");
+            return;
+        } else if (idCheckElement.text() !== "사용 가능한 아이디입니다.") {
+            alert("사용 가능한 아이디로 확인해주세요.");
+            return;
+        }
+
+        // 이메일 중복 확인
+        const emailCheckElement = $('#email_check');
+        if (!email) {
+            alert("이메일 중복 확인을 해주세요.");
+            return;
+        } else if (emailCheckElement.text() !== "사용 가능한 이메일 입니다.") {
+            alert("사용 가능한 이메일로 확인해주세요.");
+            return;
+        }
+
+
+
+        const temp = {
+            memberId: memberId,
+            password: $('#password').val(),
+            companyNm: $('.companyNm').val(),
+            region: selectedRegion ? selectedRegion : 'KR',
+            city: $('#city').val(),
+            postCode: $('#postcode').val(),
+            address: $('#address').val(),
+            addressDetail: $('#address_detail').val(),
+            store: $('.store').val(),
+            memberNm: $('.memberNm').val(),
+            position: $('.position').val(),
+            email: email,
+            contact: contact,
+        };
+
+        COMM.ajax({
+            url : "/signup",
+            type: "POST",
+            headers: {'Content-Type': 'application/json'},
+            data: JSON.stringify(temp),
+            success : function(data) {
+                if(data.code === 200){
+                    window.location.href="/signup/complete";
+                }
+            },
+            error : function(jqXHR){
+                console.log(jqXHR.status, jqXHR);
+            },
+        });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+</script>

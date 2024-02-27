@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+<div layout:fragment="content">
+    <section class="inquiry_more"></section>
+    <main class="mypage">
+        <div class="mypage-container">
+            <h1>마이페이지</h1>
+            <section class="mypage-contents">
+                <div class="mypage-section">
+                    <h2>아이디</h2>
+                    <span th:text="${memberResponse.getMemberId()}"/>
+                </div>
+<!--                <div class="mypage-section">-->
+<!--                    <h2>비밀번호 변경</h2>-->
+<!--                    <span>******</span>-->
+<!--                </div>-->
+<!--                <div class="mypage-section">-->
+<!--                    <h2>비밀번호 재입력</h2>-->
+<!--                    <span>******</span>-->
+<!--                </div>-->
+                <div class="mypage-section">
+                    <h2>이메일</h2>
+                    <span th:text="${memberResponse.getEmail()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>업체명</h2>
+                    <span th:text="${memberResponse.getCompanyNm()}"/>
+                </div>
+                <div class="mypage-section" th:if="${memberResponse.getRegion()} != 'KR'" >
+                    <h2>Country/Region</h2>
+                    <span th:text="${memberResponse.getRegion()}"/>
+                </div>
+                <div class="mypage-section" th:if="${memberResponse.getRegion()} != 'KR'" >
+                    <h2>City</h2>
+                    <span th:text="${memberResponse.getCity()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>우편번호</h2>
+                    <span th:text="${memberResponse.getPostCd()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>주소</h2>
+                    <span th:text="${memberResponse.getAddress()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>상세주소</h2>
+                    <span th:text="${memberResponse.getAddressDetail()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>로봇구매처/대리점</h2>
+                    <span th:text="${memberResponse.getStore()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>이름</h2>
+                    <span th:text="${memberResponse.getMemberNm()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>직급</h2>
+                    <span th:text="${memberResponse.getPosition()}"/>
+                </div>
+                <div class="mypage-section">
+                    <h2>연락처</h2>
+                    <span th:text="${memberResponse.getContact()}"/>
+                </div>
+            </section>
+        </div>
+        <div class="mypage-btn-group">
+            <a href="/member/profile/delete" class="mypage-btn">회원탈퇴</a>
+            <div>
+                <a href="/member/logout" class="mypage-btn color-black">로그아웃</a>
+                <a href="/member/profile/edit" class="mypage-btn color-orange">회원정보 수정</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+</body>
+</html>
+<script th:inline="javascript">
+
+
+
+</script>

@@ -8,111 +8,314 @@
 
     <section class="inquiry_more"></section>
 
-    <main class="sub notice-view">
+    <aside id="aside"></aside>
+
+
+
+    <main class="sub qna-view">
         <div class="board board-type1">
             <div class="column">
-                <h1>Q&A</h1>
+                <h1>Q<span>&</span>A</h1>
                 <p class="desc">
-                  한화로보틱스에 대해 궁금한 점이 있으시면 문의해주세요.
+                    한화로보틱스에 대해 궁금한 점이<br />있으시면 문의해주세요.
                 </p>
-<!--                <p class="desc" th:utext="#{notice}">-->
             </div>
-            <br><br>
 
-            <div class="column">
-                번호 <span class="board_no"></span>
-                작성자 <span class="board_memberId"></span>
-                진행상황 <span class="board_endStatus"></span>
-                등록일 <span class="board_date"></span>
-
-                <br><hr>
-                문의 유형
-                <div class="qna_type1"></div>
-                <div class="qna_type2"></div>
-
-                <br><hr>
-                문의제품 <span class="qna_robot"></span>
-
-
-                <br><hr>
-                제목 <span class="board_title"></span>
-                <span class="board_exposureStatus"></span>
-                <br><hr>
-                내용 <span class="board_contents"></span>
-                <br><hr>
-
-
-                <div class="reply"></div>
-
-
-                <script id="reply-html" type="text/template">
-
-                    {{#list}}
-                        <div class="reply-item">
-                            <span>
-                                {{#isUser}}
-                                    {{memberId}}
-                                {{/isUser}}
-                                {{#isAdmin}}
-                                    admin
-                                {{/isAdmin}}
-                            </span>
-                            <span id="reply-item-replyContent">{{replyContent}}</span>
-                            <hr>
+            <div class="column board_list">
+                <div class="qna-view-container">
+                    <div class="qna-view-section">
+                        <div class="qna-view-section-title">
+                            <h4>번호</h4>
+                            <span class="board_no"></span>
                         </div>
-                    {{/list}}
+                        <div class="qna-view-section-content">
+                            <div>
+                                <h4>작성자</h4>
+                                <span class="board_memberId"></span>
+                            </div>
+                            <div class="qna-view-section-content-right">
+                                <div class="qna-view-title-badge board_endStatus"></div>
+                                <span class="board_date"></span>
+                            </div>
+                        </div>
+                    </div>
 
-                </script>
-
-                <br><hr>
 
 
+                    <div class="qna-view-section">
+                        <div class="qna-view-section-title">
+                            <h4>문의유형 1</h4>
+                        </div>
+                        <div class="qna-view-section-content">
+                            <span class="qna_type1"></span>
+                        </div>
+                    </div>
 
-                <div class="reply-section">
-                    <label>
-                        답글 <span class="board_memberId"></span>
-                        <input id="replyContent_input" type="text">
-                    </label>
-                    <button onclick="register()">답글 남기기 </button>
+
+                    <div class="qna-view-section">
+                        <div class="qna-view-section-title">
+                            <h4>문의유형 2</h4>
+                        </div>
+                        <div class="qna-view-section-content">
+                            <span class="qna_type2"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="qna-view-section">
+                        <div class="qna-view-section-title">
+                            <h4>문의제품</h4>
+                        </div>
+
+                        <div class="qna-view-section-content">
+                            <ul class="qna-view-product-list" id="qna_robot">
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="qna-view-section">
+                        <div class="qna-viw-qna-wrapper">
+                            <div class="qna-view-question">
+                                <div>
+                                    <div>
+                                        <h4>제목</h4>
+                                        <p class="board_title"></p>
+                                    </div>
+                                    <span class="board_exposureStatus"></span>
+<!--                                    <img src="../images/pc/ic_lock.svg" alt="" />-->
+                                </div>
+                                <div>
+                                    <div>
+                                        <h4>내용</h4>
+                                        <p class="board_contents">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="reply"></div>
+
+                            <script id="reply-html" type="text/template">
+
+                                {{#list}}
+                                <div class="reply-item">
+
+                                    {{#isUser}}
+
+                                          <div class="qna-view-answer re">
+                                            <div>
+                                                <h4>답글</h4>
+                                                <p class="qna-view-answer-my">{{memberId}}</p>
+                                            </div>
+                                            <div>
+                                                <h4 class="hidden-text">내용</h4>
+                                                <p>
+                                                    <span id="reply-item-replyContent">{{replyContent}}</span>
+                                                </p>
+                                            </div>
+                                            <div class="qna-view-answer-my-btngroup">
+
+                                            </div>
+                                        </div>
+
+                                    {{/isUser}}
+
+
+                                    {{#isAdmin}}
+                                        <div class="qna-view-answer">
+                                            <div>
+                                                <h4>답변</h4>
+                                                <p>
+                                                    <strong>Admin<br/></strong>
+                                                    <span id="reply-item-replyContent">{{replyContent}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {{/isAdmin}}
+
+
+                                </div>
+                                {{/list}}
+
+                            </script>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="qna-view-section">
+                        <div class="qna-view-answer-wrapper">
+                            <div class="qna-view-section-title">
+                                <h4>답글</h4>
+                                <span class="board_memberId"></span>
+                            </div>
+                            <textarea class="qna-view-answer-text" name="answer" id="replyContent_input"></textarea>
+                            <button class="qna-view-answer-submit" type="button" onclick="register()">답글 남기기</button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
                 </div>
 
 
 
+                <a href="#" class="qna-view-nav board_prev">
+                    <h4>이전글</h4>
+                    <div>
+                        <p>HCR-3A 모델과 다른 모델의 차이점이 뭘까요?</p>
+<!--                        <img src="../images/pc/ic_lock.svg" alt="" />-->
+                    </div>
+                </a>
+                <a href="#" class="qna-view-nav board_next">
+                    <h4>다음글</h4>
+                    <div>
+                        <p>대리점을 신청하기전에 준비해야 할 사항이 있을까요?</p>
+                    </div>
+                </a>
 
-                <br><hr>
 
 
-                <a class="board_prev">&lt; 이전글</a>
-                <a class="board_next">다음글 &gt;</a>
+
+<!--                <a class="board_prev">&lt; 이전글</a>-->
+<!--                <a class="board_next">다음글 &gt;</a>-->
 
 
-                <div th:if="${#request.userPrincipal.getName()}">
 
+
+<!--                <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}" class="qna-view-prev">-->
+<!--                    <img src="../images/pc/btn_prev.svg" alt="" />-->
+<!--                </a>-->
+
+
+
+                <div class="qna-view-footer">
+
+                    <a href="javascript:void(0)" onClick="goBack()" class="qna-view-prev">
+                        <img src="../images/pc/btn_prev.svg" alt="" />
+                        목록으로
+                    </a>
+
+                    <div class="qna-view-footer-btngroup">
+                        <button type="button" class="qna-view-footer-btn delete-button" onclick="deleteQna()">삭제</button>
+                        <a type="button" class="qna-view-footer-btn color-orange edit-button" th:href="@{'/qna/edit/' + ${qnaNo}}">수정</a>
+                    </div>
                 </div>
-
-
-
-
-
-                <a class="edit-button" th:href="@{'/qna/edit/' + ${qnaNo}}">수정</a>
-                <a class="delete-button" onclick="deleteQna()" th:text="삭제"></a>
-
-
-
-                <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}"></a>
-
-
-
 
 
             </div>
         </div>
-
-
-
-
-
     </main>
+
+
+
+
+
+
+
+
+
+
+
+<!--    <main class="sub qna-view">-->
+<!--        <div class="board board-type1">-->
+<!--&lt;!&ndash;            <div class="column">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h1>Q<span>&</span>A</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p class="desc">&ndash;&gt;-->
+<!--&lt;!&ndash;                    한화로보틱스에 대해 궁금한 점이<br />있으시면 문의해주세요.&ndash;&gt;-->
+<!--&lt;!&ndash;                </p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            &ndash;&gt;-->
+
+
+<!--            <div class="column">-->
+
+
+<!--&lt;!&ndash;                <div class="reply"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+
+<!--&lt;!&ndash;                <script id="reply-html" type="text/template">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    {{#list}}&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="reply-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                {{#isUser}}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    {{memberId}}&ndash;&gt;-->
+<!--&lt;!&ndash;                                {{/isUser}}&ndash;&gt;-->
+<!--&lt;!&ndash;                                {{#isAdmin}}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    admin&ndash;&gt;-->
+<!--&lt;!&ndash;                                {{/isAdmin}}&ndash;&gt;-->
+<!--&lt;!&ndash;                            </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <span id="reply-item-replyContent">{{replyContent}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{/list}}&ndash;&gt;-->
+
+<!--&lt;!&ndash;                </script>&ndash;&gt;-->
+
+
+
+
+<!--                <div class="reply-section">-->
+<!--                    <label>-->
+<!--                        답글 <span class="board_memberId"></span>-->
+<!--                        <input id="replyContent_input" type="text">-->
+<!--                    </label>-->
+<!--                    <button onclick="register()">답글 남기기 </button>-->
+<!--                </div>-->
+
+
+<!--                <br><hr>-->
+
+
+<!--                <a class="board_prev">&lt; 이전글</a>-->
+<!--                <a class="board_next">다음글 &gt;</a>-->
+
+<!--                <div th:if="${#request.userPrincipal.getName()}">-->
+
+<!--                </div>-->
+
+<!--                <a class="edit-button" th:href="@{'/qna/edit/' + ${qnaNo}}">수정</a>-->
+<!--                <a class="delete-button" onclick="deleteQna()" th:text="삭제"></a>-->
+
+<!--                <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}"></a>-->
+
+
+<!--            </div>-->
+<!--        </div>-->
+
+
+<!--    </main>-->
 </div>
 
 </body>
@@ -126,13 +329,10 @@
         const loginMemberNo =  Number("[[${#request.userPrincipal.getName()}]]");
 
 
-
         $(document).ready(function () {
             getData();
 
         });
-
-
 
 
 
@@ -163,32 +363,43 @@
                         if(data.data == null){
                             alert("[[#{alert.postNotExist}]]");
                             window.history.back();
-                        }else{
+                        }else {
 
                             $('.board_no').html(data.data.qnaDetail.qnaNo);
                             $('.board_memberId').html(data.data.qnaDetail.memberId);
 
                             // $('.board_endStatus').html(data.data.qnaDetail.endStatus);
                             $('.board_endStatus').html(data.data.qnaDetail.endStatus === 'N' ? '답변 진행 중' : '답변 종료');
-                            $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-','.'));
+                            $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-', '.'));
 
                             $('.board_title').html(data.data.qnaDetail.title);
-                            $('.board_exposureStatus').html(data.data.qnaDetail.exposureStatus === 'N' ? '비공개' : '');
+                            $('.board_exposureStatus').html(data.data.qnaDetail.exposureStatus === 'N' ? '<img src="../images/pc/ic_lock.svg" alt="" />' : '');
                             $('.board_contents').html(data.data.qnaDetail.content);
 
                             $('.qna_type1').html(data.data.qnaDetail.qnaType1Nm);
                             $('.qna_type2').html(data.data.qnaDetail.qnaType2Nm);
 
 
-
                             // 로봇리스트
-                            data.data.qnaRobots.forEach(function(robot) {
-                                const robotDiv = $('<div class="robot-info"></div>');
-                                robotDiv.append('<span>모델명: ' + robot.modelCd + '</span>');
-                                robotDiv.append('<span>소프트웨어 버전: ' + robot.swVersion + '</span>');
-                                robotDiv.append('<span>어플리케이션' + robot.applicationCd + '</span>');
-                                $('.qna_robot').append(robotDiv);
+                            data.data.qnaRobots.forEach(function (robot) {
+                                const robotItem = $('<li></li>');
+                                const modelDiv = $('<div></div>');
+                                modelDiv.append('<h4>모델명 </h4><span>' + robot.modelCd + '</span>');
+                                const softwareVersionDiv = $('<div></div>');
+                                softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + robot.swVersion + '</span>');
+                                const applicationDiv = $('<div></div>');
+                                applicationDiv.append('<h4>어플리케이션</h4><span>' + robot.applicationCd + '</span>');
+
+                                robotItem.append(modelDiv);
+                                robotItem.append(softwareVersionDiv);
+                                robotItem.append(applicationDiv);
+
+                                $('#qna_robot').append(robotItem);
                             });
+
+
+
+
 
 
                             if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
@@ -203,19 +414,23 @@
                                 });
 
                                 const template = $("#reply-html").html();
-                                const rendered = Mustache.render(template, { 'list': data.data.qnaReplies });
+                                const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
                                 $('.reply').html(rendered);
 
-                                $('.reply-item:last-child').ready(function() {
+
+                                $('.reply-item:last-child').ready(function () {
                                     const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
                                     if (latestReply.replyType === 'USER') {
-                                        const editDeleteButtons = $('<span class="reply-edit-delete-buttons"></span>');
-                                        editDeleteButtons.append('<button class="reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">답글 수정</button>');
-                                        editDeleteButtons.append('<button class="reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">답글 삭제</button>');
-                                        $('.reply-item:last-child').append(editDeleteButtons);
+                                        const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
+                                        const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
+                                        $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
                                     }
                                 });
+
+
+
                             }
+
 
 
 
@@ -234,7 +449,6 @@
                             }
 
 
-
                             // 수정,삭제 버튼 노출 체크
                             if ((loginMemberNo === data.data.qnaDetail.memberNo) && (data.data.qnaReplies.length === 0)) {
                                 $('.edit-button').show();
@@ -245,7 +459,6 @@
                             }
 
 
-
                             if ((loginMemberNo === data.data.qnaDetail.memberNo) && (data.data.qnaDetail.endStatus === "N")) {
                                 $('.reply-section').show();
                             } else {
@@ -253,22 +466,18 @@
                             }
 
 
-
                         }
                     }
                 },
-                error : function(jqXHR, textStatus, errorThrown){
+                error: function (jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR.status, jqXHR);
-                    if(jqXHR.status === 403) {
+                    if (jqXHR.status === 403) {
                         alert("비공개 게시글 입니다.");
                         window.location.href = "/qna";
                     }
                 }
             });
         }
-
-
-
 
 
         function editReply(replyNo) {
@@ -281,23 +490,23 @@
             deleteButton.hide();
 
             const replyContent = editButton.closest('.reply-item').find('#reply-item-replyContent').text();
-            editButton.closest('.reply-item').find('#reply-item-replyContent').replaceWith(`<textarea id="reply-item-replyContent" class="replyContent_edit" rows="4">${replyContent}</textarea>`);
+            editButton.closest('.reply-item').find('#reply-item-replyContent').replaceWith(`<textarea id="reply-item-replyContent" class="replyContent_edit" rows="3">${replyContent}</textarea>`);
         }
 
-        function cancelEdit(replyNo) {
+
+
+
+
+
+
+
+
+
+
+        function cancelEdit() {
+            // FIXME: getReply()
             getData();
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -365,9 +574,6 @@
 
 
 
-
-
-
         // 답글 수정 완료
         function updateReply(replyNo) {
             const replyContent = $('.replyContent_edit').val();
@@ -394,7 +600,6 @@
                 }
             });
         }
-
 
 
 
@@ -429,3 +634,438 @@
     </script>
 </th:block>
 </html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{layout/sub_layout.html}">-->
+<!--<body>-->
+<!--<div layout:fragment="content">-->
+
+<!--    <main class="sub notice-view">-->
+<!--        <div class="board board-type1">-->
+<!--            <div class="column">-->
+<!--                <h1>Q&A</h1>-->
+<!--                <p class="desc">-->
+<!--                    한화로보틱스에 대해 궁금한 점이 있으시면 문의해주세요.-->
+<!--                </p>-->
+<!--                &lt;!&ndash;                <p class="desc" th:utext="#{notice}">&ndash;&gt;-->
+<!--            </div>-->
+<!--            <br><br>-->
+
+<!--            <div class="column">-->
+<!--                번호 <span class="board_no"></span>-->
+<!--                작성자 <span class="board_memberId"></span>-->
+<!--                진행상황 <span class="board_endStatus"></span>-->
+<!--                등록일 <span class="board_date"></span>-->
+
+<!--                <br><hr>-->
+<!--                문의 유형-->
+<!--                <div class="qna_type1"></div>-->
+<!--                <div class="qna_type2"></div>-->
+
+<!--                <br><hr>-->
+<!--                문의제품 <span class="qna_robot"></span>-->
+
+
+<!--                <br><hr>-->
+<!--                제목 <span class="board_title"></span>-->
+<!--                <span class="board_exposureStatus"></span>-->
+<!--                <br><hr>-->
+<!--                내용 <span class="board_contents"></span>-->
+<!--                <br><hr>-->
+
+
+<!--                <div class="reply"></div>-->
+
+
+<!--                <script id="reply-html" type="text/template">-->
+
+<!--                    {{#list}}-->
+<!--                    <div class="reply-item">-->
+<!--                            <span>-->
+<!--                                {{#isUser}}-->
+<!--                                    {{memberId}}-->
+<!--                                {{/isUser}}-->
+<!--                                {{#isAdmin}}-->
+<!--                                    admin-->
+<!--                                {{/isAdmin}}-->
+<!--                            </span>-->
+<!--                        <span id="reply-item-replyContent">{{replyContent}}</span>-->
+<!--                        <hr>-->
+<!--                    </div>-->
+<!--                    {{/list}}-->
+
+<!--                </script>-->
+
+<!--                <br><hr>-->
+
+
+
+<!--                <div class="reply-section">-->
+<!--                    <label>-->
+<!--                        답글 <span class="board_memberId"></span>-->
+<!--                        <input id="replyContent_input" type="text">-->
+<!--                    </label>-->
+<!--                    <button onclick="register()">답글 남기기 </button>-->
+<!--                </div>-->
+
+
+
+
+<!--                <br><hr>-->
+
+
+<!--                <a class="board_prev">&lt; 이전글</a>-->
+<!--                <a class="board_next">다음글 &gt;</a>-->
+
+
+<!--                <div th:if="${#request.userPrincipal.getName()}">-->
+
+<!--                </div>-->
+
+
+
+
+
+<!--                <a class="edit-button" th:href="@{'/qna/edit/' + ${qnaNo}}">수정</a>-->
+<!--                <a class="delete-button" onclick="deleteQna()" th:text="삭제"></a>-->
+
+
+
+<!--                <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}"></a>-->
+
+
+
+
+
+<!--            </div>-->
+<!--        </div>-->
+
+
+
+
+
+<!--    </main>-->
+<!--</div>-->
+
+<!--</body>-->
+
+
+
+<!--<th:block layout:fragment="script">-->
+
+<!--    <script>-->
+
+<!--        const loginMemberNo =  Number("[[${#request.userPrincipal.getName()}]]");-->
+
+
+
+<!--        $(document).ready(function () {-->
+<!--            getData();-->
+
+<!--        });-->
+
+
+
+
+
+<!--        function goBack(){-->
+<!--            const params = {};-->
+<!--            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,-->
+<!--                function(str, key, value) {-->
+<!--                    params[key] = value;-->
+<!--                }-->
+<!--            );-->
+<!--            if(params["to"] !== undefined && params["to"]==="main"){-->
+<!--                // location.href="/newsroom/notice";-->
+<!--            }else{-->
+<!--                history.back();-->
+<!--            }-->
+<!--        }-->
+
+<!--        const paths = window.location.pathname.split('/');-->
+
+<!--        function getData(){-->
+<!--            // var paths = window.location.pathname.split('/')-->
+
+<!--            COMM.ajax({-->
+<!--                url : "/qna/" + paths[paths.length-1],-->
+<!--                success : function(data) {-->
+<!--                    if(data.code === 200){-->
+<!--                        console.log(data)-->
+<!--                        if(data.data == null){-->
+<!--                            alert("[[#{alert.postNotExist}]]");-->
+<!--                            window.history.back();-->
+<!--                        }else{-->
+
+<!--                            $('.board_no').html(data.data.qnaDetail.qnaNo);-->
+<!--                            $('.board_memberId').html(data.data.qnaDetail.memberId);-->
+
+<!--                            // $('.board_endStatus').html(data.data.qnaDetail.endStatus);-->
+<!--                            $('.board_endStatus').html(data.data.qnaDetail.endStatus === 'N' ? '답변 진행 중' : '답변 종료');-->
+<!--                            $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-','.'));-->
+
+<!--                            $('.board_title').html(data.data.qnaDetail.title);-->
+<!--                            $('.board_exposureStatus').html(data.data.qnaDetail.exposureStatus === 'N' ? '비공개' : '');-->
+<!--                            $('.board_contents').html(data.data.qnaDetail.content);-->
+
+<!--                            $('.qna_type1').html(data.data.qnaDetail.qnaType1Nm);-->
+<!--                            $('.qna_type2').html(data.data.qnaDetail.qnaType2Nm);-->
+
+
+
+<!--                            // 로봇리스트-->
+<!--                            data.data.qnaRobots.forEach(function(robot) {-->
+<!--                                const robotDiv = $('<div class="robot-info"></div>');-->
+<!--                                robotDiv.append('<span>모델명: ' + robot.modelCd + '</span>');-->
+<!--                                robotDiv.append('<span>소프트웨어 버전: ' + robot.swVersion + '</span>');-->
+<!--                                robotDiv.append('<span>어플리케이션' + robot.applicationCd + '</span>');-->
+<!--                                $('.qna_robot').append(robotDiv);-->
+<!--                            });-->
+
+
+<!--                            if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {-->
+<!--                                data.data.qnaReplies.forEach(function (reply) {-->
+<!--                                    if (reply.replyType === 'USER') {-->
+<!--                                        reply.isUser = true;-->
+<!--                                        reply.isAdmin = false;-->
+<!--                                    } else if (reply.replyType === 'ADMIN') {-->
+<!--                                        reply.isUser = false;-->
+<!--                                        reply.isAdmin = true;-->
+<!--                                    }-->
+<!--                                });-->
+
+<!--                                const template = $("#reply-html").html();-->
+<!--                                const rendered = Mustache.render(template, { 'list': data.data.qnaReplies });-->
+<!--                                $('.reply').html(rendered);-->
+
+<!--                                $('.reply-item:last-child').ready(function() {-->
+<!--                                    const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];-->
+<!--                                    if (latestReply.replyType === 'USER') {-->
+<!--                                        const editDeleteButtons = $('<span class="reply-edit-delete-buttons"></span>');-->
+<!--                                        editDeleteButtons.append('<button class="reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">답글 수정</button>');-->
+<!--                                        editDeleteButtons.append('<button class="reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">답글 삭제</button>');-->
+<!--                                        $('.reply-item:last-child').append(editDeleteButtons);-->
+<!--                                    }-->
+<!--                                });-->
+<!--                            }-->
+
+
+
+<!--                            // 이전글-->
+<!--                            if (data.data.previousQnaNo != null) {-->
+<!--                                $('.board_prev').show().attr('href', '/qna/' + data.data.previousQnaNo);-->
+<!--                            } else {-->
+<!--                                $('.board_prev').hide();-->
+<!--                            }-->
+
+<!--                            // 다음글-->
+<!--                            if (data.data.nextQnaNo != null) {-->
+<!--                                $('.board_next').show().attr('href', '/qna/' + data.data.nextQnaNo);-->
+<!--                            } else {-->
+<!--                                $('.board_next').hide();-->
+<!--                            }-->
+
+
+
+<!--                            // 수정,삭제 버튼 노출 체크-->
+<!--                            if ((loginMemberNo === data.data.qnaDetail.memberNo) && (data.data.qnaReplies.length === 0)) {-->
+<!--                                $('.edit-button').show();-->
+<!--                                $('.delete-button').show();-->
+<!--                            } else {-->
+<!--                                $('.edit-button').hide();-->
+<!--                                $('.delete-button').hide();-->
+<!--                            }-->
+
+
+
+<!--                            if ((loginMemberNo === data.data.qnaDetail.memberNo) && (data.data.qnaDetail.endStatus === "N")) {-->
+<!--                                $('.reply-section').show();-->
+<!--                            } else {-->
+<!--                                $('.reply-section').hide();-->
+<!--                            }-->
+
+
+
+<!--                        }-->
+<!--                    }-->
+<!--                },-->
+<!--                error : function(jqXHR, textStatus, errorThrown){-->
+<!--                    console.log(jqXHR.status, jqXHR);-->
+<!--                    if(jqXHR.status === 403) {-->
+<!--                        alert("비공개 게시글 입니다.");-->
+<!--                        window.location.href = "/qna";-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+
+
+
+
+<!--        function editReply(replyNo) {-->
+<!--            const editButton = $('.reply-edit-button');-->
+<!--            editButton.text('수정 완료').attr('onclick', `updateReply(${replyNo})`);-->
+
+<!--            const cancelButton = $(`<button class="reply-cancel-button" onclick="cancelEdit(${replyNo})">취소</button>`);-->
+<!--            const deleteButton = $('.reply-delete-button');-->
+<!--            deleteButton.after(cancelButton);-->
+<!--            deleteButton.hide();-->
+
+<!--            const replyContent = editButton.closest('.reply-item').find('#reply-item-replyContent').text();-->
+<!--            editButton.closest('.reply-item').find('#reply-item-replyContent').replaceWith(`<textarea id="reply-item-replyContent" class="replyContent_edit" rows="4">${replyContent}</textarea>`);-->
+<!--        }-->
+
+<!--        function cancelEdit(replyNo) {-->
+<!--            getData();-->
+<!--        }-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--        // Q&A 삭제-->
+<!--        function deleteQna() {-->
+<!--            alert("삭제하시겠습니까?");-->
+<!--            COMM.ajax({-->
+<!--                type: 'DELETE',-->
+<!--                url: '/qna/' + paths[paths.length-1],-->
+<!--                success: function (data) {-->
+<!--                    alert("삭제되었습니다.")-->
+<!--                    window.location.href ="/qna";-->
+<!--                },-->
+<!--                error: function (xhr, textStatus) {-->
+<!--                    console.error('전송 실패:', textStatus);-->
+<!--                    if (xhr.responseJSON) {-->
+<!--                        const errorMessage = xhr.responseJSON.message;-->
+<!--                        alert(errorMessage);-->
+<!--                    } else {-->
+<!--                        alert('삭제 실패했습니다.');-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+
+
+<!--        // 답글 등록-->
+<!--        function register() {-->
+<!--            const replyContent = $('#replyContent_input').val();-->
+<!--            const qnaNo = paths[paths.length - 1];-->
+<!--            const jsonData = {-->
+<!--                replyContent: replyContent,-->
+<!--                qnaNo : qnaNo-->
+<!--            };-->
+
+<!--            COMM.ajax({-->
+<!--                type: 'POST',-->
+<!--                url: '/qna/reply',-->
+<!--                data: JSON.stringify(jsonData),-->
+<!--                contentType: 'application/json',-->
+<!--                success: function (data) {-->
+<!--                    alert('등록되었습니다.')-->
+<!--                    $('#replyContent').val('');-->
+<!--                    getData();-->
+<!--                },-->
+
+<!--                error: function (xhr, textStatus) {-->
+<!--                    console.error('전송 실패:', textStatus);-->
+<!--                    if (xhr.responseJSON) {-->
+<!--                        const errorMessage = xhr.responseJSON.message;-->
+<!--                        alert(errorMessage);-->
+<!--                    } else {-->
+<!--                        alert('등록에 실패했습니다.');-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+
+
+
+
+
+
+
+
+<!--        // 답글 수정 완료-->
+<!--        function updateReply(replyNo) {-->
+<!--            const replyContent = $('.replyContent_edit').val();-->
+<!--            const jsonData = {-->
+<!--                replyContent: replyContent,-->
+<!--            };-->
+
+<!--            COMM.ajax({-->
+<!--                type: 'PUT',-->
+<!--                url: '/qna/reply/' + replyNo ,-->
+<!--                data: JSON.stringify(jsonData),-->
+<!--                contentType: 'application/json',-->
+<!--                success: function () {-->
+<!--                    getData();-->
+<!--                },-->
+<!--                error: function (xhr, textStatus) {-->
+<!--                    console.error('전송 실패:', textStatus);-->
+<!--                    if (xhr.responseJSON) {-->
+<!--                        const errorMessage = xhr.responseJSON.message;-->
+<!--                        alert(errorMessage);-->
+<!--                    } else {-->
+<!--                        alert('댓글 수정에 실패했습니다.');-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+
+
+
+<!--        // 답글 삭제-->
+<!--        function deleteReply(replyNo) {-->
+<!--            if (!confirm('답글을 삭제 하시겠습니까?')) {-->
+<!--                return;-->
+<!--            }-->
+<!--            COMM.ajax({-->
+<!--                type: 'DELETE',-->
+<!--                url: '/qna/reply/' + replyNo ,-->
+<!--                success: function () {-->
+<!--                    getData();-->
+<!--                },-->
+<!--                error: function (xhr, textStatus) {-->
+<!--                    console.error('전송 실패:', textStatus);-->
+<!--                    if (xhr.responseJSON) {-->
+<!--                        const errorMessage = xhr.responseJSON.message;-->
+<!--                        alert(errorMessage);-->
+<!--                    } else {-->
+<!--                        alert('댓글 삭제에 실패했습니다.');-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+
+
+
+
+
+<!--    </script>-->
+<!--</th:block>-->
+<!--</html>-->

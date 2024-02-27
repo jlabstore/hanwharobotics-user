@@ -39,7 +39,7 @@ public class MemberController {
 	 */
 	@GetMapping("/signup/term")
 	public String signupTerm() {
-		return "member/signup_term";
+		return "member/signup_terms";
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class MemberController {
 		List<Map<String, Object>> phoneCodes = codeService.getPhoneCodes();
 		model.addAttribute("countries", countries);
 		model.addAttribute("phoneCodes",phoneCodes);
-		return "member/signup";
+		return "member/signup_main";
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class MemberController {
 
 	@GetMapping("/delete/complete")
 	public String deleteAccountCompletePage() {
-		return "member/delete_account_complete";
+		return "/member/mypage_withdrawal_complete";
 	}
 
 

@@ -139,7 +139,6 @@ public class QnaController {
         request.setMemberNo(memberNo);
         int qnaNo = qnaService.register(request);
         return ResponseEntity.ok().body(qnaNo);
-        //        return ResponseEntity.ok().header("Location", "/qna/" + qnaNo).build();
     }
 
 
@@ -155,7 +154,6 @@ public class QnaController {
     ) {
         QnaCodeResponse qnaCodeResponse = qnaService.getQnaCode();
         QnaDetailEditResponse qnaDetailEditResponse = qnaService.getQnaDetailEdit(qnaNo);
-
 
         model.addAttribute("qnaCodeResponse", qnaCodeResponse);
         model.addAttribute("qnaDetailEditResponse", qnaDetailEditResponse);
