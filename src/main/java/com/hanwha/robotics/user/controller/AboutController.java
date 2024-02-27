@@ -15,14 +15,16 @@ public class AboutController {
      * @return
      */
     @GetMapping("")
-    public String about(@RequestParam String lang){
-        if ("en".equals(lang)) {
-            // 영문페이지
-            return "about/about";
-		} else {
-            // 국문페이지
-            return "about/aboutKr";
-		}
+    // public String about(@RequestParam String lang){
+    public String about(){
+        // if ("en".equals(lang)) {
+        //     // 영문페이지
+        //     return "about/about";
+		// } else {
+        //     // 국문페이지
+        //     return "about/aboutKr";
+		// }
+        return "about/aboutKr";
     }
 
     // /**

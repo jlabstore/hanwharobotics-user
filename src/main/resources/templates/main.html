@@ -24,7 +24,8 @@
                       한화로보틱스 소개<br />보러가기
                       <span></span>
                     </a> -->
-                    <a href="/about" th:utext="#{main.trust}"></a>
+                    <!-- <a href="/about" th:utext="#{main.trust}"></a> -->
+                    <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)" th:utext="#{main.trust}"></a>
                   </div>
 
                 </div>
@@ -44,8 +45,8 @@
                 <div class="primary_box box">
                   <a href="https://o.hanwharobotics.com/" target="_blank">
                     <div class="contents">
-                      <div class="pc_title title">Robots</div>
-                      <div class="mobile_title title">Robots</div>
+                      <div class="pc_title title">Robot</div>
+                      <div class="mobile_title title">Robot</div>
                       <!-- <div class="pc_txt txt">
                         사람과 함께 일하는 협동 로봇
                       </div> -->
@@ -198,6 +199,17 @@
 
                               }
                         });
+                  }
+
+                  function goAbout(type) {
+                      console.log('타입', type);
+                      if (type == 'EN') {
+                          // 국문페이지
+                          location.href = '/about?lang=ko';
+                      } else if (type == 'KR') {
+                          // 영문페이지
+                          location.href = '/about?lang=en';
+                      }
                   }
             </script>
       </th:block>

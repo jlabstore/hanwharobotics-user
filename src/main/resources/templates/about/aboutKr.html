@@ -5,20 +5,19 @@
       layout:decorate="~{layout/sub_layout.html}">
 <body>
     <div layout:fragment="content">
-  <section class="inquiry_more"></section>
 
-  <header id="header" class="sub_header">
-  </header>
 
   <aside id="aside"></aside>
 
   <main class="sub about">
     <section class="section_1">
       <div class="group group1">
-        <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">한화로보틱스</div>
-        <div class="txt1" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">
+        <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear" th:utext="#{hanwharobotics.large}"></div>
+        <!-- <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">한화로보틱스</div> -->
+        <div class="txt1" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear" th:utext="#{about.txt1}"></div>
+        <!-- <div class="txt1" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">
           인간과 로봇의 조화로운 공존을<br />앞당기는 한화로보틱스
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -30,11 +29,13 @@
     </aside>
 
     <section class="about-main-section-2">
-      <h2 class="about-main-section-2-title">
+      <h2 class="about-main-section-2-title" th:utext="#{about.mainsectionTitle}"></h2>
+      <!-- <h2 class="about-main-section-2-title">
         2017년 국내에서 협동로봇을 처음 출시한 한화 로봇사업부가 로보틱스 솔루션의<br/>
         글로벌 리더로 성장하기 위해 가슴 뛰는 비전과 목표로 새롭게 출발합니다.
-      </h2>
-      <div class="about-main-section-2-desc">
+      </h2> -->
+      <div class="about-main-section-2-desc" th:utext="#{about.mainsectionContent}"></div>
+      <!-- <div class="about-main-section-2-desc">
         <p>
           한화로보틱스는 첨단 정밀기계/자동화 분야에서 축적한 고도화된 설계 및 스마트 기술 레퍼런스를 기반으로 우수한 품질과 신뢰도를 보유한 협동로봇, 모빌리티(AGV/AMR) 기술을 개발하고 있습니다.<br/>
           첨단산업 등 B2B 고객 대상으로는 스마트 팩토리 등 고부가 가치의 솔루션 제공을 통해 고객의 지속적인 성장에 함께하겠습니다. 나아가 서비스, 푸드테크 등 B2C 분야에서 인간과 로봇이 조화롭게 공존하는 자동화 기술과 제품 구현을 통해 인간이 더 편리하고 자유로울 수 있는 디지털 시대로의 전환(Digital Transformation)에 기여하고자 합니다.
@@ -43,12 +44,13 @@
           한화로보틱스는 기술 품질과 신뢰를 경영의 제1원칙으로 설정해 고객이 안심하고 사용할 수 있는 제품과 솔루션을 제공하고, 미래를 내다보는 차별화된 기술과 솔루션을 제공하겠습니다.<br/>
           고객 입장을 먼저 생각하는 고객 지향적인 태도와 제품, 사회에 책임감 있는 행동을 통해 고객가치 창출에 부응하겠습니다.
         </p>
-      </div>
+      </div> -->
       <div class="about-main-section-2-mission">
         <div class="about-main-section-2-mission-img">
           <img src="../images/pc/about_main_item_01@3x.webp" alt="" />
         </div>
-        <div class="about-main-section-2-mission-info">
+        <div class="about-main-section-2-mission-info" th:utext="#{about.missionInfo}"></div>
+        <!-- <div class="about-main-section-2-mission-info">
           <div class="about-main-section-2-mission-info-wrapper">
             <h3>미션</h3>
             <p>품질과 신뢰성 기반의 스마트 기술과 혁신적 로보틱스 솔루션 제공을 통해 인간이 더 자유로운 미래 디지털 시대로의 변화와 발전에 기여</p>
@@ -61,13 +63,14 @@
             <h3>핵심가치</h3>
             <p>한화로보틱스는 책임감과 신뢰 그리고 안전을 추구하여 고객에게 고부가 가치의 기술과 솔루션을 제공할 것이며 경영 정도를 지키며 고객과 동반 성장을 지속 할 수 있는 파트너가 되겠습니다.</p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="about-main-section-2-value">
         <div class="about-main-section-2-value-info">
           <h2>Core Values</h2>
-          <div class="about-main-section-2-value-info-txt">
+          <div class="about-main-section-2-value-info-txt" th:utext="#{about.valueInfo}"></div>
+          <!-- <div class="about-main-section-2-value-info-txt">
             <div class="about-main-section-2-value-info-txt-wrapper">
               <h4>Technology</h4>
               <span>내재화된 기술력으로 고객 니즈에 신속하게 대응</span>
@@ -88,64 +91,79 @@
               <h4>Together for a Better Future</h4>
               <span>함께 미래를 준비하는 기업 문화</span>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="about-main-section-2-value-img">
-          <img src="../images/pc/about_main_item_02@3x.webp" alt="" />
+          <picture>
+            <source srcset="../images/pc/about_main_item_02_mo@3x.png" media="(max-width: 765px)" />
+            <source srcset="../images/pc/about_main_item_02_pad@3x.png" media="(max-width: 1024px)" />
+            <img src="../images/pc/about_main_item_02@3x.png" alt="" />
+          </picture>
         </div>
       </div>
     </section>
 
     <section class="about-main-section-3">
-      <h2>한화로보틱스 <strong>행동규범</strong></h2>
+      <h2 th:utext="#{about.codeOfConductTitle}"></h2>
+      <!-- <h2>한화로보틱스 <strong>행동규범</strong></h2> -->
       <div class="about-main-section-3-container">
         <div class="about-main-section-3-img">
           <img src="../images/pc/about_main_item_03@3x.webp" alt="" />
-          <span>미래를 위한 준비</span>
+          <span th:utext="#{about.codeOfConduct1}"></span>
+          <!-- <span>미래를 위한 준비</span> -->
         </div>
         <div class="about-main-section-3-img">
           <img src="../images/pc/about_main_item_04@3x.webp" alt="" />
-          <span>한 단계 더 높은 도전</span>
+          <span th:utext="#{about.codeOfConduct2}"></span>
+          <!-- <span>한 단계 더 높은 도전</span> -->
         </div>
         <div class="about-main-section-3-img">
           <img src="../images/pc/about_main_item_05@3x.webp" alt="" />
-          <span>즉시적인 실행</span>
+          <span th:utext="#{about.codeOfConduct3}"></span>
+          <!-- <span>즉시적인 실행</span> -->
         </div>
         <div class="about-main-section-3-img">
           <img src="../images/pc/about_main_item_06@3x.webp" alt="" />
-          <span>끝까지 해내는 완결</span>
+          <span th:utext="#{about.codeOfConduct4}"></span>
+          <!-- <span>끝까지 해내는 완결</span> -->
         </div>
       </div>
     </section>
 
     <section class="about-main-section-4">
-      <h2>한화 <strong>CI</strong></h2>
-      <div class="about-main-section-4-desc">
-        <h4>Hanwha의 CI는 Hanwha 아이덴티티를 일관성 있게 표현하기 위한 핵심 디자인 요소이자 상징적으로 시각화하는 기준점입니다.</h4>
-        <p>Hanwha 아이덴티티를 기본적으로 CI 모티프를 기준으로 표현하는 것을 원칙으로 합니다. 또한 ‘Energy for Life’의 브랜드 에센스에 기반하여 역동적인 에너지를 통해 무한성장의 느낌을 전달함으로써 Hanwha만의 비주얼적 브랜드 자산을 효과적으로 축적해 나갑니다.</p>
-      </div>
+      <h2 th:utext="#{about.ciTitle}"></h2>
+      <!-- <h2>한화 <strong>CI</strong></h2> -->
+      <div class="about-main-section-4-desc" th:utext="#{about.ciContent}"></div>
+      <!-- <div class="about-main-section-4-desc">
+        <h4>CI는 Hanwha Robotics의 아이덴티티를 일관성 있게 표현하기 위한 핵심 디자인 요소이자 상징적으로 시각화하는 기준점입니다.</h4>
+        <p>CI 모티프를 기준으로 역동적인 에너지를 통해 무한 성장의 느낌을 전달함으로써 Hanwha Robotics만의 비주얼적 브랜드 자산을 효과적으로 축적해 나갑니다.</p>
+      </div> -->
       <div class="about-main-section-4-info">
         <div class="about-main-section-4-info-img">
           <img  src="../images/pc/about_main_item_07@3x.webp" alt="" />
         </div>
-        <div class="about-main-section-4-info-wrapper">
+        <div class="about-main-section-4-info-wrapper" th:utext="#{about.ciInfo}"></div>
+        <!-- <div class="about-main-section-4-info-wrapper">
           <div>
             <h3>구성</h3>
             <p>끊임없는 변화와 혁신을 통해 우주 속으로 무한진화, 팽창, 성장해 나가는 세 개의 원으로 구성</p>
           </div>
           <div>
             <h3>의미</h3>
-            <p>세 개의 원이 창조적 만남을 통해 고객,사회,인류의 내일을 키우고 세계적인 기업으로 발전하는 그룹의 모습을 담고 있으며 핵심가치, 비전, 세가지 사업 부문을 상징</p>
+            <p>세 개의 원이 창조적 만남을 통해 고객,사회,인류의 내일을 키우고 세계적인 기업으로 발전하는 모습을 상징</p>
           </div>
           <div>
             <h3>표현</h3>
             <p>세 개의 원의 역동적인 에너지가 확장하며 무한성장해 나가는 이미지를 조화롭게 표현</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="about-main-section-4-hero">
         <div class="about-main-section-4-hero-img">
-          <img src="../images/pc/about_main_item_08@3x.webp" alt="" />
+          <picture>
+            <source srcset="../images/pc/about_main_item_08_mo@3x.webp" media="(max-width: 765px)" />
+            <img src="../images/pc/about_main_item_08@3x.webp" alt="" />
+          </picture>
         </div>
         <div class="about-main-section-4-hero-wrapper">
           <div class="about-main-section-4-hero-align">
@@ -208,17 +226,20 @@
       <div class="about-main-section-5-txt">
         <div class="about-main-section-5-txt-wrapper">
           <h5>CMYK</h5>
-          <span>TV광고, 웹사이트, 방송 데이터 적용 시</span>
+          <span th:utext="#{about.cmyk}"></span>
+          <!-- <span>TV광고, 웹사이트, 방송 데이터 적용 시</span> -->
         </div>
         <div class="about-main-section-5-txt-wrapper">
           <h5>RGB</h5>
-          <span>신문광고, 잡지광고, 실사 출력물 등의 옵셋 인쇄 시</span>
+          <span th:utext="#{about.rgb}"></span>
+          <!-- <span>신문광고, 잡지광고, 실사 출력물 등의 옵셋 인쇄 시</span> -->
         </div>
       </div>
-      <a href="https://www.hanwhacorp.co.kr/hanwha/company/ci.jsp" target="_blank" type="button" class="about-download">
-        한화 CI 다운로드
+      <a href="../ciLogo/Hanwha Robotics_Logo.zip" download type="button" class="about-download" th:utext="#{about.downloadCI}"></a>
+      <!-- <a href="/src/main/resources/static/images/ciLogo/Hanwha Robotics_Logo.zip" download type="button" class="about-download">
+        한화로보틱스 CI 다운로드
         <span><strong>+</strong></span>
-      </a>
+      </a> -->
     </section>
   </main>
 </div>
