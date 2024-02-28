@@ -46,7 +46,6 @@
 
                     <ul class="header__nav__items_sub">
                       <li>
-                        <!-- <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)" class="header_about" th:utext="#{hanwharobotics.large}"></a> -->
                         <a href="/about" class="header_about" th:utext="#{hanwharobotics.large}"></a>
                         <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
                       </li>
@@ -235,16 +234,6 @@
 
             }
 
-            function goAbout(type) {
-                console.log('타입', type);
-                if (type == 'EN') {
-                    // 국문페이지
-                    location.href = '/about?lang=ko';
-                } else if (type == 'KR') {
-                    // 영문페이지
-                    location.href = '/about?lang=en';
-                }
-            }
           </script>
         </div>
       </header>
