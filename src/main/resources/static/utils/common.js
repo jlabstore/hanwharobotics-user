@@ -260,6 +260,24 @@ var layerPwdEditCompleteBtn = function () {
 
 
 
+
+////
+$(document).on('click', '.qna-list .qna-mobile-search', function(e) {
+    e.stopPropagation();
+
+    $('.qna-list .search').css('display', 'block');
+});
+
+$(document).on('click', '.qna-list .search-close', function(e) {
+    e.stopPropagation();
+
+    $('.qna-list .search').css('display', 'none');
+});
+////
+
+
+
+
 // $(document).on('click', 'button.mypage-pwd-edit', function(e) {
 //     e.stopPropagation();
 //

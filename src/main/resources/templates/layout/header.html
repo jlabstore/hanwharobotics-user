@@ -150,9 +150,16 @@
                     </ul>
 
 
-                  <li class="header__nav__login">
-                    <a href="#" class="header__nav__link">로그인/회원가입</a>
+
+                  <li class="header__nav__login" th:if="${#request.userPrincipal == null}">
+                    <a href="/login-page" class="header__nav__link">로그인/회원가입</a>
                   </li>
+
+                  <li class="header__nav__login" th:if="${#request.userPrincipal != null}">
+                    <a href="/member/profile" class="header__nav__link">마이페이지</a>
+                  </li>
+
+
 
 
 
