@@ -237,14 +237,16 @@
                 <a href="#" class="qna-view-nav board_prev">
                     <h4>이전글</h4>
                     <div>
-                        <p>HCR-3A 모델과 다른 모델의 차이점이 뭘까요?</p>
+                        <p class="boardPrevTitle"></p>
+                        <span class="boardPrevWrap"></span>
                         <!--                        <img src="../images/pc/ic_lock.svg" alt="" />-->
                     </div>
                 </a>
                 <a href="#" class="qna-view-nav board_next">
                     <h4>다음글</h4>
                     <div>
-                        <p>대리점을 신청하기전에 준비해야 할 사항이 있을까요?</p>
+                        <p class="boardNextTitle"></p>
+                        <span class="boardNextWrap"></span>
                     </div>
                 </a>
 
@@ -388,14 +390,26 @@
 
                             // 이전글
                             if (data.data.previousQnaNo != null) {
-                                $('.board_prev').show().attr('href', '/qna/' + data.data.previousQnaNo);
+                                $('.board_prev').show().attr('href', '/qna/' + data.data.previousQnaNo.qnaNo);
+                                $('.boardPrevTitle').text(data.data.previousQnaNo.title);
+
+                                if (data.data.previousQnaNo.exposureStatus === "N") {
+                                    $('.boardPrevWrap').append('<img src="../images/pc/ic_lock.svg" alt="" />');
+                                }
+
                             } else {
                                 $('.board_prev').hide();
                             }
 
                             // 다음글
                             if (data.data.nextQnaNo != null) {
-                                $('.board_next').show().attr('href', '/qna/' + data.data.nextQnaNo);
+                                $('.board_next').show().attr('href', '/qna/' + data.data.nextQnaNo.qnaNo);
+                                $('.boardNextTitle').text(data.data.nextQnaNo.title);
+
+                                if (data.data.nextQnaNo.exposureStatus === "N") {
+                                    $('.boardNextWrap').append('<img src="../images/pc/ic_lock.svg" alt="" />');
+                                }
+
                             } else {
                                 $('.board_next').hide();
                             }

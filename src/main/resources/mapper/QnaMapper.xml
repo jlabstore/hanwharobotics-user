@@ -95,7 +95,8 @@
     <select id="selectPrevQna" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaResponse">
         SELECT
             qna_no,
-            title
+            title,
+            exposure_status
         FROM tb_qna
         WHERE qna_no &lt; #{qnaNo}
         ORDER BY qna_no DESC
@@ -106,7 +107,8 @@
     <select id="selectNextQna" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaResponse">
         SELECT
             qna_no,
-            title
+            title,
+            exposure_status
         FROM tb_qna
         WHERE qna_no &gt; #{qnaNo}
         ORDER BY qna_no ASC

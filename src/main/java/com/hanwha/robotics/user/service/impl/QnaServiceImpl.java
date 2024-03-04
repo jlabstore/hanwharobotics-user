@@ -113,19 +113,15 @@ public class QnaServiceImpl implements QnaService {
 			throw new ForbiddenException("비공개 게시글입니다.");
 		}
 
-
 		// 로봇 리스트
 		List<QnaRobot> qnaRobots = qnaMapper.selectRobotByQnaNo(qnaNo);
 		List<QnaReplyResponse> qnaReplies = qnaReplyService.getQnaReplies(qnaNo);
 
-
-		// FIXME
 		// 아이디 마스킹
 		qnaDetail.setMaskedMemberId();
 		for (QnaReplyResponse reply : qnaReplies) {
 			reply.setMaskedMemberId();
 		}
-
 
 		// 이전글, 다음글
 		Optional<QnaResponse> previousQna = Optional.ofNullable(qnaMapper.selectPrevQna(qnaNo));
@@ -135,8 +131,10 @@ public class QnaServiceImpl implements QnaService {
 			qnaDetail,
 			qnaRobots,
 			qnaReplies,
-			previousQna.map(QnaResponse::getQnaNo).orElse(null),
-			nextQna.map(QnaResponse::getQnaNo).orElse(null)
+//			previousQna.map(QnaResponse::getQnaNo).orElse(null),
+//			nextQna.map(QnaResponse::getQnaNo).orElse(null)
+			previousQna,
+			nextQna
 		);
 	}
 
