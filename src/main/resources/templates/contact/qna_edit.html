@@ -7,7 +7,6 @@
 <div layout:fragment="content">
 
 
-
     <main class="sub qna-write">
         <div class="board board-type1">
             <div class="column">
@@ -26,16 +25,13 @@
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">작성자</span>
                         <div class="qna-write-form-section-content">
-                            <input class="qna-write-default-input" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getMemberId()}" name="name" id="memberId" readonly/>
+                            <input class="qna-write-default-input" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getMemberId()}" name="name" id="memberId" readonly disabled/>
                         </div>
                     </div>
 
 
 <!--                    <label for="memberId">작성자 </label><input id="memberId" th:value="${qnaDetailEditResponse.getQnaDetail().getMemberId()}" readonly>-->
 <!--                    <hr>-->
-
-
-
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">이메일</span>
@@ -52,13 +48,10 @@
                     </div>
 
 
-
 <!--                    <label for="email">이메일 </label><input id="email" name="email" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getEmail()}">-->
 <!--                    <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" style="appearance: auto" th:value="${qnaDetailEditResponse.getQnaDetail().getEmailReceiveYn()}"> 관리자가 답변을 남기면 이메일로 알림을 받습니다.-->
 <!--                    <hr>-->
 <!--                    -->
-
-
 
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">문의유형 1<strong>*</strong></span>
@@ -79,27 +72,11 @@
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">문의유형 2<strong>*</strong></span>
                         <div class="qna-write-form-section-content">
-                            <div class="qna-write-custom-radio qnaType2" id="qnaType2">
-                                <label class="radio">
-                                    <input type="radio" name="group1" checked />
-                                    <span></span>
-                                    <p>하드웨어</p>
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="group1" />
-                                    <span></span>
-                                    <p>소프트웨어</p>
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="group1" />
-                                    <span></span>
-                                    <p>모르겠음</p>
-                                </label>
-                            </div>
+                            <!--                            <div class="qna-write-custom-radio">-->
+                            <div class="qna-write-custom-radio qnaType2" id="qnaType2" th:text="${qnaDetailEditResponse.getQnaDetail().getQnaType1Nm()}"></div>
+                            <!--                            </div>-->
                         </div>
                     </div>
-
-
 
 
 
@@ -108,72 +85,216 @@
 <!--                    <div class="qnaType1" id="qnaType1"></div>-->
 <!--                    <div class="qnaType2" id="qnaType2"></div>-->
 
-                    문의제품
-                    모델명
-                    로봇암 시리얼넘버
-                    소프트웨어 버전
-                    어플리케이션
-                    <br>
-                    <div class="robotInfoContainer">
-                        <span id="modelCd" class="robotModel"></span>
 
-                        <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">
-                        <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">
 
-                        <span id="applicationCd" class="application"></span>
 
-                        <button type="button" onclick="addRobotInfo()">+</button>
-                        <button type="button" onclick="removeRobotInfo()">-</button>
+                    <div class="qna-write-form-section">
+                        <span class="qna-write-form-section-title">문의제품</span>
+                        <div class="qna-write-inquiry-product">
+                            <div class="qna-write-inquiry-product-title">
+                                <p>모델명</p>
+                                <p>로봇암 시리얼넘버</p>
+                                <p>소프트웨어 버전</p>
+                                <p>어플리케이션</p>
+                                <p>추가/삭제</p>
+                            </div>
+
+                            <div class="qna-write-inquiry-product-box" >
+
+                                <div class="qna-write-inquiry-product-item robotInfoContainer">
+
+                                    <div id="modelCd" class="qna-write-inquiry-prodict-item-wrapper robotModel">
+                                        <p>모델명</p>
+                                    </div>
+
+                                    <div class="qna-write-inquiry-prodict-item-wrapper">
+                                        <p>로봇암 시리얼넘버</p>
+                                        <input class="qna-write-custom-input serialNo" type="text" name="serial1" id="serial1" />
+                                    </div>
+
+                                    <!--                                    <input class="qna-write-custom-input serialNo" type="text" value="" name="serial1" id="serial1" />-->
+
+                                    <!--                                    <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
+                                    <!--                                    <input class="qna-write-custom-input swVersion" type="text" value="" name="software1" id="software1" />-->
+
+                                    <div class="qna-write-inquiry-prodict-item-wrapper">
+                                        <p>소프트웨어 버전</p>
+
+                                        <div class="qna-write-software">
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software1" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <span>.</span>
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software2" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software3" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software4" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <span>.</span>
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software5" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software6" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software7" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <span>.</span>
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software8" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software9" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                            <input class="qna-write-custom-input" type="text" name="software1" id="software10" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
+                                        </div>
+                                    </div>
+
+                                    <!--                                    <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">-->
+
+
+                                    <!--                                    <select class="qna-write-custom-select app" name="inquiry3" id="inquiry3">-->
+                                    <!--                                    </select>-->
+
+
+                                    <div id="applicationCd" class="qna-write-inquiry-prodict-item-wrapper applicationCd">
+                                        <p>어플리케이션</p>
+                                    </div>
+
+                                    <!--                                    <span id="applicationCd" class="application" style="width: calc(22%);"></span>-->
+
+
+
+                                    <div class="qna-write-inquiry-product-item-btn">
+                                        <button type="button" class="qna-write-inquiry-product-item-add" onclick="addRobotInfo()">
+                                            <img src="/images/pc/ic_plus2.svg" alt="" />
+                                        </button>
+                                        <button type="button" class="qna-write-inquiry-product-item-delete" onclick="removeRobotInfo()">
+                                            <img src="/images/pc/ic_minus.svg" alt="" />
+                                        </button>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
                     </div>
 
-                    <hr>
 
 
-                    <label for="title">제목 </label><input id="title" name="title" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getTitle()}">
-                    <hr>
-                    <label for="content">내용 </label><input id="content" name="content" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getContent()}">
-
-                    <br>
-                    문의 내용에 따라 제품 로그, 제품 구동 영상, VOC 리포트 등을 추가로 요청할 수 있으며 메일을 통해 전달 부탁드립니다.
 
 
-                    <hr>
+<!--                    문의제품-->
+<!--                    모델명-->
+<!--                    로봇암 시리얼넘버-->
+<!--                    소프트웨어 버전-->
+<!--                    어플리케이션-->
+<!--                    <br>-->
+<!--                    <div class="robotInfoContainer">-->
+<!--                        <span id="modelCd" class="robotModel"></span>-->
+<!--                        <input type="text" id="serialNo" class="serialNo" placeholder="로봇암 시리얼넘버">-->
+<!--                        <input type="text" id="swVersion" class="swVersion" placeholder="소프트웨어 버전">-->
+<!--                        <span id="applicationCd" class="application"></span>-->
+<!--                        <button type="button" onclick="addRobotInfo()">+</button>-->
+<!--                        <button type="button" onclick="removeRobotInfo()">-</button>-->
+<!--                    </div>-->
 
-                    첨부파일
 
 
-<!--                    &lt;!&ndash; 파일이 보여지는 영역 &ndash;&gt;-->
-<!--                    <div class="fileDisplayContainer"></div>-->
 
 
-                    <div class="serverFileDisplayContainer">
-                        <th:block th:each="file, fileIndex : ${qnaDetailEditResponse.qnaFiles}">
-                            <span th:text="${file.originalFileNm}" th:data-file-no="${file.fileNo}"></span>
-                            <button type="button" onclick="addDeleteList(this)">x</button>
-                        </th:block>
+
+                    <div class="qna-write-form-section">
+                        <span class="qna-write-form-section-title">제목</span>
+                        <div class="qna-write-form-section-content">
+                            <input class="qna-write-custom-input full" type="text" name="title" id="title" th:value="${qnaDetailEditResponse.getQnaDetail().getTitle()}" />
+                        </div>
+                    </div>
+
+
+<!--                    <label for="title">제목 </label><input id="title" name="title" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getTitle()}">-->
+
+
+
+                    <div class="qna-write-form-section">
+                        <span class="qna-write-form-section-title">내용</span>
+                        <div class="qna-write-des-box">
+                            <textarea class="qna-write-custom-textarea" name="description" id="content" th:text="${qnaDetailEditResponse.getQnaDetail().getContent()}"></textarea>
+                            <span>문의 내용에 따라 제품 로그, 제품 구동 영상, <strong>VOC 리포트</strong> 등을 추가로 요청할 수 있으며 메일을 통해 전달 부탁드립니다.</span>
+                        </div>
                     </div>
 
 
 
-                    <div class="fileDisplayContainer">
+<!--                    <label for="content">내용 </label><input id="content" name="content" type="text" th:value="${qnaDetailEditResponse.getQnaDetail().getContent()}">-->
+
+
+
+
+
+
+                    <div class="qna-write-form-section">
+                        <span class="qna-write-form-section-title">첨부파일</span>
+                        <div class="qna-write-form-file-wrapper">
+
+                            <div class="qna-write-custom-file">
+                                <input type="file" name="file" id="fileInput" onchange="handleFileUpload()"/>
+                                <label for="fileInput">파일찾기</label>
+                            </div>
+
+<!--                            <span class="serverFileDisplayContainer">-->
+<!--                                    <th:block th:each="file, fileIndex : ${qnaDetailEditResponse.qnaFiles}">-->
+<!--                                        <span th:text="${file.originalFileNm}" th:data-file-no="${file.fileNo}"></span>-->
+<!--                                        <button type="button" onclick="addDeleteList(this)">x</button>-->
+<!--                                    </th:block>-->
+<!--                            </span>-->
+
+
+                            <div class="qna-write-file-list">
+
+                                <div class="qna-write-file-list-item">
+
+<!--                                    <span class="serverFileDisplayContainer">-->
+<!--                                        <th:block th:each="file, fileIndex : ${qnaDetailEditResponse.qnaFiles}">-->
+<!--                                            <span th:text="${file.originalFileNm}" th:data-file-no="${file.fileNo}"></span>-->
+<!--                                            <button type="button" onclick="addDeleteList(this)">-->
+<!--                                                <img src="/images/pc/btn_close.svg" alt="" />-->
+<!--                                            </button>-->
+<!--                                        </th:block>-->
+<!--                                    </span>-->
+
+                                </div>
+                            </div>
+
+                            <span>첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다. exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.</span>
+                        </div>
                     </div>
 
-                    <!-- 첨부파일 -->
-                    <div class="fileContainer">
-                        <input type="file" name="attachment" id="fileInput" onchange="handleFileUpload()">
-                    </div>
-                    첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다.<br>
-                    exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.
+                </div>
+
+                <button type="button" class="qna-write-submit" onclick="editConfirm()">수정하기</button>
+
+
+
+
+
+<!--                    첨부파일-->
+
+<!--                    <div class="serverFileDisplayContainer">-->
+<!--                        <th:block th:each="file, fileIndex : ${qnaDetailEditResponse.qnaFiles}">-->
+<!--                            <span th:text="${file.originalFileNm}" th:data-file-no="${file.fileNo}"></span>-->
+<!--                            <button type="button" onclick="addDeleteList(this)">x</button>-->
+<!--                        </th:block>-->
+<!--                    </div>-->
+
+
+
+<!--                    <div class="fileDisplayContainer">-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; 첨부파일 &ndash;&gt;-->
+<!--                    <div class="fileContainer">-->
+<!--                        <input type="file" name="attachment" id="fileInput" onchange="handleFileUpload()">-->
+<!--                    </div>-->
+<!--                    첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다.<br>-->
+<!--                    exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.-->
 
 
                 </div>
 
-                <hr><br>
-                <button type="button" onclick="editConfirm()">수정 하기</button>
-                <button type="button" onclick="goBack()">취소</button>
+<!--                <button type="button" onclick="editConfirm()">수정 하기</button>-->
+<!--                <button type="button" onclick="goBack()">취소</button>-->
 
 
-            </div>
+<!--            </div>-->
 
 
         </div>
@@ -238,18 +359,14 @@
                 success: function (data) {
                     populateSelectBox(data.data.qnaType1List, 'qnaType1');
                     populateRadioButtons(data.data.qnaType2List, 'qnaType2');
-
-                    // populateSelectAndInputs(data.data.robotModelList, 'robotModel');
-                    // populateSelectAndInputs(data.data.applicationList, 'application');
-
                 },
             });
         }
 
 
-        // 문의유형1
+        // 문의유형 1
         function populateSelectBox(options, selectClass) {
-            const selectBox = $('<select class="qna-write-custom-select" name="inquiry1" id="inquiry1">');
+            const selectBox = $('<select class="qna-write-custom-select">');
             selectBox.addClass(selectClass);
 
             $.each(options, function (index, option) {
@@ -266,30 +383,36 @@
             $('.' + selectClass).html(selectBox);
         }
 
-
-        // 문의유형2
+        // 문의유형 2
         function populateRadioButtons(options, containerId) {
             const container = $('#' + containerId);
             container.empty();
 
             $.each(options, function (index, option) {
+
+                const label = $('<label>', {
+                    class: 'radio'
+                })
                 const radioBtn = $('<input>', {
                     type: 'radio',
                     name: 'qnaType2',
-                    value: option.code,
-                    style: 'appearance: auto'
-                });
-
-                const label = $('<label>', {
-                    for: option.code,
-                    text: option.description
+                    value: option.code
                 });
 
                 if (option.code === qnaType2Nm) {
                     radioBtn.prop('checked', true);
                 }
 
-                container.append(radioBtn).append(label);
+                const span = $('<span>',{
+                });
+
+                const p = $('<p>', {
+                    // for: option.code,
+                    text: option.description
+                });
+
+                label.append(radioBtn).append(span).append(p);
+                container.append(label);
             });
         }
 
@@ -329,7 +452,7 @@
                 url: "/qna/code/" + paths[paths.length-1],
                 success: function (data) {
                     populateSelectAndInputs(data.qnaCodeResponse.robotModelList, 'robotModel');
-                    populateSelectAndInputs(data.qnaCodeResponse.applicationList, 'application');
+                    populateSelectAndInputsApp(data.qnaCodeResponse.applicationList, 'applicationCd');
 
                     const qnaRobots = data.qnaDetailEditResponse.qnaRobots;
                     const robotInfoContainer = $('.robotInfoContainer');
@@ -356,8 +479,26 @@
                         const currentRobotInfoContainer = $('.robotInfoContainer').eq(index);
                         currentRobotInfoContainer.find('.robotModel select').val(robot.modelCd);
                         currentRobotInfoContainer.find('.serialNo').val(robot.serialNo);
-                        currentRobotInfoContainer.find('.swVersion').val(robot.swVersion);
-                        currentRobotInfoContainer.find('.application select').val(robot.applicationCd);
+
+
+                        const swVersion = robot.swVersion;
+                        const parts = swVersion.split('');
+
+                        // currentRobotInfoContainer.find('.swVersion').val(robot.swVersion);
+                        currentRobotInfoContainer.find('#software1').val(parts[0]);
+                        currentRobotInfoContainer.find('#software2').val(parts[2]);
+                        currentRobotInfoContainer.find('#software3').val(parts[3]);
+                        currentRobotInfoContainer.find('#software4').val(parts[4]);
+                        currentRobotInfoContainer.find('#software5').val(parts[6]);
+                        currentRobotInfoContainer.find('#software6').val(parts[7]);
+                        currentRobotInfoContainer.find('#software7').val(parts[8]);
+                        currentRobotInfoContainer.find('#software8').val(parts[10]);
+                        currentRobotInfoContainer.find('#software9').val(parts[11]);
+                        currentRobotInfoContainer.find('#software10').val(parts[12]);
+
+
+                        // TODO
+                        currentRobotInfoContainer.find('.applicationCd select').val(robot.applicationCd);
                     });
                 },
             });
@@ -366,12 +507,20 @@
 
 
 
-        // 문의제품
+
+
+
+
+
+
+
+
+        // 문의제품 - 모델명
         function populateSelectAndInputs(options, containerId) {
             const container = $('.' + containerId);
             container.empty();
 
-            const selectBox = $('<select>');
+            const selectBox = $('<select class="qna-write-custom-select" name="inquiry2" id="inquiry2">');
             container.append(selectBox);
 
             selectBox.append($('<option>', {
@@ -385,72 +534,261 @@
                     text: option.description
                 }));
             });
+        }
 
+
+        // 문의제품 - 어플리케이션
+        function populateSelectAndInputsApp(options, containerId) {
+            const container = $('.' + containerId);
+            container.empty();
+
+            const selectBox = $('<select class="qna-write-custom-select app" name="inquiry3" id="inquiry3">');
+            container.append(selectBox);
+
+            selectBox.append($('<option>', {
+                value: '',
+                text: '선택'
+            }));
+
+            $.each(options, function (index, option) {
+                selectBox.append($('<option>', {
+                    value: option.code,
+                    text: option.description
+                }));
+            });
         }
 
 
 
+        // 문의제품 - 어플리케이션
+        // function populateSelectAndInputs(options, containerId) {
+        //     const container = $('.' + containerId);
+        //     container.empty();
+        //
+        //     const selectBox = $('<select class="qna-write-custom-select app" name="inquiry3" id="inquiry3" >');
+        //     container.append(selectBox);
+        //
+        //     selectBox.append($('<option>', {
+        //         value: '',
+        //         text: '선택'
+        //     }));
+        //
+        //     $.each(options, function (index, option) {
+        //         selectBox.append($('<option>', {
+        //             value: option.code,
+        //             text: option.description
+        //         }));
+        //     });
+        //
+        // }
+
+
+
+
+
+
+
         let robotInfoCounter = 1;
+
+
+        // function addRobotInfo() {
+        //     if (robotInfoCounter < 10) {
+        //         const newRobotInfo = $('.qna-write-inquiry-product-item:first').clone();
+        //         newRobotInfo.find('input').val('');
+        //         $('.qna-write-inquiry-product-item:last').after(newRobotInfo);
+        //         robotInfoCounter++;
+        //     }
+        // }
+        //
+        //
+        // function removeRobotInfo() {
+        //     if (robotInfoCounter > 1) {
+        //         $('.qna-write-inquiry-product-item:last').remove();
+        //         robotInfoCounter--;
+        //     }
+        // }
+
+
 
         function addRobotInfo() {
             if (robotInfoCounter < 10) {
                 const newRobotInfo = $('.robotInfoContainer:first').clone();
                 newRobotInfo.find('input').val('');
                 $('.robotInfoContainer:last').after(newRobotInfo);
-                robotInfoCounter++;
+                robotInfoCounter = $('.robotInfoContainer').length;
             }
         }
 
         function removeRobotInfo() {
             if (robotInfoCounter > 1) {
                 $('.robotInfoContainer:last').remove();
-                robotInfoCounter--;
+                robotInfoCounter = $('.robotInfoContainer').length;
             }
         }
 
 
-        const formData = new FormData();
 
-        // 파일 선택
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var fileList = []; // 파일 목록을 저장할 배열
+
+        // fileList에 파일을 추가하고 다시 그리기
         function handleFileUpload() {
+            console.log("업로드")
+
             const fileInput = document.getElementById('fileInput');
-            const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
 
-            const currentFileCount = formData.getAll('files[]').length;
-
-            const additionalFileCount = fileInput.files.length;
-
-            if (currentFileCount + additionalFileCount > 5) {
-                alert('최대 5개까지만 첨부 가능합니다.');
-                fileInput.value = '';
+            // 파일이 선택되었는지 확인
+            if (fileInput.files.length === 0) {
+                alert('파일을 선택해주세요.');
+                fileInput.value = null; // 파일 input 초기화
                 return;
             }
 
-            if (additionalFileCount > 0) {
-                for (let i = 0; i < additionalFileCount; i++) {
-                    const fileNameDiv = document.createElement('div');
-                    fileNameDiv.innerHTML = `${fileInput.files[i].name} <button onclick="removeFile(${i})">x</button>`;
-                    fileDisplayContainer.appendChild(fileNameDiv);
+            // 파일 추가 여부 및 최대 개수 확인
+            if (fileList.length + fileInput.files.length > 5) {
+                alert('최대 5개까지만 첨부 가능합니다.');
+                fileInput.value = null; // 파일 input 초기화
+                return;
+            }
 
-                    formData.append(`files[]`, fileInput.files[i]);
+            // 파일 크기 확인
+            for (var i = 0; i < fileInput.files.length; i++) {
+                const fileSize = fileInput.files[i].size; // 파일 크기 (단위: bytes)
+                const maxSize = 5 * 1024 * 1024; // 5MB
+
+                if (fileSize > maxSize) {
+                    alert('파일 크기는 최대 5MB까지만 허용됩니다.');
+                    fileInput.value = null; // 파일 input 초기화
+                    return;
                 }
             }
+
+            // fileList에 파일 추가
+            for (var i = 0; i < fileInput.files.length; i++) {
+                fileList.push(fileInput.files[i]);
+            }
+
+            // 파일 그리기
+            drawFileList();
+
+            console.log(fileList)
         }
 
 
-
-        // 새로운 첨부 파일 삭제
+        // fileList에 파일을 삭제하고 다시 그리기
         function removeFile(index) {
-            const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
-            fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
+            console.log("삭제")
+
+            //파일 제거
+            if (index >= 0 && index < fileList.length) {
+                fileList.splice(index, 1);
+            }
+
+            //파일 그리기
+            drawFileList();
+        }
+
+        /* fileList를 참조하여 첨부 파일목록을 그린다. */
+        function drawFileList(){
+            console.log("드로우")
+
+            const fileDisplayContainer = document.querySelector('.qna-write-file-list');
+
+            // 파일 목록을 싹 지우고 다시 그리기
+            fileDisplayContainer.innerHTML = '';
+
+            for (let i = 0; i < fileList.length; i++) {
+                //다시 그리자
+                const fileNameDiv = document.createElement('div');
+                fileNameDiv.innerHTML =
+                    `<div class="qna-write-file-list-item">
+                    <button type="button" onclick="removeFile(${i})">
+                        <img src="/images/pc/btn_close.svg" alt="" />
+                    </button>
+                    <span>${fileList[i].name}</span>
+                </div>`;
+                fileDisplayContainer.appendChild(fileNameDiv);
+                // formData.append(`files[]`, fileInput.files[i]);
+            }
 
             const fileInput = document.getElementById('fileInput');
-            const files = Array.from(fileInput.files).filter((file, i) => i !== index);
-            fileInput.value = '';
-            files.forEach(file => {
-                fileInput.files.append(file);
-            });
+            fileInput.value = null; // 파일 input 초기화
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // const formData = new FormData();
+        //
+        // // 파일 선택
+        // function handleFileUpload() {
+        //     const fileInput = document.getElementById('fileInput');
+        //     const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
+        //
+        //     const currentFileCount = formData.getAll('files[]').length;
+        //
+        //     const additionalFileCount = fileInput.files.length;
+        //
+        //     if (currentFileCount + additionalFileCount > 5) {
+        //         alert('최대 5개까지만 첨부 가능합니다.');
+        //         fileInput.value = '';
+        //         return;
+        //     }
+        //
+        //     if (additionalFileCount > 0) {
+        //         for (let i = 0; i < additionalFileCount; i++) {
+        //             const fileNameDiv = document.createElement('div');
+        //             fileNameDiv.innerHTML = `${fileInput.files[i].name} <button onclick="removeFile(${i})">x</button>`;
+        //             fileDisplayContainer.appendChild(fileNameDiv);
+        //
+        //             formData.append(`files[]`, fileInput.files[i]);
+        //         }
+        //     }
+        // }
+        //
+        //
+        //
+        // // 새로운 첨부 파일 삭제
+        // function removeFile(index) {
+        //     const fileDisplayContainer = document.querySelector('.fileDisplayContainer');
+        //     fileDisplayContainer.removeChild(fileDisplayContainer.childNodes[index]);
+        //
+        //     const fileInput = document.getElementById('fileInput');
+        //     const files = Array.from(fileInput.files).filter((file, i) => i !== index);
+        //     fileInput.value = '';
+        //     files.forEach(file => {
+        //         fileInput.files.append(file);
+        //     });
+        // }
 
 
 
@@ -509,7 +847,7 @@
                 const modelCd = $(this).find('.robotModel select').val();
                 const serialNo = $(this).find('.serialNo').val();
                 const swVersion = $(this).find('.swVersion').val();
-                const applicationCd = $(this).find('.application select').val();
+                const applicationCd = $(this).find('.applicationCd select').val();
 
                 const robotInfo = {
                     modelCd: modelCd,
