@@ -160,6 +160,13 @@ public class QnaController {
         return "contact/qna_edit";
     }
 
+    /**
+     * Q&A 수정
+     * @param memberNo
+     * @param qnaNo
+     * @param request
+     * @return
+     */
     @PutMapping("/edit/{qnaNo}")
     public ResponseEntity<Object> updateQna(
             @AuthenticationPrincipal int memberNo,
