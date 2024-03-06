@@ -66,6 +66,11 @@ public class MemberController {
 //		return "member/signup_complete";
 //	}
 
+	/**
+	 * 회원가입 등록
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/signup")
 	public ResponseEntity<Object> signup(@RequestBody MemberRequest request) {
 		memberService.registerMember(request);
@@ -95,6 +100,7 @@ public class MemberController {
 	 */
 	@GetMapping("/check/email")
 	public ResponseEntity<Boolean> checkMemberEmail(@RequestParam String email) {
+		System.out.println("이메일"+ email);
 		boolean isExists = memberService.isMemberEmailExists(email);
 		return ResponseEntity.ok(isExists);
 	}

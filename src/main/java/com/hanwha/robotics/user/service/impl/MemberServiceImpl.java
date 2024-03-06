@@ -39,6 +39,15 @@ public class MemberServiceImpl implements MemberService {
 	// 회원가입
 	@Override
 	public void registerMember(MemberRequest request) {
+
+		if (this.isMemberIdExists(request.getMemberId())) {
+			throw new BadRequestException("중복된 아이디 입니다.");
+		}
+
+		if (this.isMemberEmailExists(request.getEmail())){
+			throw new BadRequestException("중복된 아이디 입니다.");
+		}
+
 		request.encryptedPassword(passwordEncoder);
 		Member member = request.toEntity();
 		memberMapper.insertMember(member);
