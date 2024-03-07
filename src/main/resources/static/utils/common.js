@@ -261,6 +261,16 @@ var layerPwdEditCompleteBtn = function () {
 
 
 
+///
+$(document).on('click', 'button.inquiry.products', function(e) {
+    e.stopPropagation();
+
+    showLayer('inquiry', $(this), headerMinHeight);
+});
+
+
+
+
 ////
 $(document).on('click', '.qna-list .qna-mobile-search', function(e) {
     e.stopPropagation();
@@ -274,6 +284,12 @@ $(document).on('click', '.qna-list .search-close', function(e) {
     $('.qna-list .search').css('display', 'none');
 });
 ////
+
+
+
+
+
+
 
 
 
