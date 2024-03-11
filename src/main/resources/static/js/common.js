@@ -298,8 +298,61 @@ $('.products-section2-slider').slick({
   autoplay: false,
   draggable: false,
   prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>",
-  nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>"
+  nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>",
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        rows: 3,
+        slidesPerRow: 2,
+        draggable: true
+      }
+    },
+    {
+      breakpoint: 765,
+      settings: {
+        rows: 3,
+        slidesPerRow: 1,
+        draggable: true
+      }
+    }
+  ]
 });
+
+
+
+
+
+$('.robots-section2-slider').slick({
+  rows: 2,
+  dots: true,
+  arrows: true,
+  slidesPerRow: 2,
+  infinite: false,
+  autoplay: false,
+  draggable: false,
+  prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>",
+  nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>",
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        draggable: true
+      }
+    },
+    {
+      breakpoint: 765,
+      settings: {
+        rows: 4,
+        slidesPerRow: 1,
+        draggable: true
+      }
+    }
+  ]
+});
+
+
+
 
 $('.products-detail-slider').slick({
   arrows: true,
@@ -309,10 +362,81 @@ $('.products-detail-slider').slick({
   slidesToScroll: 1,
   draggable: false,
   prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/products_detail_slider_prev.svg' alt='' /></button>",
-  nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/products_detail_slider_next.svg' alt='' /></button>"
+  nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/products_detail_slider_next.svg' alt='' /></button>",
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        draggable: true,
+        slidesToShow: 4,
+      }
+    },
+    {
+      breakpoint: 765,
+      settings: {
+        arrows: false,
+        draggable: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        swipeToSlide: true
+      }
+    },
+  ]
 })
 
-$('#nav1-1-content').show();
+
+$('.robots-detail-slider').slick({
+  arrows: true,
+  infinite: true,
+  autoplay: false,
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  draggable: false,
+  variableWidth: true,
+  prevArrow: "<div></div>",
+  nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/ic_robots_detail_arrow.svg' alt='' /></button>",
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        arrows: true,
+        draggable: true,
+        slidesToShow: 2,
+      }
+    },
+    {
+      breakpoint: 765,
+      settings: {
+        arrows: true,
+        draggable: true,
+        variableWidth: true,
+        slidesToShow: 1,
+        swipeToSlide: true
+      }
+    },
+  ]
+})
+
+if (win.outerWidth() <= 765) {
+  $('.robots-section4-slider').slick({
+    rows: 3,
+    dots: true,
+    arrows: true,
+    slidesPerRow: 2,
+    infinite: false,
+    autoplay: false,
+    draggable: false,
+    prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>",
+    nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/btn_paging_arrow_enabled.svg' alt='' /></button>",
+  });
+}
+
+
+if (win.outerWidth() > 765) {
+  $('#nav1-1-content').show();
+} else {
+  $('#nav1-1-content').hide();
+}
 
 $("input[name='nav1-1']").change(function() {
   let value = $("input[name='nav1-1']:checked").val();
@@ -346,6 +470,15 @@ $("input[name='nav1-1']").change(function() {
   }
 })
 
+if (win.outerWidth() <= 765) {
+  $('.nav1-content-mobile-title').first().toggleClass('on').next('.nav1-content-mobile-content').slideToggle(300);
+}
+
+$(".nav1-content-mobile-title").click(function() {
+  $(this).next(".nav1-content-mobile-content").stop().slideToggle(300);
+  $(this).toggleClass('on').siblings().removeClass('on');
+  $(this).next(".nav1-content-mobile-content").siblings(".nav1-content-mobile-content").slideUp(300); // 1개씩 펼치기
+});
 
 
 

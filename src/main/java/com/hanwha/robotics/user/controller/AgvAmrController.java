@@ -13,9 +13,14 @@ public class AgvAmrController {
         return "agv_amr/products";
     }
 
-    @GetMapping("/forklift-type")
-    public String forkliftType() {
+    @GetMapping("/forklift")
+    public String forklift() {
         return "agv_amr/products_detail";
+    }
+
+    @GetMapping("/reel-and-roll")
+    public String reelAndRoll() {
+        return "agv_amr/products_detail2";
     }
 
 
