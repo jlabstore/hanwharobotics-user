@@ -4,213 +4,245 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/main_layout.html}">
 <body>
-      <div layout:fragment="content">
-          <main class="main">
-            <section class="section1">
-              <div class="bg_section"></div>
-              <div class="contents">
+<div layout:fragment="content">
+    <main class="main">
+        <section class="section1">
+            <div class="bg_section"></div>
+            <div class="contents">
 
                 <div class="main_txt">
 
-                  <div class="title">Quality & Trust</div>
-                  <!-- <div class="txt">
-                    품질과 신뢰성을 기반으로<br />
-                    차별화된 기술과 솔루션을<br />
-                    제공합니다.
-                  </div> -->
-                  <div class="txt" th:utext="#{main.quality}"></div>
-                  <div class="move_to_intro">
-                    <!-- <a href="/about">
-                      한화로보틱스 소개<br />보러가기
-                      <span></span>
-                    </a> -->
-                    <!-- <a href="/about" th:utext="#{main.trust}"></a> -->
-                    <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)" th:utext="#{main.trust}"></a>
-                  </div>
+                    <div class="title">Quality & Trust</div>
+                    <!-- <div class="txt">
+                      품질과 신뢰성을 기반으로<br />
+                      차별화된 기술과 솔루션을<br />
+                      제공합니다.
+                    </div> -->
+                    <div class="txt" th:utext="#{main.quality}"></div>
+                    <div class="move_to_intro">
+                        <!-- <a href="/about">
+                          한화로보틱스 소개<br />보러가기
+                          <span></span>
+                        </a> -->
+                        <!-- <a href="/about" th:utext="#{main.trust}"></a> -->
+                        <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)"
+                           th:utext="#{main.trust}"></a>
+                    </div>
 
                 </div>
-              </div>
+            </div>
 
-              <div class="update updatesDiv">
+            <div class="update updatesDiv">
                 <div class="title">Updates</div>
                 <div class="txt updatesContentDiv">
-                      <!-- <div>조회결과가 없습니다.</div> -->
-                      <div th:utext="#{main.noUpdates}"></div>
+                    <!-- <div>조회결과가 없습니다.</div> -->
+                    <div th:utext="#{main.noUpdates}"></div>
                 </div>
-              </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="section_bottom">
-              <section class="section2">
+        <section class="section_bottom">
+            <section class="section2">
                 <div class="primary_box box">
-                  <a href="https://o.hanwharobotics.com/" target="_blank">
-                    <div class="contents">
-                      <div class="pc_title title">Robot</div>
-                      <div class="mobile_title title">Robot</div>
-                      <!-- <div class="pc_txt txt">
-                        사람과 함께 일하는 협동 로봇
-                      </div> -->
-                      <div class="pc_txt txt" th:utext="#{main.robots1}"></div>
-                      <!-- <div class="not_pc_txt txt">
-                        사람과 함께 일하는<br />협동 로봇
-                      </div> -->
-                      <div class="not_pc_txt txt" th:utext="#{main.robots2}"></div>
-                      <!-- <div class="detail">
-                        자세히 보기
-                        <span></span>
-                      </div> -->
-                      <div class="detail" th:utext="#{main.learnMore}"></div>
-                    </div>
-                  </a>
+                    <a href="https://o.hanwharobotics.com/" target="_blank">
+                        <div class="contents">
+                            <div class="pc_title title">Robot</div>
+                            <div class="mobile_title title">Robot</div>
+                            <!-- <div class="pc_txt txt">
+                              사람과 함께 일하는 협동 로봇
+                            </div> -->
+                            <div class="pc_txt txt" th:utext="#{main.robots1}"></div>
+                            <!-- <div class="not_pc_txt txt">
+                              사람과 함께 일하는<br />협동 로봇
+                            </div> -->
+                            <div class="not_pc_txt txt" th:utext="#{main.robots2}"></div>
+                            <!-- <div class="detail">
+                              자세히 보기
+                              <span></span>
+                            </div> -->
+                            <div class="detail" th:utext="#{main.learnMore}"></div>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="second_box box">
-                  <a href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp" target="_blank">
-                    <div class="contents">
-                      <div class="pc_title title">AGV/AMR</div>
-                      <div class="mobile_title title">AGV/AMR</div>
-                      <!-- <div class="pc_txt txt">
-                        안전하고 효율적인 모빌리티 솔루션
-                      </div> -->
-                      <div class="pc_txt txt" th:utext="#{main.agv1}"></div>
-                      <!-- <div class="not_pc_txt txt">
-                        안전하고 효율적인<br />모빌리티 솔루션
-                      </div> -->
-                      <div class="not_pc_txt txt" th:utext="#{main.agv2}"></div>
-                      <!-- <div class="detail">
-                        자세히 보기
-                        <span></span>
-                      </div> -->
-                      <div class="detail" th:utext="#{main.learnMore}"></div>
-                    </div>
-                  </a>
+                    <a href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp" target="_blank">
+                        <div class="contents">
+                            <div class="pc_title title">AGV/AMR</div>
+                            <div class="mobile_title title">AGV/AMR</div>
+                            <!-- <div class="pc_txt txt">
+                              안전하고 효율적인 모빌리티 솔루션
+                            </div> -->
+                            <div class="pc_txt txt" th:utext="#{main.agv1}"></div>
+                            <!-- <div class="not_pc_txt txt">
+                              안전하고 효율적인<br />모빌리티 솔루션
+                            </div> -->
+                            <div class="not_pc_txt txt" th:utext="#{main.agv2}"></div>
+                            <!-- <div class="detail">
+                              자세히 보기
+                              <span></span>
+                            </div> -->
+                            <div class="detail" th:utext="#{main.learnMore}"></div>
+                        </div>
+                    </a>
                 </div>
 
-              </section>
+            </section>
 
-              <section class="section3">
+
+            <section class="main-case-studies">
+                <div class="main-case-studies-title">
+                    <h2>Case Studies</h2>
+                    <p>전세계 다양한 비즈니스가 한화로보틱스와 함께 업무 효율성을 높이고 있습니다.</p>
+                </div>
+                <div class="main-case-studies-content">
+                    <div class="main-case-studies-item">
+                        <img src="../images/pc/case_study_1@3x.webp" alt=""/>
+                        <div class="main-case-studies-item-text">
+                            <h3>팔레트 적재</h3>
+                            <p>팔레트 적재는 제품을 전용 케이스 위에 정렬하여 쌓는 공정입니다.</p>
+                        </div>
+                    </div>
+                    <div class="main-case-studies-item">
+                        <img src="../images/pc/case_study_2@3x.webp" alt=""/>
+                        <div class="main-case-studies-item-text">
+                            <h3>폴리싱</h3>
+                            <p>폴리싱 공정은 금속 가공, 가구 제작 등에서 품질을 결정하는 중요한 공정입니다.</p>
+                        </div>
+                    </div>
+                    <div class="main-case-studies-item">
+                        <img src="../images/pc/case_study_3@3x.webp" alt=""/>
+                        <div class="main-case-studies-item-text">
+                            <h3>포장</h3>
+                            <p>다양한 규격의 제품포장이 가능하며, 빠르고 정확하게 수행하여 포장의 생산성 및 품질을 향상시킵니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section3">
 
                 <section class="section3_inner">
-                  <div class="board_wrap">
-                    <div class="board news">
-                      <div class="title">Newsroom</div>
-                      <div class="newsroomDiv">
-                          <div class="list">
-                                <!-- <div class="list_title">
-                                      조회 결과가 없습니다.
-                                </div> -->
-                                <div class="list_title" th:utex="#{main.noLists}"></div>
-                          </div>
-                      </div>
+                    <div class="board_wrap">
+                        <div class="board news">
+                            <div class="title">Newsroom</div>
+                            <div class="newsroomDiv">
+                                <div class="list">
+                                    <!-- <div class="list_title">
+                                          조회 결과가 없습니다.
+                                    </div> -->
+                                    <div class="list_title" th:utex="#{main.noLists}"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
 
-                  <div class="recruit">
-                    <a href="/contact/inquiry">
-                      <strong>INQUIRIES</strong>
-                      <!-- <span class="pc">한화로보틱스 제품 및 대리점 모집 관련<br />궁금한 점을 문의해주세요.</span> -->
-                      <span class="pc" th:utext="#{main.inquiryPc}"></span>
-                      <!-- <span class="tablet">한화로보틱스 제품 및<br />대리점 모집 관련<br />궁금한 점을 문의해주세요.</span> -->
-                      <span class="tablet" th:utext="#{main.inquiryTablet}"></span>
-                    </a>
-                  </div>
-                </section>
-              </section>
-            </section>
-          </main>
-
-
-
-          <script id="updates-tmpl" type="x-tmpl-mustache">
-                {{#list}}
-                      <div onclick="location.href='/newsroom/notice/{{newsroomNo}}?to=main'" style="cursor:pointer">{{title}}</div>
-                {{/list}}
-          </script>
-
-
-          <script id="newsroom-tmpl" type="x-tmpl-mustache">
-                {{#list}}
-                      <div class="list">
-                        <a href="{{href}}" >
-                          <div class="list_title">
-                            {{title}}
-                          </div>
-                          <div class="list_date">
-                            {{createDt}}
-                          </div>
+                    <div class="recruit">
+                        <a href="/contact/inquiry">
+                            <strong>INQUIRIES</strong>
+                            <!-- <span class="pc">한화로보틱스 제품 및 대리점 모집 관련<br />궁금한 점을 문의해주세요.</span> -->
+                            <span class="pc" th:utext="#{main.inquiryPc}"></span>
+                            <!-- <span class="tablet">한화로보틱스 제품 및<br />대리점 모집 관련<br />궁금한 점을 문의해주세요.</span> -->
+                            <span class="tablet" th:utext="#{main.inquiryTablet}"></span>
                         </a>
-                      </div>
-                {{/list}}
-          </script>
-      </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </main>
+
+
+    <script id="updates-tmpl" type="x-tmpl-mustache">
+        {{#list}}
+              <div onclick="location.href='/newsroom/notice/{{newsroomNo}}?to=main'" style="cursor:pointer">{{title}}</div>
+        {{/list}}
+    </script>
+
+
+    <script id="newsroom-tmpl" type="x-tmpl-mustache">
+        {{#list}}
+              <div class="list">
+                <a href="{{href}}" >
+                  <div class="list_title">
+                    {{title}}
+                  </div>
+                  <div class="list_date">
+                    {{createDt}}
+                  </div>
+                </a>
+              </div>
+        {{/list}}
+    </script>
+</div>
 
 </body>
-      <th:block layout:fragment="script">
-            <script>
+<th:block layout:fragment="script">
+    <script>
 
-                  // document.addEventListener('DOMContentLoaded', function () {
-                  //     if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
-                  //         layerCookieOpenBtn();
-                  //     }
-                  // });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
+        //         layerCookieOpenBtn();
+        //     }
+        // });
 
-                  $(document).ready(function () {
-                        getMainUpdates();
-                        getMainNewsroom();
-                  });
+        $(document).ready(function () {
+            getMainUpdates();
+            getMainNewsroom();
+        });
 
-                  function getMainUpdates(){
-                        COMM.ajax({
-                              url : "/main/updates",
-                              success : function(data) {
-                                    if(data.code === 200 &&  data.data != null  && data.data.length > 0){
-                                          // console.log(data)
-                                        var template = $("#updates-tmpl").html();
-                                        var rendered = Mustache.render(template, {'list' : data.data});
-                                        $('.updatesContentDiv').html(rendered);
-                                    }
-                              },
-                              error : function(jqXHR, textStatus, errorThrown){
-                                    console.log(jqXHR.status, jqXHR);
+        function getMainUpdates() {
+            COMM.ajax({
+                url: "/main/updates",
+                success: function (data) {
+                    if (data.code === 200 && data.data != null && data.data.length > 0) {
+                        // console.log(data)
+                        var template = $("#updates-tmpl").html();
+                        var rendered = Mustache.render(template, {'list': data.data});
+                        $('.updatesContentDiv').html(rendered);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status, jqXHR);
 
-                              }
+                }
+            });
+        }
+
+        function getMainNewsroom() {
+            COMM.ajax({
+                url: "/main/newsroom",
+                success: function (data) {
+                    if (data.code === 200 && data.data != null && data.data.length > 0) {
+                        $(data.data).map(function (i, e) {
+                            var typeCdNm = e.typeCdNm != null ? e.typeCdNm.toLowerCase() : 'notice';
+                            e.href = "newsroom" + "/" + typeCdNm;
+                            if (typeCdNm != 'ir') e.href += "/" + e.newsroomNo + '?to=main'
+                            e.createDt = e.createDt ? e.createDt.replaceAll('-', '.') : e.createDt;
                         });
-                  }
+                        var template = $("#newsroom-tmpl").html();
+                        var rendered = Mustache.render(template, {'list': data.data});
+                        $('.newsroomDiv').html(rendered);
 
-                  function getMainNewsroom(){
-                        COMM.ajax({
-                              url : "/main/newsroom",
-                              success : function(data) {
-                                    if(data.code === 200 &&  data.data != null && data.data.length > 0){
-                                          $(data.data).map(function(i, e){
-                                              var typeCdNm =  e.typeCdNm != null ? e.typeCdNm.toLowerCase() : 'notice';
-                                              e.href = "newsroom" + "/" + typeCdNm;
-                                              if(typeCdNm != 'ir') e.href += "/" + e.newsroomNo + '?to=main'
-                                              e.createDt = e.createDt ? e.createDt.replaceAll('-','.') : e.createDt;
-                                          });
-                                          var template = $("#newsroom-tmpl").html();
-                                          var rendered = Mustache.render(template, {'list' : data.data});
-                                          $('.newsroomDiv').html(rendered);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status, jqXHR);
 
-                                    }
-                              },
-                              error : function(jqXHR, textStatus, errorThrown){
-                                    console.log(jqXHR.status, jqXHR);
+                }
+            });
+        }
 
-                              }
-                        });
-                  }
-
-                  function goAbout(type) {
-                      console.log('타입', type);
-                      if (type == 'EN') {
-                          // 국문페이지
-                          location.href = '/about?lang=ko';
-                      } else if (type == 'KR') {
-                          // 영문페이지
-                          location.href = '/about?lang=en';
-                      }
-                  }
-            </script>
-      </th:block>
+        function goAbout(type) {
+            console.log('타입', type);
+            if (type == 'EN') {
+                // 국문페이지
+                location.href = '/about?lang=ko';
+            } else if (type == 'KR') {
+                // 영문페이지
+                location.href = '/about?lang=en';
+            }
+        }
+    </script>
+</th:block>
 </html>
