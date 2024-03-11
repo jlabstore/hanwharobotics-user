@@ -67,7 +67,6 @@
                                 </div>
                             </div>
 
-
                             <div class="mypage-section">
                                 <h2>업체명<strong>*</strong></h2>
                                 <input type="text" name="company_name" id="company_name" class="companyNm" required />
@@ -81,12 +80,10 @@
                                 </select>
                             </div>
 
-
                             <div class="mypage-section"  th:if="#{header.nation} == 'KR'" >
                                 <h2>City<strong>*</strong></h2>
                                 <input type="text" name="city" id="city" value="" required />
                             </div>
-
 
                             <div class="mypage-section">
                                 <h2>우편번호<strong>*</strong></h2>
@@ -96,18 +93,15 @@
                                 </div>
                             </div>
 
-
                             <div class="mypage-section">
                                 <h2>주소<strong>*</strong></h2>
                                 <input type="text" name="address" id="address" required />
                             </div>
 
-
                             <div class="mypage-section">
                                 <h2>상세주소<strong>*</strong></h2>
                                 <input type="text" name="address_detail" id="address_detail" required />
                             </div>
-
 
                             <div class="mypage-section">
                                 <h2>로봇구매처/대리점<strong>*</strong></h2>
@@ -119,13 +113,10 @@
                                 <input type="text" name="name" id="name" class="memberNm" required />
                             </div>
 
-
                             <div class="mypage-section">
                                 <h2>직급</h2>
                                 <input type="text" name="rank" id="rank" class="position" value="" required />
                             </div>
-
-
 
                             <div class="mypage-section">
                                 <h2>연락처<strong>*</strong></h2>
@@ -143,7 +134,6 @@
                                     <input id="contact" name="contact" style="display: none">
                                 </div>
                             </div>
-
 
                         </section>
                     </div>
@@ -346,6 +336,16 @@
         const emailCheckElement = $('#email_check');
         const selectedRegion = $('#selectCountry').val();
 
+        const city = $('#city').val()
+        const companyNm = $('.companyNm').val();
+        const postCode = $('#postcode').val();
+        const address = $('#address').val();
+        const addressDetail = $('#address_detail').val();
+        const store = $('.store').val();
+        const memberNm = $('.memberNm').val();
+        const position = $('.position').val();
+        const contact = $("#contact").val();
+
         // 아이디 체크
         if (memberId.length < 6 ) {
             idCheckElement.text("아이디는 5~12글자 이어야 합니다.").show();
@@ -390,20 +390,27 @@
             return;
         }
 
+
+        // 필수 입력 항목
+        if (!memberId || !password || !email || !companyNm || !postCode || !address || !addressDetail || !store || !memberNm || !position || !contact) {
+            alert('모든 필수 입력 항목을 입력해주세요.');
+            return;
+        }
+
         const temp = {
             memberId: memberId,
             password: password,
-            companyNm: $('.companyNm').val(),
+            companyNm: companyNm,
             region: selectedRegion ? selectedRegion : 'KR',
-            city: $('#city').val(),
-            postCode: $('#postcode').val(),
-            address: $('#address').val(),
-            addressDetail: $('#address_detail').val(),
-            store: $('.store').val(),
-            memberNm: $('.memberNm').val(),
-            position: $('.position').val(),
+            city: city,
+            postCode: postCode,
+            address: address,
+            addressDetail: addressDetail,
+            store: store,
+            memberNm: memberNm,
+            position: position,
             email: email,
-            contact: $("#contact").val(),
+            contact: contact,
         };
 
         COMM.ajax({
