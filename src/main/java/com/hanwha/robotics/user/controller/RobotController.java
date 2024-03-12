@@ -13,9 +13,9 @@ public class RobotController {
         return "robot/robots";
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/hcr-5a")
     public String robotDetail() {
-        return "robot/robots_detail";
+        return "robot/robots_detail_hcr_5a";
     }
 
 
