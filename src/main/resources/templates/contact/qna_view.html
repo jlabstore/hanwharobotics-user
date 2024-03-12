@@ -59,22 +59,28 @@
 
                     <div class="qna-view-section">
                         <div class="qna-view-section-title">
-                            <h4>문의유형 1</h4>
+                            <h4>문의유형</h4>
                         </div>
-                        <div class="qna-view-section-content">
-                            <span class="qna_type1"></span>
+
+                        <div class="qna-view-section-content-wrapper">
+                            <div class="qna-view-section-content">
+                                <span class="qna_type1"></span>
+                            </div>
+                            <div class="qna-view-section-content">
+                                <span class="qna_type2"></span>
+                            </div>
                         </div>
                     </div>
 
 
-                    <div class="qna-view-section">
-                        <div class="qna-view-section-title">
-                            <h4>문의유형 2</h4>
-                        </div>
-                        <div class="qna-view-section-content">
-                            <span class="qna_type2"></span>
-                        </div>
-                    </div>
+<!--                    <div class="qna-view-section">-->
+<!--                        <div class="qna-view-section-title">-->
+<!--                            <h4>문의유형 2</h4>-->
+<!--                        </div>-->
+<!--                        <div class="qna-view-section-content">-->
+<!--                            <span class="qna_type2"></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
 
                     <div class="qna-view-section">
@@ -377,31 +383,31 @@
                             });
 
 
-                            if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
-                                data.data.qnaReplies.forEach(function (reply) {
-                                    if (reply.replyType === 'USER') {
-                                        reply.isUser = true;
-                                        reply.isAdmin = false;
-                                    } else if (reply.replyType === 'ADMIN') {
-                                        reply.isUser = false;
-                                        reply.isAdmin = true;
-                                    }
-                                });
-
-                                const template = $("#reply-html").html();
-                                const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
-                                $('.reply').html(rendered);
-
-
-                                $('.reply-item:last-child').ready(function () {
-                                    const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
-                                    if (latestReply.replyType === 'USER') {
-                                        const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
-                                        const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
-                                        $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
-                                    }
-                                });
-                            }
+                            // if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
+                            //     data.data.qnaReplies.forEach(function (reply) {
+                            //         if (reply.replyType === 'USER') {
+                            //             reply.isUser = true;
+                            //             reply.isAdmin = false;
+                            //         } else if (reply.replyType === 'ADMIN') {
+                            //             reply.isUser = false;
+                            //             reply.isAdmin = true;
+                            //         }
+                            //     });
+                            //
+                            //     const template = $("#reply-html").html();
+                            //     const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
+                            //     $('.reply').html(rendered);
+                            //
+                            //
+                            //     $('.reply-item:last-child').ready(function () {
+                            //         const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
+                            //         if (latestReply.replyType === 'USER') {
+                            //             const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
+                            //             const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
+                            //             $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
+                            //         }
+                            //     });
+                            // }
 
 
                             // 이전글
@@ -432,7 +438,7 @@
 
 
                             // 수정,삭제 버튼 노출 체크
-                            if ((loginMemberNo === data.data.qnaDetail.memberNo) && (data.data.qnaReplies.length === 0)) {
+                            if ((loginMemberNo === data.data.qnaDetail.memberNo) && (!data.data.qnaReplies.some(reply => reply.replyType === 'ADMIN'))) {
                                 $('.edit-button').show();
                                 $('.delete-button').show();
                             } else {
@@ -537,9 +543,8 @@
 
 
         function cancelEdit() {
-            // FIXME: getReply()
-            getData();
-            // window.location.reload();
+            getReply()
+            // getData();
         }
 
 
@@ -583,9 +588,9 @@
                 data: JSON.stringify(jsonData),
                 contentType: 'application/json',
                 success: function (data) {
-                    alert('등록되었습니다.')
-                    $('#replyContent').val('');
-                    getData();
+                    getReply();
+                    $('#replyContent_input').val('');
+                    // alert('등록되었습니다.')
                 },
 
                 error: function (xhr, textStatus) {
@@ -614,7 +619,7 @@
                 data: JSON.stringify(jsonData),
                 contentType: 'application/json',
                 success: function () {
-                    getData();
+                    getReply();
                 },
                 error: function (xhr, textStatus) {
                     console.error('전송 실패:', textStatus);
@@ -638,8 +643,7 @@
                 type: 'DELETE',
                 url: '/qna/reply/' + replyNo,
                 success: function () {
-                    // getData();
-                    window.location.reload();
+                    getReply();
                 },
                 error: function (xhr, textStatus) {
                     console.error('전송 실패:', textStatus);

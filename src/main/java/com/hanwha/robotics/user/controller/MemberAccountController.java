@@ -73,6 +73,12 @@ public class MemberAccountController {
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
+    /**
+     * 비밀번호 일치 확인
+     * @param memberNo
+     * @param request
+     * @return
+     */
     @PostMapping("/check/password")
     public ResponseEntity<Object> checkPassword (
             @AuthenticationPrincipal int memberNo,
@@ -117,15 +123,6 @@ public class MemberAccountController {
         memberService.deleteAccount(memberNo);
         return "main";
     }
-
-//    /**
-//     * 비밀번호 재설정 페이지
-//     * @return
-//     */
-//    @GetMapping("/change/password")
-//    public String changePasswordPage() {
-//        return "/member/change_pw";
-//    }
 
 
 

@@ -1,7 +1,9 @@
 package com.hanwha.robotics.user.controller;
 
+import com.hanwha.robotics.user.common.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,8 @@ public class PasswordResetController {
 
 	@Autowired
 	private PasswordResetTokenService passwordResetTokenService;
+	@Autowired
+	private MailUtil mailUtil;
 
 	@PostMapping("/password/reset-page")
 	@ResponseBody
@@ -33,14 +37,8 @@ public class PasswordResetController {
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 
-	/**
-	 *  Reset Token 에 MemberId 를 넣기
-	 *   1. 이상한 사람 인지 파악하기 위함. (Auditing)
-	 */
 	@GetMapping("/password/reset")
-	public String resetPasswordPage(
-		@RequestParam String token
-	) {
+	public String resetPasswordPage(@RequestParam String token) {
 		if (passwordResetTokenService.validate(token)) {
 			return "/member/login_pwd_re";
 		} else {
@@ -48,15 +46,22 @@ public class PasswordResetController {
 		}
 	}
 
+	// FIXME: 재설정 후 메일 보내기
 	@PutMapping("/password/reset")
 	@ResponseBody
-	public ResponseEntity<ApiResponse<Void>> resetPassword(
-		@RequestBody ResetPasswordRequest request
-	) {
+	public ResponseEntity<ApiResponse<Void>> resetPassword(@RequestBody ResetPasswordRequest request) {
 		memberService.resetPassword(request);
+		String email = passwordResetTokenService.retrieveEmail(request.getToken());
+		mailUtil.sendPasswordChangeConfirm(email);
+		// TODO: 비밀번호 재설정 완료되면 토큰 삭제
+//		passwordResetTokenService.deleteToken(request.getToken());
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 
+	/**
+	 * 비밀번호 찾기 완료 페이지
+	 * @return
+	 */
 	@GetMapping("/password/reset/complete")
 	public String resetPwCompletePage() {
 		return "member/login_pwd_re_complete";

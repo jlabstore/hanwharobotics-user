@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.hanwha.robotics.user.entity.PasswordResetToken;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 
-@Service
 public interface PasswordResetTokenService {
 
 //	@Autowired
@@ -23,4 +22,6 @@ public interface PasswordResetTokenService {
 	 * @return
 	 */
 	boolean validate(String token);
+
+	String retrieveEmail(String token);
 }

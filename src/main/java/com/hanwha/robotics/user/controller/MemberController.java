@@ -60,26 +60,10 @@ public class MemberController {
 	 * @param request
 	 * @return
 	 */
-//	@PostMapping("/signup")
-//	public String signup(@ModelAttribute MemberRequest request) {
-//		memberService.registerMember(request);
-//		return "member/signup_complete";
-//	}
-
-	/**
-	 * 회원가입 등록
-	 * @param request
-	 * @return
-	 */
 	@PostMapping("/signup")
 	public ResponseEntity<Object> signup(@RequestBody MemberRequest request) {
 		memberService.registerMember(request);
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
-	}
-
-	@GetMapping("/signup/complete")
-	public String signupCompletePage() {
-		return "member/signup_complete";
 	}
 
 	/**
@@ -103,6 +87,15 @@ public class MemberController {
 		System.out.println("이메일"+ email);
 		boolean isExists = memberService.isMemberEmailExists(email);
 		return ResponseEntity.ok(isExists);
+	}
+
+	/**
+	 * 회원가입 완료 페이지
+	 * @return
+	 */
+	@GetMapping("/signup/complete")
+	public String signupCompletePage() {
+		return "member/signup_complete";
 	}
 
 	/**
@@ -143,7 +136,7 @@ public class MemberController {
 	}
 
 	/**
-	 * 비밀번호 찾기 페이지
+	 * 비밀번호 찾기 완료 페이지
 	 * @return
 	 */
 	@GetMapping("/find-pw/complete")
@@ -151,7 +144,10 @@ public class MemberController {
 		return "member/login_find_pwd_complete";
 	}
 
-
+	/**
+	 * 회원탈퇴 완료 페이지
+	 * @return
+	 */
 	@GetMapping("/delete/complete")
 	public String deleteAccountCompletePage() {
 		return "/member/mypage_withdrawal_complete";

@@ -153,7 +153,7 @@ public class QnaController {
         request.setMemberNo(memberNo);
         int qnaNo = qnaService.register(request);
         // FIXME
-        mailUtil.sendNewQnaToAdmin();
+        mailUtil.sendNewQnaToAdmin(qnaNo);
         return ResponseEntity.ok().body(qnaNo);
     }
 

@@ -13,7 +13,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/qna/reply")
@@ -25,7 +27,6 @@ public class QnaReplyController {
     // FIXME: replyType enum
     /**
      * Q&A 답변 등록
-     *
      * @param memberNo
      * @param request
      * @return
@@ -41,18 +42,23 @@ public class QnaReplyController {
     }
 
 
-
+    /**
+     * Q&A 답변 목록
+     * @param qnaNo
+     * @return
+     */
     @GetMapping("/{qnaNo}")
     public ResponseEntity<Object> retrieveReplies(@PathVariable int qnaNo) {
         List<QnaReplyResponse> response = qnaReplyService.retrieveQnaReply(qnaNo);
-        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), response));
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("qnaReplies", response);
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), responseData));
     }
 
 
 
     /**
      * Q&A 답변 수정
-     *
      * @param request
      * @return
      */
@@ -68,7 +74,6 @@ public class QnaReplyController {
 
     /**
      * Q&A 답변 삭제
-     *
      * @param replyNo
      * @return
      */

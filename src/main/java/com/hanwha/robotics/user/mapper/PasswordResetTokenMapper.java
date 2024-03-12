@@ -12,4 +12,6 @@ public interface PasswordResetTokenMapper {
 	void insertToken(Map<String, Object> data);
 
 	PasswordResetToken findByToken(String token);
+
+    String findEmailByToken(String token);
 }

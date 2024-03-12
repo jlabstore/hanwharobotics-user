@@ -12,9 +12,20 @@ public class PasswordResetTokenServiceImpl implements PasswordResetTokenService 
     @Autowired
     private PasswordResetTokenMapper passwordResetTokenMapper;
 
+    @Override
     public boolean validate(String token) {
         PasswordResetToken resetToken = passwordResetTokenMapper.findByToken(token);
         return !resetToken.isExpired();
     }
+
+    @Override
+    public String retrieveEmail(String token) {
+        return passwordResetTokenMapper.findEmailByToken(token);
+    }
+
+//    @Override
+//    public void deleteToken(String token) {
+//        passwordResetTokenMapper.deleteToken(token);
+//    }
 
 }

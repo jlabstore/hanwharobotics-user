@@ -88,17 +88,6 @@ public class MailUtil {
 
 	@Async
 	public void sendMemberId(String email, String memberId) {
-//		try {
-//			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-//			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-//			messageHelper.setTo(email); // 메일 수신자
-//			messageHelper.setSubject("문의하신 한화로보틱스 아이디 안내 입니다.");
-//			messageHelper.setText("아이디는 " + memberId + " 입니다.");
-//			javaMailSender.send(mimeMessage);
-//		} catch (Exception e) {
-//			throw new RuntimeException("아이디 발송 실패", e);
-//		}
-
 		this.sendEmail(
 				List.of(email),
 				"문의하신 한화로보틱스 아이디 안내입니다.",
@@ -131,12 +120,23 @@ public class MailUtil {
 	}
 
 	@Async
-	public void sendNewQnaToAdmin() {
+	public void sendPasswordChangeConfirm(String email) {
+		this.sendEmail(
+				List.of(email),
+				"한화로보틱스 고객님의 비밀번호가 변경되었습니다.",
+				"고객님의 비밀번호가 변경되었습니다."
+		);
+	}
+
+
+
+	@Async
+	public void sendNewQnaToAdmin(int qnaNo) {
 		try {
 			this.sendEmail(
 				adminMapper.selectAdminEmail(),
 				"Q&A 게시판에 새로운 글이 등록되었습니다.",
-				"Q&A 게시판에 새로운 글이 등록되었습니다."
+				"Q&A 게시판에 새로운 글이 등록되었습니다. gogo: http://localhost:8090/admin/qna/detail?no=" + qnaNo + " <- 이동"
 			);
 		} catch (Exception e) {
 			throw new RuntimeException("관리자 이메일 발송 실패", e);
