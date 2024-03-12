@@ -5,6 +5,7 @@ import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.dto.PageResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.utils.CommonUtil;
+import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.*;
 import com.hanwha.robotics.user.service.MemberService;
 import com.hanwha.robotics.user.service.QnaService;
@@ -34,6 +35,8 @@ public class QnaController {
     private MemberService memberService;
     @Autowired
     private CommonUtil commonUtil;
+    @Autowired
+    private MailUtil mailUtil;
 
     /**
      * Q&A 리스트 페이지
@@ -108,12 +111,23 @@ public class QnaController {
         return "contact/qna_write";
     }
 
+    /**
+     * 코드 가져오기
+     *
+     * @return
+     */
     @GetMapping("/code")
     public ResponseEntity<Object> getQnaCode() {
         QnaCodeResponse qnaCodeResponse = qnaService.getQnaCode();
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaCodeResponse));
     }
 
+    /**
+     * 수정 페이지 코드 가져오기
+     *
+     * @param qnaNo
+     * @return
+     */
     @GetMapping("/code/{qnaNo}")
     public ResponseEntity<Map<String, Object>> getQnaEditCode(@PathVariable int qnaNo) {
         Map<String, Object> responseData = new HashMap<>();
@@ -125,9 +139,9 @@ public class QnaController {
     }
 
 
-
     /**
      * Q&A 등록
+     *
      * @param request
      * @return
      */
@@ -138,12 +152,15 @@ public class QnaController {
     ) {
         request.setMemberNo(memberNo);
         int qnaNo = qnaService.register(request);
+        // FIXME
+        mailUtil.sendNewQnaToAdmin();
         return ResponseEntity.ok().body(qnaNo);
     }
 
 
     /**
      * Q&A 수정 페이지
+     *
      * @param qnaNo
      * @return
      */
@@ -162,6 +179,7 @@ public class QnaController {
 
     /**
      * Q&A 수정
+     *
      * @param memberNo
      * @param qnaNo
      * @param request

@@ -1,12 +1,12 @@
 package com.hanwha.robotics.user.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.hanwha.robotics.user.entity.QnaReply;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class QnaReplyResponse {
@@ -22,4 +22,11 @@ public class QnaReplyResponse {
         int maskLength = memberId.length() / 2;
         this.memberId = memberId.substring(0, maskLength) + "*".repeat(maskLength);
     }
+
+//    public static QnaReplyResponse from(QnaReply qnaReply) {
+//        return QnaReplyResponse.builder()
+//                .replyNo(qnaReply.getReplyNo())
+//                .qnaNo(qnaReply.getQnaNo())
+//                .build();
+//    }
 }

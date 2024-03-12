@@ -53,6 +53,28 @@
     </delete>
 
 
+    <!-- Q&A 삭제시 답글 삭제 -->
+    <delete id="deleteQnaReplyByQnaNo" parameterType="int">
+        DELETE FROM tb_qna_reply
+        WHERE qna_no = #{qnaNo}
+    </delete>
+
+
+
+    <select id="findByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaReplyResponse">
+        SELECT
+            r.reply_no,
+            r.qna_no,
+#             r.admin_id,
+            r.reply_content,
+            r.reply_type,
+            r.create_dt,
+            q.member_id
+        FROM tb_qna_reply r
+                 LEFT JOIN tb_qna q ON r.qna_no = q.qna_no
+        WHERE r.qna_no = #{qnaNo}
+        ORDER BY create_dt;
+    </select>
 
 
 

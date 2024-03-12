@@ -262,7 +262,12 @@
 
                 <div class="qna-view-footer">
 
-                    <a href="javascript:void(0)" onClick="goBack()" class="qna-view-prev">
+<!--                    <a href="javascript:void(0)" onClick="goBack()" class="qna-view-prev">-->
+<!--                        <img src="../images/pc/btn_prev.svg" alt=""/>-->
+<!--                        목록으로-->
+<!--                    </a>-->
+
+                    <a href="/qna" class="qna-view-prev">
                         <img src="../images/pc/btn_prev.svg" alt=""/>
                         목록으로
                     </a>
@@ -288,30 +293,31 @@
 
     <script>
 
-        const loginMemberNo = Number("[[${#request.userPrincipal.getName()}]]");
 
+        const loginMemberNo = Number("[[${#request.userPrincipal.getName()}]]");
 
         $(document).ready(function () {
             getData();
-
+            getReply();
         });
 
 
-        function goBack() {
-            const params = {};
-            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-                function (str, key, value) {
-                    params[key] = value;
-                }
-            );
-            if (params["to"] !== undefined && params["to"] === "main") {
-                // location.href="/newsroom/notice";
-            } else {
-                history.back();
-            }
-        }
+        // function goBack() {
+        //     const params = {};
+        //     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+        //         function (str, key, value) {
+        //             params[key] = value;
+        //         }
+        //     );
+        //     if (params["to"] !== undefined && params["to"] === "main") {
+        //         // location.href="/newsroom/notice";
+        //     } else {
+        //         history.back();
+        //     }
+        // }
 
         const paths = window.location.pathname.split('/');
+
 
         function getData() {
             // var paths = window.location.pathname.split('/')
@@ -346,19 +352,20 @@
                                 const robotItem = $('<li></li>');
                                 const modelDiv = $('<div></div>');
 
-                                // modelDiv.append('<h4>모델명 </h4><span>' + robot.modelCd + '</span>');
-                                const modelCdText = robot.modelCd !== null ? robot.modelCd : '-';
-                                modelDiv.append('<h4>모델명</h4><span>' + modelCdText + '</span>');
+                                modelDiv.append('<h4>모델명 </h4><span>' + robot.modelCd + '</span>');
+                                // const modelCdText = robot.modelCd !== null ? robot.modelCd : '-';
+                                // modelDiv.append('<h4>모델명</h4><span>' + modelCdText + '</span>');
 
                                 const softwareVersionDiv = $('<div></div>');
 
-                                // softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + robot.swVersion + '</span>');
-                                const swVersionText = robot.swVersion !== null ? robot.swVersion : '-';
-                                softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + swVersionText + '</span>');
+                                softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + robot.swVersion + '</span>');
+                                // const swVersionText = robot.swVersion !== null ? robot.swVersion : '-';
+                                // softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + swVersionText + '</span>');
 
                                 const applicationDiv = $('<div></div>');
 
-                                const applicationCdText = robot.applicationCd !== null ? robot.applicationCd : '-';
+                                // applicationDiv.append('<h4>어플리케이션</h4><span>' + robot.applicationCd + '</span>');
+                                const applicationCdText = robot.applicationCd !== null ? robot.applicationCd : '';
                                 applicationDiv.append('<h4>어플리케이션</h4><span>' + applicationCdText + '</span>');
 
 
@@ -394,8 +401,6 @@
                                         $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
                                     }
                                 });
-
-
                             }
 
 
@@ -463,6 +468,51 @@
             });
         }
 
+        function getReply(qnaNo) {
+            COMM.ajax({
+                type: 'GET',
+                url: '/qna/reply/' + paths[paths.length - 1],
+                success: function (data) {
+                    if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
+                        data.data.qnaReplies.forEach(function (reply) {
+                            if (reply.replyType === 'USER') {
+                                reply.isUser = true;
+                                reply.isAdmin = false;
+                            } else if (reply.replyType === 'ADMIN') {
+                                reply.isUser = false;
+                                reply.isAdmin = true;
+                            }
+                        });
+
+                        const template = $("#reply-html").html();
+                        const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
+                        $('.reply').html(rendered);
+
+
+                        $('.reply-item:last-child').ready(function () {
+                            const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
+                            if (latestReply.replyType === 'USER') {
+                                const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
+                                const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
+                                $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
+                            }
+                        });
+                    }
+                },
+
+                error: function (xhr, textStatus) {
+                    console.error('댓글 가져오기 실패:', textStatus);
+                    if (xhr.responseJSON) {
+                        const errorMessage = xhr.responseJSON.message;
+                        alert(errorMessage);
+                    } else {
+                        alert('댓글 가져오기에 실패했습니다.');
+                    }
+                }
+            });
+
+        }
+
 
 
         function editReply(replyNo) {
@@ -514,6 +564,8 @@
                 }
             });
         }
+
+
 
 
         // 답글 등록

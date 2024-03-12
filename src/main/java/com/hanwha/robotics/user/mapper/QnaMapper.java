@@ -49,4 +49,6 @@ public interface QnaMapper {
     Qna selectQnaByQnaNo(int qnaNo);
 
     void deleteRobotByQnaNo(int qnaNo);
+
+    List<QnaRobot> selectEditRobotByQnaNo(int qnaNo);
 }

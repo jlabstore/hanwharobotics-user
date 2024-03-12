@@ -43,9 +43,6 @@
                 </div>
 
 
-
-
-
                 <div class="table">
                     <div class="thead">
                         <div class="th" th:text="#{no}"></div>
@@ -63,18 +60,16 @@
 
                 <div class="paging">
 
-
-                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()">
-                        문의하기
-                        <span><strong>+</strong></span>
-                    </button>
+<!--                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()">-->
+<!--                        문의하기-->
+<!--                        <span><strong>+</strong></span>-->
+<!--                    </button>-->
 
                 </div>
 
-
-
             </div>
         </div>
+
 
     </main>
 
@@ -88,8 +83,9 @@
     <script id="list-tmpl" type="x-tmpl-mustache" class="hide">
         {{#list}}
             <div class="tr">
-                <a href="/qna/{{qnaNo}}" >
 
+                <a href="/qna/{{qnaNo}}">
+<!--                <a onclick="goToQnaDetail('{{qnaNo}}')">-->
 
                     <div class="td">
                         {{#isFixed}}
@@ -146,8 +142,6 @@
         {{/list}}
     </script>
 
-
-
 </div>
 
 
@@ -156,13 +150,11 @@
 <th:block layout:fragment="script">
     <script>
 
+
         $(document).ready(function () {
             setQueryStringParams();
             getList();
         });
-
-        // const loginMemberNo =  Number("[[${#request.userPrincipal.getName()}]]");
-
 
         function getList(page) {
             if (typeof page != "undefined" && page != null) $('#page').val(page);
@@ -178,29 +170,79 @@
                         item.isFixed = (item.fixedStatus === 'Y');
                     });
 
-
                     const template = $("#list-tmpl").html();
                     const rendered = Mustache.render(template, {'list': data.contents});
                     $('.tbody').html(rendered);
 
                     if (data.totalElements !== 0) {
                         setPagination(data, $('.paging'));
+
+                        // 문의하기 버튼 추가
+                        const inquiryButton = document.createElement('button');
+                        inquiryButton.setAttribute('type', 'button');
+                        inquiryButton.classList.add('inquiry', 'qna');
+                        inquiryButton.innerHTML = '문의하기 <span><strong>+</strong></span>';
+                        inquiryButton.onclick = function() {
+                            layerQnaOpenBtn();
+                        };
+                        $('.paging').append(inquiryButton);
+
                     }
                 }
             );
         }
 
 
+        // const loginMemberNo =  Number("[[${#request.userPrincipal.getName()}]]");
 
         // function goToQnaDetail(qnaNo) {
-        //     const qnaItem = data.contents.find(item => item.qnaNo === qnaNo);
-        //     if (qnaItem) {
+        //     getList(function(data) {
+        //         const qnaItem = data.contents.find(item => item.qnaNo === parseInt(qnaNo));
         //         if ((qnaItem.exposureStatus === 'Y') && (loginMemberNo !== qnaItem.memberNo)) {
         //             alert("비공개 게시글입니다.");
         //         } else {
         //             window.location.href = `/qna/${qnaNo}`;
         //         }
-        //     }
+        //     });
+        // }
+
+
+        // function getList(callback, page) {
+        //     if (typeof page != "undefined" && page != null) $('#page').val(page);
+        //
+        //     COMM.ajaxPagingList({
+        //             url: "/qna"
+        //         },
+        //         function success(data) {
+        //             if (typeof callback === 'function') {
+        //                 callback(data);
+        //             }
+        //
+        //             data.contents.forEach(function (item) {
+        //                 item.isExposure = (item.exposureStatus === 'Y');
+        //                 item.isAnswered = (item.endStatus === 'Y');
+        //                 item.isFixed = (item.fixedStatus === 'Y');
+        //             });
+        //
+        //             const template = $("#list-tmpl").html();
+        //             const rendered = Mustache.render(template, {'list': data.contents});
+        //             $('.tbody').html(rendered);
+        //
+        //             if (data.totalElements !== 0) {
+        //                 setPagination(data, $('.paging'));
+        //
+        //                 // 문의하기 버튼 추가
+        //                 const inquiryButton = document.createElement('button');
+        //                 inquiryButton.setAttribute('type', 'button');
+        //                 inquiryButton.classList.add('inquiry', 'qna');
+        //                 inquiryButton.innerHTML = '문의하기 <span><strong>+</strong></span>';
+        //                 inquiryButton.onclick = function() {
+        //                     layerQnaOpenBtn();
+        //                 };
+        //                 $('.paging').append(inquiryButton);
+        //             }
+        //         }
+        //     );
         // }
 
 
@@ -208,14 +250,5 @@
 
 
 
-
 </th:block>
-
-
-<style>
-
-
-</style>
-
-
 </html>

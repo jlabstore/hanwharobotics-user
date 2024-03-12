@@ -97,10 +97,9 @@ public class QnaServiceImpl implements QnaService {
 			uploadFileMapper.saveFile(uploadFiles);
 		}
 
-		mailUtil.sendNewQnaToAdmin();
+//		mailUtil.sendNewQnaToAdmin();
 		return qnaNo;
 	}
-
 
 
 	@Override
@@ -142,7 +141,7 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public QnaDetailEditResponse getQnaDetailEdit(int qnaNo) {
 		QnaResponse qnaDetail = QnaResponse.of(qnaMapper.selectQnaByQnaNo(qnaNo));
-		List<QnaRobot> qnaRobots = qnaMapper.selectRobotByQnaNo(qnaNo);
+		List<QnaRobot> qnaRobots = qnaMapper.selectEditRobotByQnaNo(qnaNo);
 		List<UploadFile> qnaFiles = uploadFileMapper.selectByQnaNo(qnaNo);
 		return new QnaDetailEditResponse(qnaDetail, qnaRobots, qnaFiles);
 	}
@@ -153,7 +152,7 @@ public class QnaServiceImpl implements QnaService {
 
 		var qnaNo = req.qnaNo;
 		if(memberNo != qnaMapper.selectByQnaNo(qnaNo).getMemberNo()) {
-			throw new RuntimeException("본인글만 삭제 가능합니다.");
+			throw new RuntimeException("본인글만 수정 가능합니다.");
 		}
 
 		// qna 정보 업데이트
@@ -186,10 +185,13 @@ public class QnaServiceImpl implements QnaService {
 
 
 	@Override
+	@Transactional
 	public void deleteQna(int memberNo, int qnaNo) {
 		if (memberNo != qnaMapper.selectByQnaNo(qnaNo).getMemberNo()) {
 			throw new RuntimeException("본인글만 삭제 가능합니다.");
 		}
+		qnaMapper.deleteRobotByQnaNo(qnaNo);
+		// reply 삭제
 		qnaMapper.deleteQna(qnaNo);
 	}
 

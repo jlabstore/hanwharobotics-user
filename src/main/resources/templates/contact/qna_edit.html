@@ -14,7 +14,7 @@
                 <p class="desc">
                     한화로보틱스에 대해 궁금한 점이<br />있으시면 문의해주세요.
                 </p>
-<!--                <p class="desc" th:utext="#{notice}">-->
+                <!--                <p class="desc" th:utext="#{notice}">-->
             </div>
 
             <div class="column board_list">
@@ -325,19 +325,20 @@
 
 
                         const swVersion = robot.swVersion;
-                        const parts = swVersion.split('');
+                        const parts = swVersion.split('.');
+                        const splitParts = parts.map(part => part.split(''));
 
                         // currentRobotInfoContainer.find('.swVersion').val(robot.swVersion);
-                        currentRobotInfoContainer.find('#software1').val(parts[0]);
-                        currentRobotInfoContainer.find('#software2').val(parts[2]);
-                        currentRobotInfoContainer.find('#software3').val(parts[3]);
-                        currentRobotInfoContainer.find('#software4').val(parts[4]);
-                        currentRobotInfoContainer.find('#software5').val(parts[6]);
-                        currentRobotInfoContainer.find('#software6').val(parts[7]);
-                        currentRobotInfoContainer.find('#software7').val(parts[8]);
-                        currentRobotInfoContainer.find('#software8').val(parts[10]);
-                        currentRobotInfoContainer.find('#software9').val(parts[11]);
-                        currentRobotInfoContainer.find('#software10').val(parts[12]);
+                        currentRobotInfoContainer.find('#software1').val(splitParts[0]);
+                        currentRobotInfoContainer.find('#software2').val(splitParts[1][0]);
+                        currentRobotInfoContainer.find('#software3').val(splitParts[1][1]);
+                        currentRobotInfoContainer.find('#software4').val(splitParts[1][2]);
+                        currentRobotInfoContainer.find('#software5').val(splitParts[2][0]);
+                        currentRobotInfoContainer.find('#software6').val(splitParts[2][1]);
+                        currentRobotInfoContainer.find('#software7').val(splitParts[2][2]);
+                        currentRobotInfoContainer.find('#software8').val(splitParts[3][0]);
+                        currentRobotInfoContainer.find('#software9').val(splitParts[3][1]);
+                        currentRobotInfoContainer.find('#software10').val(splitParts[3][2]);
 
 
                         // currentRobotInfoContainer.find('.applicationCd select').val(robot.applicationCd);
@@ -424,10 +425,14 @@
         $(document).ready(function() {
             // 기존 파일 정보를 불러와서 fileList에 추가
             const existingFiles = $('.serverFileDisplayContainer span');
+
             existingFiles.each(function() {
                 const fileName = $(this).text();
-                fileList.push({ name: fileName });
+                const data = $(this).data();
+                fileList.push({ name: fileName, fileNo: data.fileNo});
             });
+
+            console.log(fileList)
             // 파일 목록 그리기
             drawFileList();
         });
@@ -482,8 +487,16 @@
 
             //파일 제거
             if (index >= 0 && index < fileList.length) {
+                //기존에 등록되어있던 파일은 deleteFile에 추가한다.
+                if(fileList[index].fileNo != undefined){
+                    console.log("fileNo----->",fileList[index].fileNo)
+                    deleteFileIds.push(fileList[index].fileNo)
+                }
+
                 fileList.splice(index, 1);
             }
+
+            console.log('deleteFiles=',deleteFileIds)
 
             //파일 그리기
             drawFileList();
@@ -546,8 +559,6 @@
             return deleteFileIds;
         }
 
-
-
         // 수정
         function editConfirm() {
 
@@ -579,18 +590,13 @@
                 const modelCd = $(this).find('.robotModel select').val();
                 const serialNo = $(this).find('.serialNo').val();
 
+                const vValues = [];
+                for (let i = 1; i <= 10; i++) {
+                    const v = $(this).find(`#software${i}`).val();
+                    vValues.push(v);
+                }
+                const swVersion = vValues[0]+"."+vValues[1]+vValues[2]+vValues[3]+"."+vValues[4]+vValues[5]+vValues[6]+"."+vValues[7]+vValues[8]+vValues[9];
 
-                const v1 = $(this).find('#software1').val();
-                const v2 = $(this).find('#software2').val();
-                const v3 = $(this).find('#software3').val();
-                const v4 = $(this).find('#software4').val();
-                const v5 = $(this).find('#software5').val();
-                const v6 = $(this).find('#software6').val();
-                const v7 = $(this).find('#software7').val();
-                const v8 = $(this).find('#software8').val();
-                const v9 = $(this).find('#software9').val();
-                const v10 = $(this).find('#software10').val();
-                const swVersion = v1+"."+v2+v3+v4+"."+v5+v6+v7+"."+v8+v9+v10;
 
                 // const swVersion = $(this).find('.swVersion').val();
 
@@ -625,10 +631,13 @@
             // files를 초기화
             // formData.delete('files');
             //
-            // // fileList를 formData에 추가
-            // for (let i = 0; i < fileList.length; i++) {
-            //     formData.append('files', fileList[i]);
-            // }
+            // fileList를 formData에 추가
+            for (let i = 0; i < fileList.length; i++) {
+                if(!fileList[i].fileNo){
+                    formData.append('files', fileList[i]);
+                    console.log("추가한 파일", fileList[i])
+                }
+            }
 
 
             COMM.ajax({

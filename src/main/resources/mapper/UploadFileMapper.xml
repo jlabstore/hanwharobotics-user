@@ -25,16 +25,27 @@
         WHERE qna_no = #{qnaNo}
     </select>
 
-    <select id="selectByIds" parameterType="list">
+    <select id="selectByIds" parameterType="list" resultType="com.hanwha.robotics.user.entity.UploadFile">
         SELECT *
         FROM tb_qna_file
-        WHERE file_no = #{fileNo}
+        WHERE file_no = #{deleteFileIds}
     </select>
 
-    <delete id="deleteByIds" parameterType="int">
+<!--    <delete id="deleteByIds" parameterType="int">-->
+<!--        DELETE FROM tb_qna_file-->
+<!--        WHERE file_no = #{deleteFileIds}-->
+<!--    </delete>-->
+
+    <delete id="deleteByIds" parameterType="java.util.List">
         DELETE FROM tb_qna_file
-        WHERE file_no = #{fileNo}
+        WHERE file_no IN
+        <foreach collection="list" item="deleteFileIds" open="(" separator="," close=")">
+            #{deleteFileIds}
+        </foreach>
     </delete>
+
+
+
 
 
 

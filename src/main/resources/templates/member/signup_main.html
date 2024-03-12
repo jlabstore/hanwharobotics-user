@@ -88,7 +88,8 @@
                             <div class="mypage-section">
                                 <h2>우편번호<strong>*</strong></h2>
                                 <div class="mypage-edit-zipcode">
-                                    <input type="number" name="zipcode" id="postcode" required />
+                                    <input type="text" name="zipcode" id="postcode" required th:if="#{header.nation} == 'KR'"/>
+                                    <input type="text" name="zipcode" id="postcode" required readonly th:if="#{header.nation} != 'KR'"/>
                                     <button type="button" onclick="daumPostcode()" th:if="#{header.nation} != 'KR'">우편번호 찾기</button>
                                 </div>
                             </div>
@@ -130,7 +131,7 @@
                                                 th:text="${phoneCode['code_phone']}" th:selected="${phoneCode['code_phone'] == '+82'}"></option>
                                     </select>
 
-                                    <input type="number" name="phone" id="phone" required />
+                                    <input type="text" name="phone" id="phone" required />
                                     <input id="contact" name="contact" style="display: none">
                                 </div>
                             </div>

@@ -2,6 +2,8 @@ package com.hanwha.robotics.user.service;
 
 import com.hanwha.robotics.user.dto.QnaReplyRequest;
 import com.hanwha.robotics.user.dto.QnaReplyResponse;
+import com.hanwha.robotics.user.dto.QnaResponse;
+import com.hanwha.robotics.user.entity.QnaReply;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +26,7 @@ public interface QnaReplyService {
     void update(QnaReplyRequest request);
 
     void delete(int replyNo);
+
+
+    List<QnaReplyResponse> retrieveQnaReply(int qnaNo);
 }

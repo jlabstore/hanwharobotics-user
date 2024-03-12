@@ -4,12 +4,16 @@ import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.QnaReplyRequest;
+import com.hanwha.robotics.user.dto.QnaReplyResponse;
+import com.hanwha.robotics.user.dto.QnaResponse;
 import com.hanwha.robotics.user.service.QnaReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/qna/reply")
@@ -21,6 +25,7 @@ public class QnaReplyController {
     // FIXME: replyType enum
     /**
      * Q&A 답변 등록
+     *
      * @param memberNo
      * @param request
      * @return
@@ -35,8 +40,19 @@ public class QnaReplyController {
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
+
+
+    @GetMapping("/{qnaNo}")
+    public ResponseEntity<Object> retrieveReplies(@PathVariable int qnaNo) {
+        List<QnaReplyResponse> response = qnaReplyService.retrieveQnaReply(qnaNo);
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), response));
+    }
+
+
+
     /**
      * Q&A 답변 수정
+     *
      * @param request
      * @return
      */
@@ -52,6 +68,7 @@ public class QnaReplyController {
 
     /**
      * Q&A 답변 삭제
+     *
      * @param replyNo
      * @return
      */

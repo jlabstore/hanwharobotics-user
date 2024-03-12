@@ -12,6 +12,7 @@
         </where>
     </select>
 
+
     <select id="selectQnaList" parameterType="hashMap" resultType="com.hanwha.robotics.user.dto.QnaResponse">
         SELECT
             q.qna_no,
@@ -80,13 +81,30 @@
             r.qna_robot_no,
             r.qna_no,
             r.model_cd,
-            r.serial_no,
+--             r.serial_no,
             r.sw_version,
             c.description as application_cd
         FROM tb_qna_robot r
         LEFT JOIN tb_code c ON r.application_cd = c.code
         WHERE qna_no = #{qnaNo}
     </select>
+
+
+
+    <!-- Q&A 수정 - 문의제품 -->
+    <select id="selectEditRobotByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.entity.QnaRobot">
+        SELECT
+            r.qna_robot_no,
+            r.qna_no,
+            r.model_cd,
+            r.serial_no,
+            r.sw_version,
+            c.description as application_cd
+        FROM tb_qna_robot r
+                 LEFT JOIN tb_code c ON r.application_cd = c.code
+        WHERE qna_no = #{qnaNo}
+    </select>
+
 
 
 
@@ -165,6 +183,10 @@
         WHERE qna_no = #{qnaNo}
     </delete>
 
+    <delete id="deleteQnaRobotByQnaNo" parameterType="int">
+        DELETE FROM tb_qna_robot
+        WHERE qna_no = #{qnaNo}
+    </delete>
 
 
 
