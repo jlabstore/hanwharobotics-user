@@ -55,13 +55,6 @@
                         </div>
                     </div>
 
-<!--                    <div class="qna-write-form-section">-->
-<!--                        <span class="qna-write-form-section-title">문의유형 2<strong>*</strong></span>-->
-<!--                        <div class="qna-write-form-section-content">-->
-<!--                            <div class="qna-write-custom-radio qnaType2" id="qnaType2" th:text="${qnaDetailEditResponse.getQnaDetail().getQnaType1Nm()}"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                     <div class="qna-write-form-section">
                         <span class="qna-write-form-section-title">문의제품 <strong>*</strong></span>
                         <div class="qna-write-inquiry-product">
@@ -386,22 +379,40 @@
         // 문의제품 영역 추가 삭제
         let robotInfoCounter = 1;
 
+        // function addRobotInfo() {
+        //     if (robotInfoCounter < 10) {
+        //         const newRobotInfo = $('.robotInfoContainer:first').clone();
+        //         newRobotInfo.find('input').val('');
+        //         $('.robotInfoContainer:last').after(newRobotInfo);
+        //         robotInfoCounter = $('.robotInfoContainer').length;
+        //     }
+        // }
+
+        // function removeRobotInfo() {
+        //     if (robotInfoCounter > 1) {
+        //         $('.robotInfoContainer:last').remove();
+        //         robotInfoCounter = $('.robotInfoContainer').length;
+        //     }
+        // }
+
+        function removeRobotInfo() {
+            if ($('.robotInfoContainer').length > 1) {
+                $('.robotInfoContainer:last').remove();
+                robotInfoCounter = $('.robotInfoContainer').length;
+            }
+        }
+
+
         function addRobotInfo() {
             if (robotInfoCounter < 10) {
                 const newRobotInfo = $('.robotInfoContainer:first').clone();
                 newRobotInfo.find('input').val('');
                 $('.robotInfoContainer:last').after(newRobotInfo);
                 robotInfoCounter = $('.robotInfoContainer').length;
+            } else {
+                alert('최대 10개까지만 추가할 수 있습니다.');
             }
         }
-
-        function removeRobotInfo() {
-            if (robotInfoCounter > 1) {
-                $('.robotInfoContainer:last').remove();
-                robotInfoCounter = $('.robotInfoContainer').length;
-            }
-        }
-
 
 
         // 기존 파일 정보를 불러와서 fileList에 추가
@@ -571,39 +582,6 @@
             formData.append('qnaType2Cd', $('.qnaType2').find('input:checked').val());
 
             const qnaRobots = [];
-            // $('.robotInfoContainer').each(function () {
-            //     const modelCd = $(this).find('.robotModel select').val();
-            //     const serialNo = $(this).find('.serialNo').val();
-            //
-            //     if(!serialNo) {
-            //         alert("로봇암 시리얼넘버를 입력해주세요.");
-            //         return;
-            //     }
-            //
-            //     const vValues = [];
-            //     for (let i = 1; i <= 10; i++) {
-            //         const v = $(this).find(`#software${i}`).val();
-            //         vValues.push(v);
-            //     }
-            //     const swVersion = vValues[0]+"."+vValues[1]+vValues[2]+vValues[3]+"."+vValues[4]+vValues[5]+vValues[6]+"."+vValues[7]+vValues[8]+vValues[9];
-            //
-            //
-            //
-            //     // const swVersion = $(this).find('.swVersion').val();
-            //
-            //
-            //
-            //     const applicationCd = $(this).find('.applicationCd select').val();
-            //
-            //     const robotInfo = {
-            //         modelCd: modelCd,
-            //         serialNo: serialNo,
-            //         swVersion: swVersion,
-            //         applicationCd: applicationCd
-            //     };
-            //     qnaRobots.push(robotInfo);
-            // });
-
             const inquiryItems = $('.qna-write-inquiry-product-item');
 
             for (let i = 0; i < inquiryItems.length; i++) {
