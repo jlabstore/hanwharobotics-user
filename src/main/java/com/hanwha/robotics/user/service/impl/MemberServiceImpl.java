@@ -150,8 +150,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public void deleteAccount(int memberNo) {
-		memberMapper.deleteMember(memberNo);
 		deletedAccountMapper.insertDeletedAccount(memberNo);
+		memberMapper.deleteMember(memberNo);
 	}
 
 

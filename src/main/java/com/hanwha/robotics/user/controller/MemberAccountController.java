@@ -46,14 +46,11 @@ public class MemberAccountController {
     @GetMapping("/profile/edit")
     public String editPage(@AuthenticationPrincipal int memberNo ,Model model) {
         MemberResponse response = memberService.retrieve(memberNo);
-
         List<Map<String, Object>> countries = codeService.getAllCountries();
         List<Map<String, Object>> phoneCodes = codeService.getPhoneCodes();
         model.addAttribute("countries", countries);
         model.addAttribute("phoneCodes",phoneCodes);
-
         model.addAttribute("memberResponse", response);
-
         return "member/mypage_edit";
     }
 
@@ -119,9 +116,9 @@ public class MemberAccountController {
      * @return
      */
     @DeleteMapping("/profile/delete")
-    public String deleteAccount(@AuthenticationPrincipal int memberNo) {
+    public ResponseEntity<Object> deleteAccount(@AuthenticationPrincipal int memberNo) {
         memberService.deleteAccount(memberNo);
-        return "main";
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
 

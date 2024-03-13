@@ -37,32 +37,6 @@
         </div>
     </main>
 
-
-
-
-
-
-<!--    <div>-->
-<!--        <br><br><br><br><br><br><br><br><br><br>-->
-<!--        <h1>회원탈퇴</h1>-->
-<!--        <br>-->
-<!--        <hr>-->
-<!--        회원을 탈퇴하시면 앞으로 Q&A 게시판을 이용하실 수 없습니다.-->
-
-<!--        <hr>-->
-<!--&lt;!&ndash;        <p th:text="${#request.userPrincipal.getName()}"/>&ndash;&gt;-->
-
-<!--        <br><br><br><br>-->
-<!--        <hr>-->
-
-<!--        <a href="/member/profile">아니오, 탈퇴를 취소하겠습니다.</a>-->
-<!--        <button onclick="deleteMember()">예, 탈퇴하겠습니다.</button>-->
-
-<!--        <br><br>-->
-<!--    </div>-->
-
-
-
 </div>
 
 
@@ -76,11 +50,10 @@
         COMM.ajax({
             type: 'DELETE',
             url: '/member/profile/delete',
-            data: JSON.stringify(jsonData),
-            contentType: 'application/json',
+            // data: JSON.stringify(jsonData),
+            // contentType: 'application/json',
             success: function (data) {
-                alert("회원 탈퇴가 완료되었습니다. \n그동안 한화 로보틱스와 함께해주셔서 감사합니다.")
-                window.location.href = '/';
+                window.location.href = '/delete/complete';
             },
 
             error: function (xhr, textStatus) {

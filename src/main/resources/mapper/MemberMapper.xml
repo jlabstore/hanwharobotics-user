@@ -94,5 +94,11 @@
         WHERE member_no = #{memberNo}
     </update>
 
+    <delete id="deleteMember" parameterType="int">
+        DELETE
+        FROM tb_member
+        WHERE member_no = #{memberNo}
+    </delete>
+
 
 </mapper>
