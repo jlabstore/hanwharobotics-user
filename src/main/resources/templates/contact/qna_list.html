@@ -9,7 +9,6 @@
 
 <div layout:fragment="content">
 
-
     <main class="sub qna-list">
         <div class="board board-type1">
             <div class="column">
@@ -156,7 +155,9 @@
             getList();
         });
 
+
         function getList(page) {
+
             if (typeof page != "undefined" && page != null) $('#page').val(page);
 
             COMM.ajaxPagingList({
