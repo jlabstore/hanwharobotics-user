@@ -99,12 +99,22 @@ public class MemberAccountController {
             @AuthenticationPrincipal int memberNo,
             @RequestBody MemberRequest request
     ) {
+
         memberService.changePassword(memberNo, request);
 
+        String email = memberService.getMemberEmail(memberNo);
+        mailUtil.sendPasswordChangeConfirm(email);
+        
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
 
+    /**
+     * 회원정보 수정 이메일 중복체크
+     * @param memberNo
+     * @param email
+     * @return
+     */
     @GetMapping("/check/email")
     public ResponseEntity<Boolean> checkMemberEmail(
             @AuthenticationPrincipal int memberNo,
