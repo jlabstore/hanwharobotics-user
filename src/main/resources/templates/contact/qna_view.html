@@ -247,19 +247,19 @@
         });
 
 
-        // function goBack() {
-        //     const params = {};
-        //     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-        //         function (str, key, value) {
-        //             params[key] = value;
-        //         }
-        //     );
-        //     if (params["to"] !== undefined && params["to"] === "main") {
-        //         // location.href="/newsroom/notice";
-        //     } else {
-        //         history.back();
-        //     }
-        // }
+        function goBack() {
+            const params = {};
+            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function (str, key, value) {
+                    params[key] = value;
+                }
+            );
+            if (params["to"] !== undefined && params["to"] === "main") {
+                // location.href="/newsroom/notice";
+            } else {
+                history.back();
+            }
+        }
 
         const paths = window.location.pathname.split('/');
 
@@ -407,7 +407,8 @@
                     console.log(jqXHR.status, jqXHR);
                     if (jqXHR.status === 403) {
                         alert("비공개 게시글 입니다.");
-                        window.location.href = "/qna";
+                        // window.location.href = "/qna";
+                        goBack();
                     }
                 }
             });
