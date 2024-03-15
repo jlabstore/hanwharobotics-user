@@ -27,4 +27,7 @@ public interface MemberMapper {
 
 	void updateMember(Member member);
 
+	String findEmailByMemberNo(int memberNo);
+
+
 }

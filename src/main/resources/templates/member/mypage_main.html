@@ -13,14 +13,6 @@
                     <h2>아이디</h2>
                     <span th:text="${memberResponse.getMemberId()}"/>
                 </div>
-<!--                <div class="mypage-section">-->
-<!--                    <h2>비밀번호 변경</h2>-->
-<!--                    <span>******</span>-->
-<!--                </div>-->
-<!--                <div class="mypage-section">-->
-<!--                    <h2>비밀번호 재입력</h2>-->
-<!--                    <span>******</span>-->
-<!--                </div>-->
                 <div class="mypage-section">
                     <h2>이메일</h2>
                     <span th:text="${memberResponse.getEmail()}"/>
@@ -49,8 +41,8 @@
                     <h2>상세주소</h2>
                     <span th:text="${memberResponse.getAddressDetail()}"/>
                 </div>
-                <div class="mypage-section">
-                    <h2>로봇구매처/대리점</h2>
+                <div class="mypage-section agency">
+                    <h2>로봇구매처/<br/>대리점</h2>
                     <span th:text="${memberResponse.getStore()}"/>
                 </div>
                 <div class="mypage-section">

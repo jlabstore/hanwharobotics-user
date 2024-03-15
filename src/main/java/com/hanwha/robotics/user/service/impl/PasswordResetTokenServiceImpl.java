@@ -15,6 +15,10 @@ public class PasswordResetTokenServiceImpl implements PasswordResetTokenService 
     @Override
     public boolean validate(String token) {
         PasswordResetToken resetToken = passwordResetTokenMapper.findByToken(token);
+        // FIXME
+        if (resetToken == null) {
+            return false;
+        }
         return !resetToken.isExpired();
     }
 
@@ -23,9 +27,9 @@ public class PasswordResetTokenServiceImpl implements PasswordResetTokenService 
         return passwordResetTokenMapper.findEmailByToken(token);
     }
 
-//    @Override
-//    public void deleteToken(String token) {
-//        passwordResetTokenMapper.deleteToken(token);
-//    }
+    @Override
+    public void deleteToken(String token) {
+        passwordResetTokenMapper.deleteToken(token);
+    }
 
 }

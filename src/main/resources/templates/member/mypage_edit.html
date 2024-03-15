@@ -6,11 +6,8 @@
 <body>
 
 <div layout:fragment="content">
-
-
-
     <main class="mypage edit">
-<!--        <form>-->
+        <form>
             <div class="mypage-container">
                 <h1>회원정보 수정</h1>
                 <section class="mypage-contents edit">
@@ -20,85 +17,109 @@
                     </div>
                     <div class="mypage-section">
                         <h2>비밀번호 변경</h2>
-                        <button type="button" class="mypage-pwd-edit" onclick="layerMyPagePwdEditOpenBtn()">비밀번호 변경</button>
+                        <button type="button" class="mypage-pwd-edit" onclick="layerMyPagePwdEditOpenBtn()">비밀번호 변경
+                        </button>
                     </div>
+
+
+
                     <div class="mypage-section">
                         <h2>이메일</h2>
                         <div class="mypage-edit-email">
-                            <input type="text" name="email-local" id="email-local" class="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required placeholder="이메일" />
-<!--                            <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>-->
+                            <input type="text" name="email-local" id="email-local" class="email_front"
+                                   th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required
+                                   placeholder="이메일"/>
+                            <!--                            <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>-->
                             <span>@</span>
                             <select name="email-domain" id="email-domain" class="email_end">
                                 <option value="gmail.com">gmail.com</option>
                                 <option value="naver.com">naver.com</option>
+                                <option value="outlook.com">outlook.com</option>
+                                <option value="yahoo.com">yahoo.com</option>
                                 <option value="hotmail.com">hotmail.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="hanmail.net">hanmail.net</option>
                                 <option value="nate.com">nate.com</option>
                                 <option value="kakao.com">kakao.com</option>
                             </select>
                         </div>
+
+                        <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
+
+                        <label class="signup-message-warning check_text" id="email_check" style="display: none"></label>
+
                     </div>
+
+
+
                     <div class="mypage-section">
                         <h2>업체명</h2>
-                        <input type="text" name="company_name" id="company_name" class="companyName" th:value="${memberResponse.getCompanyNm()}" required placeholder="업체명" />
-<!--                        <input type="text" th:value="${memberResponse.getCompanyNm()}" id="companyName" name="companyName">-->
+                        <input type="text" name="company_name" id="company_name" class="companyName"
+                               th:value="${memberResponse.getCompanyNm()}" required placeholder="업체명"/>
+                        <!--                        <input type="text" th:value="${memberResponse.getCompanyNm()}" id="companyName" name="companyName">-->
                     </div>
 
 
+                    <!--                    <div th:if="${memberResponse.getRegion()} != 'KR'" >-->
+                    <!--                        &lt;!&ndash;                <label for="selectCountry">Country/Region * </label>&ndash;&gt;-->
 
-<!--                    <div th:if="${memberResponse.getRegion()} != 'KR'" >-->
-<!--                        &lt;!&ndash;                <label for="selectCountry">Country/Region * </label>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                <select id="selectCountry">&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    <option th:each="country : ${countries}" th:value="${country['code']}" th:text="${country['code_en']}"></option>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                </select>&ndash;&gt;-->
 
-<!--                        &lt;!&ndash;                <select id="selectCountry">&ndash;&gt;-->
-<!--                        &lt;!&ndash;                    <option th:each="country : ${countries}" th:value="${country['code']}" th:text="${country['code_en']}"></option>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                </select>&ndash;&gt;-->
+                    <!--                        Country/Region-->
+                    <!--                        <input th:value="${memberResponse.getRegion()}"/>-->
 
-<!--                        Country/Region-->
-<!--                        <input th:value="${memberResponse.getRegion()}"/>-->
+                    <!--                        <br>-->
+                    <!--                        City *-->
+                    <!--                        <input type="text" id="city" name="city" th:value="${memberResponse.getCity()}" >-->
 
-<!--                        <br>-->
-<!--                        City *-->
-<!--                        <input type="text" id="city" name="city" th:value="${memberResponse.getCity()}" >-->
-
-<!--                    </div>-->
-
+                    <!--                    </div>-->
 
 
                     <div class="mypage-section">
                         <h2>우편번호</h2>
                         <div class="mypage-edit-zipcode">
-                            <input type="text" name="zipcode" id="zipcode" th:value="${memberResponse.getPostCd()}" required placeholder="우편번호" />
-                            <button type="button" th:if="${memberResponse.getRegion()} == 'KR'" onclick="daumPostcode()">우편번호 찾기</button>
+                            <input type="text" name="zipcode" id="zipcode" th:value="${memberResponse.getPostCd()}"
+                                   required readonly placeholder="우편번호"/>
+                            <button type="button" th:if="${memberResponse.getRegion()} == 'KR'"
+                                    onclick="daumPostcode()">우편번호 찾기
+                            </button>
                         </div>
                     </div>
 
 
-
                     <div class="mypage-section">
                         <h2>주소</h2>
-                        <input type="text" name="address" id="address" th:value="${memberResponse.getAddress()}" required placeholder="주소" />
+                        <input type="text" name="address" id="address" th:value="${memberResponse.getAddress()}"
+                               required placeholder="주소"/>
                     </div>
                     <div class="mypage-section">
                         <h2>상세주소</h2>
-                        <input type="text" name="address_detail" id="address_detail" th:value="${memberResponse.getAddressDetail()}" required placeholder="상세주소" />
+                        <input type="text" name="address_detail" id="address_detail"
+                               th:value="${memberResponse.getAddressDetail()}" required placeholder="상세주소"/>
                     </div>
-
 
 
                     <div class="mypage-section">
                         <h2>로봇구매처/대리점</h2>
-                        <input type="text" name="agency" id="agency" th:value="${memberResponse.getStore()}" required placeholder="로봇구매처/대리점" />
+                        <input type="text" name="agency" id="agency" th:value="${memberResponse.getStore()}" required
+                               placeholder="로봇구매처/대리점"/>
                     </div>
                     <div class="mypage-section">
                         <h2>이름</h2>
-                        <input type="text" name="name" id="name" th:value="${memberResponse.getMemberNm()}" required placeholder="이름" />
+                        <input type="text" name="name" id="name" th:value="${memberResponse.getMemberNm()}" required
+                               placeholder="이름"/>
                     </div>
                     <div class="mypage-section">
                         <h2>직급</h2>
-                        <input type="text" name="rank" id="rank" th:value="${memberResponse.getPosition()}" required placeholder="직급" />
+                        <input type="text" name="rank" id="rank" th:value="${memberResponse.getPosition()}" required
+                               placeholder="직급"/>
                     </div>
                     <div class="mypage-section">
                         <h2>연락처</h2>
-                        <div class="mypage-edit-phone" th:with="contactParts=${#strings.setSplit(memberResponse.getContact(), ')')}">
+                        <div class="mypage-edit-phone"
+                             th:with="contactParts=${#strings.setSplit(memberResponse.getContact(), ')')}">
 
                             <select id="phone_code" required>
                                 <option th:each="phoneCode : ${phoneCodes}"
@@ -111,182 +132,15 @@
                             <input id="phone" name="phone" th:value="${contactParts[1]}" required>
                             <input id="contact" name="contact" style="display: none">
 
-<!--                            <select name="telecom" id="telecom">-->
-<!--                                <option value="010">010</option>-->
-<!--                                <option value="011">011</option>-->
-<!--                                <option value="016">016</option>-->
-<!--                                <option value="017">017</option>-->
-<!--                                <option value="018">018</option>-->
-<!--                                <option value="019">019</option>-->
-<!--                            </select>-->
-
-<!--                            <input type="text" name="phone_front" id="phone_front" value="2541" required />-->
-<!--                            <input type="text" name="phone_back" id="phone_back" value="0255" required />-->
                         </div>
                     </div>
                 </section>
             </div>
             <button type="button" class="mypage-btn color-orange edit" onclick="editConfirm()">수정 완료</button>
-<!--        </form>-->
+        </form>
     </main>
 
-
-
-    <div>
-
-<!--        아이디 <span th:text="${memberResponse.getMemberId()}"/>-->
-<!--        <br><br>-->
-
-<!--        비밀번호 변경 <button id="openModalBtn"> 비밀번호 변경 </button>-->
-<!--        <br><br>-->
-
-
-
-        <!-- 비밀번호 변경 모달 -->
-<!--        <div id="passwordChange" class="popup">-->
-<!--            <span class="close">&times;</span>-->
-<!--            <h2>비밀번호 변경</h2>-->
-<!--            <div id="passwordForm">-->
-<!--                비밀번호를 변경하기 위해 기존 비밀번호를 먼저 입력해주세요.<br>-->
-<!--                <label for="password">기존 비밀번호</label>-->
-<!--                <input type="password" id="password" name="password"><br><br>-->
-<!--                <button type="button" onclick="checkPasswordChange()">확인</button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div id="passwordChange2" class="popup">-->
-<!--            <span class="close">&times;</span>-->
-<!--            <h2>비밀번호 변경</h2>-->
-<!--            <div id="passwordForm2">-->
-<!--                새로운 비밀번호를 입력해주세요.<br>-->
-<!--                <label for="newPassword1">비밀번호</label>-->
-<!--                <input type="password" id="newPassword1" name="newPassword1"><br>-->
-<!--                영문과 숫자를 조합하여 만들어주세요.<br>-->
-<!--                <label for="newPassword2">비밀번호 다시입력</label>-->
-<!--                <input type="password" id="newPassword2" name="newPassword2"><br><br>-->
-<!--                <button type="button" onclick="changePassword()">비밀번호 변경</button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--        <div id="passwordChange3" class="popup">-->
-<!--            <span class="close">&times;</span>-->
-<!--            <h2>비밀번호 변경</h2>-->
-<!--            <div id="passwordForm3">-->
-<!--                비밀번호 변경이 완료되었습니다.<br>-->
-<!--                <span class="close">확인</span>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-
-
-
-
-<!--        <label for="email_front">이메일 주소 *</label>-->
-<!--        <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>-->
-<!--        <label>-->
-<!--            @-->
-<!--            <select id="email_end" name="email_end">-->
-<!--                <option value="gmail.com">gmail.com</option>-->
-<!--                <option value="naver.com">naver.com</option>-->
-<!--                <option value="hotmail.com">hotmail.com</option>-->
-<!--                <option value="nate.com">nate.com</option>-->
-<!--                <option value="kakao.com">kakao.com</option>-->
-<!--&lt;!&ndash;                <option value="">직접입력</option>&ndash;&gt;-->
-<!--            </select>-->
-<!--        </label>-->
-<!--        <input id="email" name="email" style="display: none">-->
-
-<!--        <button type="button" onclick="checkDuplicateEmail()">중복확인</button>-->
-
-<!--        &lt;!&ndash;                <input type="text" id="custom_email" name="custom_email" style="display: none;" placeholder="이메일인풋창">&ndash;&gt;-->
-<!--        <br>-->
-<!--        <span id="email_check" class="check_text" style="color: #ff0000;"></span>-->
-<!--        <br><br>-->
-
-
-
-<!--        <label for="companyName">업체명 * </label><input type="text" th:value="${memberResponse.getCompanyNm()}" id="companyName" name="companyName">-->
-<!--        <br><br>-->
-
-
-
-
-<!--        <div th:if="${memberResponse.getRegion()} != 'KR'" >-->
-<!--&lt;!&ndash;                <label for="selectCountry">Country/Region * </label>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <select id="selectCountry">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option th:each="country : ${countries}" th:value="${country['code']}" th:text="${country['code_en']}"></option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </select>&ndash;&gt;-->
-
-<!--            Country/Region-->
-<!--            <input th:value="${memberResponse.getRegion()}"/>-->
-
-<!--            <br>-->
-<!--            <label for="city">City * </label><input type="text" id="city" name="city" th:value="${memberResponse.getCity()}" >-->
-
-<!--        </div>-->
-<!--        <br><br>-->
-
-
-<!--        <div>-->
-
-<!--            <label for="postcode">우편번호 *</label><input type="text" id="postcode" name="postcode" th:value="${memberResponse.getPostCd()}">-->
-
-<!--            <span th:if="${memberResponse.getRegion()} == 'KR'">-->
-<!--                <button type="button" onclick="daumPostcode()">우편번호 찾기</button>-->
-<!--            </span>-->
-
-<!--            <br>-->
-
-<!--            <label for="address">주소 *</label><input type="text" id="address" name="address" th:value="${memberResponse.getAddress()}">-->
-<!--            <br>-->
-
-<!--            <label for="addressDetail">상세주소 *</label><input type="text" id="addressDetail" name="addressDetail" th:value="${memberResponse.getAddressDetail()}">-->
-<!--        </div>-->
-<!--        <br><br>-->
-
-
-<!--        <label for="store">로봇 구매처 / 대리점 * </label><input type="text" id="store" name="store" th:value="${memberResponse.getStore()}" required>-->
-<!--        <br><br>-->
-
-<!--        <label for="memberNm">이름 * </label><input type="text" id="memberNm" name="memberNm" th:value="${memberResponse.getMemberNm()}" required>-->
-<!--        <br><br>-->
-
-<!--        <label for="position">직급 * </label><input type="text" id="position" name="position" th:value="${memberResponse.getPosition()}" required>-->
-<!--        <br><br>-->
-
-
-
-<!--&lt;!&ndash;        <label>&ndash;&gt;-->
-<!--&lt;!&ndash;            연락처 *&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <span th:with="contactParts=${#strings.setSplit(memberResponse.getContact(), ')')}">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <select id="phone_code" required>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option th:each="phoneCode : ${phoneCodes}"&ndash;&gt;-->
-<!--&lt;!&ndash;                            th:value="${phoneCode['code_phone']}"&ndash;&gt;-->
-<!--&lt;!&ndash;                            th:selected="${phoneCode['code_phone'] == contactParts[0]}"&ndash;&gt;-->
-<!--&lt;!&ndash;                            th:text="${phoneCode['code_phone']}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    </option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </select>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <input id="phone" name="phone" th:value="${contactParts[1]}" required>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            </span>&ndash;&gt;-->
-<!--&lt;!&ndash;            <input id="contact" name="contact" style="display: none">&ndash;&gt;-->
-
-<!--&lt;!&ndash;        </label>&ndash;&gt;-->
-
-
-<!--        <button type="button" onclick="editConfirm()">수정완료</button>-->
-
-<!--    </div>-->
-
-
 </div>
-
 
 </body>
 </html>
@@ -301,27 +155,47 @@
     //
     // });
 
+
+    let isEmailChanged = false;
+    let emailCheck = false;
+
+    $('#email-local, #email-domain').on('change', function() {
+        isEmailChanged = true;
+    });
+
     // 이메일 중복확인
     function checkDuplicateEmail() {
         const email_front = $(".email_front").val();
-        const email = $('#email').val();
+        const email_end = $(".email_end").val();
+        const email = email_front + "@" + email_end;
+
         const emailCheckElement = $('#email_check');
 
         if (email_front.length < 3 ) {
             emailCheckElement.text("이메일을 정확히 입력해 주세요");
+            emailCheckElement.show();
         } else {
             $.ajax({
                 type: 'GET',
-                url: `/check/email?email=${encodeURIComponent(email)}`,
+                url: `/member/check/email`,
+                data: {
+                    email : email
+                },
                 success: function(data) {
                     if (data === true) {
                         emailCheckElement.text("이미 존재하는 이메일입니다.");
+                        emailCheckElement.show();
+                        emailCheck = true;
+                        isEmailChanged = true;
                     } else {
                         emailCheckElement.text("사용 가능한 이메일 입니다.");
+                        emailCheckElement.show();
+                        emailCheck = false;
+                        isEmailChanged = false;
                     }
                 },
                 error: function() {
-                    alert('서버 에러');
+                    alert('에러가 발생했습니다.');
                 }
             });
         }
@@ -348,7 +222,7 @@
 
 
     // 연락처 숫자만 입력
-    document.getElementById('phone').addEventListener('keyup', function() {
+    document.getElementById('phone').addEventListener('keyup', function () {
         checkNumericInput(this);
     });
 
@@ -359,8 +233,20 @@
         }
     }
 
+
+
+
     // 수정완료 버튼
-    function editConfirm(){
+    function editConfirm() {
+
+        const companyNm = $('#company_name').val();
+        const postCode = $('#zipcode').val();
+        const address = $('#address').val();
+        const addressDetail = $('#address_detail').val();
+        const store = $('#agency').val();
+        const memberNm = $('#name').val();
+        const position = $('#rank').val();
+
         const email_front = $(".email_front").val();
         const email_end = $(".email_end").val();
         const email = email_front + "@" + email_end;
@@ -369,33 +255,41 @@
         const phone = $("#phone").val();
         const contact = phone_code + ")" + phone;
 
+        if (isEmailChanged || emailCheck) {
+            alert("이메일 중복확인을 해주세요.");
+            return;
+        }
+
+        if ( !email || !companyNm || !postCode || !address || !addressDetail || !store || !memberNm || !position || !contact) {
+            alert('모든 필수 입력 항목을 입력해주세요.');
+            return;
+        }
+
         const temp = {
-            memberId: $('#memberId').val(),
-            password: $('#password').val(),
-            companyNm: $('#company_name').val(),
-            region: $('#region').val(),
-            city: $('#city').val(),
-            postCd: $('#zipcode').val(),
-            address: $('#address').val(),
-            addressDetail: $('#address_detail').val(),
-            store: $('#agency').val(),
-            memberNm: $('#name').val(),
-            position: $('#rank').val(),
+            companyNm: companyNm,
+            // region: $('#region').val(),
+            // city: $('#city').val(),
+            postCd: postCode,
+            address: address,
+            addressDetail: addressDetail,
+            store: store,
+            memberNm: memberNm,
+            position: position,
             email: email,
             contact: contact,
         };
 
         COMM.ajax({
-            url : "/member/profile/edit",
+            url: "/member/profile/edit",
             type: "PUT",
             headers: {'Content-Type': 'application/json'},
             data: JSON.stringify(temp),
-            success : function(data) {
-                if(data.code === 200){
-                    window.location.href="/member/profile";
+            success: function (data) {
+                if (data.code === 200) {
+                    window.location.href = "/member/profile";
                 }
             },
-            error : function(jqXHR){
+            error: function (jqXHR) {
                 console.log(jqXHR.status, jqXHR);
             },
         });
@@ -412,19 +306,19 @@
             alert("기존 비밀번호를 입력하세요.");
         } else {
             COMM.ajax({
-                url : "/member/check/password",
+                url: "/member/check/password",
                 type: "POST",
                 headers: {'Content-Type': 'application/json'},
                 data: JSON.stringify(requestData),
-                success : function(data) {
-                    if(data.code === 200){
+                success: function (data) {
+                    if (data.code === 200) {
                         // document.getElementById('passwordChange').style.display = 'none';
                         layerPwdEditBtn();
                         $("#pwd").val('');
                         // document.getElementById('passwordChange2').style.display = 'block';
                     }
                 },
-                error : function(jqXHR){
+                error: function (jqXHR) {
                     const errorResponse = JSON.parse(jqXHR.responseText);
                     alert(errorResponse.message);
                     console.log(jqXHR.status, jqXHR);
@@ -434,14 +328,13 @@
     }
 
 
-
     function changePassword() {
         const newPassword = $(".newPassword").val();
         const newPassword2 = $(".newPassword2").val();
 
         // 비밀번호 유효성 검증
         if (!isValidPassword(newPassword, newPassword2)) {
-            return; // 비밀번호가 유효하지 않으면 함수 종료
+            return;
         }
 
         const requestData = {
@@ -451,7 +344,7 @@
         COMM.ajax({
             url: "/member/change/password",
             type: "PUT",
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             data: JSON.stringify(requestData),
             success: function (data) {
                 if (data.code === 200) {
@@ -477,15 +370,12 @@
         }
 
         if (newPassword !== newPassword2) {
-            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            alert("비밀번호 확인이 일치하지 않습니다.");
             return false;
         }
 
         return true;
     }
-
-
-
 
 
 </script>

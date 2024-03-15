@@ -38,6 +38,16 @@
         WHERE email = #{email}
     </select>
 
+
+
+    <select id="findEmailByMemberNo" parameterType="int" resultType="String">
+        SELECT email
+        FROM tb_member
+        WHERE member_no = #{memberNo}
+    </select>
+
+
+
     <!-- 로그인 , 비밀번호 찾기 -->
     <select id="selectByMemberId" parameterType="String" resultType="com.hanwha.robotics.user.entity.Member">
         SELECT *
@@ -80,8 +90,6 @@
         UPDATE tb_member
         SET
             company_nm = #{companyNm},
-            region = #{region},
-            city = #{city},
             post_cd = #{postCd},
             address = #{address},
             address_detail = #{addressDetail},

@@ -16,6 +16,7 @@ import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 import com.hanwha.robotics.user.service.MemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -129,6 +130,7 @@ public class MemberServiceImpl implements MemberService {
 //		}
 		String encodedPassword = passwordEncoder.encode(request.getNewPassword());
 		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
+
 	}
 
 
@@ -146,14 +148,21 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public String getMemberEmail(int memberNo) {
+		return memberMapper.findEmailByMemberNo(memberNo);
+	}
+
+
+
 	// 회원 탈퇴
 	@Override
 	@Transactional
 	public void deleteAccount(int memberNo) {
 		deletedAccountMapper.insertDeletedAccount(memberNo);
 		memberMapper.deleteMember(memberNo);
+		SecurityContextHolder.clearContext();
 	}
-
 
 
 

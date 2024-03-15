@@ -116,9 +116,7 @@
 
 
 
-                            <div class="reply"></div>
-
-
+                            <span class="reply"></span>
 
                                 <script id="reply-html" type="text/template">
 
@@ -165,56 +163,9 @@
                                 </script>
 
 
-
-<!--                            <script id="reply-html" type="text/template">-->
-
-<!--                                {{#list}}-->
-<!--                                <div class="reply-item">-->
-
-<!--                                    {{#isUser}}-->
-
-<!--                                    <div class="qna-view-answer re">-->
-<!--                                        <div>-->
-<!--                                            <h4>답글</h4>-->
-<!--                                            <p class="qna-view-answer-my">{{memberId}}</p>-->
-<!--                                        </div>-->
-<!--                                        <div class="qna-view-answer-content">-->
-<!--                                            <div>-->
-<!--                                                <h4 class="hidden-text">내용</h4>-->
-<!--&lt;!&ndash;                                                <p>&ndash;&gt;-->
-<!--                                                    <p id="reply-item-replyContent">{{replyContent}}</p>-->
-<!--&lt;!&ndash;                                                </p>&ndash;&gt;-->
-<!--                                            </div>-->
-<!--                                            <div class="qna-view-answer-my-btngroup">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-
-<!--                                    {{/isUser}}-->
-
-
-<!--                                    {{#isAdmin}}-->
-<!--                                    <div class="qna-view-answer">-->
-<!--                                        <div>-->
-<!--                                            <h4>답변</h4>-->
-<!--                                            <p>-->
-<!--                                                <strong>Admin<br/></strong>-->
-<!--                                                <span id="reply-item-replyContent">{{replyContent}}</span>-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    {{/isAdmin}}-->
-
-<!--                                </div>-->
-<!--                                {{/list}}-->
-
-<!--                            </script>-->
-
                         </div>
                     </div>
 
-
-                    <!-- TODO: css -->
 
                     <div class="qna-view-section reply-section">
                         <form class="qna-view-answer-wrapper">
@@ -234,8 +185,9 @@
                     </div>
 
 
-
                 </div>
+
+
 
 
                 <a href="#" class="qna-view-nav board_prev">
@@ -255,22 +207,11 @@
                 </a>
 
 
-                <!--                <a class="board_prev">&lt; 이전글</a>-->
-                <!--                <a class="board_next">다음글 &gt;</a>-->
-
-
-                <!--                <a href="javascript:void(0)" onClick="goBack()" th:utext="#{toList}" class="qna-view-prev">-->
-                <!--                    <img src="../images/pc/btn_prev.svg" alt="" />-->
-                <!--                </a>-->
-
-
                 <div class="qna-view-footer">
-
 <!--                    <a href="javascript:void(0)" onClick="goBack()" class="qna-view-prev">-->
 <!--                        <img src="../images/pc/btn_prev.svg" alt=""/>-->
 <!--                        목록으로-->
 <!--                    </a>-->
-
                     <a href="/qna" class="qna-view-prev">
                         <img src="../images/pc/btn_prev.svg" alt=""/>
                         목록으로

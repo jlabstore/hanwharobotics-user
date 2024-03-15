@@ -27,6 +27,7 @@ public class PasswordResetController {
 
 	@Autowired
 	private PasswordResetTokenService passwordResetTokenService;
+
 	@Autowired
 	private MailUtil mailUtil;
 
@@ -53,8 +54,8 @@ public class PasswordResetController {
 		memberService.resetPassword(request);
 		String email = passwordResetTokenService.retrieveEmail(request.getToken());
 		mailUtil.sendPasswordChangeConfirm(email);
-		// TODO: 비밀번호 재설정 완료되면 토큰 삭제
-//		passwordResetTokenService.deleteToken(request.getToken());
+		// FIXME: 비밀번호 재설정 완료되면 토큰 삭제
+		passwordResetTokenService.deleteToken(request.getToken());
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 

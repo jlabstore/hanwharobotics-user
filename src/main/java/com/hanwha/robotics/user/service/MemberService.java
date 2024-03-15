@@ -61,6 +61,9 @@ public interface MemberService {
      */
     void resetPassword(ResetPasswordRequest request);
 
+
+
+
     /**
      * 회원 탈퇴
      * @param memberNo
@@ -72,4 +75,7 @@ public interface MemberService {
 
     // 회원 정보 수정
     void updateMember(MemberRequest request);
+
+
+    String getMemberEmail(int memberNo);
 }

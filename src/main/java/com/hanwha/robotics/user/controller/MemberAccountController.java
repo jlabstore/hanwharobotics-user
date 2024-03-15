@@ -2,6 +2,7 @@ package com.hanwha.robotics.user.controller;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
+import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.dto.MemberResponse;
 import com.hanwha.robotics.user.service.CodeService;
@@ -25,6 +26,8 @@ public class MemberAccountController {
     private MemberService memberService;
     @Autowired
     private CodeService codeService;
+    @Autowired
+    private MailUtil mailUtil;
 
 	/**
 	 * 회원정보 페이지
@@ -97,7 +100,23 @@ public class MemberAccountController {
             @RequestBody MemberRequest request
     ) {
         memberService.changePassword(memberNo, request);
+
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
+    }
+
+
+    @GetMapping("/check/email")
+    public ResponseEntity<Boolean> checkMemberEmail(
+            @AuthenticationPrincipal int memberNo,
+            @RequestParam String email
+    ) {
+        String currentMemberEmail = memberService.getMemberEmail(memberNo);
+        if (currentMemberEmail.equals(email)) {
+            return ResponseEntity.ok(false);
+        }
+
+        boolean isExists = memberService.isMemberEmailExists(email);
+        return ResponseEntity.ok(isExists);
     }
 
 

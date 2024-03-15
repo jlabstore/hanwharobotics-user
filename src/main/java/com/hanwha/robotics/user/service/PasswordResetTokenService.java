@@ -24,4 +24,6 @@ public interface PasswordResetTokenService {
 	boolean validate(String token);
 
 	String retrieveEmail(String token);
+
+    void deleteToken(String token);
 }

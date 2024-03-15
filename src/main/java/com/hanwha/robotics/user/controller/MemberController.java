@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.service.MemberService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,11 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("/login-page")
-	public String loginPage() {
+	public String loginPage(HttpServletRequest request) {
+		String uri = request.getHeader("Referer");
+		if (uri != null && ! uri.contains("/login")) {
+			request.getSession().setAttribute("prevPage",uri);
+		}
 		return "member/login_main";
 	}
 
@@ -84,7 +89,6 @@ public class MemberController {
 	 */
 	@GetMapping("/check/email")
 	public ResponseEntity<Boolean> checkMemberEmail(@RequestParam String email) {
-		System.out.println("이메일"+ email);
 		boolean isExists = memberService.isMemberEmailExists(email);
 		return ResponseEntity.ok(isExists);
 	}

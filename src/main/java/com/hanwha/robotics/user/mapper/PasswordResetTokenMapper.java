@@ -14,4 +14,6 @@ public interface PasswordResetTokenMapper {
 	PasswordResetToken findByToken(String token);
 
     String findEmailByToken(String token);
+
+    void deleteToken(String token);
 }
