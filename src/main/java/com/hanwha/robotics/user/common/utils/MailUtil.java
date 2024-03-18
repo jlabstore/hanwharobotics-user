@@ -98,7 +98,7 @@ public class MailUtil {
 	@Async
 	public void sendPasswordResetLink(Member member) {
 		String resetToken = generateResetToken(member);
-		String resetLink = "http://localhost:8081/password/reset?token=" +
+		String resetLink = "https://www.hanwharobotics.com:8090/password/reset?token=" +
 			URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
 
 		this.sendEmail(
@@ -136,7 +136,7 @@ public class MailUtil {
 			this.sendEmail(
 				adminMapper.selectAdminEmail(),
 				"Q&A 게시판에 새로운 글이 등록되었습니다.",
-				"Q&A 게시판에 새로운 글이 등록되었습니다. gogo: http://localhost:8090/admin/qna/detail?no=" + qnaNo + " <- 이동"
+				"Q&A 게시판에 새로운 글이 등록되었습니다. : https://www.hanwharobotics.com:8080/admin/qna/detail?no=" + qnaNo + " <- 이동"
 			);
 		} catch (Exception e) {
 			throw new RuntimeException("관리자 이메일 발송 실패", e);
