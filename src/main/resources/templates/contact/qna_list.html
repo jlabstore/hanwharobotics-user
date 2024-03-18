@@ -175,7 +175,7 @@
                     const rendered = Mustache.render(template, {'list': data.contents});
                     $('.tbody').html(rendered);
 
-                    if (data.totalElements !== 0) {
+                    // if (data.totalElements !== 0) {
                         setPagination(data, $('.paging'));
 
                         // 문의하기 버튼 추가
@@ -188,7 +188,7 @@
                         };
                         $('.paging').append(inquiryButton);
 
-                    }
+                    // }
                 }
             );
         }

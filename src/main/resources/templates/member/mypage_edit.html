@@ -12,7 +12,7 @@
                 <h1>회원정보 수정</h1>
                 <section class="mypage-contents edit">
                     <div class="mypage-section">
-                        <h2>아이디</h2>
+                        <h2>아이디<strong>*</strong></h2>
                         <input name="id" id="id" type="text" readonly th:value="${memberResponse.getMemberId()}"/>
                     </div>
                     <div class="mypage-section">
@@ -22,38 +22,44 @@
                     </div>
 
 
-
                     <div class="mypage-section">
-                        <h2>이메일</h2>
-                        <div class="mypage-edit-email">
-                            <input type="text" name="email-local" id="email-local" class="email_front"
-                                   th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required
-                                   placeholder="이메일"/>
-                            <!--                            <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>-->
-                            <span>@</span>
-                            <select name="email-domain" id="email-domain" class="email_end">
-                                <option value="gmail.com">gmail.com</option>
-                                <option value="naver.com">naver.com</option>
-                                <option value="outlook.com">outlook.com</option>
-                                <option value="yahoo.com">yahoo.com</option>
-                                <option value="hotmail.com">hotmail.com</option>
-                                <option value="daum.net">daum.net</option>
-                                <option value="hanmail.net">hanmail.net</option>
-                                <option value="nate.com">nate.com</option>
-                                <option value="kakao.com">kakao.com</option>
-                            </select>
+                        <h2>이메일<strong>*</strong></h2>
+
+                        <div class="signup-main-email-container">
+                            <div class="signup-main-email-wrapper">
+
+                                <div class="mypage-edit-email">
+                                    <input type="text" name="email-local" id="email-local" class="email_front"
+                                           th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}"
+                                           required
+                                           placeholder="이메일"/>
+                                    <!--                            <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>-->
+                                    <span>@</span>
+                                    <select name="email-domain" id="email-domain" class="email_end">
+                                        <option value="gmail.com">gmail.com</option>
+                                        <option value="naver.com">naver.com</option>
+                                        <option value="outlook.com">outlook.com</option>
+                                        <option value="yahoo.com">yahoo.com</option>
+                                        <option value="hotmail.com">hotmail.com</option>
+                                        <option value="daum.net">daum.net</option>
+                                        <option value="hanmail.net">hanmail.net</option>
+                                        <option value="nate.com">nate.com</option>
+                                        <option value="kakao.com">kakao.com</option>
+                                    </select>
+                                </div>
+
+                                <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
+                            </div>
+
+                            <label class="signup-message-warning check_text" id="email_check"
+                                   style="display: none"></label>
                         </div>
-
-                        <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
-
-                        <label class="signup-message-warning check_text" id="email_check" style="display: none"></label>
 
                     </div>
 
 
-
                     <div class="mypage-section">
-                        <h2>업체명</h2>
+                        <h2>업체명<strong>*</strong></h2>
                         <input type="text" name="company_name" id="company_name" class="companyName"
                                th:value="${memberResponse.getCompanyNm()}" required placeholder="업체명"/>
                         <!--                        <input type="text" th:value="${memberResponse.getCompanyNm()}" id="companyName" name="companyName">-->
@@ -78,7 +84,7 @@
 
 
                     <div class="mypage-section">
-                        <h2>우편번호</h2>
+                        <h2>우편번호<strong>*</strong></h2>
                         <div class="mypage-edit-zipcode">
                             <input type="text" name="zipcode" id="zipcode" th:value="${memberResponse.getPostCd()}"
                                    required readonly placeholder="우편번호"/>
@@ -90,24 +96,24 @@
 
 
                     <div class="mypage-section">
-                        <h2>주소</h2>
+                        <h2>주소<strong>*</strong></h2>
                         <input type="text" name="address" id="address" th:value="${memberResponse.getAddress()}"
                                required placeholder="주소"/>
                     </div>
                     <div class="mypage-section">
-                        <h2>상세주소</h2>
+                        <h2>상세주소<strong>*</strong></h2>
                         <input type="text" name="address_detail" id="address_detail"
                                th:value="${memberResponse.getAddressDetail()}" required placeholder="상세주소"/>
                     </div>
 
 
                     <div class="mypage-section">
-                        <h2>로봇구매처/대리점</h2>
+                        <h2>로봇구매처/대리점<strong>*</strong></h2>
                         <input type="text" name="agency" id="agency" th:value="${memberResponse.getStore()}" required
                                placeholder="로봇구매처/대리점"/>
                     </div>
                     <div class="mypage-section">
-                        <h2>이름</h2>
+                        <h2>이름<strong>*</strong></h2>
                         <input type="text" name="name" id="name" th:value="${memberResponse.getMemberNm()}" required
                                placeholder="이름"/>
                     </div>
@@ -117,7 +123,7 @@
                                placeholder="직급"/>
                     </div>
                     <div class="mypage-section">
-                        <h2>연락처</h2>
+                        <h2>연락처<strong>*</strong></h2>
                         <div class="mypage-edit-phone"
                              th:with="contactParts=${#strings.setSplit(memberResponse.getContact(), ')')}">
 
@@ -159,7 +165,7 @@
     let isEmailChanged = false;
     let emailCheck = false;
 
-    $('#email-local, #email-domain').on('change', function() {
+    $('#email-local, #email-domain').on('change', function () {
         isEmailChanged = true;
     });
 
@@ -171,7 +177,7 @@
 
         const emailCheckElement = $('#email_check');
 
-        if (email_front.length < 3 ) {
+        if (email_front.length < 3) {
             emailCheckElement.text("이메일을 정확히 입력해 주세요");
             emailCheckElement.show();
         } else {
@@ -179,9 +185,9 @@
                 type: 'GET',
                 url: `/member/check/email`,
                 data: {
-                    email : email
+                    email: email
                 },
-                success: function(data) {
+                success: function (data) {
                     if (data === true) {
                         emailCheckElement.text("이미 존재하는 이메일입니다.");
                         emailCheckElement.show();
@@ -194,13 +200,12 @@
                         isEmailChanged = false;
                     }
                 },
-                error: function() {
+                error: function () {
                     alert('에러가 발생했습니다.');
                 }
             });
         }
     }
-
 
 
     // 우편번호 검색
@@ -234,8 +239,6 @@
     }
 
 
-
-
     // 수정완료 버튼
     function editConfirm() {
 
@@ -260,8 +263,8 @@
             return;
         }
 
-        if ( !email || !companyNm || !postCode || !address || !addressDetail || !store || !memberNm || !position || !contact) {
-            alert('모든 필수 입력 항목을 입력해주세요.');
+        if (!email || !companyNm || !postCode || !address || !addressDetail || !store || !memberNm || !position || !contact) {
+            alert('필수 입력 항목을 모두 입력해주세요.');
             return;
         }
 
