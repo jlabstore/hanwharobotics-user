@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 public class QnaReplyResponse {
     private int replyNo;
     private int qnaNo;
+
+    private int memberNo;
     private String memberId;
     private String adminId;
     private String replyContent;

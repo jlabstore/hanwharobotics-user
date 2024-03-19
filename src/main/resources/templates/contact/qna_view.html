@@ -430,7 +430,7 @@
 
                         $('.reply-item:last-child').ready(function () {
                             const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
-                            if (latestReply.replyType === 'USER') {
+                            if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo)) {
                                 const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
                                 const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
                                 $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
