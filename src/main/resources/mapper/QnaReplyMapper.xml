@@ -63,6 +63,7 @@
 
 
 
+    <!-- Q&A 답변 목록 -->
     <select id="findByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.QnaReplyResponse">
         SELECT
             r.reply_no,

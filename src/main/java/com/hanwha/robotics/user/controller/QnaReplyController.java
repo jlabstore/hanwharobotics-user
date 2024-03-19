@@ -47,11 +47,22 @@ public class QnaReplyController {
      * @param qnaNo
      * @return
      */
+//    @GetMapping("/{qnaNo}")
+//    public ResponseEntity<Object> retrieveReplies(@PathVariable int qnaNo) {
+//        List<QnaReplyResponse> response = qnaReplyService.retrieveQnaReply(qnaNo);
+//        Map<String, Object> responseData = new HashMap<>();
+//        responseData.put("qnaReplies", response);
+//        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), responseData));
+//    }
+
     @GetMapping("/{qnaNo}")
     public ResponseEntity<Object> retrieveReplies(@PathVariable int qnaNo) {
-        List<QnaReplyResponse> response = qnaReplyService.retrieveQnaReply(qnaNo);
+        List<QnaReplyResponse> responses = qnaReplyService.retrieveQnaReply(qnaNo);
+        for (QnaReplyResponse response : responses) {
+            response.setMaskedMemberId();
+        }
         Map<String, Object> responseData = new HashMap<>();
-        responseData.put("qnaReplies", response);
+        responseData.put("qnaReplies", responses);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), responseData));
     }
 
