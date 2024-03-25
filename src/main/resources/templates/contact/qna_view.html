@@ -163,17 +163,12 @@
                                 </script>
 
 
-
-
                             <div class="qna-view-answer-disable">
                                 <p>해당 문의글은 답변이 완료되었습니다.</p>
                                 <p>더 이상 글을 남길 수 없습니다.</p>
                             </div>
-
-
                         </div>
                     </div>
-
 
                     <div class="qna-view-section reply-section">
                         <form class="qna-view-answer-wrapper">
@@ -186,9 +181,7 @@
                         </form>
                     </div>
 
-
                 </div>
-
 
 
 
@@ -239,7 +232,6 @@
 <th:block layout:fragment="script">
 
     <script>
-
 
         const loginMemberNo = Number("[[${#request.userPrincipal.getName()}]]");
 
@@ -438,7 +430,7 @@
 
                         $('.reply-item:last-child').ready(function () {
                             const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
-                            if (latestReply.replyType === 'USER') {
+                            if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo)) {
                                 const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
                                 const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
                                 $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);

@@ -7,6 +7,8 @@
             email
         FROM tb_admin
         WHERE email_receive_yn = 'Y'
+          AND email IS NOT NULL
+          AND email != ''
     </select>
 
 
