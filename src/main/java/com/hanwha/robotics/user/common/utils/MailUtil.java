@@ -86,27 +86,60 @@ public class MailUtil {
 		}
 	}
 
+
+//	@Async
+//	public void sendMemberId(String email, String memberId) {
+//		this.sendEmail(
+//				List.of(email),
+//				"문의하신 한화로보틱스 아이디 안내입니다.",
+//				"아이디는 " + memberId + " 입니다."
+//		);
+//	}
+
+
 	@Async
 	public void sendMemberId(String email, String memberId) {
+		Context context = new Context();
+		context.setVariable("memberId", memberId);
+		String emailContent = templateEngine.process("email/email_id", context);
 		this.sendEmail(
 				List.of(email),
 				"문의하신 한화로보틱스 아이디 안내입니다.",
-				"아이디는 " + memberId + " 입니다."
+				emailContent
 		);
 	}
+
+
+//	@Async
+//	public void sendPasswordResetLink(Member member) {
+//		String resetToken = generateResetToken(member);
+//		String resetLink = "https://www.hanwharobotics.com:8090/password/reset?token=" +
+//			URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
+//
+//		this.sendEmail(
+//			List.of(member.getEmail()),
+//			"한화 로보틱스 비밀번호 재설정",
+//			"비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">resetLink</a>"
+//		);
+//	}
 
 	@Async
 	public void sendPasswordResetLink(Member member) {
 		String resetToken = generateResetToken(member);
 		String resetLink = "https://www.hanwharobotics.com:8090/password/reset?token=" +
-			URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
+				URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
+
+		Context context = new Context();
+		context.setVariable("resetLink", resetLink);
+		String emailContent = templateEngine.process("email/email_password_re", context);
 
 		this.sendEmail(
-			List.of(member.getEmail()),
-			"한화 로보틱스 비밀번호 재설정",
-			"비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">resetLink</a>"
+				List.of(member.getEmail()),
+				"한화 로보틱스 비밀번호 재설정",
+				emailContent
 		);
 	}
+
 
 	private String generateResetToken(Member member) {
 		String resetToken = UUID.randomUUID().toString().replace("-", "").substring(0, 12);
@@ -119,12 +152,15 @@ public class MailUtil {
 		return resetToken;
 	}
 
+
 	@Async
 	public void sendPasswordChangeConfirm(String email) {
+		Context context = new Context();
+		String emailContent = templateEngine.process("email/email_password_complete", context);
 		this.sendEmail(
 				List.of(email),
 				"한화로보틱스 고객님의 비밀번호가 변경되었습니다.",
-				"고객님의 비밀번호가 변경되었습니다."
+				emailContent
 		);
 	}
 
@@ -133,10 +169,18 @@ public class MailUtil {
 	@Async
 	public void sendNewQnaToAdmin(int qnaNo) {
 		try {
+			String qnaLink = "https://www.hanwharobotics.com:8080/admin/qna/detail?no=" + qnaNo;
+//			String qnaLink = "http://localhost:8090/admin/qna/detail?no=" + qnaNo;
+
+			System.out.println(qnaLink);
+			Context context = new Context();
+			context.setVariable("qnaLink", qnaLink);
+			String emailContent = templateEngine.process("email/email_post", context);
+
 			this.sendEmail(
 				adminMapper.selectAdminEmail(),
 				"Q&A 게시판에 새로운 글이 등록되었습니다.",
-				"Q&A 게시판에 새로운 글이 등록되었습니다. : https://www.hanwharobotics.com:8080/admin/qna/detail?no=" + qnaNo + " <- 이동"
+					emailContent
 			);
 		} catch (Exception e) {
 			throw new RuntimeException("관리자 이메일 발송 실패", e);
@@ -146,10 +190,13 @@ public class MailUtil {
 	@Async
 	public void sendNewQnaReplyToAdmin() {
 		try {
+			Context context = new Context();
+			String emailContent = templateEngine.process("email/email_reply", context);
+
 			this.sendEmail(
 				adminMapper.selectAdminEmail(),
 				"Q&A 게시글에 새로운 답글이 등록되었습니다.",
-				"Q&A 게시글에 새로운 답글이 등록되었습니다."
+					emailContent
 			);
 		} catch (Exception e) {
 			throw new RuntimeException("관리자 이메일 발송 실패", e);
