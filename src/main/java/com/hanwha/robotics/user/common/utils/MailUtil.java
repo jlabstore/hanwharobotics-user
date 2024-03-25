@@ -32,6 +32,12 @@ public class MailUtil {
 	@Value("${target.mail}")
 	private String target;
 
+	@Value("${base.url}")
+	private String baseUrl;
+
+	@Value("${base.admin.url}")
+	private String adminUrl;
+
 	@Autowired
 	private JavaMailSender javaMailSender;
 
@@ -69,8 +75,6 @@ public class MailUtil {
 		return templateEngine.process("inquiryTemplete", context);
 	}
 
-
-
 	private void sendEmail(List<String> targets, String subject, String text) {
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -86,20 +90,10 @@ public class MailUtil {
 		}
 	}
 
-
-//	@Async
-//	public void sendMemberId(String email, String memberId) {
-//		this.sendEmail(
-//				List.of(email),
-//				"문의하신 한화로보틱스 아이디 안내입니다.",
-//				"아이디는 " + memberId + " 입니다."
-//		);
-//	}
-
-
 	@Async
 	public void sendMemberId(String email, String memberId) {
 		Context context = new Context();
+		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("memberId", memberId);
 		String emailContent = templateEngine.process("email/email_id", context);
 		this.sendEmail(
@@ -109,37 +103,22 @@ public class MailUtil {
 		);
 	}
 
-
-//	@Async
-//	public void sendPasswordResetLink(Member member) {
-//		String resetToken = generateResetToken(member);
-//		String resetLink = "https://www.hanwharobotics.com:8090/password/reset?token=" +
-//			URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
-//
-//		this.sendEmail(
-//			List.of(member.getEmail()),
-//			"한화 로보틱스 비밀번호 재설정",
-//			"비밀번호 재설정 링크 : <a href=\"" + resetLink + "\">resetLink</a>"
-//		);
-//	}
-
 	@Async
 	public void sendPasswordResetLink(Member member) {
 		String resetToken = generateResetToken(member);
-		String resetLink = "https://www.hanwharobotics.com:8090/password/reset?token=" +
-				URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
+		String resetLink = baseUrl + "/password/reset?token=" + URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
 
 		Context context = new Context();
+		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("resetLink", resetLink);
 		String emailContent = templateEngine.process("email/email_password_re", context);
 
 		this.sendEmail(
 				List.of(member.getEmail()),
-				"한화 로보틱스 비밀번호 재설정",
+				"한화 로보틱스 비밀번호 재설정 안내입니다.",
 				emailContent
 		);
 	}
-
 
 	private String generateResetToken(Member member) {
 		String resetToken = UUID.randomUUID().toString().replace("-", "").substring(0, 12);
@@ -152,11 +131,12 @@ public class MailUtil {
 		return resetToken;
 	}
 
-
 	@Async
 	public void sendPasswordChangeConfirm(String email) {
 		Context context = new Context();
+		context.setVariable("baseUrl", baseUrl);
 		String emailContent = templateEngine.process("email/email_password_complete", context);
+
 		this.sendEmail(
 				List.of(email),
 				"한화로보틱스 고객님의 비밀번호가 변경되었습니다.",
@@ -164,15 +144,10 @@ public class MailUtil {
 		);
 	}
 
-
-
 	@Async
 	public void sendNewQnaToAdmin(int qnaNo) {
 		try {
-			String qnaLink = "https://www.hanwharobotics.com:8080/admin/qna/detail?no=" + qnaNo;
-//			String qnaLink = "http://localhost:8090/admin/qna/detail?no=" + qnaNo;
-
-			System.out.println(qnaLink);
+			String qnaLink = adminUrl + "/admin/qna/detail?no=" + qnaNo;
 			Context context = new Context();
 			context.setVariable("qnaLink", qnaLink);
 			String emailContent = templateEngine.process("email/email_post", context);
@@ -188,9 +163,11 @@ public class MailUtil {
 	}
 
 	@Async
-	public void sendNewQnaReplyToAdmin() {
+	public void sendNewQnaReplyToAdmin(int qnaNo) {
 		try {
+			String qnaLink = adminUrl + "/admin/qna/detail?no=" + qnaNo;
 			Context context = new Context();
+			context.setVariable("qnaLink", qnaLink);
 			String emailContent = templateEngine.process("email/email_reply", context);
 
 			this.sendEmail(
