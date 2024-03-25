@@ -15,6 +15,8 @@ public class QnaReplyResponse {
 
     private int memberNo;
     private String memberId;
+    private String endStatus;
+
     private String adminId;
     private String replyContent;
     private String replyType;

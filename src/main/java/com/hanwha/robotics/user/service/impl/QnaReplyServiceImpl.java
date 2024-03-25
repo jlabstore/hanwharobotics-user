@@ -52,7 +52,6 @@ public class QnaReplyServiceImpl implements QnaReplyService {
     }
 
 
-
 //    public List<QnaReplyResponse> retrieveQnaReply(int qnaNo) {
 //        List<QnaReply> qnaReplies = qnaReplyMapper.findByQnaNo(qnaNo);
 //        return qnaReplies.stream()

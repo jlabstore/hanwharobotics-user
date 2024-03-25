@@ -378,6 +378,11 @@
                                 $('.delete-button').hide();
                             }
 
+                            if(data.data.qnaDetail.endStatus === 'Y') {
+                                $('.edit-button').hide();
+                                $('.delete-button').hide();
+                            }
+
 
                             if ((loginMemberNo === data.data.qnaDetail.memberNo) && (data.data.qnaDetail.endStatus === "N")) {
                                 $('.reply-section').show();
@@ -430,7 +435,7 @@
 
                         $('.reply-item:last-child').ready(function () {
                             const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
-                            if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo)) {
+                            if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo) && (latestReply.endStatus === 'N')) {
                                 const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
                                 const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
                                 $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
@@ -576,7 +581,7 @@
                 type: 'DELETE',
                 url: '/qna/reply/' + replyNo,
                 success: function () {
-                    getReply();
+                    getReplyRe();
                 },
                 error: function (xhr, textStatus) {
                     console.error('전송 실패:', textStatus);
@@ -589,6 +594,58 @@
                 }
             });
         }
+
+
+
+
+        function getReplyRe(qnaNo) {
+            COMM.ajax({
+                type: 'GET',
+                url: '/qna/reply/' + paths[paths.length - 1],
+                success: function (data) {
+                    if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
+                        data.data.qnaReplies.forEach(function (reply) {
+                            if (reply.replyType === 'USER') {
+                                reply.isUser = true;
+                                reply.isAdmin = false;
+                            } else if (reply.replyType === 'ADMIN') {
+                                reply.isUser = false;
+                                reply.isAdmin = true;
+                            }
+                        });
+
+                        const template = $("#reply-html").html();
+                        const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
+                        $('.reply').html(rendered);
+
+
+                        $('.reply-item:last-child').ready(function () {
+                            const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
+                            if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo) && (latestReply.endStatus === 'N')) {
+                                const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
+                                const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
+                                $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
+                            }
+                        });
+                    } else if (data.data.qnaReplies === null || data.data.qnaReplies.length === 0) {
+                        window.location.reload();
+                    }
+                },
+
+                error: function (xhr, textStatus) {
+                    console.error('댓글 가져오기 실패:', textStatus);
+                    if (xhr.responseJSON) {
+                        const errorMessage = xhr.responseJSON.message;
+                        alert(errorMessage);
+                    } else {
+                        alert('댓글 가져오기에 실패했습니다.');
+                    }
+                }
+            });
+
+        }
+
+
 
 
     </script>
