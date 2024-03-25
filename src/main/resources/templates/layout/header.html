@@ -72,21 +72,21 @@
                     <span th:if="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.location.href='/robot'">ROBOT</span>
                     <span th:unless="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'">ROBOT</span>
                     <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOT</a> -->
-                    <!-- <span class="header__nav__link on">ROBOT</span>
+                    <!-- <span class="header__nav__link on">ROBOT</span> -->
                     <ul class="header__nav__items_sub">
-                      <li>
+                      <!-- <li>
                         <a href="#" class="on" target="_blank">Products</a>
-                      </li>
+                      </li> -->
                       <li>
-                        <a href="#" target="_blank">Solutions</a>
+                        <a href="/robot/solutions">Solutions</a>
                       </li>
-                      <li>
+                      <!-- <li>
                         <a href="#" target="_blank">Ecosystem</a>
                       </li>
                       <li>
                         <a href="#" target="_blank">Case Study</a>
-                      </li>
-                    </ul> -->
+                      </li> -->
+                    </ul>
                   </li>
                   <li>
                     <span th:if="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.location.href='/agv-amr'">AGV/AMR</span>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body>
+  <div layout:fragment="content">
+
+  <main class="sub products solutions">
+    <section class="section_1">
+      <div class="group group1">
+        <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Solutions</div>
+        <div class="txt1" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">
+          HCR과 함께 제공하는 한화로보틱스의 첨단 기술력을 <br/>적용해 자동화 효율을 높여 보세요.
+        </div>
+      </div>
+    </section>
+
+    <section class="solutions-content">
+      <div class="solutions-content-item">
+        <div class="solutions-content-item-text">
+          <div class="solutions-content-item-title">
+            <h2>RAIV <span>(Robot AI Vision)</span></h2>
+            <p>자체 개발한 AI 및 딥러닝 기반 Vision 솔루션으로 다양한 물체를 Pick & Place 하는 작업이 가능합니다.</p>
+          </div>
+          <ul class="solutions-content-item-list">
+            <li><span>▪︎</span>AI RGBD Preprocessing: AI를 활용, RGB 이미지를 기반으로 거리 정보를 파악하는 RGBD(RGB depth) 기술을 활용해 데이터를 최적화할 수 있습니다.</li>
+            <li><span>▪︎</span>AI Bin Picking: 물체의 3D 이미지를 학습한 AI를 활용해 다양한 형태의 물체를 Pick & Place 할 수 있습니다.</li>
+            <li><span>▪︎</span>3D Model Picking: 3D 모델링 데이터를 활용해 물체를 분석, 지정된 위치를 Picking하여 물체를 쉽게 정렬할 수 있습니다.</li>
+          </ul>
+        </div>
+        <div class="solutions-content-item-icon">
+          <img src="../images/pc/solutions_item_01.svg" alt="" />
+        </div>
+      </div>
+      <div class="solutions-content-item">
+        <div class="solutions-content-item-text">
+          <div class="solutions-content-item-title">
+            <h2>Visual Safety</h2>
+          </div>
+          <ul class="solutions-content-item-list">
+            <li><span>▪︎</span>이중화된 3D 카메라와 기능 안전(Functional Safety)을 기반으로 가상의 안전 펜스를 구축하여 효과적으로 공간을 관리하고 작업자의 안전을 지킬 수 있습니다.</li>
+            <li><span>▪︎</span>로봇 중심으로부터의 거리를 기준으로 로봇의 동작 속도를 늦추는 Yellow Zone, 로봇을 정지시키는 Red Zone을 설정해 안전사고를 예방할 수 있습니다.</li>
+          </ul>
+        </div>
+        <div class="solutions-content-item-icon">
+          <img src="../images/pc/solutions_item_02.svg" alt="" />
+        </div>
+      </div>
+      <div class="solutions-content-item">
+        <div class="solutions-content-item-text">
+          <div class="solutions-content-item-title">
+            <h2>2D Marker <br/>Positioning</h2>
+          </div>
+          <ul class="solutions-content-item-list">
+            <li><span>▪︎</span>이동식 협동로봇(Mobile Manipulator, 모바일 로봇에 협동로봇을 장착)으로 작업을 수행하는 경우 매번 같은 위치로의 정차가 까다로워 동일한 작업의 반복 수행이 어렵습니다. 한화로보틱스의 이동식 협동로봇은 2D 비전을 활용하여 X, Y, Z의 3차원 좌표뿐만 아니라 축별 회전 각도를 인식해 동일한 위치에서의 정밀 작업이 가능합니다.</li>
+          </ul>
+        </div>
+        <div class="solutions-content-item-icon">
+          <img src="../images/pc/solutions_item_03.svg" alt="" />
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+</body>
+
+</html>
