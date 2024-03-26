@@ -46,7 +46,7 @@
 
                     <ul class="header__nav__items_sub">
                       <li>
-                        <a href="/about" class="header_about" th:utext="#{hanwharobotics.large}"></a>
+                        <a href="/about" class="header_about" th:utext="#{header.hanwharobotics}"></a>
                         <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
                       </li>
                       <li>
@@ -68,15 +68,12 @@
                     </ul>
                   </li>
                   <li>
-<!--                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.co.kr/'">ROBOT</span>-->
-                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.location.href='/robot'">ROBOT</span>
-                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link on" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'">ROBOT</span>
-                    <!-- <a class="header__nav__link" href="https://o.hanwharobotics.co.kr/"  style="opacity: 100%;" target="_blank">ROBOT</a> -->
-                    <!-- <span class="header__nav__link on">ROBOT</span> -->
+                    <span class="header__nav__link on">ROBOT</span>
                     <ul class="header__nav__items_sub">
-                      <!-- <li>
-                        <a href="#" class="on" target="_blank">Products</a>
-                      </li> -->
+                      <li>
+                        <a th:if="#{header.nation} == 'EN'" href="javascript:void(0)" onclick="window.location.href='/robot'">Products</a>
+                        <a th:unless="#{header.nation} == 'EN'" href="javscript:void(0)" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'" target="_blank">Products</a>
+                      </li>
                       <li>
                         <a href="/robot/solutions">Solutions</a>
                       </li>
@@ -89,22 +86,17 @@
                     </ul>
                   </li>
                   <li>
-                    <span th:if="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.location.href='/agv-amr'">AGV/AMR</span>
-                    <span th:unless="#{header.nation} == 'EN'" class="header__nav__link" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'">AGV/AMR</span>
-                    <!-- <a class="header__nav__link" href="https://www.hanwhacorp.co.kr/momentum/business/logistics.jsp"  style="opacity: 100%;"  target="_blank">AGVS</a> -->
-                    <!-- <span class="header__nav__link">AGVS</span>
+                    <span class="header__nav__link">AGV/AMR</span>
 
                     <ul class="header__nav__items_sub">
                       <li>
-                        <a href="#" target="_blank">Products</a>
+                        <a th:if="#{header.nation} == 'EN'" href="javascript:void(0)" onclick="window.location.href='/agv-amr'">Products</a>
+                        <a th:unless="#{header.nation} == 'EN'" href="javascript:void(0)" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'" target="_blank">Products</a>
                       </li>
-                      <li>
-                        <a href="#" target="_blank">Solutions</a>
-                      </li>
-                      <li>
+                      <!-- <li>
                         <a href="#" target="_blank">Case Study</a>
-                      </li>
-                    </ul> -->
+                      </li> -->
+                    </ul>
                   </li>
 
                   <li>
