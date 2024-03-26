@@ -73,7 +73,8 @@
             r.reply_type,
             r.create_dt,
             q.member_id,
-            q.member_no
+            q.member_no,
+            q.end_status
         FROM tb_qna_reply r
                  LEFT JOIN tb_qna q ON r.qna_no = q.qna_no
         WHERE r.qna_no = #{qnaNo}

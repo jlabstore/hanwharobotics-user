@@ -33,7 +33,7 @@ public class QnaReplyServiceImpl implements QnaReplyService {
             throw new RuntimeException("작성자만 댓글 작성이 가능합니다.");
         }
         qnaReplyMapper.insertQnaReply(request);
-        mailUtil.sendNewQnaReplyToAdmin();
+        mailUtil.sendNewQnaReplyToAdmin(request.getQnaNo());
     }
 
     @Override
@@ -50,7 +50,6 @@ public class QnaReplyServiceImpl implements QnaReplyService {
     public void delete(int replyNo) {
         qnaReplyMapper.deleteQnaReply(replyNo);
     }
-
 
 
 //    public List<QnaReplyResponse> retrieveQnaReply(int qnaNo) {
