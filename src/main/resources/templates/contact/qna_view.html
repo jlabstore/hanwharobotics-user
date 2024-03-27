@@ -52,9 +52,6 @@
                     </div>
 
 
-
-
-
                     <div class="qna-view-section">
                         <div class="qna-view-section-title">
                             <h4>문의유형</h4>
@@ -62,13 +59,17 @@
 
                         <div class="qna-view-section-content-wrapper">
                             <div class="qna-view-section-content">
-                                <span class="qna_type1"></span>
-                            </div>
-                            <div class="qna-view-section-content">
-                                <span class="qna_type2"></span>
+                                <div class="qna-view-section-content-inquiry">
+                                    <span class="qna_type2"></span>
+                                    <span class="qna_type_bar"></span>
+                                    <span class="qna_type1"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+
 
 
 <!--                    <div class="qna-view-section">-->
@@ -283,7 +284,18 @@
                             $('.board_contents').html(data.data.qnaDetail.content);
 
                             $('.qna_type1').html(data.data.qnaDetail.qnaType1Nm);
-                            $('.qna_type2').html(data.data.qnaDetail.qnaType2Nm);
+
+                            if (data.data.qnaDetail.qnaType2Nm === '모르겠음') {
+                                $('.qna_type2').html('').css('display', 'none');
+                            } else {
+                                $('.qna_type2').html(data.data.qnaDetail.qnaType2Nm);
+                            }
+
+                            if (data.data.qnaDetail.qnaType2Nm === '모르겠음') {
+                                $('.qna_type_bar').html('').css('display', 'none');
+                            } else {
+                                $('.qna_type_bar').html('|');
+                            }
 
 
                             // 로봇리스트
