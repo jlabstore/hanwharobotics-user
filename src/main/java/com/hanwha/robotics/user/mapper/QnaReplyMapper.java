@@ -11,10 +11,7 @@ import java.util.List;
 public interface QnaReplyMapper {
     void insertQnaReply(QnaReplyRequest request);
     List<QnaReplyResponse> selectByQnaNo(int qnaNo);
-
     void updateQnaReply(QnaReplyRequest request);
     void deleteQnaReply(int replyNo);
-
-
     List<QnaReplyResponse> findByQnaNo(int qnaNo);
 }

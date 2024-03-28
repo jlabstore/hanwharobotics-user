@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.hanwha.robotics.user.mapper.AdminMapper;
@@ -84,6 +85,7 @@ public class MailUtil {
 			messageHelper.setTo(emailArray);
 			messageHelper.setSubject(subject);
 			messageHelper.setText(text, true);
+			messageHelper.setFrom(new InternetAddress(target, "한화로보틱스"));
 			javaMailSender.send(mimeMessage);
 		} catch (Exception e) {
 			throw new RuntimeException("메일발송 에러발생", e);

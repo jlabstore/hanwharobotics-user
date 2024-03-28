@@ -18,7 +18,6 @@ public interface QnaMapper {
 
     List<QnaResponse> selectQnaList(Map<String, Object> map);
 
-
     QnaResponse selectByQnaNo(int qnaNo);
 
     QnaResponse selectPrevQna(int qnaNo);
@@ -27,23 +26,12 @@ public interface QnaMapper {
 
     List<QnaRobot> selectRobotByQnaNo(int qnaNo);
 
-
-
-//    void insertQna(QnaRequest request);
-//    int insertQna(QnaRequest request);
-
     int insertQna(Qna qna);
-
 
     void insertQnaRobot(QnaRobot qnaRobot);
 
-
     void updateQna(QnaUpdateRequest request);
 
-    /**
-     * Q&A 삭제
-     * @param qnaNo
-     */
     void deleteQna(int qnaNo);
 
     Qna selectQnaByQnaNo(int qnaNo);
@@ -51,4 +39,6 @@ public interface QnaMapper {
     void deleteRobotByQnaNo(int qnaNo);
 
     List<QnaRobot> selectEditRobotByQnaNo(int qnaNo);
+
+    int existsById(int qnaNo);
 }

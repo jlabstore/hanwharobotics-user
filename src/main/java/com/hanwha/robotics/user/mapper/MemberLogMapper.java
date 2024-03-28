@@ -8,6 +8,5 @@ import com.hanwha.robotics.user.entity.Member;
 
 @Mapper
 public interface MemberLogMapper {
-
 	void insertMemberLog(HashMap<String, Object> data);
 }

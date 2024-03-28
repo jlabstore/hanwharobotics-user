@@ -12,17 +12,6 @@ import com.hanwha.robotics.user.entity.code.ParentCode;
 @Mapper
 public interface CodeMapper {
 
-    List<Code> selectQnaCode();
-
-
-    List<Code> selectQnaType1();
-
-    List<Code> selectQnaType2();
-
-    List<Code> selectRobotModel();
-
-    List<Code> selectApplication();
-
     List<Map<String, Object>> selectAllCountries();
 
     List<Map<String, Object>> selectPhoneCodes();

@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface UploadFileMapper {
 
-    public void saveFile(List<UploadFile> files);
+    void saveFile(List<UploadFile> files);
 
-    List<UploadFile> getFileListByNo(int no);
+//    List<UploadFile> getFileListByNo(int no);
 
     List<UploadFile> selectByQnaNo(int qnaNo);
 

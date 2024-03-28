@@ -73,10 +73,24 @@ public class QnaController {
      * @param qnaNo
      * @return
      */
+//    @GetMapping("/{qnaNo}")
+//    public String qnaView(@PathVariable("qnaNo") int qnaNo) {
+//        return "contact/qna_view";
+//    }
+
+
+
     @GetMapping("/{qnaNo}")
     public String qnaView(@PathVariable("qnaNo") int qnaNo) {
-        return "contact/qna_view";
+        boolean exists = qnaService.existsById(qnaNo);
+        System.out.println("asdf" +exists);
+        if (!exists) {
+            return "common/error";
+        } else {
+            return "contact/qna_view";
+        }
     }
+
 
     /**
      * Q&A 상세 페이지

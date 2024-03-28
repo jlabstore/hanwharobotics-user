@@ -23,10 +23,22 @@ public interface QnaReplyService {
      */
     List<QnaReplyResponse> getQnaReplies(int qnaNo);
 
+    /**
+     * 답글 수정
+     * @param request
+     */
     void update(QnaReplyRequest request);
 
+    /**
+     * 답글 삭제
+     * @param replyNo
+     */
     void delete(int replyNo);
 
-
+    /**
+     * 답글 리스트 조회
+     * @param qnaNo
+     * @return
+     */
     List<QnaReplyResponse> retrieveQnaReply(int qnaNo);
 }

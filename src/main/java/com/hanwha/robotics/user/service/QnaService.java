@@ -18,7 +18,7 @@ public interface QnaService {
    PageResponse getQnaList(PageRequest page, String lang);
 
     /**
-     * Q&A 상세
+     * Q&A 조회
      * @param qnaNo
      * @return
      */
@@ -31,21 +31,32 @@ public interface QnaService {
      */
     int register(QnaRequest request);
 
+    /**
+     * Q&A 상세 조회
+     * @param memberNo
+     * @param qnaNo
+     * @return
+     */
     QnaDetailResponse getQnaDetail(int memberNo, int qnaNo);
 
     /**
-     * QNA Code
+     * Q&A Code
      * @return
      */
     QnaCodeResponse getQnaCode();
 
-
+    /**
+     * Q&A 삭제
+     * @param memberNo
+     * @param qnaNo
+     */
     void deleteQna(int memberNo, int qnaNo);
 
-//    QnaResponse getQnaEditDetail(int qnaNo);
-
-
-//    QnaDetailResponse getQnaEditDetail(int qnaNo);
+    /**
+     * Q&A 수정 정보 조회
+     * @param qnaNo
+     * @return
+     */
     QnaDetailEditResponse getQnaDetailEdit(int qnaNo);
 
     /**
@@ -54,4 +65,11 @@ public interface QnaService {
      * @param request
      */
     void updateQna(int memberNo, QnaUpdateRequest request);
+
+    /**
+     * Q&A 존재여부 조회
+     * @param qnaNo
+     * @return
+     */
+    boolean existsById(int qnaNo);
 }

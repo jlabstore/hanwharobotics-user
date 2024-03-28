@@ -29,5 +29,4 @@ public interface MemberMapper {
 
 	String findEmailByMemberNo(int memberNo);
 
-
 }

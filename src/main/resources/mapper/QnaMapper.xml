@@ -62,9 +62,6 @@
         WHERE qna_no = #{qnaNo}
     </select>
 
-
-
-
     <!-- Q&A 상세2 (수정) -->
     <select id="selectQnaByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.entity.Qna">
         SELECT
@@ -72,8 +69,6 @@
         FROM tb_qna
         WHERE qna_no = #{qnaNo}
     </select>
-
-
 
     <!-- Q&A 상세 - 문의제품 -->
     <select id="selectRobotByQnaNo" parameterType="int" resultType="com.hanwha.robotics.user.entity.QnaRobot">
@@ -175,8 +170,6 @@
         WHERE qna_no = #{qnaNo}
     </delete>
 
-
-
     <!-- Q&A 삭제 -->
     <delete id="deleteQna" parameterType="int">
         DELETE FROM tb_qna
@@ -188,12 +181,11 @@
         WHERE qna_no = #{qnaNo}
     </delete>
 
-
-
-
-
-
-
+    <select id="existsById" resultType="int" parameterType="int">
+        SELECT COUNT(*) > 0
+        FROM tb_qna
+        WHERE qna_no = #{qnaNo}
+    </select>
 
 
 </mapper>

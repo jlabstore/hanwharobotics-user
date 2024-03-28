@@ -99,12 +99,9 @@ public class MemberAccountController {
             @AuthenticationPrincipal int memberNo,
             @RequestBody MemberRequest request
     ) {
-
         memberService.changePassword(memberNo, request);
-
         String email = memberService.getMemberEmail(memberNo);
         mailUtil.sendPasswordChangeConfirm(email);
-        
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 

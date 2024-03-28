@@ -71,13 +71,6 @@
     </select>
 
 
-<!--    <select id="selectByMemberIdAndEmail" parameterType="String" resultType="com.hanwha.robotics.user.entity.Member">-->
-<!--        SELECT *-->
-<!--        FROM tb_member-->
-<!--        WHERE member_id = #{memberId}-->
-<!--          AND email = #{email}-->
-<!--    </select>-->
-
     <select id="findByMemberNo" parameterType="int" resultType="com.hanwha.robotics.user.dto.MemberResponse">
         SELECT *
         FROM tb_member

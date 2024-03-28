@@ -31,6 +31,11 @@ public class PasswordResetController {
 	@Autowired
 	private MailUtil mailUtil;
 
+	/**
+	 * 비밀번호 찾기
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/password/reset-page")
 	@ResponseBody
 	public ResponseEntity<ApiResponse<Void>> sendPasswordResetPage(@RequestBody MemberRequest request) {
@@ -38,23 +43,31 @@ public class PasswordResetController {
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 
+	/**
+	 * 비밀번호 찾기 - 재설정 페이지
+	 * @param token
+	 * @return
+	 */
 	@GetMapping("/password/reset")
 	public String resetPasswordPage(@RequestParam String token) {
 		if (passwordResetTokenService.validate(token)) {
 			return "/member/login_pwd_re";
 		} else {
-			return "main"; // FIXME : 실패하면 어디로 보내야할까,,
+			return "/common/error";
 		}
 	}
 
-	// FIXME: 재설정 후 메일 보내기
+	/**
+	 * 비밀번호 재설정
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/password/reset")
 	@ResponseBody
 	public ResponseEntity<ApiResponse<Void>> resetPassword(@RequestBody ResetPasswordRequest request) {
 		memberService.resetPassword(request);
 		String email = passwordResetTokenService.retrieveEmail(request.getToken());
 		mailUtil.sendPasswordChangeConfirm(email);
-		// FIXME: 비밀번호 재설정 완료되면 토큰 삭제
 		passwordResetTokenService.deleteToken(request.getToken());
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}

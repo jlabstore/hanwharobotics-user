@@ -183,6 +183,11 @@ public class QnaServiceImpl implements QnaService {
 		}
 	}
 
+	@Override
+	public boolean existsById(int qnaNo) {
+		int count = qnaMapper.existsById(qnaNo);
+		return count == 1;
+	}
 
 	@Override
 	@Transactional
@@ -194,8 +199,6 @@ public class QnaServiceImpl implements QnaService {
 		// reply 삭제
 		qnaMapper.deleteQna(qnaNo);
 	}
-
-
 
 
 }

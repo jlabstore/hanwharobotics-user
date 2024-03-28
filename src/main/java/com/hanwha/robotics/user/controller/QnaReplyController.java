@@ -24,7 +24,6 @@ public class QnaReplyController {
     @Autowired
     private QnaReplyService qnaReplyService;
 
-    // FIXME: replyType enum
     /**
      * Q&A 답변 등록
      * @param memberNo
@@ -40,7 +39,6 @@ public class QnaReplyController {
         qnaReplyService.register(request);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
-
 
     /**
      * Q&A 답변 목록
@@ -65,8 +63,6 @@ public class QnaReplyController {
         responseData.put("qnaReplies", responses);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), responseData));
     }
-
-
 
     /**
      * Q&A 답변 수정
