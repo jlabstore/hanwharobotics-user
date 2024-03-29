@@ -178,6 +178,10 @@ $(document).ready(async function() {
   // $('.inquiry_more').load('/includes/inquiry.html');
 
   // $('#header').load('/includes/header.html');
+  // $('#header').load('/templates/layout/header.html', function() {
+    const gnbTarget = $(document.body).data('gnb-target');
+    $(`[data-gnb="${gnbTarget}"]`).addClass('active');
+  // });
   // $('#aside').load('/includes/aside.html');
 
   // $('#footer').load('/includes/footer.html', function() {
