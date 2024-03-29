@@ -124,21 +124,23 @@ $(window).on("load", function (e) {
 $(window).scroll(function (e) {
   if(window.scrollY < 1) {
     $header.css('backgroundColor', 'transparent').find('.header_wrapper').css('backgroundColor', 'transparent');
+    $header.removeClass('scroll');
     $('.inquiry_more .bg').css({
       'opacity': '0.6',
       'background': '#000'
     });
     $('header .logo .txt span').css('color', '#f60');
-    $('header .logo .txt span strong').css('background', 'url(/images/pc/ic_main_more.svg) no-repeat 0 0')
+    $('header .logo .txt span strong').css('background', 'url(../images/pc/ic_main_more.svg) no-repeat 0 0')
 
-  } else {
+  } else { 
 
     $header.css('backgroundColor', '#f60').find('.header_wrapper').css('backgroundColor', '#f60');
+    $header.addClass('scroll');
     $('.inquiry_more .bg').css({
       'opacity': '1',
       'background': '#666'
     });
     $('header .logo .txt span, header .logo .txt span strong').css('color', '#fff');
-    $('header .logo .txt span strong').css('background', 'url(/images/pc/ic_sub_more.svg) no-repeat 0 0')
+    $('header .logo .txt span strong').css('background', 'url(../images/pc/ic_sub_more.svg) no-repeat 0 0')
   }
 });
