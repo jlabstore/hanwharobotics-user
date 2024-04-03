@@ -148,13 +148,6 @@ $(window).on("load resize", function (e) {
           breakpoint: 1200,
           settings: {
             draggable: true,
-            slidesToShow: 5,
-          }
-        },
-        {
-          breakpoint: 1024,
-          settings: {
-            draggable: true,
             slidesToShow: 4,
           }
         },
