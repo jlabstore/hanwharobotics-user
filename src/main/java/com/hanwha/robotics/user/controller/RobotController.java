@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
 @Controller
 @RequestMapping("/robot")
 public class RobotController {
@@ -23,11 +24,22 @@ public class RobotController {
     public String robotHcr5a() {
         return "robot/robots_detail_hcr_5a";
     }
+    
+    @GetMapping("/hcr-12a")
+    public String robotHcr12a() {
+        return "robot/robots_detail_hcr_12a";
+    }
+    
+    @GetMapping("/hcr-14")
+    public String robotHcr14() {
+        return "robot/robots_detail_hcr_14";
+    }
 
     @GetMapping("/solutions")
     public String solutions() {
         return "robot/solutions";
     }
+    
 
 
 
