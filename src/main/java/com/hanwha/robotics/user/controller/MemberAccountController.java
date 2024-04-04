@@ -126,7 +126,6 @@ public class MemberAccountController {
         return ResponseEntity.ok(isExists);
     }
 
-
     /**
      * 회원 탈퇴 페이지
      * @return
