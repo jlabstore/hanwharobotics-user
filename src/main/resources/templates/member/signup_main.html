@@ -55,6 +55,7 @@
                                                 <option value="hanmail.net">hanmail.net</option>
                                                 <option value="nate.com">nate.com</option>
                                                 <option value="kakao.com">kakao.com</option>
+                                                <option value="">직접 입력</option>
                                             </select>
                                         </div>
                                         <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
@@ -173,8 +174,25 @@
         isIdChanged = true;
     });
 
-    $('#email-local, #email-domain').on('change', function () {
-        isEmailChanged = true;
+    // $('#email-local, #email-domain').on('change', function () {
+    $(document).on('change', '#email-local, #email-domain', function () {
+        if($('#email-domain').val() === '') {
+            console.log("이프 조건문 탔음~~~~");
+            // TODO 
+            // 인풋창으로 바꾸기, 셀렉트 값 빼고 인풋창 값을 넣기
+            $( 'select' ).remove( '#email-domain' );
+            $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            // 유효성 검사
+            isEmailChanged = false;
+
+        }
+         else {
+            console.log("엘스 조건문 탔음")
+            isEmailChanged = true;
+        }
+        // console.log("온체인지~!!")
+        // isEmailChanged = true;
+
     });
 
 
@@ -269,10 +287,13 @@
     // 이메일 중복확인
     function checkDuplicateEmail() {
         const email_front = $(".email_front").val();
+        const email_end = $(".email_end").val();
+        const emailPattern = /^[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
         const email = $('#email').val();
         const emailCheckElement = $('#email_check');
 
-        if (email_front.length < 3 ) {
+        if (email_front.length < 3 || !emailPattern.test(email_end)) {
+            console.log(email_end.match("."), "이메일매치");
             emailCheckElement.text("이메일을 정확히 입력해 주세요");
             emailCheckElement.show();
         } else {
