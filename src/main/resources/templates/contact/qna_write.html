@@ -194,11 +194,13 @@
                             <span>첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다. exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.</span>
                         </div>
                     </div>
-
-
                 </div>
 
                 <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button>
+<!--                    <button type="button" class="btn btn&#45;&#45;block btn&#45;&#45;gray"  onclick="toList()">취소</button>-->
+                <a type="button" class="btn btn--block btn--gray" href="javascript:void(0)" onClick="goBack()">취소</a>
+
+
 
             </div>
         </div>
@@ -232,6 +234,25 @@
                 $('#emailReceiveYn').prop('checked', true);
             }
         });
+
+
+
+        function goBack(){
+            var params = {};
+            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function(str, key, value) {
+                    params[key] = value;
+                }
+            );
+            if(params["to"] != undefined && params["to"]=="main"){
+                location.href="/newsroom/notice";
+            }else{
+                history.back();
+            }
+        }
+
+
+
 
         // 코드 가져오기
         function getCode() {
