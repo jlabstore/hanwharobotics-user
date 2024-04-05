@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body data-gnb-target="robot">
+<div layout:fragment="content" class="robots-detail">
+
+  <main>
+    <a href="#" class="robots-detail-prev">
+      <img src="../images/pc/products_detail_arrow.svg" alt />
+    </a>
+
+    <section class="robots-detail-title">
+      <h1>HCR-12A</h1>
+      <p>HCR-12A는 가반하중 12kg, 구동범위 1300mm의 협동로봇으로,<br/>
+        중량물 작업이 많은 자동차, 금속 가공, 물류 등 산업에서 최적의 솔루션을<br/>
+        구현할 수 있습니다. 사람이 작업하기 어려운 협소한 공간에서 최적의 솔루션을 제공합니다.  
+      </p>
+    </section>
+
+    <section class="robots-detail-slider">
+      <div class="robots-detail-slider-item">
+        <div>
+          <img src="../images/pc/robots_detail_hcr_12a_01.webp" alt="" />
+        </div>
+      </div>
+      <div class="robots-detail-slider-item">
+        <div>
+          <img src="../images/pc/robots_detail_hcr_12a_02.webp" alt="" />
+        </div>
+      </div>
+      <div class="robots-detail-slider-item">
+        <div>
+          <img src="../images/pc/robots_detail_hcr_12a_03.webp" alt="" />
+        </div>
+      </div>
+      <div class="robots-detail-slider-item">
+        <div>
+          <img src="../images/pc/robots_detail_hcr_12a_04.webp" alt="" />
+        </div>
+      </div>
+      <div class="robots-detail-slider-item">
+        <div>
+          <img src="../images/pc/robots_detail_hcr_12a_05.webp" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <section class="robots-detail-application">
+      <h3>주요 <br/>어플리케이션</h3>
+      <div class="robots-detail-application-wrapper">
+        <div class="robots-detail-application-item">
+          <img src="../images/pc/robots_application_item_06.webp" alt="" />
+          <span>Machine Tending</span>
+        </div>
+        <div class="robots-detail-application-item">
+          <img src="../images/pc/robots_application_item_02.webp" alt="" />
+          <span>Mold Handling</span>
+        </div>
+        <div class="robots-detail-application-item">
+          <img src="../images/pc/robots_application_item_03.webp" alt="" />
+          <span>Palletizing</span>
+        </div>
+        <div class="robots-detail-application-item">
+          <img src="../images/pc/robots_application_item_07.webp" alt="" />
+          <span>Polishing</span>
+        </div>
+        <div class="robots-detail-application-item">
+          <img src="../images/pc/robots_application_item_12.webp" alt="" />
+          <span>Welding</span>
+        </div>
+        <div class="robots-detail-application-item empty">
+          <div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="robots-detail-sepc">
+      <div class="robots-detail-spec-title">
+        <h3>Specifications</h3>
+        <a href="https://hanwharobotics.com/hanwharobotics/file/pdf/Hanwha_Robotics_specifications.pdf " download type="button" class="catalog-download">
+            제품 카탈로그 다운로드
+            <span><strong>+</strong></span>
+        </a>
+      </div>
+
+      <div class="robots-detail-spec-table">
+        <div class="robots-detail-spec-table-title">
+          <span>Robot Body</span>
+        </div>
+        <div class="robots-detail-spec-table-item">
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Basic Specifications</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Payload</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>12kg</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Reach</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>1300mm</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>DOF</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>6</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Performance</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Repeatability</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>±0.07mm</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Linear Speed</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>1m/s</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title multiple">
+                  <span>Motion Range<br/> & Speed</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content2-wrapper">
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>J1</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>±180°, Max 130°/sec</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>J2</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>±150°, Max 130°/sec</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>J3</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>±165°, Max 200°/sec</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>J4</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>±190°, Max 200°/sec</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>J5</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>±170°, Max 200°/sec</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>J6</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>±360°, Max 200°/sec</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Tool/IO</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title multiple2">
+                  <span>Tool/IO #1</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content2-wrapper">
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Connector</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>M8, 8pin, A Coding</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Power</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>DC 24V</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Digital In</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>2ch</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Digital Out</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>2ch</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Analog In</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>2ch</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title multiple3">
+                  <span>Tool/IO #2</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content2-wrapper">
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Connector</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>M8, 8pin, A Coding</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Power</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>DC 24V</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Digital In</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>2ch</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Digital Out</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>2ch</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title multiple4">
+                  <span>EtherCAT</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content2-wrapper">
+                  <div class="robots-detail-spec-table-section-item-content2 border">
+                    <div class="robots-detail-spec-table-section-item-content2-title">
+                      <span>Connector</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content2-content">
+                      <span>M8, 6pin</span>
+                    </div>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content3">
+                    <div class="robots-detail-spec-table-section-item-content3-title">
+                      <span>DC</span>
+                    </div>
+                    <div class="robots-detail-spec-table-section-item-content3-content">
+                      <div class="robots-detail-spec-table-section-item-content3-content-item">
+                        <span>TX+, TX-, RX+, RX-</span>
+                      </div>
+                      <div class="robots-detail-spec-table-section-item-content3-content-item">
+                        <span>DC 24V</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>DC Power</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>Max 3A (1.5A/pin)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Installation</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Weight</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>53kg</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Footprint</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>220x227mm</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Robot Mounting</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>Floor, Wall(Max 30°), Ceiling</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>IP Ratings</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>IP54</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Noise Level	</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>≤70dBA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="robots-detail-spec-table">
+        <div class="robots-detail-spec-table-title v2">
+          <span>Controller</span>
+        </div>
+        <div class="robots-detail-spec-table-item">
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Basic Specifications</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Size (WxHxD)</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>450x470x223mm</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Weight</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>19.8kg</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Power Source</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>100-240 VAC, 50-60Hz (1kW)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Communication Protocols</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>TCP/IP</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>Yes</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Mobus TCP</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>Yes</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>EtherNet/IP</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>Not Applicable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Internal I/O Ports</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Emergency</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>2ch (4ports)</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Safety</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>2ch (4ports)</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Remote Power On/Off</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>Yes / Yes</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title multiple5">
+                  <span>Digital In</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content2-wrapper">
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <span>"Flexible In 8ch (SINK)</span>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <span>General In 8ch (SINK)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title multiple6">
+                  <span>Digital Out</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content2-wrapper">
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <span>Flexible Out 8ch (SOURCE)</span>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <span>General Out 8ch (SOURCE)</span>
+                  </div>
+                  <div class="robots-detail-spec-table-section-item-content2">
+                    <span>* &lt;1.2A/channel &gt;</span>
+                  </div>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Analog In</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>2ch</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Analog Out</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>2ch</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Incremental Encoder In</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>2ch</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="robots-detail-spec-table">
+        <div class="robots-detail-spec-table-title v3">
+          <span>Teach Pendant</span>
+        </div>
+        <div class="robots-detail-spec-table-item">
+          <div class="robots-detail-spec-table-content">
+            <div class="robots-detail-spec-table-subtitle">
+              <span>Basic Specifications</span>
+            </div>
+            <div class="robots-detail-spec-table-section">
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Size (WxHxD)</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>343x270x81mm</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Weight</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>1.8kg</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Screen Size</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>12.1inch</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Display Resolution</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>1024x768</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Power Switch</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>1ea</span>
+                </div>
+              </div>
+              <div class="robots-detail-spec-table-section-item">
+                <div class="robots-detail-spec-table-section-item-title">
+                  <span>Emergency Switch</span>
+                </div>
+                <div class="robots-detail-spec-table-section-item-content">
+                  <span>1ea</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="robots-detail-other">
+      <a href="/robot/hcr-3a" class="robots-detail-other-item">
+        <img src="../images/pc/robots_detail_hcr_3a_01.webp" alt="" />
+        <span>HCR-3A</span>
+      </a>
+      <a href="/robot/hcr-5a" class="robots-detail-other-item">
+        <img src="../images/pc/robots_detail_hcr_5a_01.webp" alt="" />
+        <span>HCR-5A</span>
+      </a>
+      <a href="/robot/hcr-14" class="robots-detail-other-item">
+        <img src="../images/pc/robots_detail_hcr_14_01.webp" alt="" />
+        <span>HCR-14</span>
+      </a>
+    </section>
+  </main>
+</div>
+
+</body>
+
+</html>
