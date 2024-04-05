@@ -20,15 +20,12 @@ import com.hanwha.robotics.user.service.impl.MemberLogService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.session.web.http.CookieHttpSessionIdResolver;
-import org.springframework.session.web.http.DefaultCookieSerializer;
-import org.springframework.session.web.http.HttpSessionIdResolver;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-//@EnableRedisHttpSession
+@EnableRedisHttpSession
 public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
@@ -76,24 +73,10 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(loginAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(logoutAuthenticationFilter(), LogoutFilter.class)
-
-
         ;
         return http.build();
     }
 
-
-
-    @Bean
-    public HttpSessionIdResolver httpSessionIdResolver() {
-        CookieHttpSessionIdResolver cookieHttpSessionIdResolver = new CookieHttpSessionIdResolver();
-        DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
-        cookieSerializer.setCookieName("JSESSIONID");
-        cookieSerializer.setCookiePath("/");
-        cookieSerializer.setDomainName("https://hanwharobotics.co.kr:8090");
-        cookieHttpSessionIdResolver.setCookieSerializer(cookieSerializer);
-        return cookieHttpSessionIdResolver;
-    }
 
 
 
