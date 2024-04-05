@@ -196,9 +196,16 @@
                     </div>
                 </div>
 
-                <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button>
+                <!-- <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button> -->
+                <div class="qna-write-button-group">
+                    <!-- <button type="button" class="qna-write-cancel">취소</button> -->
+                    <button type="button" class="qna-write-cancel" href="javascript:void(0)" onClick="goBack()">취소</button>
+                    <!-- <button type="submit" class="qna-write-submit">문의글 남기기</button> -->
+                    <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button>
+
+                </div>
 <!--                    <button type="button" class="btn btn&#45;&#45;block btn&#45;&#45;gray"  onclick="toList()">취소</button>-->
-                <a type="button" class="btn btn--block btn--gray" href="javascript:void(0)" onClick="goBack()">취소</a>
+                <!-- <a type="button" class="btn btn--block btn--gray" href="javascript:void(0)" onClick="goBack()">취소</a> -->
 
 
 
@@ -213,16 +220,16 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const inputs = document.querySelectorAll('.software');
-            for (let i = 0; i < inputs.length; i++) {
-                inputs[i].addEventListener('input', function() {
-                    if (this.value.length > 0) {
-                        const nextIndex = Array.from(inputs).indexOf(this) + 1;
-                        if (nextIndex < inputs.length) {
-                            inputs[nextIndex].focus();
+            inputs.each(function(index) {
+                    $(this).on('input', function() {
+                        if (this.value.length > 0) {
+                            const nextIndex = inputs.index(this) + 1;
+                            if (nextIndex < inputs.length) {
+                                inputs[nextIndex].focus();
+                            }
                         }
-                    }
+                    });
                 });
-            }
         });
 
 
@@ -374,6 +381,18 @@
                 newRobotInfo.find('input').val('');
                 $('.qna-write-inquiry-product-item:last').after(newRobotInfo);
                 robotInfoCounter++;
+
+                const inputs = newRobotInfo.find('.software');
+                inputs.each(function(index) {
+                    $(this).on('input', function() {
+                        if (this.value.length > 0) {
+                            const nextIndex = inputs.index(this) + 1;
+                            if (nextIndex < inputs.length) {
+                                inputs[nextIndex].focus();
+                            }
+                        }
+                    });
+                });
             }
         }
 

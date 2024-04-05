@@ -45,6 +45,7 @@
                                         <option value="hanmail.net">hanmail.net</option>
                                         <option value="nate.com">nate.com</option>
                                         <option value="kakao.com">kakao.com</option>
+                                        <option value="">직접 입력</option>
                                     </select>
                                 </div>
 
@@ -165,19 +166,25 @@
     let isEmailChanged = false;
     let emailCheck = false;
 
-    $('#email-local, #email-domain').on('change', function () {
+    $(document).on('change', '#email-local, #email-domain', function () {
+        if($('#email-domain').val() === '') {
+            $( 'select' ).remove( '#email-domain' );
+            $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+        }
         isEmailChanged = true;
+
     });
 
     // 이메일 중복확인
     function checkDuplicateEmail() {
         const email_front = $(".email_front").val();
         const email_end = $(".email_end").val();
+        const emailPattern = /^[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
         const email = email_front + "@" + email_end;
 
         const emailCheckElement = $('#email_check');
 
-        if (email_front.length < 3) {
+        if (email_front.length < 3|| !emailPattern.test(email_end)) {
             emailCheckElement.text("이메일을 정확히 입력해 주세요");
             emailCheckElement.show();
         } else {
