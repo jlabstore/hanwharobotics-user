@@ -25,7 +25,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
@@ -76,8 +76,6 @@ public class SecurityConfig {
         ;
         return http.build();
     }
-
-
 
 
 }
