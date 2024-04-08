@@ -219,17 +219,18 @@
 <th:block layout:fragment="script">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            const existingSoftwareInputs = document.querySelectorAll('.qna-write-custom-input.software');
 
-            $(function () {
-                $("input[name='software1']").keyup(function() {
-                    if(this.value.length > 0) {
-                        $(this).next("input[name='software1']").focus();
-                        return false;
+            existingSoftwareInputs.forEach((input, index) => {
+                if (index === existingSoftwareInputs.length - 1) return;
+                input.addEventListener('input', function() {
+                    if (this.value.length > 0) {
+                        existingSoftwareInputs[index + 1].focus();
                     }
-                })
+                });
             });
-           
         });
+        
 
 
         $(document).ready(function () {
