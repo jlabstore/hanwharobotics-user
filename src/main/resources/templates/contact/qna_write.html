@@ -219,17 +219,16 @@
 <th:block layout:fragment="script">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll('.software');
-            inputs.each(function(index) {
-                    $(this).on('input', function() {
-                        if (this.value.length > 0) {
-                            const nextIndex = inputs.index(this) + 1;
-                            if (nextIndex < inputs.length) {
-                                inputs[nextIndex].focus();
-                            }
-                        }
-                    });
-                });
+
+            $(function () {
+                $("input[name='software1']").keyup(function() {
+                    if(this.value.length > 0) {
+                        $(this).next("input[name='software1']").focus();
+                        return false;
+                    }
+                })
+            });
+           
         });
 
 
@@ -382,17 +381,19 @@
                 $('.qna-write-inquiry-product-item:last').after(newRobotInfo);
                 robotInfoCounter++;
 
-                const inputs = newRobotInfo.find('.software');
-                inputs.each(function(index) {
-                    $(this).on('input', function() {
+                const newInputs = newRobotInfo.find('.software');
+                for (const input of newInputs) {
+                    input.addEventListener('input', function() {
                         if (this.value.length > 0) {
-                            const nextIndex = inputs.index(this) + 1;
-                            if (nextIndex < inputs.length) {
-                                inputs[nextIndex].focus();
+                            const nextIndex = Array.from(newInputs).indexOf(this) + 1;
+                            if (nextIndex < newInputs.length) {
+                                newInputs[nextIndex].focus();
                             }
                         }
                     });
-                });
+                }
+            } else {
+                alert('최대 10개까지만 추가할 수 있습니다.');
             }
         }
 

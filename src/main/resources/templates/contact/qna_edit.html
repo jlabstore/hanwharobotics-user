@@ -169,6 +169,19 @@
 <th:block layout:fragment="script">
     <script>
 
+        document.addEventListener("DOMContentLoaded", function() {
+
+            $(function () {
+                $("input[name='software1']").keyup(function() {
+                    if(this.value.length > 0) {
+                        $(this).next("input[name='software1']").focus();
+                        return false;
+                    }
+                })
+            });
+
+        });
+
         const qnaType1Nm = "[[${qnaDetailEditResponse.getQnaDetail().getQnaType1Nm()}]]";
         const qnaType2Nm = "[[${qnaDetailEditResponse.getQnaDetail().getQnaType2Nm()}]]";
 
@@ -408,6 +421,16 @@
                 newRobotInfo.find('input').val('');
                 $('.robotInfoContainer:last').after(newRobotInfo);
                 robotInfoCounter = $('.robotInfoContainer').length;
+
+                const newInputs = newRobotInfo.find('.qna-write-custom-input');
+                for (let i = 0; i < newInputs.length; i++) {
+                    newInputs[i].addEventListener('input', function() {
+                        if (this.value.length >= 1 && i < newInputs.length - 1) {
+                            newInputs[i + 1].focus();
+                        }
+                    });
+                }
+
             } else {
                 alert('최대 10개까지만 추가할 수 있습니다.');
             }
