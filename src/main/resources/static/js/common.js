@@ -331,7 +331,7 @@ $(document).ready(async function() {
   })
 
   /**
-   * utils/common.js 에 동일한 기능 존재하여 주석 처리
+   * qna_write.html, qna_edit.html에 동일한 기능 존재하여 주석 처리
    */
   // Array.from({ length: 10 }).forEach((_, i) => {
   //   console.log("이 메소드 타는 것")
