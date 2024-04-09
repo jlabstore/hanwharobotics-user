@@ -28,7 +28,7 @@ import org.springframework.session.web.http.HttpSessionIdResolver;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-//@EnableRedisHttpSession
+@EnableRedisHttpSession
 public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
@@ -79,18 +79,6 @@ public class SecurityConfig {
         ;
         return http.build();
     }
-
-
-//    @Bean
-//    public HttpSessionIdResolver httpSessionIdResolver() {
-//        CookieHttpSessionIdResolver cookieHttpSessionIdResolver = new CookieHttpSessionIdResolver();
-//        DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
-//        cookieSerializer.setCookieName("JSESSIONID");
-//        cookieSerializer.setCookiePath("/");
-//        cookieSerializer.setDomainName("https://hanwharobotics.co.kr:8090");
-//        cookieHttpSessionIdResolver.setCookieSerializer(cookieSerializer);
-//        return cookieHttpSessionIdResolver;
-//    }
 
 
 }
