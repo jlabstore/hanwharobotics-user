@@ -21,6 +21,7 @@ import com.hanwha.robotics.user.service.impl.MemberLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieHttpSessionIdResolver;
+import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.session.web.http.HttpSessionIdResolver;
 
@@ -79,6 +80,19 @@ public class SecurityConfig {
         ;
         return http.build();
     }
+
+
+    @Bean
+    public CookieSerializer cookieSerializer() {
+        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
+        serializer.setCookieName("JSESSIONID");
+        serializer.setCookiePath("/");
+        serializer.setDomainNamePattern("^.+?(\\w+\\.[a-z]+)$");
+        serializer.setUseBase64Encoding(false);
+        return serializer;
+    }
+
+
 
 
 }
