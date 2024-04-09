@@ -330,16 +330,20 @@ $(document).ready(async function() {
     })
   })
 
-  Array.from({ length: 10 }).forEach((_, i) => {
-    let currIndex = i + 1;
-    $(`input[name=software${currIndex}]`).keyup(function(e) {
-      if (currIndex === 1 || currIndex === 4 || currIndex === 7) {
-        $(this).next().next().focus();
-      } else {
-        $(this).next().focus();
-      }
-    });
-  });
+  /**
+   * qna_write.html, qna_edit.html에 동일한 기능 존재하여 주석 처리
+   */
+  // Array.from({ length: 10 }).forEach((_, i) => {
+  //   console.log("이 메소드 타는 것")
+  //   let currIndex = i + 1;
+  //   $(`input[name=software${currIndex}]`).keyup(function(e) {
+  //     if (currIndex === 1 || currIndex === 4 || currIndex === 7) {
+  //       $(this).next().next().focus();
+  //     } else {
+  //       $(this).next().focus();
+  //     }
+  //   });
+  // });
 
   /**
    * utils/common.js 에 동일한 기능 존재하여 주석 처리
@@ -369,8 +373,6 @@ $('.products-section2-slider').slick({
   // arrows: true,
   dots: false,
   arrows: false,
-  dots: true,
-  arrows: true,
   slidesPerRow: 3,
   infinite: false,
   autoplay: false,
@@ -408,8 +410,6 @@ $('.robots-section2-slider').slick({
   // arrows: true,
   dots: false,
   arrows: false,
-  dots: true,
-  arrows: true,
   slidesPerRow: 2,
   infinite: false,
   autoplay: false,
