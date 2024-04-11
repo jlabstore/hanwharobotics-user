@@ -82,16 +82,16 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public CookieSerializer cookieSerializer() {
-        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
-        serializer.setCookieName("JSESSIONID");
-        serializer.setCookiePath("/");
-        serializer.setDomainNamePattern("^.+?(\\w+\\.[a-z]+)$");
-        serializer.setUseBase64Encoding(false);
-        return serializer;
-    }
-
+//    @Bean
+//    public CookieSerializer cookieSerializer() {
+//        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
+//        serializer.setCookieName("JSESSIONID_2");
+//        serializer.setCookiePath("/");
+////        serializer.setDomainNamePattern("^.+?(\\w+\\.[a-z]+)$");
+//        serializer.setDomainNamePattern("^.+?\\.hanwharobotics\\.(co\\.kr|com)$");
+//        serializer.setUseBase64Encoding(false);
+//        return serializer;
+//    }
 
 
 
