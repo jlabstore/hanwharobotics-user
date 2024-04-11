@@ -28,12 +28,25 @@ public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingF
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
+//        try {
+//            LoginRequest loginReq = new ObjectMapper().readValue(request.getReader(), LoginRequest.class);
+//            return super.getAuthenticationManager().authenticate(loginReq.toAuthentication());
+//        } catch (IOException ex) {
+//            throw new RuntimeException("Bad Request Exception", ex);
+//        }
+
         try {
-            LoginRequest loginReq = new ObjectMapper().readValue(request.getReader(), LoginRequest.class);
+            String sessionId = request.getHeader("JSESSIONID_2");
+            response.setHeader("JSESSIONID_2", sessionId);
+
+            LoginRequest loginReq = objectMapper.readValue(request.getReader(), LoginRequest.class);
             return super.getAuthenticationManager().authenticate(loginReq.toAuthentication());
         } catch (IOException ex) {
             throw new RuntimeException("Bad Request Exception", ex);
         }
+
+
+
     }
 
     @Override

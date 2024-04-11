@@ -24,6 +24,12 @@ import org.springframework.session.web.http.CookieHttpSessionIdResolver;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.session.web.http.HttpSessionIdResolver;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -56,9 +62,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
+//                .addFilterBefore(new SessionHeaderFilter(), UsernamePasswordAuthenticationFilter.class)
                 .httpBasic().disable()
                 .formLogin().disable()
-                .cors().disable()
+//                .cors().disable()
+                .cors((cors -> cors.configurationSource(corsConfigurationSource())))
                 .csrf().disable()
                 .headers().frameOptions().disable()
 
@@ -81,6 +89,23 @@ public class SecurityConfig {
         return http.build();
     }
 
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList(
+                "https://hanwharobotics.co.kr",
+                "https://hanwharobotics.com",
+                "https://hanwharobotics.co.kr:8090",
+                "https://hanwharobotics.com:8090"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 //    @Bean
 //    public CookieSerializer cookieSerializer() {
