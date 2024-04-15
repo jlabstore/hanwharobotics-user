@@ -30,7 +30,7 @@ public class AgvAmrController {
 
     @GetMapping("/high-mast")
     public String highMast() {
-        return "agv_amr/products_high_mast";
+        return "agv_amr/products_detail_high_mast";
     }
 
     @GetMapping("/conveyor")
