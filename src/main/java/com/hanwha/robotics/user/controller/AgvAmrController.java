@@ -23,6 +23,20 @@ public class AgvAmrController {
         return "agv_amr/products_detail_reel_roll";
     }
 
+    @GetMapping("/pallet-truck")
+    public String palletTruck() {
+        return "agv_amr/products_detail_pallet_truck";
+    }
+
+    @GetMapping("/high-mast")
+    public String highMast() {
+        return "agv_amr/products_high_mast";
+    }
+
+    @GetMapping("/conveyor")
+    public String conveyor() {
+        return "agv_amr/products_detail_conveyor";
+    }
     @GetMapping("/semiconductor")
     public String semiconductor() {
         return "agv_amr/products_detail_semiconductor";
