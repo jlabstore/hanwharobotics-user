@@ -1,241 +1,291 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       th:fragment="header(headerClass)">
-      <header id="header" th:class="${headerClass}">
-        <!-- th:fragment = header()함수, th:fragment="header(headerClass)의 headerClass와 <header id="header" th:class="${headerClass}"> 의 headerClass 맞춰줌. 왜 한 거지??? sub_layout.htmldml header('sub_header')"로 두 개의 html을 만들지 않고 클래스만 지정해줘서 하나의 html로 해결하기 위해.
-          common.js 보면 $('header .gnb_layer').addClass('active');처럼 그냥 header를 호출해서 js 적용하고 있음. 그래서 header태그를 넣어줘야 함. -->
-        <div class="header_wrapper">
-          <div class="header_inner">
+<header id="header" th:class="${headerClass}">
+    <!-- th:fragment = header()함수, th:fragment="header(headerClass)의 headerClass와 <header id="header" th:class="${headerClass}"> 의 headerClass 맞춰줌. 왜 한 거지??? sub_layout.htmldml header('sub_header')"로 두 개의 html을 만들지 않고 클래스만 지정해줘서 하나의 html로 해결하기 위해.
+      common.js 보면 $('header .gnb_layer').addClass('active');처럼 그냥 header를 호출해서 js 적용하고 있음. 그래서 header태그를 넣어줘야 함. -->
+    <div class="header_wrapper">
+        <div class="header_inner">
             <div class="logo">
-              <a href="/" class="logo_link">
-                <!-- <span>한화로보틱스</span> -->
-                <span th:utext="#{hanwharobotics.large}"></span>
-              </a>
+                <a href="/" class="logo_link">
+                    <!-- <span>한화로보틱스</span> -->
+                    <span th:utext="#{hanwharobotics.large}"></span>
+                </a>
 
-              <div class="txt">
-                <!-- <a href="/contact/inquiry" >
-                  한화로보틱스와 함께 할 파트너를 찾습니다.
-                  <span>
-                    more
-                    <strong></strong>
-                  </span>
-                </a> -->
-                <a href="/contact/inquiry" th:utext="#{header.banner}"></a>
-              </div>
+                <div class="txt">
+                    <!-- <a href="/contact/inquiry" >
+                      한화로보틱스와 함께 할 파트너를 찾습니다.
+                      <span>
+                        more
+                        <strong></strong>
+                      </span>
+                    </a> -->
+                    <a href="/contact/inquiry" th:utext="#{header.banner}"></a>
+                </div>
             </div>
 
             <div class="gnb_layer"></div>
 
             <div class="gnb_right">
-              <div class="gnb_menu">
-                <div class="logo">
-                  <a href="/" class="logo_link">
-                    <!-- <span>한화로보틱스</span> -->
-                    <span th:utext="#{hanwharobotics.large}"></span>
-                  </a>
+                <div class="gnb_menu">
+                    <div class="logo">
+                        <a href="/" class="logo_link">
+                            <!-- <span>한화로보틱스</span> -->
+                            <span th:utext="#{hanwharobotics.large}"></span>
+                        </a>
+                    </div>
+
+                    <button class="btn_close">
+                        <span></span>
+                    </button>
+
+                    <ul class="header__nav__items">
+                        <li>
+                            <!-- <a class="header__nav__link active" href="/about.html" target="_blank">ABOUT</a> -->
+                            <span class="header__nav__link" data-gnb="about">ABOUT</span>
+
+                            <ul class="header__nav__items_sub">
+                                <li>
+                                    <a href="/about" class="header_about" th:utext="#{header.hanwharobotics}"></a>
+                                    <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
+                                </li>
+                                <li>
+                                    <a href="/about/managementPolicy" class="header_about"
+                                       th:utext="#{header.managementPolicy}"></a>
+                                    <!-- <a href="/about" class="header_about">경영방침</a> -->
+                                </li>
+                                <li>
+                                    <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
+                                </li>
+                                <!-- <li>
+                                  <a href="#" target="_blank">연혁</a>
+                                </li>
+                                <li>
+                                  <a href="#" target="_blank">경영</a>
+                                </li>
+                                <li>
+                                  <a href="#" target="_blank">채용</a>
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="header__nav__link" data-gnb="robot">ROBOT</span>
+                            <ul class="header__nav__items_sub">
+                                <li>
+                                    <a th:if="#{header.nation} == 'EN'" href="javascript:void(0)"
+                                       onclick="window.location.href='/robot'">Products</a>
+                                    <a th:unless="#{header.nation} == 'EN'" href="javscript:void(0)"
+                                       onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'"
+                                       target="_blank">Products</a>
+                                </li>
+                                <li>
+                                    <a href="/robot/solutions">Solutions</a>
+                                </li>
+                                <!-- <li>
+                                  <a href="#" target="_blank">Ecosystem</a>
+                                </li>
+                                <li>
+                                  <a href="#" target="_blank">Case Study</a>
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="header__nav__link" data-gnb="agv/amr">AGV/AMR</span>
+
+                            <ul class="header__nav__items_sub">
+                                <li>
+                                    <a th:if="#{header.nation} == 'EN'" href="javascript:void(0)"
+                                       onclick="window.location.href='/agv-amr'">Products</a>
+                                    <a th:unless="#{header.nation} == 'EN'" href="javascript:void(0)"
+                                       onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'"
+                                       target="_blank">Products</a>
+                                </li>
+                                <!-- <li>
+                                  <a href="#" target="_blank">Case Study</a>
+                                </li> -->
+                            </ul>
+                        </li>
+
+                        <li>
+                            <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
+                            <span class="header__nav__link" data-gnb="newsroom">NEWSROOM</span>
+
+                            <ul class="header__nav__items_sub">
+                                <li>
+                                    <a href="/newsroom/press" class="header_press">Press</a>
+                                </li>
+                                <li>
+                                    <a href="/newsroom/ir" class="header_ir">IR</a>
+                                </li>
+                                <li>
+                                    <a href="/newsroom/notice" class="header_notice">Notice</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
+                            <span class="header__nav__link" data-gnb="contact">CONTACT</span>
+
+                            <ul class="header__nav__items_sub">
+                                <li>
+                                    <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
+                                </li>
+
+                                <li>
+                                    <a href="/qna" class="header_inquiry">Q&A</a>
+                                </li>
+
+
+                                <!--                      <li th:if="${#request.userPrincipal == null}">-->
+                                <!--                        <a href="/member/login" class="header_inquiry">로그인</a>-->
+                                <!--                      </li>-->
+
+                                <!--                      <li th:if="${#request.userPrincipal != null}">-->
+                                <!--                        <a href="/member/logout" class="header_inquiry">로그아웃</a>-->
+                                <!--                        <a href="/member/reset/password">비밀번호 재설정 </a>-->
+                                <!--                      </li>-->
+
+
+                            </ul>
+
+
+                        <li class="header__nav__login" th:if="${#request.userPrincipal == null}">
+                            <a href="/login-page" class="header__nav__link">로그인/회원가입</a>
+                        </li>
+
+                        <li class="header__nav__login" th:if="${#request.userPrincipal != null}">
+                            <a href="/member/profile" class="header__nav__link">마이페이지</a>
+                        </li>
+
+
+                        </li>
+                    </ul>
                 </div>
 
-                <button class="btn_close">
-                  <span></span>
-                </button>
 
-                <ul class="header__nav__items">
-                  <li>
-                    <!-- <a class="header__nav__link active" href="/about.html" target="_blank">ABOUT</a> -->
-                    <span class="header__nav__link" data-gnb="about">ABOUT</span>
+                <div th:if="${#request.userPrincipal == null}">
+                    <!--                <a href="/signup/term">회원가입</a>-->
+                    <!--                |-->
+                    <!--                <a href="/login-page" class="header_inquiry">로그인</a>-->
+                    <a href="/login-page" class="login">
+                        <span>login</span>
+                    </a>
+                </div>
 
-                    <ul class="header__nav__items_sub">
-                      <li>
-                        <a href="/about" class="header_about" th:utext="#{header.hanwharobotics}"></a>
-                        <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
-                      </li>
-                      <li>
-                        <a href="/about/managementPolicy" class="header_about" th:utext="#{header.managementPolicy}"></a>
-                        <!-- <a href="/about" class="header_about">경영방침</a> -->
-                      </li>
-                      <li>
-                        <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
-                      </li>
-                      <!-- <li>
-                        <a href="#" target="_blank">연혁</a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">경영</a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">채용</a>
-                      </li> -->
-                    </ul>
-                  </li>
-                  <li>
-                    <span class="header__nav__link" data-gnb="robot">ROBOT</span>
-                    <ul class="header__nav__items_sub">
-                      <li>
-                        <a th:if="#{header.nation} == 'EN'" href="javascript:void(0)" onclick="window.location.href='/robot'">Products</a>
-                        <a th:unless="#{header.nation} == 'EN'" href="javscript:void(0)" onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'" target="_blank">Products</a>
-                      </li>
-                      <li>
-                        <a href="/robot/solutions">Solutions</a>
-                      </li>
-                      <!-- <li>
-                        <a href="#" target="_blank">Ecosystem</a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">Case Study</a>
-                      </li> -->
-                    </ul>
-                  </li>
-                  <li>
-                    <span class="header__nav__link" data-gnb="agv/amr">AGV/AMR</span>
-
-                    <ul class="header__nav__items_sub">
-                      <li>
-                        <a th:if="#{header.nation} == 'EN'" href="javascript:void(0)" onclick="window.location.href='/agv-amr'">Products</a>
-                        <a th:unless="#{header.nation} == 'EN'" href="javascript:void(0)" onclick="window.open('about:blank').location.href='https://www.hanwhacorp.co.kr/eng/momentum/business/logistics.jsp'" target="_blank">Products</a>
-                      </li>
-                      <!-- <li>
-                        <a href="#" target="_blank">Case Study</a>
-                      </li> -->
-                    </ul>
-                  </li>
-
-                  <li>
-                    <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
-                    <span class="header__nav__link" data-gnb="newsroom">NEWSROOM</span>
-
-                    <ul class="header__nav__items_sub">
-                      <li>
-                        <a href="/newsroom/press" class="header_press" >Press</a>
-                      </li>
-                      <li>
-                        <a href="/newsroom/ir" class="header_ir">IR</a>
-                      </li>
-                      <li>
-                        <a href="/newsroom/notice" class="header_notice">Notice</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
-                    <span class="header__nav__link" data-gnb="contact">CONTACT</span>
-
-                    <ul class="header__nav__items_sub">
-                      <li>
-                        <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
-                      </li>
-
-                      <li>
-                        <a href="/qna" class="header_inquiry">Q&A</a>
-                      </li>
+                <div th:if="${#request.userPrincipal != null}">
+                    <!--                <a href="/member/profile">마이페이지</a>-->
+                    <!--                |-->
+                    <!--                <a href="/member/logout" class="header_inquiry">로그아웃</a>-->
+                    <a href="/member/profile" class="login">
+                        <span>login</span>
+                    </a>
+                </div>
 
 
-<!--                      <li th:if="${#request.userPrincipal == null}">-->
-<!--                        <a href="/member/login" class="header_inquiry">로그인</a>-->
-<!--                      </li>-->
-
-<!--                      <li th:if="${#request.userPrincipal != null}">-->
-<!--                        <a href="/member/logout" class="header_inquiry">로그아웃</a>-->
-<!--                        <a href="/member/reset/password">비밀번호 재설정 </a>-->
-<!--                      </li>-->
-
-
-                    </ul>
-
-
-
-                  <li class="header__nav__login" th:if="${#request.userPrincipal == null}">
-                    <a href="/login-page" class="header__nav__link">로그인/회원가입</a>
-                  </li>
-
-                  <li class="header__nav__login" th:if="${#request.userPrincipal != null}">
-                    <a href="/member/profile" class="header__nav__link">마이페이지</a>
-                  </li>
-
-
-
-
-
-                  </li>
-                </ul>
-              </div>
-
-
-              <div th:if="${#request.userPrincipal == null}">
-<!--                <a href="/signup/term">회원가입</a>-->
-<!--                |-->
-<!--                <a href="/login-page" class="header_inquiry">로그인</a>-->
-                <a href="/login-page" class="login">
-                  <span>login</span>
+                <a class="selected_country" id="languageSelect" th:if="#{header.nation} == 'EN'" value="en">
+                    <!-- <a><span id="languageSelect">국가</span></a> -->
+                    <span th:utext="#{header.nation}"></span>
                 </a>
-              </div>
-
-              <div th:if="${#request.userPrincipal != null}">
-<!--                <a href="/member/profile">마이페이지</a>-->
-<!--                |-->
-<!--                <a href="/member/logout" class="header_inquiry">로그아웃</a>-->
-                <a href="/member/profile" class="login">
-                  <span>login</span>
+                <a class="selected_country" id="languageSelect" th:unless="#{header.nation} == 'EN'" value="ko">
+                    <span th:utext="#{header.nation}"></span>
                 </a>
-              </div>
 
-
-
-
-              <a class="selected_country" id="languageSelect" th:if="#{header.nation} == 'EN'" value="en">
-                <!-- <a><span id="languageSelect">국가</span></a> -->
-                <span th:utext="#{header.nation}"></span>
-              </a>
-              <a class="selected_country" id="languageSelect" th:unless="#{header.nation} == 'EN'" value="ko">
-                <span th:utext="#{header.nation}"></span>
-              </a>
-
-              <div class="btn_menu">
-                <button>
-                  <div class="icon-top"></div>
-                  <div class="icon-bottom"></div>
-                </button>
-              </div>
+                <div class="btn_menu">
+                    <button>
+                        <div class="icon-top"></div>
+                        <div class="icon-bottom"></div>
+                    </button>
+                </div>
             </div>
 
-          </div>
-          <script>
+        </div>
+        <script>
             $(document).ready(function () {
-              checkDomainLang();
+                checkDomainLang();
 
-              $('#languageSelect').click(function() {
-                var selectedLanguage = $(this).attr('value');
-                var param = "lang=" + selectedLanguage;
-                var url = window.location.pathname + "?" + param;
-                if (selectedLanguage == "en") {
-                  $.ajax({
-                    type: 'GET',
-                    url: `/lang/en` + url
-                  });
-                  // url = "https://hanwharobotics.com:8090" + url
-                  // window.location.href = url;
-                } else {
-                  $.ajax({
-                    type: 'GET',
-                    url: `/lang/kr` + url
-                  });
-                  // url = "https://hanwharobotics.co.kr:8090" + url
-                  // window.location.href = url;
-                }
-              })
+                //   $('#languageSelect').click(function() {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var param = "lang=" + selectedLanguage;
+                //     var url = window.location.pathname + "?" + param;
+                //     if (selectedLanguage === "en") {
+                //       $.ajax({
+                //         type: 'GET',
+                //         url: `/lang/en` + url,
+                //         // success: function () {
+                //         //   window.location.reload();
+                //         // },
+                //         // error: function () {
+                //         //   window.location.reload();
+                //         // }
+                //       });
+                //       // url = "https://hanwharobotics.com:8090" + url
+                //       // window.location.href = url;
+                //     } else {
+                //       $.ajax({
+                //         type: 'GET',
+                //         url: `/lang/kr` + url,
+                //         // success: function () {
+                //         //   window.location.reload();
+                //         // },
+                //         // error: function () {
+                //         //   window.location.reload();
+                //         // }
+                //       });
+                //       // url = "https://hanwharobotics.co.kr:8090" + url
+                //       // window.location.href = url;
+                //     }
+                //   })
+                // })
+
+
+                $('#languageSelect').click(function () {
+                    var selectedLanguage = $(this).attr('value');
+                    var param = "lang=" + selectedLanguage;
+                    var path = selectedLanguage === "en" ? "/en" : "/kr";
+                    var url = window.location.pathname + "?" + param;
+                    // var url = window.location.pathname + "/" + selectedLanguage;
+                    console.log("유알엘~~", url)
+                    console.log("셀렉트랭귀지~~", selectedLanguage)
+                    if (selectedLanguage == "en") {
+                        $.ajax({
+                            type: 'GET',
+                            // url: `/lang` + url
+                            url: '/lang/en',
+                            data: {path: url},
+                            success: function () {
+                                window.location.reload();
+                            }
+                        });
+                        // url = "https://hanwharobotics.com:8090" + url
+                        // window.location.href = url;
+                    } else {
+                        $.ajax({
+                            type: 'GET',
+                            // url: `/lang` + url
+                            url: '/lang/kr',
+                            data: {path: url},
+                            success: function () {
+                                window.location.reload();
+                            }
+                        });
+                        // url = "https://hanwharobotics.co.kr:8090" + url
+                        // window.location.href = url;
+                    }
+                })
             })
 
-            function checkDomainLang(){
-              var lang = getCookieLang();
-              var domain = window.location.host;
-              if(domain == "https://hanwharobotics.co.kr:8090" && lang == "en" ){
-                window.location.href = domain +  window.location.pathname + "?lang=kr"
-              } else if (domain == "https://hanwharobotics.com:8090" && lang == "ko") {
-                window.location.href = domain +  window.location.pathname + "?lang=en"
-              }
-
+            function checkDomainLang() {
+                var lang = getCookieLang();
+                var domain = window.location.host;
+                if (domain == "https://hanwharobotics.co.kr:8090" && lang == "en") {
+                    window.location.href = domain + window.location.pathname + "?lang=kr"
+                } else if (domain == "https://hanwharobotics.com:8090" && lang == "ko") {
+                    window.location.href = domain + window.location.pathname + "?lang=en"
+                }
             }
 
-          </script>
-        </div>
-      </header>
+
+        </script>
+    </div>
+</header>
 </html>
