@@ -207,11 +207,19 @@
                 var param = "lang=" + selectedLanguage;
                 var url = window.location.pathname + "?" + param;
                 if (selectedLanguage == "en") {
-                  url = "https://hanwharobotics.com:8090" + url
-                  window.location.href = url;
+                  $.ajax({
+                    type: 'GET',
+                    url: `/lang/en` + url
+                  });
+                  // url = "https://hanwharobotics.com:8090" + url
+                  // window.location.href = url;
                 } else {
-                  url = "https://hanwharobotics.co.kr:8090" + url
-                  window.location.href = url;
+                  $.ajax({
+                    type: 'GET',
+                    url: `/lang/kr` + url
+                  });
+                  // url = "https://hanwharobotics.co.kr:8090" + url
+                  // window.location.href = url;
                 }
               })
             })

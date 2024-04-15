@@ -35,7 +35,7 @@ import java.util.List;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
