@@ -19,11 +19,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequestMapping("/lang")
 public class LanguageController {
 
-	@Value("${base.url}")
-	private String baseUrl;
-
-	@Value("${base.url.en}")
-	private String baseUrlEn;
+//	@Value("${base.url}")
+//	private String baseUrl;
+//
+//	@Value("${base.url.en}")
+//	private String baseUrlEn;
 
 	@GetMapping("/kr")
 	public void kr(
@@ -43,7 +43,7 @@ public class LanguageController {
 				cookie.setDomain("https://hanwharobotics.co.kr");
 				response.addCookie(cookie);
 			});
-		response.sendRedirect(baseUrl + path);
+		response.sendRedirect("https://hanwharobotics.co.kr" + path);
 	}
 
 	@GetMapping("/en")
@@ -64,7 +64,7 @@ public class LanguageController {
 				cookie.setDomain("https://hanwharobotics.com");
 				response.addCookie(cookie);
 			});
-		response.sendRedirect(baseUrlEn + path);
+		response.sendRedirect("https://hanwharobotics.com" + path);
 	}
 
 }
