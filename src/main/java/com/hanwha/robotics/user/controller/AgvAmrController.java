@@ -23,5 +23,25 @@ public class AgvAmrController {
         return "agv_amr/products_detail_reel_roll";
     }
 
+    @GetMapping("/semiconductor")
+    public String semiconductor() {
+        return "agv_amr/products_detail_semiconductor";
+    }
+
+    @GetMapping("/wafer-production1")
+    public String waferProduction1() {
+        return "agv_amr/products_detail_wafer_production1";
+    }
+
+    @GetMapping("/wafer-production2")
+    public String waferProduction2() {
+        return "agv_amr/products_detail_wafer_production2";
+    }
+
+    @GetMapping("/amr")
+    public String amr() {
+        return "agv_amr/products_detail_amr";
+    }
+
 
 }

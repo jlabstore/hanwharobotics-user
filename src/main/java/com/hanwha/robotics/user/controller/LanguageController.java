@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/lang")
 public class LanguageController {
 
-//	@Value("${base.url}")
-//	private String baseUrl;
-//
-//	@Value("${base.url.en}")
-//	private String baseUrlEn;
+	@Value("${base.url}")
+	private String baseUrl;
+
+	@Value("${base.url.en}")
+	private String baseUrlEn;
 
 	@GetMapping("/kr")
 	public void kr(
@@ -38,10 +38,14 @@ public class LanguageController {
 				cookie.setSecure(jSessionId.getSecure());
 				cookie.setHttpOnly(jSessionId.isHttpOnly());
 				cookie.setVersion(jSessionId.getVersion());
-				cookie.setDomain("https://hanwharobotics.co.kr");
+//				cookie.setDomain("https://hanwharobotics.co.kr");
+				cookie.setDomain(baseUrl);
 				response.addCookie(cookie);
 			});
-		response.sendRedirect("https://hanwharobotics.co.kr" + path);
+//		response.sendRedirect("https://hanwharobotics.co.kr" + path);
+		response.sendRedirect(baseUrl + path);
+//		response.sendRedirect("http://localhost:8081" + path);
+
 	}
 
 	@GetMapping("/en")
@@ -59,10 +63,14 @@ public class LanguageController {
 				cookie.setSecure(jSessionId.getSecure());
 				cookie.setHttpOnly(jSessionId.isHttpOnly());
 				cookie.setVersion(jSessionId.getVersion());
-				cookie.setDomain("https://hanwharobotics.com");
+//				cookie.setDomain("https://hanwharobotics.com");
+				cookie.setDomain(baseUrlEn);
 				response.addCookie(cookie);
 			});
-		response.sendRedirect("https://hanwharobotics.com" + path);
+//		response.sendRedirect("https://hanwharobotics.com" + path);
+		response.sendRedirect(baseUrlEn + path);
+//		response.sendRedirect("http://localhost:8081" + path);
+
 	}
 
 }
