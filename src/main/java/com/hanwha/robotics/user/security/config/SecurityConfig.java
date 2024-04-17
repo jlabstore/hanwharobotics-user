@@ -68,9 +68,9 @@ public class SecurityConfig {
 //                .cors().disable()
                 .cors((cors -> cors.configurationSource(corsConfigurationSource())))
                 .csrf().disable()
-                .headers().frameOptions().disable()
+//                .headers().frameOptions().disable()
 
-                .and()
+//                .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/member/**").authenticated()
@@ -85,6 +85,7 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(loginAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(logoutAuthenticationFilter(), LogoutFilter.class)
+
         ;
         return http.build();
     }
@@ -106,18 +107,6 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-//    @Bean
-//    public CookieSerializer cookieSerializer() {
-//        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
-//        serializer.setCookieName("JSESSIONID_2");
-//        serializer.setCookiePath("/");
-////        serializer.setDomainNamePattern("^.+?(\\w+\\.[a-z]+)$");
-//        serializer.setDomainNamePattern("^.+?\\.hanwharobotics\\.(co\\.kr|com)$");
-//        serializer.setUseBase64Encoding(false);
-//        return serializer;
-//    }
-
 
 
 }

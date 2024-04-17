@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/lang")
+//@CrossOrigin(origins = {"https://hanwharobotics.co.kr:8090", "https://hanwharobotics.com:8090", "https://hanwharobotics.co.kr", "https://hanwharobotics.com"} , methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin
 public class LanguageController {
 
 	@Value("${base.url}")
@@ -38,14 +38,10 @@ public class LanguageController {
 				cookie.setSecure(jSessionId.getSecure());
 				cookie.setHttpOnly(jSessionId.isHttpOnly());
 				cookie.setVersion(jSessionId.getVersion());
-//				cookie.setDomain("https://hanwharobotics.co.kr");
 				cookie.setDomain(baseUrl);
 				response.addCookie(cookie);
 			});
-//		response.sendRedirect("https://hanwharobotics.co.kr" + path);
 		response.sendRedirect(baseUrl + path);
-//		response.sendRedirect("http://localhost:8081" + path);
-
 	}
 
 	@GetMapping("/en")
@@ -63,14 +59,10 @@ public class LanguageController {
 				cookie.setSecure(jSessionId.getSecure());
 				cookie.setHttpOnly(jSessionId.isHttpOnly());
 				cookie.setVersion(jSessionId.getVersion());
-//				cookie.setDomain("https://hanwharobotics.com");
 				cookie.setDomain(baseUrlEn);
 				response.addCookie(cookie);
 			});
-//		response.sendRedirect("https://hanwharobotics.com" + path);
 		response.sendRedirect(baseUrlEn + path);
-//		response.sendRedirect("http://localhost:8081" + path);
-
 	}
 
 }
