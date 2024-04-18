@@ -304,6 +304,7 @@
                         $.ajax({
                             type: 'GET',
                             url: '/lang/en',
+                            withCredentials: true,
                             data: { path: url },
                             success: function (response) {
                                 console.log("성공");
@@ -319,6 +320,7 @@
                         $.ajax({
                             type: 'GET',
                             url: '/lang/kr',
+                            withCredentials: true,
                             data: { path: url },
                             success: function (response) {
                                 console.log("성공");

@@ -18,8 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/lang")
-//@CrossOrigin(origins = {"https://hanwharobotics.co.kr:8090", "https://hanwharobotics.com:8090", "https://hanwharobotics.co.kr", "https://hanwharobotics.com"} , methods = {RequestMethod.GET, RequestMethod.POST})
-@CrossOrigin
 public class LanguageController {
 
 	@Value("${base.url}")
@@ -56,7 +54,6 @@ public class LanguageController {
 //			});
 //		response.sendRedirect(baseUrl + path);
 //	}
-//
 //
 //
 //	@GetMapping("/en")
@@ -98,6 +95,9 @@ public class LanguageController {
 				.findFirst()
 				.ifPresent(jSessionId -> {
 					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
+
+					cookie.setValue(jSessionId.getValue());
+
 					cookie.setMaxAge(jSessionId.getMaxAge());
 					cookie.setSecure(jSessionId.getSecure());
 					cookie.setHttpOnly(jSessionId.isHttpOnly());
@@ -105,7 +105,8 @@ public class LanguageController {
 					cookie.setDomain(cookieUrl);
 					response.addCookie(cookie);
 
-					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+//                    response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+
 				});
 //		response.sendRedirect(baseUrl + path);
         Map<String, String> responseMap = new HashMap<>();
@@ -124,19 +125,33 @@ public class LanguageController {
 				.findFirst()
 				.ifPresent(jSessionId -> {
 					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
+
+					cookie.setValue(jSessionId.getValue());
+
 					cookie.setMaxAge(jSessionId.getMaxAge());
 					cookie.setSecure(jSessionId.getSecure());
 					cookie.setHttpOnly(jSessionId.isHttpOnly());
 					cookie.setVersion(jSessionId.getVersion());
-					cookie.setDomain(cookieUrl);
+					cookie.setDomain(cookieUrlEn);
 					response.addCookie(cookie);
 
-					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+//					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+
 				});
 //		response.sendRedirect(baseUrlEn + path);
         Map<String, String> responseMap = new HashMap<>();
 		responseMap.put("redirectUrl", baseUrlEn + path);
 		return ResponseEntity.ok(responseMap);
 	}
+
+
+
+
+
+
+
+
+
+
 
 }
