@@ -268,34 +268,6 @@
 
 
 
-                // $('#languageSelect').click(function () {
-                //     var selectedLanguage = $(this).attr('value');
-                //     var param = "lang=" + selectedLanguage;
-                //     var url = window.location.pathname + "?" + param;
-                //     if (selectedLanguage === "en") {
-                //         $.ajax({
-                //             type: 'GET',
-                //             url: '/lang/en',
-                //             data: {
-                //                 path: url
-                //             },
-                //         });
-                //     } else {
-                //         $.ajax({
-                //             type: 'GET',
-                //             url: '/lang/kr',
-                //             data: {
-                //                 path: url
-                //             },
-                //         });
-                //     }
-                // })
-
-
-
-
-
-
                 $('#languageSelect').click(function () {
                     var selectedLanguage = $(this).attr('value');
                     var param = "lang=" + selectedLanguage;
@@ -304,36 +276,64 @@
                         $.ajax({
                             type: 'GET',
                             url: '/lang/en',
-                            withCredentials: true,
-                            data: { path: url },
-                            success: function (response) {
-                                console.log("성공");
-                                var redirectUrl = response.redirectUrl;
-                                if (redirectUrl) {
-                                    window.location.href = redirectUrl;
-                                } else {
-                                    console.log("리다이렉트 URL이 없습니다.");
-                                }
+                            data: {
+                                path: url
                             },
                         });
                     } else {
                         $.ajax({
                             type: 'GET',
                             url: '/lang/kr',
-                            withCredentials: true,
-                            data: { path: url },
-                            success: function (response) {
-                                console.log("성공");
-                                var redirectUrl = response.redirectUrl;
-                                if (redirectUrl) {
-                                    window.location.href = redirectUrl;
-                                } else {
-                                    console.log("리다이렉트 URL이 없습니다.");
-                                }
+                            data: {
+                                path: url
                             },
                         });
                     }
-                });
+                })
+
+
+
+
+
+
+                // $('#languageSelect').click(function () {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var param = "lang=" + selectedLanguage;
+                //     var url = window.location.pathname + "?" + param;
+                //     if (selectedLanguage === "en") {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: '/lang/en',
+                //             withCredentials: true,
+                //             data: { path: url },
+                //             success: function (response) {
+                //                 console.log("성공");
+                //                 var redirectUrl = response.redirectUrl;
+                //                 if (redirectUrl) {
+                //                     window.location.href = redirectUrl;
+                //                 } else {
+                //                     console.log("리다이렉트 URL이 없습니다.");
+                //                 }
+                //             },
+                //         });
+                //     } else {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: '/lang/kr',
+                //             withCredentials: true,
+                //             data: { path: url },
+                //             success: function (response) {
+                //                 console.log("성공");
+                //                 var redirectUrl = response.redirectUrl;
+                //                 if (redirectUrl) {
+                //                     window.location.href = redirectUrl;
+                //                 } else {
+                //                     console.log("리다이렉트 URL이 없습니다.");
+                //                 }
+                //             },
+                //         });
+                //     }
+                // });
 
 
 
