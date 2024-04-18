@@ -203,51 +203,47 @@
             $(document).ready(function () {
                 checkDomainLang();
 
-            //     $('#languageSelect').click(function () {
-            //         var selectedLanguage = $(this).attr('value');
-            //         var param = "lang=" + selectedLanguage;
-            //         var url = window.location.pathname + "?" + param;
-            //         if (selectedLanguage === "en") {
-            //             $.ajax({
-            //                 type: 'GET',
-            //                 url: `/lang/en` + url,
-            //                 success: function () {
-            //                   window.location.reload();
-            //                 },
-            //                 error: function () {
-            //                   window.location.reload();
-            //                 }
-            //             });
-            //             // url = "https://hanwharobotics.com:8090" + url
-            //             // window.location.href = url;
-            //         } else {
-            //             $.ajax({
-            //                 type: 'GET',
-            //                 url: `/lang/kr` + url,
-            //                 success: function () {
-            //                   window.location.reload();
-            //                 },
-            //                 error: function () {
-            //                   window.location.reload();
-            //                 }
-            //             });
-            //             // url = "https://hanwharobotics.co.kr:8090" + url
-            //             // window.location.href = url;
-            //         }
-            //     })
-            // })
+                // $('#languageSelect').click(function () {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var param = "lang=" + selectedLanguage;
+                //     var url = window.location.pathname + "?" + param;
+                //     if (selectedLanguage === "en") {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: `/lang/en` + url,
+                //             success: function () {
+                //               window.location.reload();
+                //             },
+                //             error: function () {
+                //               window.location.reload();
+                //             }
+                //         });
+                //         // url = "https://hanwharobotics.com:8090" + url
+                //         // window.location.href = url;
+                //     } else {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: `/lang/kr` + url,
+                //             success: function () {
+                //               window.location.reload();
+                //             },
+                //             error: function () {
+                //               window.location.reload();
+                //             }
+                //         });
+                //         // url = "https://hanwharobotics.co.kr:8090" + url
+                //         // window.location.href = url;
+                //     }
+                // });
 
 
                 // $('#languageSelect').click(function () {
                 //     var selectedLanguage = $(this).attr('value');
                 //     var param = "lang=" + selectedLanguage;
-                //     // var path = selectedLanguage === "en" ? "/en" : "/kr";
                 //     var url = window.location.pathname + "?" + param;
-                //     // var url = window.location.pathname + "/" + selectedLanguage;
                 //     if (selectedLanguage === "en") {
                 //         $.ajax({
                 //             type: 'GET',
-                //             // url: `/lang` + url
                 //             url: '/lang/en',
                 //             data: {
                 //                 path: url
@@ -256,12 +252,9 @@
                 //             //     window.location.reload();
                 //             // }
                 //         });
-                //         // url = "https://hanwharobotics.com:8090" + url
-                //         // window.location.href = url;
                 //     } else {
                 //         $.ajax({
                 //             type: 'GET',
-                //             // url: `/lang` + url
                 //             url: '/lang/kr',
                 //             data: {
                 //                 path: url
@@ -270,10 +263,36 @@
                 //             //     window.location.reload();
                 //             // }
                 //         });
-                //         // url = "https://hanwharobotics.co.kr:8090" + url
-                //         // window.location.href = url;
                 //     }
                 // })
+
+
+
+                // $('#languageSelect').click(function () {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var param = "lang=" + selectedLanguage;
+                //     var url = window.location.pathname + "?" + param;
+                //     if (selectedLanguage === "en") {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: '/lang/en',
+                //             data: {
+                //                 path: url
+                //             },
+                //         });
+                //     } else {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: '/lang/kr',
+                //             data: {
+                //                 path: url
+                //             },
+                //         });
+                //     }
+                // })
+
+
+
 
 
 
@@ -286,10 +305,14 @@
                             type: 'GET',
                             url: '/lang/en',
                             data: { path: url },
-                            success: function () {
-                                console.log("성공")
-                                // window.location.reload();
-
+                            success: function (response) {
+                                console.log("성공");
+                                var redirectUrl = response.redirectUrl;
+                                if (redirectUrl) {
+                                    window.location.href = redirectUrl;
+                                } else {
+                                    console.log("리다이렉트 URL이 없습니다.");
+                                }
                             },
                         });
                     } else {
@@ -297,22 +320,18 @@
                             type: 'GET',
                             url: '/lang/kr',
                             data: { path: url },
-                            success: function () {
-                                console.log("성공")
-                                // window.location.reload();
+                            success: function (response) {
+                                console.log("성공");
+                                var redirectUrl = response.redirectUrl;
+                                if (redirectUrl) {
+                                    window.location.href = redirectUrl;
+                                } else {
+                                    console.log("리다이렉트 URL이 없습니다.");
+                                }
                             },
                         });
                     }
                 });
-
-
-
-
-
-
-
-
-
 
 
 

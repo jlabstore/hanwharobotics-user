@@ -16,7 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "https://hanwharobotics.co.kr:8090",
                         "https://hanwharobotics.com:8090"
                 )
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedMethods("GET", "POST")
+                .allowCredentials(true)
                 .allowedHeaders("*");
     }
 }
