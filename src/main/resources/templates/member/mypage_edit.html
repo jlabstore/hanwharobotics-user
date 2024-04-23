@@ -36,6 +36,7 @@
                                     <!--                            <input type="text" id="email_front" name="email_front" th:value="${#strings.substringBefore(memberResponse.getEmail(), '@')}" required>-->
                                     <span>@</span>
                                     <select name="email-domain" id="email-domain" class="email_end">
+                                        <option th:text="${#strings.substringAfter(memberResponse.getEmail(), '@')}" th:value="${#strings.substringAfter(memberResponse.getEmail(), '@')}" selected hidden>
                                         <option value="gmail.com">gmail.com</option>
                                         <option value="naver.com">naver.com</option>
                                         <option value="outlook.com">outlook.com</option>
