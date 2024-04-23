@@ -174,7 +174,7 @@ public class MailUtil {
 
 			this.sendEmail(
 				adminMapper.selectAdminEmail(),
-				"Q&A 게시글에 새로운 답글이 등록되었습니다.",
+				"Q&A 게시글에 새로운 댓글이 등록되었습니다.",
 					emailContent
 			);
 		} catch (Exception e) {
