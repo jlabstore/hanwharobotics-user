@@ -117,7 +117,7 @@ public class MailUtil {
 
 		this.sendEmail(
 				List.of(member.getEmail()),
-				"한화 로보틱스 비밀번호 재설정 안내입니다.",
+				"한화로보틱스 비밀번호 재설정 안내입니다.",
 				emailContent
 		);
 	}

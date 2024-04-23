@@ -34,8 +34,13 @@
     <!-- 이메일 중복확인-->
     <select id="checkMemberEmail" parameterType="String" resultType="int" >
         SELECT COUNT(*)
-        FROM tb_member
-        WHERE email = #{email}
+        FROM (SELECT email
+              FROM tb_member
+              WHERE email = #{email}
+              UNION
+              SELECT email
+              FROM tb_deleted_account
+              WHERE email = #{email}) as member
     </select>
 
 

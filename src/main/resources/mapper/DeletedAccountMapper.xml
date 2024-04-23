@@ -10,10 +10,14 @@
 
 
     <insert id="insertDeletedAccount" parameterType="int">
-        INSERT INTO tb_deleted_account
-            (member_no, member_id, create_dt)
-        VALUES
-            (#{memberNo}, (SELECT member_id FROM tb_member WHERE member_no = #{memberNo}), current_timestamp)
+#         INSERT INTO tb_deleted_account
+#             (member_no, member_id, email, create_dt)
+#         VALUES
+#             (#{memberNo}, (SELECT member_id FROM tb_member WHERE member_no = #{memberNo}), (SELECT email FROM tb_member WHERE member_no = #{memberNo}), current_timestamp)
+        INSERT INTO tb_deleted_account (member_no, member_id, email, create_dt)
+        SELECT member_no, member_id, email, CURRENT_TIMESTAMP
+        FROM tb_member
+        WHERE member_no = #{memberNo}
     </insert>
 
 
