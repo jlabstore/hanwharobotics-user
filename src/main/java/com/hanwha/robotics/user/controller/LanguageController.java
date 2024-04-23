@@ -166,6 +166,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -234,7 +235,6 @@ public class LanguageController {
 //		// response.sendRedirect(baseUrl + path);
 //	}
 //
-////	RedirectView
 //
 //	@GetMapping("/en")
 //	public void en(
@@ -263,6 +263,115 @@ public class LanguageController {
 
 
 
+//	@GetMapping("/kr")
+//	public ResponseEntity<Map<String ,String>> kr(
+//			HttpServletRequest request,
+//			HttpServletResponse response,
+//			@RequestParam String path
+//	) throws IOException {
+//		Arrays.stream(request.getCookies())
+//				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
+//				.findFirst()
+//				.ifPresent(jSessionId -> {
+//					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
+//					cookie.setValue(jSessionId.getValue());
+//					cookie.setMaxAge(jSessionId.getMaxAge());
+//					cookie.setSecure(jSessionId.getSecure());
+//					cookie.setHttpOnly(jSessionId.isHttpOnly());
+//					cookie.setVersion(jSessionId.getVersion());
+//					cookie.setDomain(cookieUrlEn);
+//					response.addCookie(cookie);
+//					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+//				});
+//       Map<String, String> responseMap = new HashMap<>();
+//		responseMap.put("redirectUrl", baseUrl + path);
+//		return ResponseEntity.ok(responseMap);
+//	}
+//
+//	@GetMapping("/en")
+//	public ResponseEntity<Map<String,String>> en(
+//			HttpServletRequest request,
+//			HttpServletResponse response,
+//			@RequestParam String path
+//	) throws IOException {
+//		Arrays.stream(request.getCookies())
+//				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
+//				.findFirst()
+//				.ifPresent(jSessionId -> {
+//					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
+//					cookie.setValue(jSessionId.getValue());
+//					cookie.setMaxAge(jSessionId.getMaxAge());
+//					cookie.setSecure(jSessionId.getSecure());
+//					cookie.setHttpOnly(jSessionId.isHttpOnly());
+//					cookie.setVersion(jSessionId.getVersion());
+//					cookie.setDomain(cookieUrl);
+//					response.addCookie(cookie);
+//					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+//				});
+//       Map<String, String> responseMap = new HashMap<>();
+//		responseMap.put("redirectUrl", baseUrlEn + path);
+//		return ResponseEntity.ok(responseMap);
+//	}
+
+
+
+
+	// TODO: path 를 파라미터로 보내고 / 도메인 바뀐상태로 들어왔을떄 쿠키에 set
+//	@GetMapping("/kr")
+//	public ResponseEntity<Map<String ,String>> kr(
+//			HttpServletRequest request,
+//			HttpServletResponse response,
+//			@RequestParam String path
+//	) throws IOException {
+//		Arrays.stream(request.getCookies())
+//				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
+//				.findFirst()
+//				.ifPresent(jSessionId -> {
+//					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
+//					cookie.setValue(jSessionId.getValue());
+//					cookie.setMaxAge(jSessionId.getMaxAge());
+//					cookie.setSecure(jSessionId.getSecure());
+//					cookie.setHttpOnly(jSessionId.isHttpOnly());
+//					cookie.setVersion(jSessionId.getVersion());
+//					cookie.setDomain(cookieUrlEn);
+//					response.addCookie(cookie);
+//					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+//				});
+//        Map<String, String> responseMap = new HashMap<>();
+//		responseMap.put("redirectUrl", baseUrl + path);
+//		return ResponseEntity.ok(responseMap);
+//	}
+//
+//	@GetMapping("/en")
+//	public ResponseEntity<Map<String,String>> en(
+//			HttpServletRequest request,
+//			HttpServletResponse response,
+//			@RequestParam String path
+//	) throws IOException {
+//		Arrays.stream(request.getCookies())
+//				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
+//				.findFirst()
+//				.ifPresent(jSessionId -> {
+//					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
+//					cookie.setValue(jSessionId.getValue());
+//					cookie.setMaxAge(jSessionId.getMaxAge());
+//					cookie.setSecure(jSessionId.getSecure());
+//					cookie.setHttpOnly(jSessionId.isHttpOnly());
+//					cookie.setVersion(jSessionId.getVersion());
+//					cookie.setDomain(cookieUrl);
+//					response.addCookie(cookie);
+//					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
+//				});
+//		Map<String, String> responseMap = new HashMap<>();
+//		responseMap.put("redirectUrl", baseUrlEn + path);
+//		return ResponseEntity.ok(responseMap);
+//	}
+
+
+
+
+
+
 
 	@GetMapping("/kr")
 	public ResponseEntity<Map<String ,String>> kr(
@@ -270,26 +379,14 @@ public class LanguageController {
 			HttpServletResponse response,
 			@RequestParam String path
 	) throws IOException {
-		Arrays.stream(request.getCookies())
-				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
-				.findFirst()
-				.ifPresent(jSessionId -> {
-					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
-
-					cookie.setValue(jSessionId.getValue());
-
-					cookie.setMaxAge(jSessionId.getMaxAge());
-					cookie.setSecure(jSessionId.getSecure());
-					cookie.setHttpOnly(jSessionId.isHttpOnly());
-					cookie.setVersion(jSessionId.getVersion());
-					cookie.setDomain(cookieUrl);
-					response.addCookie(cookie);
-//                    response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
-				});
-//		response.sendRedirect(baseUrl + path);
-        Map<String, String> responseMap = new HashMap<>();
+		Map<String, String> responseMap = new HashMap<>();
 		responseMap.put("redirectUrl", baseUrl + path);
-		return ResponseEntity.ok(responseMap);
+
+		setCookieForLocale(request, response, path, "kr", cookieUrl, baseUrl);
+
+		response.sendRedirect(baseUrl + path);
+//		return ResponseEntity.ok(responseMap);
+		return ResponseEntity.status(HttpStatus.FOUND).build();
 	}
 
 	@GetMapping("/en")
@@ -298,29 +395,55 @@ public class LanguageController {
 			HttpServletResponse response,
 			@RequestParam String path
 	) throws IOException {
+		Map<String, String> responseMap = new HashMap<>();
+		responseMap.put("redirectUrl", baseUrlEn + path);
+
+		setCookieForLocale(request, response, path, "en", cookieUrlEn, baseUrlEn);
+
+		response.sendRedirect(baseUrlEn + path);
+//		return ResponseEntity.ok(responseMap);
+		return ResponseEntity.status(HttpStatus.FOUND).build();
+	}
+
+	private void setCookieForLocale(HttpServletRequest request, HttpServletResponse response, String path, String locale, String cookieDomain, String baseUrl) {
 		Arrays.stream(request.getCookies())
 				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
 				.findFirst()
 				.ifPresent(jSessionId -> {
 					Cookie cookie = new Cookie(jSessionId.getName(), jSessionId.getValue());
-
 					cookie.setValue(jSessionId.getValue());
-
 					cookie.setMaxAge(jSessionId.getMaxAge());
 					cookie.setSecure(jSessionId.getSecure());
 					cookie.setHttpOnly(jSessionId.isHttpOnly());
 					cookie.setVersion(jSessionId.getVersion());
-					cookie.setDomain(cookieUrlEn);
+					cookie.setDomain(cookieDomain);
 					response.addCookie(cookie);
-
-//					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
-
+					response.setHeader("Set-Cookie", "JSESSIONID=" + jSessionId.getValue() + "; SameSite=None; none");
 				});
-//		response.sendRedirect(baseUrlEn + path);
-        Map<String, String> responseMap = new HashMap<>();
-		responseMap.put("redirectUrl", baseUrlEn + path);
-		return ResponseEntity.ok(responseMap);
+
+		Cookie[] cookies = request.getCookies();
+		Arrays.stream(cookies)
+				.filter(cookie -> cookie.getName().equals("JSESSIONID"))
+				.forEach(cookie -> {
+					Cookie newCookie = new Cookie(cookie.getName(), cookie.getValue());
+					newCookie.setMaxAge(cookie.getMaxAge());
+					newCookie.setSecure(cookie.getSecure());
+					newCookie.setHttpOnly(cookie.isHttpOnly());
+					newCookie.setVersion(cookie.getVersion());
+					newCookie.setDomain(cookieDomain);
+					response.addCookie(newCookie);
+				});
+
 	}
+
+
+
+
+
+
+
+
+
 
 
 

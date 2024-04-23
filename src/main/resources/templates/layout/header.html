@@ -293,6 +293,17 @@
 <!--                })-->
 
 
+                // 링크가 co.kr / com 안에서 이동함
+                // $('#languageSelect').click(function () {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var currentPath = window.location.pathname;
+                //     var param = "lang=" + selectedLanguage;
+                //     var newUrl = currentPath + "?" + param;
+                //     window.location.href = newUrl;
+                //
+                //     console.log(newUrl);
+                // });
+
 
 
 
@@ -643,12 +654,12 @@
                 //     if (selectedLanguage === "en") {
                 //         $.ajax({
                 //             type: 'GET',
-                //             url: '/lang/test',
+                //             url: '/lang/en',
                 //             data: {
                 //                 path: url
                 //             },
                 //             success: function (data) {
-                //                 // window.location.href = "https://hanwharobotics.com:8090" + url;
+                //                 window.location.href = "https://hanwharobotics.com:8090" + url;
                 //             }
                 //         });
                 //     } else {
@@ -659,7 +670,7 @@
                 //                 path: url
                 //             },
                 //             success: function (data) {
-                //                 // window.location.href = "https://hanwharobotics.co.kr:8090" + url;
+                //                 window.location.href = "https://hanwharobotics.co.kr:8090" + url;
                 //             }
                 //         });
                 //     }
@@ -668,46 +679,156 @@
 
 
 
-
-
                 $('#languageSelect').click(function () {
                     var selectedLanguage = $(this).attr('value');
                     var param = "lang=" + selectedLanguage;
-                    var url = window.location.pathname + "?" + param;
+                    var path = window.location.pathname;
+                    var url;
+                    if (path === "/") {
+                        url = "?" + param;
+                    } else {
+                        url = path + "?" + param;
+                    }
                     if (selectedLanguage === "en") {
                         $.ajax({
                             type: 'GET',
                             url: '/lang/en',
-                            withCredentials: true,
-                            data: { path: url },
-                            success: function (response) {
-                                console.log("성공");
-                                var redirectUrl = response.redirectUrl;
-                                if (redirectUrl) {
-                                    window.location.href = redirectUrl;
-                                } else {
-                                    console.log("리다이렉트 URL이 없습니다.");
-                                }
+                            data: {
+                                path: url
                             },
+                            withCredentials: true,
+                            success: function (data) {
+                                window.location.href = "https://hanwharobotics.com:8090" + url;
+                            }
                         });
                     } else {
                         $.ajax({
                             type: 'GET',
                             url: '/lang/kr',
-                            withCredentials: true,
-                            data: { path: url },
-                            success: function (response) {
-                                console.log("성공");
-                                var redirectUrl = response.redirectUrl;
-                                if (redirectUrl) {
-                                    window.location.href = redirectUrl;
-                                } else {
-                                    console.log("리다이렉트 URL이 없습니다.");
-                                }
+                            data: {
+                                path: url
                             },
+                            withCredentials: true,
+                            success: function (data) {
+                                window.location.href = "https://hanwharobotics.co.kr:8090" + url;
+                            }
                         });
                     }
-                });
+                })
+
+
+
+
+
+
+                // $('#languageSelect').click(function () {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var param = "lang=" + selectedLanguage;
+                //     var path = window.location.pathname;
+                //     var url;
+                //     if (path === "/") {
+                //         url = "?" + param;
+                //     } else {
+                //         url = path + "?" + param;
+                //     }
+                //     var ajaxOptions = {
+                //         type: 'GET',
+                //         url: selectedLanguage === "en" ? '/lang/en' : '/lang/kr',
+                //         data: {
+                //             path: url
+                //         },
+                //         success: function (data) {
+                //             // 서버에서 리디렉션할 URL을 응답으로 받아야 함
+                //             window.location.href = selectedLanguage === "en" ? "https://hanwharobotics.com:8090" + url : "https://hanwharobotics.co.kr:8090" + url; // 리디렉션
+                //         }
+                //     };
+                //     ajaxOptions.xhrFields = {
+                //         withCredentials: true
+                //     };
+                //
+                //     $.ajax(ajaxOptions);
+                // });
+
+
+
+
+
+
+                // $('#languageSelect').click(function () {
+                //     const selectedLanguage = $(this).attr('value');
+                //     const param = "lang=" + selectedLanguage;
+                //     const path = window.location.pathname;
+                //     let url;
+                //     if (path === "/") {
+                //         url = "?" + param;
+                //     } else {
+                //         url = path + "?" + param;
+                //     }
+                //     const ajaxOptions = {
+                //         type: 'GET',
+                //         url: selectedLanguage === "en" ? '/lang/en' : '/lang/kr',
+                //         data: {
+                //             path: url
+                //         },
+                //         success: function (responseData) {
+                //             const redirectUrl = responseData.redirectUrl;
+                //             if (redirectUrl) {
+                //                 window.location.href = redirectUrl;
+                //             }
+                //         }
+                //     };
+                //     ajaxOptions.xhrFields = {
+                //         withCredentials: true
+                //     };
+                //     $.ajax(ajaxOptions);
+                // });
+
+
+
+
+
+
+
+
+
+                // $('#languageSelect').click(function () {
+                //     var selectedLanguage = $(this).attr('value');
+                //     var param = "lang=" + selectedLanguage;
+                //     var url = window.location.pathname + "?" + param;
+                //     if (selectedLanguage === "en") {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: '/lang/en',
+                //             withCredentials: true,
+                //             data: { path: url },
+                //             success: function (response) {
+                //                 console.log("성공");
+                //                 var redirectUrl = response.redirectUrl;
+                //                 if (redirectUrl) {
+                //                     window.location.href = redirectUrl;
+                //                 } else {
+                //                     console.log("리다이렉트 URL이 없습니다.");
+                //                 }
+                //             },
+                //         });
+                //     } else {
+                //         $.ajax({
+                //             type: 'GET',
+                //             url: '/lang/kr',
+                //             withCredentials: true,
+                //             data: { path: url },
+                //             success: function (response) {
+                //                 console.log("성공");
+                //                 var redirectUrl = response.redirectUrl;
+                //                 if (redirectUrl) {
+                //                     window.location.href = redirectUrl;
+                //                 } else {
+                //                     console.log("리다이렉트 URL이 없습니다.");
+                //                 }
+                //             },
+                //         });
+                //     }
+                // });
 
 
 
