@@ -178,8 +178,8 @@
 
     // 이메일 중복확인
     function checkDuplicateEmail() {
-        const email_front = $(".email_front").val();
-        const email_end = $(".email_end").val();
+        const email_front = $(".email_front").val().trim();
+        const email_end = $(".email_end").val().trim();
         const emailPattern = /^[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
         const email = email_front + "@" + email_end;
 
@@ -258,7 +258,7 @@
         const memberNm = $('#name').val();
         const position = $('#rank').val();
 
-        const email_front = $(".email_front").val();
+        const email_front = $(".email_front").val().trim();
         const email_end = $(".email_end").val();
         const email = email_front + "@" + email_end;
 

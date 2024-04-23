@@ -433,10 +433,7 @@ public class LanguageController {
 					newCookie.setDomain(cookieDomain);
 					response.addCookie(newCookie);
 				});
-
 	}
-
-
 
 
 
