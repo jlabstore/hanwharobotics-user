@@ -156,14 +156,14 @@
 
 .board-type1 .board_list .tbody .empty {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 10px 12px 0;
-  font-family: HanwhaGothicEL_OTF;
-  font-size: 16px;
-  color: #000;
-  text-align: left;
-  border-bottom: 1px solid #cbcbcb;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px 12px 0;
+    font-family: HanwhaGothicEL_OTF;
+    font-size: 16px;
+    color: #000;
+    text-align: left;
+    border-bottom: 1px solid #cbcbcb;
 }
 
 .board-type1 .board_list .tbody .tr a {
@@ -350,10 +350,10 @@
   color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 .press-list .board-type1 .thumb .thumb_contents figure {
@@ -1123,7 +1123,7 @@
   width: 490px;
   box-sizing: border-box;
   background: #fff url('../images/pc/ic_select_arrow.svg') no-repeat 96% 39%;
-  background-size: 14px;
+	background-size: 14px;
 }
 
 .qna-write .qna-write-form .qna-write-custom-radio {
@@ -1185,7 +1185,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
+} 
 .qna-write .qna-write-form .qna-write-inquiry-product-box .qna-write-inquiry-product-item .qna-write-inquiry-prodict-item-wrapper:first-child {
   width: 130px;
 }
@@ -1468,7 +1468,7 @@
 
 .qna-view-section-content-right {
   padding-right: 20px;
-  gap: 20px !important;
+  gap: 20px !important; 
 }
 
 .qna-view-section-title {
@@ -3356,7 +3356,7 @@
   gap: 10px;
 }
 
-.signup-main .mypage-container .mypage-contents .mypage-section button {
+.signup-main .mypage-container .mypage-contents .mypage-section button { 
   min-width: 115px !important;
   width: 115px !important;
 }
@@ -3698,7 +3698,7 @@
   background-image: url('../images/pc/products_nav1_default.png');
   background-repeat: no-repeat;
   background-position: 94% 46%;
-
+  
 }
 .products-nav2 {
   background-image: url('../images/pc/products_nav2_default.png');
@@ -4290,9 +4290,9 @@
 }
 
 .products-detail-video-slider .slick-next {
-  right: 50px;
+  right: 50px; 
   width: 98px;
-  height: 98px;
+  height: 98px; 
   top: calc(50% - 49px);
 }
 
@@ -4509,17 +4509,17 @@
 }
 
 .robots-case-studies-content {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	align-items: center;
 }
 
 .robots-case-studies-item {
-  width: 100%;
-  max-width: 453px;
-  position: relative;
+	width: 100%;
+	max-width: 453px;
+	position: relative;
   padding: 75px 30px 60px 50px;
   border-radius: 15px;
 }
@@ -4546,24 +4546,24 @@
 }
 
 .robots-case-studies-item-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .robots-case-studies-item-text h3 {
-  font-size: 24px;
-  font-family: HanwhaGothicB_OTF;
-  color: #fff;
+	font-size: 24px;
+	font-family: HanwhaGothicB_OTF;
+	color: #fff;
 }
 
 .robots-case-studies-item-text p {
-  font-size: 16px;
-  font-family: HanwhaGothicR_OTF;
-  color: #fff;
-  line-height: 1.38;
-  max-width: 342px;
-  word-break: keep-all;
+	font-size: 16px;
+	font-family: HanwhaGothicR_OTF;
+	color: #fff;
+	line-height: 1.38;
+	max-width: 342px;
+	word-break: keep-all;
 }
 
 .robots-detail {
@@ -4702,7 +4702,7 @@
 
 .robots-detail-sepc {
   max-width: 1400px;
-  margin: 0 auto 20px;
+  margin: 0 auto 60px;
   border-radius: 45px;
   padding: 77px 100px 100px;
   background-color: #fff;
@@ -4874,6 +4874,7 @@
   width: 100%;
   background-color: #f8f8f8;
   padding: 13px 0;
+  min-height: 44px;
 }
 
 .robots-detail-spec-table-section-item-content2-content > span {
@@ -4971,10 +4972,38 @@
   min-height: 275px;
 }
 
+.robots-inquiry-link-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.robots-inquiry-link {
+  height: 88px;
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 45px;
+  background: linear-gradient(45deg, rgba(255,151,65,1) 28%, rgba(255,80,21,1) 82%);
+}
+
+.robots-inquiry-link span {
+  font-family: HanwhaGothicB_OTF;
+  font-size: 26px;
+  color: #fff;
+}
+
+.robots-inquiry-link img {
+  width: 100%;
+  height: 100%;
+}
+
 .robots-detail-other {
   max-width: 1400px;
   width: 100%;
-  margin: 55px auto 150px;
+  margin: 100px auto 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5086,8 +5115,8 @@
 
 @media (max-width: 1755px) {
   .en footer .column1 .sitemap {
-    top: 85px;
-  }
+		top: 85px;
+	}
 
   .robots-detail .robots-detail-slider .slick-next {
     right: 50px;
@@ -5194,17 +5223,17 @@
     margin: 0 auto;
     z-index: 3;
   }
-
+  
   .management-policy .section_1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-
+  
   .management-policy .section_1 .group {
     width: 100%;
   }
-
+  
   .management-policy .section_1 .group1 .title {
     font-family: HanwhaGothicB_OTF;
     font-size: 113px;
@@ -5216,7 +5245,7 @@
     text-align: left;
     color: #000;
   }
-
+  
   .management-policy .section_1 .group1 .txt1 {
     margin-top: 15px;
     font-family: HanwhaGothicEL_OTF;
@@ -5307,7 +5336,7 @@
   .notice-view .board-type1 .column:first-child {
     position: static;
   }
-
+  
   .board {
     display: flex;
     flex-direction: column;
@@ -5333,7 +5362,7 @@
     color: #000;
     background: none;
   }
-
+  
   .board-type1 .column:first-child {
     width: 100%;
     /* padding-bottom: 9%; */
@@ -5378,8 +5407,8 @@
     width: 100%;
     margin: 85px 0 0 0;
     gap: 60px;
-  }
-
+  }  
+  
   .board-type1 .sales-board-list {
     display: flex;
     flex-direction: row;
@@ -5570,7 +5599,7 @@
     width: calc(100% - 100px);
     margin-left: 50px;
     margin-right: 50px;
-  }
+  } 
 
   .robots-detail-other img {
     width: 100%;
@@ -5590,6 +5619,12 @@
   .robots-detail-application-wrapper {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .robots-inquiry-link {
+    max-width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
   }
   /* Robots */
 }
@@ -5813,7 +5848,7 @@
   }
 
   .about-main-section-4-info {
-    padding: 60.5px 78.5px 58.5px 135.9px;
+    padding: 60.5px 78.5px 58.5px 135.9px; 
   }
 
   .en .about-main-section-4-info {
@@ -5963,6 +5998,10 @@
   .products-inquiry-link {
     margin-bottom: 100px;
   }
+
+  .products-section2-slider-item {
+    width: 44% !important;
+  }
   /* AGV/AMR */
 
   /* Robots */
@@ -6025,7 +6064,7 @@
   .robots-case-studies-item {
     max-height: 176px;
   }
-
+  
   .robots-detail-slider {
     margin-top: 60px;
     margin-left: 50px;
@@ -6064,6 +6103,10 @@
   }
   .robots-detail-spec-table-section-item-title > span {
     padding-left: 5px;
+  }
+
+  .robots-detail-spec-table-section-item-content2-content {
+    min-height: 42px;
   }
 
   .robots-detail-spec-table span {
@@ -6158,17 +6201,17 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
-
+  
   .qna-write .qna-write-form-section:nth-child(2) .qna-write-form-section-content {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-
+  
   .qna-write .qna-write-form .qna-write-email-check {
     padding-left: 0;
   }
-
+  
   .qna-write .qna-write-form .qna-write-inquiry-product .qna-write-inquiry-product-title {
     display: none;
   }
@@ -6299,11 +6342,11 @@
   .board-type1 .board_list {
     margin-top: 55px;
     gap: 60px;
-  }
+  }  
   .board-type1 .sales-board-list {
     margin-top: 55px;
     gap: 0;
-  }
+  }  
   .board-type1 .column:first-child {
     /* padding-bottom: 4%; */
     /* background: none; */
@@ -6633,7 +6676,7 @@
   }
 
   .qna-view-answer div {
-    flex-direction: column;
+    flex-direction: column;  
     gap: 7px;
   }
 
@@ -6780,7 +6823,7 @@
     width: 100%;
   }
 
-
+  
   .mypage-btn {
     width: 100%;
   }
@@ -6870,13 +6913,13 @@
   .board-type1 .board_list {
     margin-top: 35px;
     gap: 60px;
-  }
+  }  
 
   .board-type1 .column:first-child {
     width: 100%;
     background: none;
   }
-
+    
   .board-type1 .board_list .thead {
     display: none;
   }
@@ -7452,7 +7495,7 @@
     line-height: 1.5;
     margin-bottom: 10px;
   }
-
+  
   .management-policy-content li b {
     line-height: 1.5;
     font-size: 20px;
@@ -7499,7 +7542,7 @@
     border-bottom: 1px solid #000;
     transition: all 0.2s;
   }
-
+  
   .management-policy-certification summary img {
     transition: all 0.2s;
     transform: rotate(180deg);
@@ -7611,7 +7654,7 @@
     width: 100%;
     height: 100%;
   }
-
+  
   .qna-list .column-head .search .search-button img {
     width: 20.6px;
     height: 20.6px;
@@ -7768,7 +7811,7 @@
   .qna-write .board-type1 h1 span {
     font-size: 50px !important;
   }
-
+  
   .qna-write .board-type1 .desc {
     font-size: 18px !important;
   }
@@ -7791,7 +7834,7 @@
   }
 
   .qna-write-email-check .checkbox-common p {
-    font-size: 16px;
+    font-size: 16px; 
   }
 
   .qna-write-email-check .checkbox-common {
@@ -8238,7 +8281,7 @@
   .signup-terms-text h2 {
     font-size: 18px;
   }
-
+  
   .signup-terms .checkbox-common {
     padding-left: 40px;
   }
@@ -8499,6 +8542,10 @@
     bottom: -55px;
   }
 
+  .products-section2-slider-item {
+    width: 100% !important;
+  }
+
   .products-section2-contents {
     margin-bottom: 127px;
   }
@@ -8735,9 +8782,9 @@
   }
 
   .products-detail-video-slider .slick-next {
-    right: 15px;
+    right: 15px; 
     width: 34px;
-    height: 34px;
+    height: 34px; 
     top: calc(50% - 17px);
   }
   /* AGV/AMR */
@@ -8929,9 +8976,9 @@
   }
 
   .robots-detail .robots-detail-slider .slick-next {
-    right: 20px;
+    right: 20px; 
     width: 56px;
-    height: 56px;
+    height: 56px; 
     top: calc(50% - 28px);
   }
 
@@ -9002,6 +9049,22 @@
     height: 1px;
     background: #707070;
     opacity: 0.6;
+  }
+
+  .robots-inquiry-link-container {
+    background-color: #fff;
+    width: 100%;
+    padding-top: 30px;
+  }
+
+  .robots-inquiry-link {
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .robots-inquiry-link span {
+    font-size: 16px;
   }
 
   .robots-detail-other {
@@ -9144,8 +9207,8 @@
 
 @media (min-width: 431px) and (max-width: 743px) {
   .en footer .column1 .sitemap {
-    top: 120px;
-  }
+		top: 120px;
+	}
 
   .login-find-id-complete-btn-group {
     width: 80%;
@@ -9162,125 +9225,125 @@
 }
 
 @media (max-width: 743px) {
-  /* 로그인 */
-  .login-container {
-    gap: 30px;
-    padding: 70px 20px 250px;
-    width: 100%;
-  }
-
-  .login-main form {
-    width: 100%;
-  }
-
-  .login-content {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .login-container h1 {
-    font-size: 26px;
-  }
-
-  .login-info-wrapper {
-    flex-direction: column;
-    width: 80%;
-  }
-
-  .login-input-wrapper {
-    width: 100%;
-  }
-
-  .login-input-wrapper input {
-    width: 100%;
-  }
-
-  .login-info-submit {
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-  }
-
-  .login-action-group {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .login-action-group a {
-    background-color: #fff;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    color: #656565;
-    line-height: 1.6;
-    height: 100%;
-  }
-
-  .login-action-group a + a {
-    border-left: 1px solid #aaa;
-  }
-
-  .login-find-input-wrapper {
-    width: 80%;
-    flex-direction: column;
-  }
-
-  .login-find-input-wrapper input {
-    width: 100%;
-  }
-
-  .login-find-input-wrapper button {
-    width: 100%;
-  }
-
-  .login-main.find-complete {
-    padding-left: 0;
-    margin-top: 100px;
-  }
-
-  .login-main-container.find-id-complete {
-    align-items: flex-start;
-  }
-
-  .login-find-id-complete-btn-group {
-    flex-direction: column;
-  }
-
-  .login-find-id-complete-btn-group a {
-    width: 100%;
-  }
-
-  .login-find-id-complete-msg {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-
-  .login-find-id-complete-msg h3 {
-    font-size: 20px;
-  }
-
-  .login-find-id-complete-msg p br {
-    display: none;
-  }
-
-  .login-main-container.re-complete {
-    margin-top: 100px;
-  }
-
-  .login-pwd-re-wrapper input {
-    width: 100%;
-  }
-
-  .login-pwd-re-btn-wrapper {
-    margin-top: 10px;
-  }
-
-  .login-pwd-re-submit {
-    width: 100%;
-  }
-  /* 로그인 */
+    /* 로그인 */
+    .login-container {
+      gap: 30px;
+      padding: 70px 20px 250px;
+      width: 100%;
+    }
+  
+    .login-main form {
+      width: 100%;
+    }
+  
+    .login-content {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  
+    .login-container h1 {
+      font-size: 26px;
+    }
+  
+    .login-info-wrapper {
+      flex-direction: column;
+      width: 80%;
+    }
+  
+    .login-input-wrapper {
+      width: 100%;
+    }
+  
+    .login-input-wrapper input {
+      width: 100%;
+    }
+  
+    .login-info-submit {
+      width: 100%;
+      height: 50px;
+      font-size: 16px;
+    }
+  
+    .login-action-group {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .login-action-group a {
+      background-color: #fff;
+      border: none;
+      border-radius: 0;
+      font-size: 15px;
+      color: #656565;
+      line-height: 1.6;
+      height: 100%;
+    }
+  
+    .login-action-group a + a {
+      border-left: 1px solid #aaa;
+    }
+  
+    .login-find-input-wrapper {
+      width: 80%;
+      flex-direction: column;
+    }
+  
+    .login-find-input-wrapper input {
+      width: 100%;
+    }
+  
+    .login-find-input-wrapper button {
+      width: 100%;
+    }
+  
+    .login-main.find-complete {
+      padding-left: 0;
+      margin-top: 100px;
+    }
+  
+    .login-main-container.find-id-complete {
+      align-items: flex-start;
+    }
+  
+    .login-find-id-complete-btn-group {
+      flex-direction: column;
+    }
+  
+    .login-find-id-complete-btn-group a {
+      width: 100%;
+    }
+  
+    .login-find-id-complete-msg {
+      width: 100%;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .login-find-id-complete-msg h3 {
+      font-size: 20px;
+    }
+  
+    .login-find-id-complete-msg p br {
+      display: none;
+    }
+  
+    .login-main-container.re-complete {
+      margin-top: 100px;
+    }
+    
+    .login-pwd-re-wrapper input {
+      width: 100%;
+    }
+    
+    .login-pwd-re-btn-wrapper {
+      margin-top: 10px;
+    }
+  
+    .login-pwd-re-submit {
+      width: 100%;
+    }
+    /* 로그인 */
 }
 
 @media (max-width: 430px) {
@@ -9303,6 +9366,6 @@
 
 @media (min-width: 335px) and (max-width: 743px) {
   .en footer .column1 .sitemap {
-    top: 120px;
-  }
+		top: 120px;
+	}
 }
