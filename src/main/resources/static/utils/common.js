@@ -153,10 +153,13 @@ var setPagination = function(data, elemnt){
 // 문의하기 팝업 레이어 열기
 var layerInquiryBtn = function(data){
 
-    var lang = getCookieLang()
-    if (lang == 'en') {
-        alert('Coming Soon');
-    } else {
+    // var lang = getCookieLang()
+    // if (lang == 'en') {
+    //     alert('Coming Soon');
+    // } else {
+
+
+
         $('body').addClass('scroll-lock');
         // var type  = data == 1 ? '대리점 문의' : '제품 문의';
         var type = "";
@@ -187,7 +190,10 @@ var layerInquiryBtn = function(data){
 
         // e.stopPropagation();
         showLayer('inquiry', $('.layer.inquiry'), headerMinHeight);
-    }
+    
+    
+    
+    // }
 }
 
 // 푸터 팝업 열기
