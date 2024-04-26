@@ -85,11 +85,11 @@
         <label for="inquiryType" th:utext="#{inquiry.type}"></label>
 
         <select class="inquiry_select" name="inquiryType" id="inquiryType">
-          <option value="">선택</option>
-          <option value="제품 구매 문의">제품 구매 문의</option>
-          <option value="대리점 문의">대리점 문의</option>
-          <option value="사업 제휴/협업 문의">사업 제휴/협업 문의</option>
-          <option value="교육 문의">교육 문의</option>
+          <option value="" th:utext="#{inquiry.typeSelect}"></option>
+          <option value="제품 구매 문의" th:utext="#{inquiry.typePurchase}"></option>
+          <option value="대리점 문의" th:utext="#{inquiry.typeDistributor}"></option>
+          <option value="사업 제휴/협업 문의" th:utext="#{inquiry.typeBusinessCollaboration}"></option>
+          <option value="교육 문의" th:utext="#{inquiry.typeEducation}"></option>
         </select>
       </div>
       <div class="form_input">
@@ -355,8 +355,8 @@
     <p>사업제휴/협업 문의: rbt_business@hanwha.com</p>
     <p>교육 문의: rbt_education@hanwha.com</p> -->
   </div>
-  <div class="notice_message">
-    *기술 관련 문의는 회원가입 후 Q&A 게시판에 등록 부탁드립니다.
+  <div class="notice_message" th:utext="#{inquiry.noticeMessage}">
+    <!-- *기술 관련 문의는 회원가입 후 Q&A 게시판에 등록 부탁드립니다. -->
   </div>
 </div>
   <script>
