@@ -599,8 +599,109 @@ header .gnb_right .login {
 	/* opacity: 0.6; */
 	background: url('../images/pc/login.svg') no-repeat 0 0;
 	background-size: 27px 27px;
+	cursor: pointer;
+	position: relative;
 }
 
+header .gnb_right .login-tooltip {
+	position: absolute;
+	top: 45px;
+	left: -93px;
+	display: none;
+	background-color: rgba(255, 255, 255, 0.3);
+	padding: 11px 18px;
+	border-radius: 8px;
+	-webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+header .gnb_right .login-tooltip .login-tooltip-content {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+header .gnb_right .login-tooltip.active {
+	display: flex;
+}
+
+header .gnb_right .login-tooltip a {
+	color: #fff;
+	font-size: 15px;
+	letter-spacing: 0.6;
+	font-family: HanwhaGothicR_OTF;
+}
+
+header .gnb_right .login-tooltip button {
+	color: #fff;
+	font-size: 15px;
+	letter-spacing: 0.6;
+	font-family: HanwhaGothicR_OTF;
+	cursor: pointer;
+}
+
+header .gnb_right .login-tooltip > div > div {
+	height: 15px;
+	width: 1px;
+	background-color: #fff;
+}
+
+header .gnb_right .login:hover {
+	background: url('../images/pc/login_active.svg') no-repeat 0 0;
+	background-size: 27px 27px;
+}
+
+header .gnb_right .login.active {
+	background: url('../images/pc/login_active.svg') no-repeat 0 0;
+	background-size: 27px 27px;
+}
+
+.main_header.scroll .gnb_right .login:hover {
+	background: url('../images/pc/login_scroll_active.svg') no-repeat 0 0;
+	background-size: 27px 27px;
+}
+
+.main_header.scroll .gnb_right .login.active {
+	background: url('../images/pc/login_scroll_active.svg') no-repeat 0 0;
+	background-size: 27px 27px;
+}
+
+.main_header.scroll.active .gnb_right .login:hover {
+	background: url('../images/pc/login_active.svg') no-repeat 0 0;
+	background-size: 27px 27px;
+}
+
+.main_header.scroll.active .gnb_right .login.active {
+	background: url('../images/pc/login_active.svg') no-repeat 0 0;
+	background-size: 27px 27px;
+}
+
+.main_header.scroll .gnb_right .login .login-tooltip, .sub_header .gnb_right .login .login-tooltip {
+	background-color: #fff;
+	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.main_header.scroll .gnb_right .login *, .sub_header .gnb_right .login * {
+	color: #000;
+}
+
+.main_header.scroll .gnb_right .login .login-tooltip-content > div, .sub_header .gnb_right .login .login-tooltip-content > div  {
+	background-color: #000;
+}
+
+.sub_header.active .gnb_right .login .login-tooltip, .sub_header.active .gnb_right .login .login-tooltip {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.sub_header.active .gnb_right .login * {
+	color: #fff;
+}
+
+.sub_header.active .gnb_right .login .login-tooltip-content > div {
+	background-color: #fff;
+}
 
 header .gnb_right .login span {
 	display: none;
@@ -1178,7 +1279,7 @@ footer select {
 
 .layer.cookie .btn_wrap .btn_left button.save {
 	cursor: pointer;
-	width: 106px;
+	min-width: 106px;
 	height: 43px;
 	padding: 14px 20px 13px 21px;
 	font-family: HanwhaGothicB_OTF;
@@ -1192,7 +1293,7 @@ footer select {
 
 .layer.cookie .btn_wrap .btn_left button.deny {
 	cursor: pointer;
-	width: 135px;
+	min-width: 135px;
 	height: 43px;
 	padding: 14px 20px 13px 21px;
 	font-family: HanwhaGothicB_OTF;
@@ -1203,10 +1304,6 @@ footer select {
   background-color: #fff;
 	border: 1px solid #000;
 	box-sizing: border-box;
-}
-
-.en .layer.cookie .btn_wrap .btn_left button.deny {
-	width: 160px;
 }
 
 .layer.cookie .btn_wrap .btn_right button.agree {
@@ -1675,6 +1772,10 @@ footer select {
 	.layer .family li {
 		width: 50%;
 	}
+
+	header .gnb_right .login  {
+		display: none;
+	}
 }
 
 
@@ -2087,9 +2188,10 @@ footer select {
 		opacity: 1;
 	}
 
-	header .gnb_menu .header__nav__items .header__nav__link {
+	#header .gnb_menu .header__nav__items .header__nav__link {
 		font-size: 22px;
-		color: #f37321;
+		color: #f37321 !important;
+		opacity: 1 !important;
 	}
 	
 	header .gnb_menu .header__nav__items .header__nav__items_sub {
@@ -2552,14 +2654,14 @@ footer select {
 		gap: 20px;
 	}
 
-	.layer.cookie .btn_wrap {
+	/* .layer.cookie .btn_wrap {
 		flex-direction: column;
 	}
 
 
 	.layer.cookie .btn_wrap .btn_right {
 		margin-top: 20px;
-	}
+	} */
 }
 
 @media (max-width: 375px) {
