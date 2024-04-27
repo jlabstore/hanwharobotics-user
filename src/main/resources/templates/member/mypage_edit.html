@@ -52,7 +52,11 @@
 
                                 <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
                             </div>
-
+                            <div class="signup-main-email-wrapper custom-email" style="display: none;">
+                                <div class="mypage-edit-email" style="padding-left: 41%;">
+                                    <input type='text' name='email-domain-2' id='email-domain-2' class='email_end_2'></input>
+                                </div>
+                            </div>
                             <label class="signup-message-warning check_text" id="email_check"
                                    style="display: none"></label>
                         </div>
@@ -167,10 +171,20 @@
     let isEmailChanged = false;
     let emailCheck = false;
 
-    $(document).on('change', '#email-local, #email-domain', function () {
+    // $(document).on('change', '#email-local, #email-domain', function () {
+    $(document).on('change', '#email-local, #email-domain, #email-domain-2', function () {
+        // if($('#email-domain').val() === '') {
+        //     $( 'select' ).remove( '#email-domain' );
+        //     $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+        // }
         if($('#email-domain').val() === '') {
-            $( 'select' ).remove( '#email-domain' );
-            $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            // $( 'select' ).remove( '#email-domain' );
+            // $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            $('.custom-email').show();
+            $('#email-domain-2').focus();
+        } else {
+            $(".custom-email").hide();
+            $('#email-domain-2').val('');
         }
         isEmailChanged = true;
 
@@ -179,7 +193,14 @@
     // 이메일 중복확인
     function checkDuplicateEmail() {
         const email_front = $(".email_front").val().trim();
-        const email_end = $(".email_end").val().trim();
+        // const email_end = $(".email_end").val().trim();
+        let email_end = '';
+        if($('#email-domain').val() === '') {
+            email_end = $(".email_end_2").val();
+        } else {
+            email_end = $(".email_end").val();
+        }
+
         const emailPattern = /^[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
         const email = email_front + "@" + email_end;
 
@@ -259,14 +280,20 @@
         const position = $('#rank').val();
 
         const email_front = $(".email_front").val().trim();
-        const email_end = $(".email_end").val();
+        // const email_end = $(".email_end").val();
+        let email_end = '';
+        if($('#email-domain').val() === '') {
+            email_end = $(".email_end_2").val();
+        } else {
+            email_end = $(".email_end").val();
+        }
         const email = email_front + "@" + email_end;
 
         const phone_code = $("#phone_code").val();
         const phone = $("#phone").val();
         const contact = phone_code + ")" + phone;
 
-        if (isEmailChanged || emailCheck) {
+        if (isEmailChanged || emailCheck || ($('#email-domain').val() === '' && $('#email-domain-2').val() === '')) {
             alert("이메일 중복확인을 해주세요.");
             return;
         }

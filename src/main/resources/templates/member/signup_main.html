@@ -60,6 +60,11 @@
                                         </div>
                                         <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
                                     </div>
+                                    <div class="signup-main-email-wrapper custom-email" style="display: none;">
+                                        <div class="mypage-edit-email" style="padding-left: 41%;">
+                                            <input type='text' name='email-domain-2' id='email-domain-2' class='email_end_2'></input>
+                                        </div>
+                                    </div>
                                     <input id="email" name="email" style="display: none" />
                                     <!-- 중복확인 결과 메시지 -->
                                      <label class="signup-message-warning check_text" id="email_check" style="display: none"></label>
@@ -174,11 +179,16 @@
         isIdChanged = true;
     });
 
-    $(document).on('change', '#email-local, #email-domain', function () {
+    $(document).on('change', '#email-local, #email-domain, #email-domain-2', function () {
         updateEmailField();
         if($('#email-domain').val() === '') {
-            $( 'select' ).remove( '#email-domain' );
-            $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            // $( 'select' ).remove( '#email-domain' );
+            // $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            $('.custom-email').show();
+            $('#email-domain-2').focus();
+        } else {
+            $(".custom-email").hide();
+            $('#email-domain-2').val('');
         }
         isEmailChanged = true;
 
@@ -251,18 +261,31 @@
     $(document).ready(function() {
         updateEmailField();
         updatePhoneField();
-        $(".email_front, .email_end").on("change", updateEmailField);
+        $(".email_front, .email_end, .email_end_2").on("change", updateEmailField);
         $(".phone_code, #phone").on("change", updatePhoneField);
 
     });
 
     // 이메일 형식 연결
     function updateEmailField() {
-        const email_front = $(".email_front").val().trim();
-        const email_end = $(".email_end").val().trim();
-        const email = email_front + "@" + email_end;
-        $("#email").val(email);
+        if($('#email-domain').val() === '') {
+            const email_front = $(".email_front").val().trim();
+            const email_end = $(".email_end_2").val().trim();
+            const email = email_front + "@" + email_end;
+            $("#email").val(email);
+        } else {
+            const email_front = $(".email_front").val().trim();
+            const email_end = $(".email_end").val().trim();
+            const email = email_front + "@" + email_end;
+            $("#email").val(email);
+        }
     }
+    // function updateEmailField() {
+    //     const email_front = $(".email_front").val().trim();
+    //     const email_end = $(".email_end").val().trim();
+    //     const email = email_front + "@" + email_end;
+    //     $("#email").val(email);
+    // }
 
     // 연락처 형식 연결
     function updatePhoneField() {
@@ -276,7 +299,12 @@
     // 이메일 중복확인
     function checkDuplicateEmail() {
         const email_front = $(".email_front").val().trim();
-        const email_end = $(".email_end").val();
+        let email_end = '';
+        if($('#email-domain').val() === '') {
+            email_end = $(".email_end_2").val();
+        } else {
+            email_end = $(".email_end").val();
+        }
         const emailPattern = /^[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
         const email = $('#email').val();
         const emailCheckElement = $('#email_check');
@@ -431,8 +459,7 @@
         //     return;
         // }
 
-
-        if (isEmailChanged || isEmailCheck) {
+        if (isEmailChanged || isEmailCheck || ($('#email-domain').val() === '' && $('#email-domain-2').val() === '')) {
             alert("이메일 중복확인을 해주세요.");
             $('#email_front').focus();
             return;
