@@ -47,15 +47,18 @@
                                         <option value="kakao.com">kakao.com</option>
                                         <option value="" th:utext="#{signup.emailDirect}"></option>
                                     </select>
+                                    <span class="signup-main-email-wrapper custom-email" style="display: none;">
+                                        <input type='text' name='email-domain-2' id='email-domain-2' class='email_end_2'></input>
+                                    </span>
                                 </div>
 
                                 <button type="button" onclick="checkDuplicateEmail()" th:utext="#{signup.checkDuplication}"></button>
                             </div>
-                            <div class="signup-main-email-wrapper custom-email" style="display: none;">
+                            <!-- <div class="signup-main-email-wrapper custom-email" style="display: none;">
                                 <div class="mypage-edit-email" style="padding-left: 41%;">
                                     <input type='text' name='email-domain-2' id='email-domain-2' class='email_end_2'></input>
                                 </div>
-                            </div>
+                            </div> -->
                             <label class="signup-message-warning check_text" id="email_check"
                                    style="display: none"></label>
                         </div>
@@ -176,6 +179,7 @@
         if($('#email-domain').val() === '') {
             // $( 'select' ).remove( '#email-domain' );
             // $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            $('#email-domain').hide();
             $('.custom-email').show();
             $('#email-domain-2').focus();
         } else {
