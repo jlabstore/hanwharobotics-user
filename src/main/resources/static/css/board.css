@@ -2315,7 +2315,7 @@
 }
 
 .about-main-section-3 h2 {
-  font-family: HanwhaB;
+  font-family: HanwhaR_OTF;
   font-size: 60px;
   color: #000;
   margin-bottom: 56px;
@@ -2323,6 +2323,7 @@
 }
 
 .about-main-section-3 h2 strong {
+  font-family: HanwhaGothicB_OTF;
   color: #ff7600;
 }
 
