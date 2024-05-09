@@ -29,13 +29,13 @@ let headerMinHeight = '90px';
 //   $('#header').removeClass('active');
 // }
 
-$(window).on('resize', function() {
-  const gnbTarget = $(document.body).data('gnb-target');
-
-  if (gnbTarget === 'robot' && win.outerWidth() <= 765) {
-    window.location.reload();
-  }
-});
+// $(window).on('resize', function() {
+//   const gnbTarget = $(document.body).data('gnb-target');
+//
+//   if (gnbTarget === 'robot' && win.outerWidth() <= 765) {
+//     window.location.reload();
+//   }
+// });
 
 // pc, table, mobile 여부
 $(window).on("load resize", function (e) {
