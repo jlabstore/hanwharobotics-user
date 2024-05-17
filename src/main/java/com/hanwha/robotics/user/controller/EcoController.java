@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/eco")
 public class EcoController {
 
-    @GetMapping
+    @GetMapping("/main")
     public String ecoSystemMain() {
         return "eco/ecosystem_main";
     }
