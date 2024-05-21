@@ -6,7 +6,7 @@
 <body data-gnb-target="robot">
   <div layout:fragment="content">
 
-  <main class="sub products solutions">
+  <main class="sub products solutions" th:if="#{header.nation} == 'EN'">
     <section class="section_1">
       <div class="group group1">
         <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Solutions</div>
@@ -62,6 +62,75 @@
       </div>
     </section>
   </main>
+
+
+
+
+
+
+
+    <main class="sub products solutions" th:unless="#{header.nation} == 'EN'">
+      <section class="section_1">
+        <div class="group group1">
+          <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Solutions</div>
+          <div class="txt1" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">
+            다양한 산업 분야에서 자동화를 지원하는 <br/>신뢰성 높은 솔루션을 만나보세요.
+          </div>
+        </div>
+      </section>
+
+      <section class="solutions-content">
+        <div class="solutions-content-item">
+          <div class="solutions-content-item-text">
+            <div class="solutions-content-item-title">
+              <h2>RAIV <span>(Robot AI Vision)</span></h2>
+              <p>Utilizing AI and deep learning-based vision solutions developed by Hanwha Robotics, RAIV feature enables the pick and place jobs of various objects.</p>
+            </div>
+            <ul class="solutions-content-item-list">
+              <li><span>▪︎</span>AI RGBD Preprocessing: Leveraging AI, this technology optimizes data using RGBD (RGB depth), a technique that measures distance information based on RGB images.</li>
+              <li><span>▪︎</span>AI Bin Picking: Using AI trained on the 3D images of objects, RAIV can pick and place objects of various shapes.</li>
+              <li><span>▪︎</span>3D Model Picking: By analyzing objects using 3D modeling data, RAIV can easily arrange objects by picking them at specified locations.</li>
+            </ul>
+          </div>
+          <div class="solutions-content-item-icon">
+            <img src="../images/pc/solutions_item_01.svg" alt="" />
+          </div>
+        </div>
+        <div class="solutions-content-item">
+          <div class="solutions-content-item-text">
+            <div class="solutions-content-item-title">
+              <h2>Visual Safety</h2>
+              <p>By employing dual 3D cameras and functional safety features, Visual Safety establishes a virtual safety fence, effectively managing the workspace and ensuring the safety of workers. This feature helps prevent accidents in the working environment.</p>
+            </div>
+            <ul class="solutions-content-item-list">
+              <li><span>▪︎</span>Yellow Zone: A zone that slows down the robot's movement speed based on the distance from the robot's center, providing an early warning area.</li>
+              <li><span>▪︎</span>Red Zone: A zone that triggers a complete stop of the robot, acting as an emergency stop area.</li>
+            </ul>
+          </div>
+          <div class="solutions-content-item-icon">
+            <img src="../images/pc/solutions_item_02.svg" alt="" />
+          </div>
+        </div>
+        <div class="solutions-content-item">
+          <div class="solutions-content-item-text">
+            <div class="solutions-content-item-title">
+              <h2>2D Marker <br/>Positioning</h2>
+            </div>
+            <ul class="solutions-content-item-list">
+              <li><span>▪︎</span>When performing tasks with a Mobile Manipulator (a mobile robot equipped with a collaborative robot), it is challenging to stop at the exact same position for repetitive tasks. Hanwha Robotics' Mobile Manipulator utilizes 2D vision not only to recognize 3 dimensional coordinates (X, Y, Z) but also to identify rotational angles of each axis. This feature allows for precise operations at the same location, enabling the sophisticated operations at the consistent stopping point.</li>
+            </ul>
+          </div>
+          <div class="solutions-content-item-icon">
+            <img src="../images/pc/solutions_item_03.svg" alt="" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+
+
+
   </div>
 </body>
 

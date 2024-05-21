@@ -167,9 +167,9 @@
                                     <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
                                 </li>
 
-<!--                                <li>-->
-<!--                                    <a href="/qna" class="header_inquiry">Q&A</a>-->
-<!--                                </li>-->
+                                <li>
+                                    <a href="/qna" class="header_inquiry">Q&A</a>
+                                </li>
 
 
 <!--                                <li th:if="${#request.userPrincipal == null}">-->
@@ -186,89 +186,84 @@
 
 
 <!--                        <li class="header__nav__login" th:if="${#request.userPrincipal == null}">-->
-<!--                            &lt;!&ndash; <a href="/login-page" class="header__nav__link">로그인/회원가입</a> &ndash;&gt;-->
-<!--                            -->
+<!--                             <a href="/login-page" class="header__nav__link">로그인/회원가입</a>-->
+
 <!--                            &lt;!&ndash; 로그인 &ndash;&gt;-->
 <!--                            <a href="/member/profile" class="header__nav__link" style="margin-bottom: 23px;" data-gnb="mypage">마이페이지</a>-->
 <!--                            <a href="/member/logout" class="header__nav__link">로그아웃</a>-->
-<!--                        -->
+
 <!--                            &lt;!&ndash; 미로그인 &ndash;&gt;-->
-<!--                            &lt;!&ndash; <a href="/login-page" class="header__nav__link">로그인/회원가입</a> &ndash;&gt;-->
+<!--                             <a href="/login-page" class="header__nav__link">로그인/회원가입</a>-->
 <!--                        </li>-->
 
 <!--                        <li class="header__nav__login" th:if="${#request.userPrincipal != null}">-->
 <!--                            <a href="/member/profile" class="header__nav__link">마이페이지</a>-->
 <!--                        </li>-->
+
+
                     </ul>
                 </div>
 
 
-<!--                <div>-->
-<!--                    &lt;!&ndash;                <a href="/signup/term">회원가입</a>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                |&ndash;&gt;-->
-<!--                    &lt;!&ndash;                <a href="/login-page" class="header_inquiry">로그인</a>&ndash;&gt;-->
+                <div>
+                    <!--                <a href="/signup/term">회원가입</a>-->
+                    <!--                |-->
+                    <!--                <a href="/login-page" class="header_inquiry">로그인</a>-->
 
-<!--                    <a href="/login-page" th:if="${#request.userPrincipal == null}">-->
+                    <a href="/login-page" th:if="${#request.userPrincipal == null}">
 
-<!--                        <span class="login">-->
-<!--                            <span>login</span>-->
-<!--                            &lt;!&ndash; <div class="login-tooltip">-->
-<!--                                <a href="/member/profile">마이페이지</a>-->
-<!--                                <div></div>-->
-<!--                                <button href="/member/logout" type="button">로그아웃</button>-->
-<!--                            </div> &ndash;&gt;-->
+                        <span class="login">
+                            <span>login</span>
+                            <!-- <div class="login-tooltip">
+                                <a href="/member/profile">마이페이지</a>
+                                <div></div>
+                                <button href="/member/logout" type="button">로그아웃</button>
+                            </div> -->
 
-<!--&lt;!&ndash;                            <span class="login-tooltip" th:if="${#request.userPrincipal != null}">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="login-tooltip-content">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <a href="/member/profile">마이페이지</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <button onclick="window.location.href='/member/logout'" type="button">로그아웃</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </span>&ndash;&gt;-->
-<!--                        </span>-->
+<!--                            <span class="login-tooltip" th:if="${#request.userPrincipal != null}">-->
+<!--                                <div class="login-tooltip-content">-->
+<!--                                  <a href="/member/profile">마이페이지</a>-->
+<!--                                  <div></div>-->
+<!--                                  <button onclick="window.location.href='/member/logout'" type="button">로그아웃</button>-->
+<!--                                </div>-->
+<!--                            </span>-->
+                        </span>
 
-<!--                    </a>-->
-
-
-
-
-
-<!--                    <span class="login" th:if="${#request.userPrincipal != null}">-->
-
-<!--                        <span>login</span>-->
-
-<!--                        &lt;!&ndash; <div class="login-tooltip">-->
-<!--                            <a href="/member/profile">마이페이지</a>-->
-<!--                            <div></div>-->
-<!--                            <button href="/member/logout" type="button">로그아웃</button>-->
-<!--                        </div> &ndash;&gt;-->
-
-<!--                        <span class="login-tooltip" th:if="${#request.userPrincipal != null}">-->
-<!--                            <div class="login-tooltip-content">-->
-<!--                              <a href="/member/profile">마이페이지</a>-->
-<!--                              <div></div>-->
-<!--                              <button onclick="window.location.href='/member/logout'" type="button">로그아웃</button>-->
-<!--                            </div>-->
-<!--                        </span>-->
-<!--                    </span>-->
-<!--                  -->
-
-
-<!--                </div>-->
+                    </a>
 
 
 
 
 
+                    <span class="login" th:if="${#request.userPrincipal != null}">
 
-<!--                <div th:if="${#request.userPrincipal != null}">-->
-<!--                    &lt;!&ndash;                <a href="/member/profile">마이페이지</a>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                |&ndash;&gt;-->
-<!--                    &lt;!&ndash;                <a href="/member/logout" class="header_inquiry">로그아웃</a>&ndash;&gt;-->
-<!--                    <a href="/member/profile" class="login">-->
-<!--                        <span>login</span>-->
-<!--                    </a>-->
-<!--                </div>-->
+                        <span>login</span>
+
+                        <!-- <div class="login-tooltip">
+                            <a href="/member/profile">마이페이지</a>
+                            <div></div>
+                            <button href="/member/logout" type="button">로그아웃</button>
+                        </div> -->
+
+                        <span class="login-tooltip" th:if="${#request.userPrincipal != null}">
+                            <div class="login-tooltip-content">
+                              <a href="/member/profile">마이페이지</a>
+                              <div></div>
+                              <button onclick="window.location.href='/member/logout'" type="button">로그아웃</button>
+                            </div>
+                        </span>
+                    </span>
+
+
+
+                </div>
+
+
+
+
+
+
+
 
 
                 <a class="selected_country" id="languageSelect" th:if="#{header.nation} == 'EN'" value="en">
