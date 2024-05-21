@@ -65,8 +65,8 @@ public class SecurityConfig {
 //                .addFilterBefore(new SessionHeaderFilter(), UsernamePasswordAuthenticationFilter.class)
                 .httpBasic().disable()
                 .formLogin().disable()
-//                .cors().disable()
-                .cors((cors -> cors.configurationSource(corsConfigurationSource())))
+                .cors().disable()
+//                .cors((cors -> cors.configurationSource(corsConfigurationSource())))
                 .csrf().disable()
 //                .headers().frameOptions().disable()
 
@@ -91,22 +91,22 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(
-                "https://hanwharobotics.co.kr",
-                "https://hanwharobotics.com",
-                "https://hanwharobotics.co.kr:8090",
-                "https://hanwharobotics.com:8090"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList(
+//                "https://hanwharobotics.co.kr",
+//                "https://hanwharobotics.com",
+//                "https://hanwharobotics.co.kr:8090",
+//                "https://hanwharobotics.com:8090"));
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT"));
+//        configuration.setAllowedHeaders(List.of("*"));
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
 
 }
