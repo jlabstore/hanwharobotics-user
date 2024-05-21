@@ -703,6 +703,126 @@
 
 
 
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function registerWithLang() {
+            const qnaType2Selected = $('.qnaType2 input:checked').length > 0;
+            const title = $('#title').val();
+            const content = $('#content').val();
+            const lang = getCookie('lang');
+
+            console.log(lang)
+
+            if (!qnaType2Selected || !title || !content) {
+                if (!qnaType2Selected) {
+                    alert('문의 유형을 선택해주세요.');
+                } else if (!title) {
+                    alert('제목을 입력해주세요.');
+                } else {
+                    alert('내용을 입력해주세요.');
+                }
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('email', $('#email').val());
+            formData.append('emailReceiveYn', $('#emailReceiveYn').prop('checked') ? 'Y' : 'N');
+            formData.append('title', title);
+            formData.append('content', content);
+            formData.append('memberId', $('#memberId').val());
+            formData.append('qnaType1Cd', $('.qnaType1').find('select').val());
+            formData.append('qnaType2Cd', $('.qnaType2').find('input:checked').val());
+
+            const qnaRobots = [];
+            const inquiryItems = $('.qna-write-inquiry-product-item');
+
+            for (let i = 0; i < inquiryItems.length; i++) {
+                const item = $(inquiryItems[i]);
+                const modelCd = item.find('.robotModel select').val();
+                const serialNo = item.find('.serialNo').val();
+                let swVersion = '';
+                const vValues = [];
+
+                if(!serialNo) {
+                    alert("로봇암 시리얼넘버를 입력해주세요.");
+                    return;
+                }
+
+                for (let j = 1; j <= 10; j++) {
+                    const v = item.find(`#software${j}`).val();
+                    vValues.push(v);
+
+                    if (vValues.some(value => value === '')) {
+                        alert("소프트웨어 버전을 정확히 입력해주세요.");
+                        return;
+                    } else {
+                        swVersion = vValues[0] + "." + vValues[1] + vValues[2] + vValues[3] + "." + vValues[4] + vValues[5] + vValues[6] + "." + vValues[7] + vValues[8] + vValues[9];
+                    }
+                }
+
+                const applicationCd = item.find('.application select').val();
+
+                const robotInfo = {
+                    modelCd: modelCd,
+                    serialNo: serialNo,
+                    swVersion: swVersion,
+                    applicationCd: applicationCd
+                };
+                qnaRobots.push(robotInfo);
+            }
+
+            for (let i = 0; i < qnaRobots.length; i++) {
+                formData.append(`qnaRobots[${i}].modelCd`, qnaRobots[i].modelCd);
+                formData.append(`qnaRobots[${i}].serialNo`, qnaRobots[i].serialNo);
+                formData.append(`qnaRobots[${i}].swVersion`, qnaRobots[i].swVersion);
+                formData.append(`qnaRobots[${i}].applicationCd`, qnaRobots[i].applicationCd);
+            }
+
+            // files를 초기화
+            formData.delete('files');
+
+            // fileList를 formData에 추가
+            for (let i = 0; i < fileList.length; i++) {
+                formData.append('files', fileList[i]);
+            }
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/qna/register',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function (xhr) {
+                    if (lang) {
+                        xhr.setRequestHeader('Lang', lang);
+                    }
+                },
+                success: function (data) {
+                    alert("게시글이 정상적으로 등록되었습니다.");
+                    window.location.href = '/qna/' + data;
+                },
+                error: function (xhr, textStatus) {
+                    alert("등록에 실패하였습니다." + xhr.responseText);
+                    console.error('Error:', xhr.responseText);
+                    console.error('Status:', xhr.status);
+                }
+            });
+        }
+
+
+
+
+
+
+
+
     </script>
 
 

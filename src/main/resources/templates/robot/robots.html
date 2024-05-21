@@ -6,7 +6,7 @@
 <body data-gnb-target="robot">
 <div layout:fragment="content">
 
-    <main class="sub products robots">
+    <main class="sub products robots" th:if="#{header.nation} == 'EN'">
         <section class="section_1">
             <div class="group group1">
                 <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Products</div>
@@ -285,6 +285,289 @@
             <span>구매/견적 문의</span>
         </a>
     </main>
+
+
+
+
+
+    <main class="sub products robots" th:unless="#{header.nation} == 'EN'">
+        <section class="section_1">
+            <div class="group group1">
+                <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Products</div>
+                <div class="txt1" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">
+                    The HCR series is Hanwha Robotics’<br/>
+                    high-quality collaborative robot brand,<br/>
+                    built on precise design and control technology.
+                </div>
+            </div>
+            <button type="button" class="inquiry products">
+                Purchase Inquiry
+                <span><strong>+</strong></span>
+            </button>
+        </section>
+
+        <aside class="products-main-bg">
+            <picture>
+                <source srcset="../images/pc/robots_main_bg_mobile@3x.webp" media="(max-width: 765px)" />
+                <img src="../images/pc/robots_main_bg@3x.webp" alt="" />
+            </picture>
+        </aside>
+
+        <section class="products-section2">
+            <div class="products-section2-title">
+                <div class="products-section2-title-item">
+                    <div>
+                        <h2>Cobot</h2>
+                    </div>
+                    <p>
+                        A collaborative robot is a robot that can share a workspace with humans. Unlike industrial robots that require the installation of safety fences for worker protection, cobots hold minimum or zero need for fences, enhancing efficiency in terms of workspace, processes, and time.
+                    </p>
+                </div>
+                <div class="products-section2-title-item">
+                    <div>
+                        <h2>HCR</h2>
+                        <span>(Hanwha Collaborative Robots)</span>
+                    </div>
+                    <p>
+                        Hanwha Robotics' HCR is a high-quality collaborative robot brand based on Hanwha Robotics' precise design and control technology. It provides reliable products and solutions supporting automation in various industrial fields.
+                    </p>
+                </div>
+            </div>
+            <div class="products-section2-contents">
+                <div class="robots-section2-slider">
+                    <div class="robots-slider-item">
+                        <div class="robots-slider-item-wrapper">
+                            <a href="#" class="robots-slider-item-text">
+                                <span>HCR-3A</span>
+                                <img src="../images/pc/ic_robots_arrow.svg" alt="" />
+                            </a>
+                            <div class="robots-slider-item-img">
+                                <img src="../images/pc/robots_list_01.webp" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robots-slider-item">
+                        <div class="robots-slider-item-wrapper">
+                            <a href="#" class="robots-slider-item-text">
+                                <span>HCR-5A</span>
+                                <img src="../images/pc/ic_robots_arrow.svg" alt="" />
+                            </a>
+                            <div class="robots-slider-item-img">
+                                <img src="../images/pc/robots_list_02.webp" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robots-slider-item">
+                        <div class="robots-slider-item-wrapper">
+                            <a href="#" class="robots-slider-item-text">
+                                <span>HCR-12A</span>
+                                <img src="../images/pc/ic_robots_arrow.svg" alt="" />
+                            </a>
+                            <div class="robots-slider-item-img">
+                                <img src="../images/pc/robots_list_03.webp" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robots-slider-item">
+                        <div class="robots-slider-item-wrapper">
+                            <a href="#" class="robots-slider-item-text">
+                                <span>HCR-14</span>
+                                <img src="../images/pc/ic_robots_arrow.svg" alt="" />
+                            </a>
+                            <div class="robots-slider-item-img">
+                                <img src="../images/pc/robots_list_04.webp" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section3 robots">
+            <div class="products-section3-title">
+                <h2>What’s good about HCR?</h2>
+            </div>
+            <div class="robots-section3-content">
+                <div class="robots-section3-certi-wrapper">
+                    <div class="robots-section3-certi">
+                        <div class="robots-section3-certi-top">
+                            <h5>Quality and Durability</h5>
+                            <img src="../images/pc/robots_certi_01.svg" alt="" />
+                        </div>
+                        <p class="robots-section3-certi-text">
+                            Ensure high reliability by applying high-end reducers, verified components, and metal covers.
+                        </p>
+                    </div>
+                    <div class="robots-section3-certi">
+                        <div class="robots-section3-certi-top">
+                            <h5>High Precision and Usability</h5>
+                            <img src="../images/pc/robots_certi_02.svg" alt="" />
+                        </div>
+                        <p class="robots-section3-certi-text">
+                            Provide a high level of control performance and a flexible operational environment based on self-developed control and operation software.
+                        </p>
+                    </div>
+                    <div class="robots-section3-certi">
+                        <div class="robots-section3-certi-top">
+                            <h5>Safety/Environmental Certification</h5>
+                            <img src="../images/pc/robots_certi_03.svg" alt="" />
+                        </div>
+                        <p class="robots-section3-certi-text">
+                            Acquire domestic and international safety certifications and achieve the highest level (ISO Class 2) of cleanroom certification among collaborative robots.
+                        </p>
+                    </div>
+                </div>
+                <div class="robots-section3-bottom">
+                    <h3 class="robots-section3-bottom-title">Improve automation efficiency with <br/>Hanwha Robotics' advanced technology and HCR.</h3>
+                    <div class="robots-section3-certi-wrapper">
+                        <div class="robots-section3-certi">
+                            <div class="robots-section3-certi-top">
+                                <h5>RAIV(Robot AI Vision)</h5>
+                                <img src="../images/pc/robots_certi_04.svg" alt="" />
+                            </div>
+                            <p class="robots-section3-certi-text">
+                                Utilizing AI and deep learning-based 3D vision solutions, enable the recognition of objects in various sizes and shapes.
+                            </p>
+                        </div>
+                        <div class="robots-section3-certi">
+                            <div class="robots-section3-certi-top">
+                                <h5>Visual Safety</h5>
+                                <img src="../images/pc/robots_certi_05.svg" alt="" />
+                            </div>
+                            <p class="robots-section3-certi-text">
+                                Operate robots safely without the need for fences, thanks to dual 3D cameras and functional-safety measures.
+                            </p>
+                        </div>
+                        <div class="robots-section3-certi">
+                            <div class="robots-section3-certi-top">
+                                <h5>2D Marker Positioning</h5>
+                                <img src="../images/pc/robots_certi_06.svg" alt="" />
+                            </div>
+                            <p class="robots-section3-certi-text">
+                                Correct the position of the robot arm installed on mobile manipulator with 2D vision technologies and markers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="robots-section4">
+            <h3>Application</h3>
+            <div class="robots-section4-slider">
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_01.webp" alt="" />
+                        <p>Assembly</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_10.webp" alt="" />
+                        <p>Dispensing</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_11.webp" alt="" />
+                        <p>Food & Beverage</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_04.webp" alt="" />
+                        <p>Inspection</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_06.webp" alt="" />
+                        <p>Machine Tending</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_02.webp" alt="" />
+                        <p>Mold Handling</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_13.webp" alt="" />
+                        <p>Packaging</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_03.webp" alt="" />
+                        <p>Palletizing</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_05.webp" alt="" />
+                        <p>Pick & Place</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_07.webp" alt="" />
+                        <p>Polishing/Grinding</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item">
+                    <div>
+                        <img src="../images/pc/robots_application_item_12.webp" alt="" />
+                        <p>Welding</p>
+                    </div>
+                </div>
+                <div class="robots-section4-slider-item empty">
+                    <div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="robots-section5">
+            <div class="robots-section5-title">
+                <h3>Case Studies</h3>
+                <div>
+                    <p>Are you interested in real-world applications of<br/>
+                        Hanwha Collaborative Robot HCR?</p>
+                    <button type="button" class="inquiry products robots">
+                        Case studies
+                        <span><strong>+</strong></span>
+                    </button>
+                </div>
+            </div>
+            <div class="robots-case-studies-content">
+                <div class="robots-case-studies-item">
+                    <div class="robots-case-studies-item-text">
+                        <h3>Palletizing</h3>
+                        <p>Palletizing is the process of stacking products onto dedicated pallets or cases.</p>
+                    </div>
+                </div>
+                <div class="robots-case-studies-item">
+                    <div class="robots-case-studies-item-text">
+                        <h3>Polishing</h3>
+                        <p>The polishing process is crucial in determining quality in both metal processing and furniture manufacturing.</p>
+                    </div>
+                </div>
+                <div class="robots-case-studies-item">
+                    <div class="robots-case-studies-item-text">
+                        <h3>Packaging</h3>
+                        <p>The system can handle various size of products quickly and accurately, enhancing productivity and quality in packaging.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <a href="#" class="products-inquiry-link">
+            <span>Purchase Inquiry</span>
+        </a>
+    </main>
+
 
 
 
