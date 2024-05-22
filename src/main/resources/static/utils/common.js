@@ -166,7 +166,7 @@ var layerInquiryBtn = function(data){
         if(data == 1) {
             type = '대리점 문의';
         } else if (data == 2) {
-            type = '제품 문의';
+            type = '제품 구매 문의';
         } else {
             type = "";
         }
@@ -267,12 +267,12 @@ var layerPwdEditCompleteBtn = function () {
 
 
 
-///
-$(document).on('click', 'button.inquiry.products', function(e) {
-    e.stopPropagation();
-
-    showLayer('inquiry', $(this), headerMinHeight);
-});
+// layerInquiryBtn으로 변경
+// $(document).on('click', 'button.inquiry.products', function(e) {
+//     e.stopPropagation();
+//
+//     showLayer('inquiry', $(this), headerMinHeight);
+// });
 
 
 
