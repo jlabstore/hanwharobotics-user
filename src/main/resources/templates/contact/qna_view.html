@@ -413,7 +413,7 @@
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR.status, jqXHR);
                     if (jqXHR.status === 403) {
-                        alert("비공개 게시글 입니다.");
+                        alert("[[#{qna.alertPrivatePost}]]");
                         // window.location.href = "/qna";
                         goBack();
                     }
@@ -454,12 +454,12 @@
                 },
 
                 error: function (xhr, textStatus) {
-                    console.error('댓글 가져오기 실패:', textStatus);
+                    console.error('error', textStatus);
                     if (xhr.responseJSON) {
                         const errorMessage = xhr.responseJSON.message;
                         alert(errorMessage);
                     } else {
-                        alert('댓글 가져오기에 실패했습니다.');
+                        alert("[[#{qna.alertGetReplyError}]]");
                     }
                 }
             });
@@ -497,14 +497,14 @@
 
         // Q&A 삭제
         function deleteQna() {
-            if (!confirm('게시글을 삭제 하시겠습니까?')) {
+            if (!confirm("[[#{qna.alertDelete}]]")) {
                 return;
             }
             COMM.ajax({
                 type: 'DELETE',
                 url: '/qna/' + paths[paths.length - 1],
                 success: function (data) {
-                    alert("삭제되었습니다.")
+                    // alert("삭제되었습니다.")
                     window.location.href = "/qna";
                 },
                 error: function (xhr, textStatus) {
@@ -513,7 +513,7 @@
                         const errorMessage = xhr.responseJSON.message;
                         alert(errorMessage);
                     } else {
-                        alert('삭제 실패했습니다.');
+                        alert('errir');
                     }
                 }
             });
@@ -543,12 +543,13 @@
                 },
 
                 error: function (xhr, textStatus) {
-                    console.error('전송 실패:', textStatus);
+                    console.error('error', textStatus);
                     if (xhr.responseJSON) {
                         const errorMessage = xhr.responseJSON.message;
                         alert(errorMessage);
                     } else {
-                        alert('등록에 실패했습니다.');
+                        alert('error');
+
                     }
                 }
             });
@@ -571,12 +572,13 @@
                     getReply();
                 },
                 error: function (xhr, textStatus) {
-                    console.error('전송 실패:', textStatus);
+                    console.error('error', textStatus);
                     if (xhr.responseJSON) {
                         const errorMessage = xhr.responseJSON.message;
                         alert(errorMessage);
                     } else {
-                        alert('댓글 수정에 실패했습니다.');
+                        alert('error');
+
                     }
                 }
             });
@@ -585,7 +587,7 @@
 
         // 답글 삭제
         function deleteReply(replyNo) {
-            if (!confirm('답글을 삭제 하시겠습니까?')) {
+            if (!confirm("[[#{qna.alertDelete}]]")) {
                 return;
             }
             COMM.ajax({
@@ -595,12 +597,12 @@
                     getReplyRe();
                 },
                 error: function (xhr, textStatus) {
-                    console.error('전송 실패:', textStatus);
+                    console.error('error:', textStatus);
                     if (xhr.responseJSON) {
                         const errorMessage = xhr.responseJSON.message;
                         alert(errorMessage);
                     } else {
-                        alert('댓글 삭제에 실패했습니다.');
+                        alert("[[#{qna.alertGetReplyError}]]");
                     }
                 }
             });
@@ -633,8 +635,8 @@
                         $('.reply-item:last-child').ready(function () {
                             const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
                             if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo) && (latestReply.endStatus === 'N')) {
-                                const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
-                                const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
+                                const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">[[#{qna.delete}]]</button>');
+                                const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">[[#{qna.edit}]]</button>');
                                 $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
                             }
                         });
@@ -644,12 +646,12 @@
                 },
 
                 error: function (xhr, textStatus) {
-                    console.error('댓글 가져오기 실패:', textStatus);
+                    console.error('error', textStatus);
                     if (xhr.responseJSON) {
                         const errorMessage = xhr.responseJSON.message;
                         alert(errorMessage);
                     } else {
-                        alert('댓글 가져오기에 실패했습니다.');
+                        alert("[[#{qna.alertGetReplyError}]]");
                     }
                 }
             });
