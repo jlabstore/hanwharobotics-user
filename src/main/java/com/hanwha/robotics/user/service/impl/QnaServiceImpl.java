@@ -57,6 +57,20 @@ public class QnaServiceImpl implements QnaService {
 		return new QnaCodeResponse(codeGroup);
 	}
 
+	@Override
+	public QnaEnCodeResponse getEnQnaCode() {
+		var parentCodeList = List.of(
+				ParentCode.QNA_TYPE1_EN,
+				ParentCode.QNA_TYPE2_EN,
+				ParentCode.ROBOT_MODEL,
+				ParentCode.ROBOT_APPLICATION
+		);
+		Map<ParentCode, List<Code>> codeGroup = codeMapper.selectAllInParentCode(parentCodeList)
+				.stream()
+				.collect(Collectors.groupingBy(Code::getParentCode));
+		return new QnaEnCodeResponse(codeGroup);
+	}
+
 
 
 	@Override

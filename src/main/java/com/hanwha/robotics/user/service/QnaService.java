@@ -45,6 +45,8 @@ public interface QnaService {
      */
     QnaCodeResponse getQnaCode();
 
+    QnaEnCodeResponse getEnQnaCode();
+
     /**
      * Q&A 삭제
      * @param memberNo

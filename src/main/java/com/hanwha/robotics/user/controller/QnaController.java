@@ -136,6 +136,12 @@ public class QnaController {
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaCodeResponse));
     }
 
+    @GetMapping("/code/en")
+    public ResponseEntity<Object> getQnaEnCode() {
+        QnaEnCodeResponse qnaEnCodeResponse = qnaService.getEnQnaCode();
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), qnaEnCodeResponse));
+    }
+
     /**
      * 수정 페이지 코드 가져오기
      *

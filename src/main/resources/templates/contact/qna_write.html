@@ -260,11 +260,24 @@
 
 
 
-        // 코드 가져오기
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
         function getCode() {
+            let lang = getCookie('lang');
+            let url = "/qna/code";
+
+            if (lang === 'en') {
+                url = "/qna/code/en";
+            }
+
             COMM.ajax({
                 type: 'GET',
-                url: "/qna/code",
+                url: url,
                 success: function (data) {
                     if(data.data != null) {
                         populateSelectBox(data.data["qnaType1List"], 'qnaType1');
@@ -276,6 +289,26 @@
                 },
             });
         }
+
+
+
+
+        // 코드 가져오기
+        // function getCode() {
+        //     COMM.ajax({
+        //         type: 'GET',
+        //         url: "/qna/code",
+        //         success: function (data) {
+        //             if(data.data != null) {
+        //                 populateSelectBox(data.data["qnaType1List"], 'qnaType1');
+        //                 populateRadioButtons(data.data["qnaType2List"], 'qnaType2');
+        //
+        //                 populateSelectAndInputs(data.data["robotModelList"], 'robotModel');
+        //                 populateSelectAndInputsApp(data.data["applicationList"], 'application');
+        //             }
+        //         },
+        //     });
+        // }
 
 
         // 문의유형1
@@ -703,11 +736,11 @@
 
 
 
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
+        // function getCookie(name) {
+        //     const value = `; ${document.cookie}`;
+        //     const parts = value.split(`; ${name}=`);
+        //     if (parts.length === 2) return parts.pop().split(';').shift();
+        // }
 
         function registerWithLang() {
             const qnaType2Selected = $('.qnaType2 input:checked').length > 0;
