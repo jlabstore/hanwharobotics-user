@@ -147,7 +147,7 @@
                                         {{#isAdmin}}
                                         <div class="qna-view-answer">
                                             <div>
-                                                <h4>답변</h4>
+                                                <h4 th:utext="#{qna.answer}"></h4>
                                                 <p>
                                                     <strong>Admin<br/></strong>
                                                     <span id="reply-item-replyContent">{{replyContent}}</span>
@@ -162,9 +162,8 @@
                                 </script>
 
 
-                            <div class="qna-view-answer-disable">
-                                <p>해당 문의글은 답변이 완료되었습니다.</p>
-                                <p>더 이상 글을 남길 수 없습니다.</p>
+                            <div class="qna-view-answer-disable" th:utext="#{qna.qnaComplete}">
+
                             </div>
                         </div>
                     </div>
@@ -301,13 +300,13 @@
                                 const robotItem = $('<li></li>');
                                 const modelDiv = $('<div></div>');
 
-                                modelDiv.append('<h4> </h4><span>' + robot.modelCd + '</span>');
+                                modelDiv.append('<h4>[[#{qna.modelName}]]</h4><span>' + robot.modelCd + '</span>');
                                 // const modelCdText = robot.modelCd !== null ? robot.modelCd : '-';
                                 // modelDiv.append('<h4>모델명</h4><span>' + modelCdText + '</span>');
 
                                 const softwareVersionDiv = $('<div></div>');
 
-                                softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + robot.swVersion + '</span>');
+                                softwareVersionDiv.append('<h4>[[#{qna.softwareVersion}]]</h4><span>' + robot.swVersion + '</span>');
                                 // const swVersionText = robot.swVersion !== null ? robot.swVersion : '-';
                                 // softwareVersionDiv.append('<h4>소프트웨어 버전</h4><span>' + swVersionText + '</span>');
 
@@ -315,7 +314,7 @@
 
                                 // applicationDiv.append('<h4>어플리케이션</h4><span>' + robot.applicationCd + '</span>');
                                 const applicationCdText = robot.applicationCd !== null ? robot.applicationCd : '';
-                                applicationDiv.append('<h4>어플리케이션</h4><span>' + applicationCdText + '</span>');
+                                applicationDiv.append('<h4>[[#{qna.application}]]</h4><span>' + applicationCdText + '</span>');
 
 
                                 robotItem.append(modelDiv);
@@ -446,8 +445,8 @@
                         $('.reply-item:last-child').ready(function () {
                             const latestReply = data.data.qnaReplies[data.data.qnaReplies.length - 1];
                             if ((latestReply.replyType === 'USER') && (loginMemberNo === latestReply.memberNo) && (latestReply.endStatus === 'N')) {
-                                const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">삭제</button>');
-                                const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">수정</button>');
+                                const deleteButton = $('<button class="qna-view-answer-my-btn reply-delete-button" onclick="deleteReply(' + latestReply.replyNo + ')">[[#{qna.delete}]]</button>');
+                                const editButton = $('<button class="qna-view-answer-my-btn color-orange reply-edit-button" onclick="editReply(' + latestReply.replyNo + ')">[[#{qna.edit}]]</button>');
                                 $('.reply-item:last-child .qna-view-answer-my-btngroup').append(deleteButton).append(editButton);
                             }
                         });
@@ -482,8 +481,8 @@
                             <textarea name="qna-answer" id="qna-answer" class="replyContent_edit" rows="3">${replyContent}</textarea>
                         </div>
                         <div class="qna-view-answer-my-btngroup">
-                            <button type="button" class="qna-view-answer-my-btn" onclick="cancelEdit(${replyNo})">취소</button>
-                            <button type="button" class="qna-view-answer-my-btn color-orange edit-complete" onclick="updateReply(${replyNo})">수정완료</button>
+                            <button type="button" class="qna-view-answer-my-btn" onclick="cancelEdit(${replyNo})">[[#{qna.cancel}]]</button>
+                            <button type="button" class="qna-view-answer-my-btn color-orange edit-complete" onclick="updateReply(${replyNo})">[[#{qna.complete}]]</button>
                         </div>
                     </form>`);
         }
