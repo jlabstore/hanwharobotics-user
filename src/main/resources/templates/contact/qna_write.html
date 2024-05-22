@@ -61,14 +61,14 @@
 
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title" th:utext="#{qna.inquiryProduct}">문의제품 <strong>*</strong></span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.inquiryProduct}"> <strong>*</strong></span>
                         <div class="qna-write-inquiry-product">
                             <div class="qna-write-inquiry-product-title">
-                                <p>모델명</p>
-                                <p>로봇암 시리얼넘버</p>
-                                <p>소프트웨어 버전</p>
-                                <p>어플리케이션</p>
-                                <p>추가/삭제</p>
+                                <p th:utext="#{qna.modelName}"></p>
+                                <p th:utext="#{qna.serialNo}"></p>
+                                <p th:utext="#{qna.softwareVersion}"></p>
+                                <p th:utext="#{qna.application}"></p>
+                                <p th:utext="#{qna.addDelete}"></p>
                             </div>
 
                             <div class="qna-write-inquiry-product-box" >
@@ -76,7 +76,7 @@
                                 <div class="qna-write-inquiry-product-item">
 
                                     <div id="modelCd" class="qna-write-inquiry-prodict-item-wrapper robotModel">
-                                        <p>모델명</p>
+                                        <p th:utext="#{qna.modelName}"></p>
                                     </div>
 
                                     <div class="qna-write-inquiry-prodict-item-wrapper">
@@ -90,7 +90,7 @@
                                     <!--                                    <input class="qna-write-custom-input swVersion" type="text" value="" name="software1" id="software1" />-->
 
                                     <div class="qna-write-inquiry-prodict-item-wrapper">
-                                        <p>소프트웨어 버전</p>
+                                        <p th:utext="#{qna.softwareVersion}"></p>
 
                                         <div class="qna-write-software">
                                             <input class="qna-write-custom-input software" type="text" name="software1" id="software1" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1)" />
@@ -117,7 +117,7 @@
 
 
                                     <div id="applicationCd" class="qna-write-inquiry-prodict-item-wrapper application">
-                                        <p>어플리케이션</p>
+                                        <p th:utext="#{qna.application}"></p>
                                     </div>
 
 <!--                                    <span id="applicationCd" class="application" style="width: calc(22%);"></span>-->
@@ -161,27 +161,27 @@
                     <!--                    </div>-->
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">제목 <strong>*</strong></span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.subject}"> <strong>*</strong></span>
                         <div class="qna-write-form-section-content">
                             <input class="qna-write-custom-input full" type="text" name="title" id="title" />
                         </div>
                     </div>
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">내용 <strong>*</strong></span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.content}"> <strong>*</strong></span>
                         <div class="qna-write-des-box">
                             <textarea class="qna-write-custom-textarea" name="description" id="content"></textarea>
-                            <span>문의 내용에 따라 제품 로그, 제품 구동 영상, <a href="/newsroom/notice" target="_blank"><strong>VOC 리포트</strong></a> 등을 추가로 요청할 수 있으며 메일을 통해 전달 부탁드립니다.</span>
+                            <span th:utext="#{qna.description}"></span>
                         </div>
                     </div>
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">첨부파일</span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.attachFile}"></span>
                         <div class="qna-write-form-file-wrapper">
 
                             <div class="qna-write-custom-file">
                                 <input type="file" name="file" id="fileInput" onchange="handleFileUpload()"/>
-                                <label for="fileInput">파일찾기</label>
+                                <label for="fileInput" th:utext="#{qna.findFile}"></label>
                             </div>
 
                             <div class="qna-write-file-list">
@@ -190,7 +190,7 @@
                                 </div>
                             </div>
 
-                            <span>첨부파일 개당 최대 5MB 이내, 최대 5개까지 첨부 가능합니다. exe, html 형식등 문제가 될 수 있는 파일은 압축파일 형태로 첨부해주세요.</span>
+                            <span th:utext="#{qna.fileText}"></span>
                         </div>
                     </div>
                 </div>
@@ -198,9 +198,9 @@
                 <!-- <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button> -->
                 <div class="qna-write-button-group">
                     <!-- <button type="button" class="qna-write-cancel">취소</button> -->
-                    <button type="button" class="qna-write-cancel" href="javascript:void(0)" onClick="goBack()">취소</button>
+                    <button type="button" class="qna-write-cancel" href="javascript:void(0)" onClick="goBack()" th:utext="#{qna.cancel}"></button>
                     <!-- <button type="submit" class="qna-write-submit">문의글 남기기</button> -->
-                    <button type="button" class="qna-write-submit" onclick="register()">문의글 남기기</button>
+                    <button type="button" class="qna-write-submit" onclick="register()" th:utext="#{qna.summitButton}"></button>
 
                 </div>
 <!--                    <button type="button" class="btn btn&#45;&#45;block btn&#45;&#45;gray"  onclick="toList()">취소</button>-->
@@ -426,7 +426,7 @@
                     });
                 }
             } else {
-                alert('최대 10개까지만 추가할 수 있습니다.');
+                alert("[[#{qna.alertMax10}]]");
             }
         }
 
@@ -445,20 +445,20 @@
 
         // fileList에 파일을 추가하고 다시 그리기
         function handleFileUpload() {
-            console.log("업로드")
+            // console.log("업로드")
 
             const fileInput = document.getElementById('fileInput');
 
             // 파일이 선택되었는지 확인
             if (fileInput.files.length === 0) {
-                alert('파일을 선택해주세요.');
+                alert("[[#{qna.alertSelectFile}]]");
                 fileInput.value = null; // 파일 input 초기화
                 return;
             }
 
             // 파일 추가 여부 및 최대 개수 확인
             if (fileList.length + fileInput.files.length > 5) {
-                alert('최대 5개까지만 첨부 가능합니다.');
+                alert("[[#{qna.alertMax5}]]");
                 fileInput.value = null; // 파일 input 초기화
                 return;
             }
@@ -469,7 +469,7 @@
                 const maxSize = 5 * 1024 * 1024; // 5MB
 
                 if (fileSize > maxSize) {
-                    alert('파일 크기는 최대 5MB까지만 허용됩니다.');
+                    alert("[[#{qna.alertMax5mb}]]");
                     fileInput.value = null; // 파일 input 초기화
                     return;
                 }
@@ -483,13 +483,12 @@
             // 파일 그리기
             drawFileList();
 
-            console.log(fileList)
+            // console.log(fileList)
         }
 
 
         // fileList에 파일을 삭제하고 다시 그리기
         function removeFile(index) {
-            console.log("삭제")
 
             //파일 제거
             if (index >= 0 && index < fileList.length) {
@@ -502,7 +501,7 @@
 
         /* fileList를 참조하여 첨부 파일목록을 그린다. */
         function drawFileList(){
-            console.log("드로우")
+            // console.log("드로우")
 
             const fileDisplayContainer = document.querySelector('.qna-write-file-list');
 
@@ -644,11 +643,13 @@
 
             if (!qnaType2Selected || !title || !content) {
                 if (!qnaType2Selected) {
-                    alert('문의 유형을 선택해주세요.');
+                    alert("[[#{qna.alertSelectType}]]");
+
                 } else if (!title) {
-                    alert('제목을 입력해주세요.');
+                    alert("[[#{qna.alertSubject}]]");
+
                 } else {
-                    alert('내용을 입력해주세요.');
+                    alert("[[#{qna.alertContent}]]");
                 }
                 return;
             }
@@ -673,7 +674,7 @@
                 const vValues = [];
 
                 if(!serialNo) {
-                    alert("로봇암 시리얼넘버를 입력해주세요.");
+                    alert("[[#{qna.alertSerialNo}]]");
                     return;
                 }
 
@@ -682,7 +683,8 @@
                     vValues.push(v);
 
                     if (vValues.some(value => value === '')) {
-                        alert("소프트웨어 버전을 정확히 입력해주세요.");
+                        alert("[[#{qna.alertSoftwareVersion}]]");
+
                         return;
                     } else {
                         swVersion = vValues[0] + "." + vValues[1] + vValues[2] + vValues[3] + "." + vValues[4] + vValues[5] + vValues[6] + "." + vValues[7] + vValues[8] + vValues[9];
@@ -722,136 +724,16 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    alert("게시글이 정상적으로 등록되었습니다.");
+                    // alert("게시글이 정상적으로 등록되었습니다.");
                     window.location.href = '/qna/' + data;
                 },
                 error: function (xhr, textStatus) {
-                    alert("등록에 실패하였습니다." + xhr.responseText);
+                    alert("error" + xhr.responseText);
                     console.error('Error:', xhr.responseText);
                     console.error('Status:', xhr.status);
                 }
             });
         }
-
-
-
-
-        // function getCookie(name) {
-        //     const value = `; ${document.cookie}`;
-        //     const parts = value.split(`; ${name}=`);
-        //     if (parts.length === 2) return parts.pop().split(';').shift();
-        // }
-
-        function registerWithLang() {
-            const qnaType2Selected = $('.qnaType2 input:checked').length > 0;
-            const title = $('#title').val();
-            const content = $('#content').val();
-            const lang = getCookie('lang');
-
-            console.log(lang)
-
-            if (!qnaType2Selected || !title || !content) {
-                if (!qnaType2Selected) {
-                    alert('문의 유형을 선택해주세요.');
-                } else if (!title) {
-                    alert('제목을 입력해주세요.');
-                } else {
-                    alert('내용을 입력해주세요.');
-                }
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('email', $('#email').val());
-            formData.append('emailReceiveYn', $('#emailReceiveYn').prop('checked') ? 'Y' : 'N');
-            formData.append('title', title);
-            formData.append('content', content);
-            formData.append('memberId', $('#memberId').val());
-            formData.append('qnaType1Cd', $('.qnaType1').find('select').val());
-            formData.append('qnaType2Cd', $('.qnaType2').find('input:checked').val());
-
-            const qnaRobots = [];
-            const inquiryItems = $('.qna-write-inquiry-product-item');
-
-            for (let i = 0; i < inquiryItems.length; i++) {
-                const item = $(inquiryItems[i]);
-                const modelCd = item.find('.robotModel select').val();
-                const serialNo = item.find('.serialNo').val();
-                let swVersion = '';
-                const vValues = [];
-
-                if(!serialNo) {
-                    alert("로봇암 시리얼넘버를 입력해주세요.");
-                    return;
-                }
-
-                for (let j = 1; j <= 10; j++) {
-                    const v = item.find(`#software${j}`).val();
-                    vValues.push(v);
-
-                    if (vValues.some(value => value === '')) {
-                        alert("소프트웨어 버전을 정확히 입력해주세요.");
-                        return;
-                    } else {
-                        swVersion = vValues[0] + "." + vValues[1] + vValues[2] + vValues[3] + "." + vValues[4] + vValues[5] + vValues[6] + "." + vValues[7] + vValues[8] + vValues[9];
-                    }
-                }
-
-                const applicationCd = item.find('.application select').val();
-
-                const robotInfo = {
-                    modelCd: modelCd,
-                    serialNo: serialNo,
-                    swVersion: swVersion,
-                    applicationCd: applicationCd
-                };
-                qnaRobots.push(robotInfo);
-            }
-
-            for (let i = 0; i < qnaRobots.length; i++) {
-                formData.append(`qnaRobots[${i}].modelCd`, qnaRobots[i].modelCd);
-                formData.append(`qnaRobots[${i}].serialNo`, qnaRobots[i].serialNo);
-                formData.append(`qnaRobots[${i}].swVersion`, qnaRobots[i].swVersion);
-                formData.append(`qnaRobots[${i}].applicationCd`, qnaRobots[i].applicationCd);
-            }
-
-            // files를 초기화
-            formData.delete('files');
-
-            // fileList를 formData에 추가
-            for (let i = 0; i < fileList.length; i++) {
-                formData.append('files', fileList[i]);
-            }
-
-
-
-            $.ajax({
-                type: 'POST',
-                url: '/qna/register',
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function (xhr) {
-                    if (lang) {
-                        xhr.setRequestHeader('Lang', lang);
-                    }
-                },
-                success: function (data) {
-                    alert("게시글이 정상적으로 등록되었습니다.");
-                    window.location.href = '/qna/' + data;
-                },
-                error: function (xhr, textStatus) {
-                    alert("등록에 실패하였습니다." + xhr.responseText);
-                    console.error('Error:', xhr.responseText);
-                    console.error('Status:', xhr.status);
-                }
-            });
-        }
-
-
-
-
-
 
 
 
