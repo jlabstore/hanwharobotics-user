@@ -18,7 +18,7 @@
                 <div class="qna-write-form">
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">작성자</span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.author}"></span>
                         <!--                        <input id="memberId" th:value="${memberResponse.getMemberId()}" readonly>-->
                         <div class="qna-write-form-section-content">
                             <input class="qna-write-default-input" type="text" name="name" id="memberId" th:value="${memberResponse.getMemberId()}" readonly disabled/>
@@ -26,21 +26,21 @@
                     </div>
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">이메일</span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.email}"></span>
                         <div class="qna-write-form-section-content">
-                            <input class="qna-write-custom-input" type="text" placeholder="이메일을 작성해주세요." name="email" id="email" th:value="${memberResponse.getEmail()}" />
+                            <input class="qna-write-custom-input" type="text" th:placeholder="#{qna.emailPlaceHolder}" name="email" id="email" th:value="${memberResponse.getEmail()}" />
                             <div class="qna-write-email-check">
                                 <label class="checkbox-common">
                                     <input type="checkbox" id="emailReceiveYn" name="emailReceiveYn" value="Y"/>
                                     <span></span>
-                                    <p>관리자가 답변을 남기면 이메일로 알림을 받습니다.</p>
+                                    <p th:utext="#{qna.emailCheckBox}"></p>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">문의유형 <strong>*</strong></span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.inquiryType}"> <strong>*</strong></span>
                         <div class="qna-write-form-section-content-wrapper">
                             <div class="qna-write-form-section-content qnaType1" id="qnaType1">
     <!--                            <span class="qnaType1" id="qnaType1"></span>-->
@@ -61,7 +61,7 @@
 
 
                     <div class="qna-write-form-section">
-                        <span class="qna-write-form-section-title">문의제품 <strong>*</strong></span>
+                        <span class="qna-write-form-section-title" th:utext="#{qna.inquiryProduct}">문의제품 <strong>*</strong></span>
                         <div class="qna-write-inquiry-product">
                             <div class="qna-write-inquiry-product-title">
                                 <p>모델명</p>
