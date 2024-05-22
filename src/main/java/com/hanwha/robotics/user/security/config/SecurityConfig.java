@@ -19,23 +19,11 @@ import com.hanwha.robotics.user.security.LogoutAuthenticationFilter;
 import com.hanwha.robotics.user.service.impl.MemberLogService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.session.web.http.CookieHttpSessionIdResolver;
-import org.springframework.session.web.http.CookieSerializer;
-import org.springframework.session.web.http.DefaultCookieSerializer;
-import org.springframework.session.web.http.HttpSessionIdResolver;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-//@EnableRedisHttpSession
 public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
