@@ -13,8 +13,7 @@
         <div class="board board-type1">
             <div class="column">
                 <h1>Q<span>&</span>A</h1>
-                <p class="desc">
-                    한화로보틱스에 대해 궁금한 점이<br />있으시면 문의해주세요.
+                <p class="desc" th:utext="#{qna.leftTitle}">
                 </p>
             </div>
 
@@ -22,7 +21,7 @@
 
                 <div class="column-head">
                     <form class="search" onsubmit="return false;">
-                        <input type="text" placeholder="검색어를 입력하세요." name="search" id="keyword"/>
+                        <input type="text" th:placeholder="#{qna.placeholder}" name="search" id="keyword"/>
                         <button type="button" class="search-button" onclick="getList()">
                             <img src="../images/pc/ic_search.svg" alt="" />
                         </button>
@@ -35,20 +34,19 @@
                         <img src="../images/pc/ic_search.svg" alt="" />
                     </button>
 
-                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()">
-                        문의하기
-                        <span><strong>+</strong></span>
+                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()" th:utext="#{qna.inquiryButton}">
+
                     </button>
                 </div>
 
 
                 <div class="table">
                     <div class="thead">
-                        <div class="th" th:text="#{no}"></div>
-                        <div class="th">작성자</div>
-                        <div class="th" th:text="#{title}"></div>
-                        <div class="th">진행상황</div>
-                        <div class="th">등록일</div>
+                        <div class="th" th:utext="#{qna.no}"></div>
+                        <div class="th" th:utext="#{qna.author}"></div>
+                        <div class="th" th:utext="#{qna.title}"></div>
+                        <div class="th" th:utext="#{qna.progress}"></div>
+                        <div class="th" th:utext="#{qna.date}"></div>
                     </div>
                     <div class="tbody newsroomTbody">
                         <div class="tr">
@@ -118,10 +116,10 @@
                     <div class="td">
 
                         {{#isAnswered}}
-                            <span class="qna_badge qna_complete">답변 완료</span>
+                            <span class="qna_badge qna_complete" th:text="#{qna.answered}">답변 완료</span>
                         {{/isAnswered}}
                         {{^isAnswered}}
-                            <span class="qna_badge qna_ing">답변 진행중</span>
+                            <span class="qna_badge qna_ing" th:text="#{qna.answeredProgress}">답변 진행중</span>
                         {{/isAnswered}}
 
                     </div>
@@ -136,7 +134,7 @@
                 <!-- <p class="empty">
                     조회 결과가 없습니다.
                 </p> -->
-                <p class="empty" th:text="#{main.noLists}"></p>
+                <p class="empty" th:text="#{qna.empty}"></p>
             </div>
         {{/list}}
     </script>
@@ -146,9 +144,9 @@
 
 </body>
 
+
 <th:block layout:fragment="script">
     <script>
-
 
         $(document).ready(function () {
             setQueryStringParams();
@@ -182,24 +180,14 @@
                         const inquiryButton = document.createElement('button');
                         inquiryButton.setAttribute('type', 'button');
                         inquiryButton.classList.add('inquiry', 'qna');
-                        inquiryButton.innerHTML = '문의하기 <span><strong>+</strong></span>';
+                        // inquiryButton.innerHTML = '문의하기 <span><strong>+</strong></span>';
+                        inquiryButton.innerHTML = '[[#{qna.inquiryButton2}]] <span><strong>+</strong></span>';
                         inquiryButton.onclick = function() {
                             layerQnaOpenBtn();
                         };
                         $('.paging').append(inquiryButton);
 
                     // }
-
-
-
-
-                    // $('.tr a').each(function(index) {
-                    //     const qnaNo = data.contents[index].qnaNo;
-                    //     $(this).data('qnaData', data);
-                    //     console.log("qnaData", data);
-                    //     $(this).data('qnaNo', qnaNo);
-                    //     console.log("qnaNo", qnaNo)
-                    // });
 
 
 
