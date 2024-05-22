@@ -13,8 +13,7 @@
         <div class="board board-type1">
             <div class="column">
                 <h1>Q<span>&</span>A</h1>
-                <p class="desc">
-                    한화로보틱스에 대해 궁금한 점이<br/>있으시면 문의해주세요.
+                <p class="desc" th:utext="#{qna.leftTitle}">
                 </p>
             </div>
 
@@ -22,13 +21,13 @@
                 <div class="qna-view-container">
                     <div class="qna-view-section pc">
                         <div class="qna-view-section-title">
-                            <h4>번호</h4>
+                            <h4 th:utext="#{qna.no}"></h4>
                             <span class="board_no"></span>
                         </div>
 
                         <div class="qna-view-section-content">
                             <div class="qna-view-writer-pc">
-                                <h4>작성자</h4>
+                                <h4 th:utext="#{qna.author}"></h4>
                                 <span class="board_memberId"></span>
                             </div>
                             <div class="qna-view-section-content-right">
@@ -42,7 +41,7 @@
                     <div class="qna-view-section mobile">
                         <div class="qna-view-writer-mobile">
                             <div class="qna-view-section-title">
-                                <h4>작성자</h4>
+                                <h4 th:utext="#{qna.author}"></h4>
                             </div>
                             <div class="qna-view-section-content">
                                 <span class="board_memberId"></span>
@@ -54,7 +53,7 @@
 
                     <div class="qna-view-section">
                         <div class="qna-view-section-title">
-                            <h4>문의유형</h4>
+                            <h4 th:utext="#{qna.inquiryType}"></h4>
                         </div>
 
                         <div class="qna-view-section-content-wrapper">
@@ -71,7 +70,6 @@
 
 
 
-
 <!--                    <div class="qna-view-section">-->
 <!--                        <div class="qna-view-section-title">-->
 <!--                            <h4>문의유형 2</h4>-->
@@ -84,7 +82,7 @@
 
                     <div class="qna-view-section">
                         <div class="qna-view-section-title">
-                            <h4>문의제품</h4>
+                            <h4 th:utext="#{qna.inquiryProduct}"></h4>
                         </div>
 
                         <div class="qna-view-section-content">
@@ -100,7 +98,7 @@
                             <div class="qna-view-question">
                                 <div>
                                     <div class="qna-view-question-text">
-                                        <h4>제목</h4>
+                                        <h4 th:utext="#{qna.subject}"></h4>
                                         <p class="board_title"></p>
                                     </div>
                                     <span class="board_exposureStatus"></span>
@@ -108,7 +106,7 @@
                                 </div>
                                 <div>
                                     <div class="qna-view-question-text">
-                                        <h4>내용</h4>
+                                        <h4 th:utext="#{qna.content}"></h4>
                                         <p class="board_contents">
                                         </p>
                                     </div>
@@ -128,7 +126,7 @@
 
                                         <div class="qna-view-answer re">
                                             <div>
-                                                <h4>답글</h4>
+                                                <h4 th:utext="#{qna.reply}"></h4>
                                                 <p class="qna-view-answer-my">{{memberId}}</p>
                                             </div>
                                             <div class="qna-view-answer-content">
@@ -174,11 +172,11 @@
                     <div class="qna-view-section reply-section">
                         <form class="qna-view-answer-wrapper">
                             <div class="qna-view-section-title">
-                                <h4>답글</h4>
+                                <h4 th:utext="#{qna.reply}"></h4>
                                 <span class="board_memberId"></span>
                             </div>
                             <textarea class="qna-view-answer-text" name="answer" id="replyContent_input"></textarea>
-                            <button class="qna-view-answer-submit" type="button" onclick="register()">답글 남기기</button>
+                            <button class="qna-view-answer-submit" type="button" onclick="register()" th:utext="#{qna.replyButton}"></button>
                         </form>
                     </div>
 
@@ -187,7 +185,7 @@
 
 
                 <a href="#" class="qna-view-nav board_prev">
-                    <h4>이전글</h4>
+                    <h4 th:utext="#{qna.previousPost}"></h4>
                     <div>
                         <p class="boardPrevTitle"></p>
                         <span class="boardPrevWrap"></span>
@@ -195,7 +193,7 @@
                     </div>
                 </a>
                 <a href="#" class="qna-view-nav board_next">
-                    <h4>다음글</h4>
+                    <h4 th:utext="#{qna.nextPost}"></h4>
                     <div>
                         <p class="boardNextTitle"></p>
                         <span class="boardNextWrap"></span>
@@ -210,14 +208,14 @@
 <!--                    </a>-->
                     <a href="/qna" class="qna-view-prev">
                         <img src="../images/pc/btn_prev.svg" alt=""/>
-                        목록으로
+                        <span th:utext="#{qna.backToList}"></span>
                     </a>
 
                     <div class="qna-view-footer-btngroup">
-                        <button type="button" class="qna-view-footer-btn delete-button" onclick="deleteQna()">삭제
+                        <button type="button" class="qna-view-footer-btn delete-button" onclick="deleteQna()" th:utext="#{qna.delete}">
                         </button>
                         <a type="button" class="qna-view-footer-btn color-orange edit-button"
-                           th:href="@{'/qna/edit/' + ${qnaNo}}">수정</a>
+                           th:href="@{'/qna/edit/' + ${qnaNo}}" th:utext="#{qna.edit}"></a>
                     </div>
                 </div>
 
@@ -276,7 +274,7 @@
                             $('.board_memberId').html(data.data.qnaDetail.memberId);
 
                             // $('.board_endStatus').html(data.data.qnaDetail.endStatus);
-                            $('.board_endStatus').html(data.data.qnaDetail.endStatus === 'N' ? '답변 진행 중' : '답변 종료');
+                            $('.board_endStatus').html(data.data.qnaDetail.endStatus === 'N' ? '[[#{qna.answeredProgress}]]' : '[[#{qna.answered}]]');
                             $('.board_date').html(data.data.qnaDetail.createDt.replaceAll('-', '.'));
 
                             $('.board_title').html(data.data.qnaDetail.title);
@@ -303,7 +301,7 @@
                                 const robotItem = $('<li></li>');
                                 const modelDiv = $('<div></div>');
 
-                                modelDiv.append('<h4>모델명 </h4><span>' + robot.modelCd + '</span>');
+                                modelDiv.append('<h4> </h4><span>' + robot.modelCd + '</span>');
                                 // const modelCdText = robot.modelCd !== null ? robot.modelCd : '-';
                                 // modelDiv.append('<h4>모델명</h4><span>' + modelCdText + '</span>');
 
@@ -500,7 +498,9 @@
 
         // Q&A 삭제
         function deleteQna() {
-            alert("삭제하시겠습니까?");
+            if (!confirm('게시글을 삭제 하시겠습니까?')) {
+                return;
+            }
             COMM.ajax({
                 type: 'DELETE',
                 url: '/qna/' + paths[paths.length - 1],
