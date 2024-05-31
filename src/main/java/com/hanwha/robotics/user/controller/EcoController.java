@@ -174,69 +174,30 @@ public class EcoController {
         return "eco/ecosystem_template_32_asycube380_asycube530";
     }
 
-
-
-
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem28() {
-//        return "ecosystem_template_28";
-//    }
-
     @GetMapping("/coprotect")
     public String ecoSystem33() {
         return "eco/ecosystem_template_33_coprotect";
     }
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem29() {
-//        return "ecosystem_template_29";
-//    }
 
     @GetMapping("/vg10")
     public String ecoSystem34() {
         return "eco/ecosystem_template_34_vg10";
     }
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem30() {
-//        return "ecosystem_template_30";
-//    }
 
     @GetMapping("/smart2")
     public String ecoSystem35() {
         return "eco/ecosystem_template_35_smart2";
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem31() {
-//        return "ecosystem_template_31";
-//    }
-//
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem32() {
-//        return "ecosystem_template_32";
-//    }
-//
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem33() {
-//        return "ecosystem_template_33";
-//    }
-//
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem34() {
-//        return "ecosystem_template_34";
-//    }
-//
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem35() {
-//        return "ecosystem_template_35";
-//    }
-//
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem36() {
-//        return "ecosystem_template_36";
-//    }
-//
-//    @GetMapping("/HRC-03-099507")
-//    public String ecoSystem37() {
-//        return "ecosystem_template_37";
-//    }
+    }
+
+    @GetMapping("/HRC-03-099507")
+    public String ecoSystem36() {
+        return "eco/ecosystem_template_36";
+    }
+
+    @GetMapping("/HRC-03-099507")
+    public String ecoSystem37() {
+        return "eco/ecosystem_template_37";
+    }
 
     @GetMapping("/HRC-03-09950")
     public String ecoSystem38() {
