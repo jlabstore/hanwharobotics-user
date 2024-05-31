@@ -189,19 +189,17 @@ public class EcoController {
         return "eco/ecosystem_template_35_smart2";
     }
 
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem36() {
-        return "eco/ecosystem_template_36";
-    }
+    @GetMapping("/hcr-dresspack")
+    public String ecoSystem36() { return "eco/ecosystem_template_36_hcr_dresspack"; }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/rg2-rg6")
     public String ecoSystem37() {
-        return "eco/ecosystem_template_37";
+        return "eco/ecosystem_template_37_rg2_rg6";
     }
 
-    @GetMapping("/HRC-03-09950")
+    @GetMapping("/abirob-w-300")
     public String ecoSystem38() {
-        return "eco/ecosystem_template_38";
+        return "eco/ecosystem_template_38_abirob_w_300";
     }
 
     @GetMapping("/1a-cobot-dress-pack")
