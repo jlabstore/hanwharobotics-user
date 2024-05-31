@@ -149,163 +149,47 @@ public class EcoController {
         return "eco/ecosystem_template_27_sbot_speed";
     }
 
-
-
-
-
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/gecko-gripper")
     public String ecoSystem28() {
-        return "ecosystem_template_28";
+        return "eco/ecosystem_template_28_gecko_gripper";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/asycube240")
     public String ecoSystem29() {
-        return "ecosystem_template_29";
+        return "eco/ecosystem_template_29_asycube240";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/quick-changer")
     public String ecoSystem30() {
-        return "ecosystem_template_30";
+        return "eco/ecosystem_template_30_quick_changer";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/rg2-ft")
     public String ecoSystem31() {
-        return "ecosystem_template_31";
+        return "eco/ecosystem_template_31_rg2_ft";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/asycube380-asycube530")
     public String ecoSystem32() {
-        return "ecosystem_template_32";
+        return "eco/ecosystem_template_32_asycube380_asycube530";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/coprotect")
     public String ecoSystem33() {
-        return "ecosystem_template_33";
+        return "eco/ecosystem_template_33_coprotect";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/vg10")
     public String ecoSystem34() {
-        return "ecosystem_template_34";
+        return "eco/ecosystem_template_34_vg10";
     }
 
-    @GetMapping("/HRC-03-099507")
+    @GetMapping("/smart2")
     public String ecoSystem35() {
-        return "ecosystem_template_35";
+        return "eco/ecosystem_template_35_smart2";
     }
 
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem36() {
-        return "ecosystem_template_36";
-    }
 
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem37() {
-        return "ecosystem_template_37";
-    }
 
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem38() {
-        return "ecosystem_template_38";
-    }
-
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem39() {
-        return "ecosystem_template_39";
-    }
-
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem40() {
-        return "ecosystem_template_40";
-    }
-
-    @GetMapping("/FHS-SH-Set-HCR-Series")
-    public String ecoSystem41() {
-        return "ecosystem_template_41";
-    }
-
-    @GetMapping("/2F-85-2F-140")
-    public String ecoSystem42() {
-        return "ecosystem_template_42";
-    }
-
-    @GetMapping("/NT-50-RS-EN")
-    public String ecoSystem43() {
-        return "ecosystem_template_43";
-    }
-
-    @GetMapping("/AG-95-Adaptive-Gripper")
-    public String ecoSystem44() {
-        return "ecosystem_template_44";
-    }
-
-    @GetMapping("/NT-100-RE-EN")
-    public String ecoSystem45() {
-        return "ecosystem_template_45";
-    }
-
-    @GetMapping("/PHD-Pneu-Connect-X1-Pneumatic-Grippers")
-    public String ecoSystem46() {
-        return "ecosystem_template_46";
-    }
-
-    @GetMapping("/NT-50-CC-EN")
-    public String ecoSystem47() {
-        return "ecosystem_template_47";
-    }
-
-    @GetMapping("/Co-act-EGP-C")
-    public String ecoSystem48() {
-        return "ecosystem_template_48";
-    }
-
-    @GetMapping("/HRC-03-086003")
-    public String ecoSystem49() {
-        return "ecosystem_template_49";
-    }
-
-    @GetMapping("/HRC-03-099507")
-    public String ecoSystem50() {
-        return "ecosystem_template_50";
-    }
-
-    @GetMapping("/JEGB-4140/485")
-    public String ecoSystem51() {
-        return "ecosystem_template_51";
-    }
-
-    @GetMapping("/CoGrip-Drim-Robotics")
-    public String ecoSystem52() {
-        return "ecosystem_template_52";
-    }
-
-    @GetMapping("/CoGrip-8/4")
-    public String ecoSystem53() {
-        return "ecosystem_template_53";
-    }
-
-    @GetMapping("/V-Grip-System")
-    public String ecoSystem54() {
-        return "ecosystem_template_54";
-    }
-
-    @GetMapping("/Magic-Grippers")
-    public String ecoSystem55() {
-        return "ecosystem_template_55";
-    }
-
-    @GetMapping("/FXCB-FMCB")
-    public String ecoSystem56() {
-        return "ecosystem_template_56_FXCB-FMCB";
-    }
-
-    @GetMapping("/Cobot-Pump-ECBPi")
-    public String ecoSystem57() {
-        return "ecosystem_template_57_Cobot-Pump-ECBPi";
-    }
-
-    @GetMapping("/JPGB-3285/32140")
-    public String ecoSystem58() {
-        return "ecosystem_template_58_JPGB-3285";
-    }
 
 }
