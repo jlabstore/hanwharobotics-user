@@ -174,22 +174,171 @@ public class EcoController {
         return "eco/ecosystem_template_32_asycube380_asycube530";
     }
 
+
+
+
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem28() {
+//        return "ecosystem_template_28";
+//    }
+
     @GetMapping("/coprotect")
     public String ecoSystem33() {
         return "eco/ecosystem_template_33_coprotect";
     }
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem29() {
+//        return "ecosystem_template_29";
+//    }
 
     @GetMapping("/vg10")
     public String ecoSystem34() {
         return "eco/ecosystem_template_34_vg10";
     }
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem30() {
+//        return "ecosystem_template_30";
+//    }
 
     @GetMapping("/smart2")
     public String ecoSystem35() {
         return "eco/ecosystem_template_35_smart2";
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem31() {
+//        return "ecosystem_template_31";
+//    }
+//
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem32() {
+//        return "ecosystem_template_32";
+//    }
+//
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem33() {
+//        return "ecosystem_template_33";
+//    }
+//
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem34() {
+//        return "ecosystem_template_34";
+//    }
+//
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem35() {
+//        return "ecosystem_template_35";
+//    }
+//
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem36() {
+//        return "ecosystem_template_36";
+//    }
+//
+//    @GetMapping("/HRC-03-099507")
+//    public String ecoSystem37() {
+//        return "ecosystem_template_37";
+//    }
+
+    @GetMapping("/HRC-03-09950")
+    public String ecoSystem38() {
+        return "eco/ecosystem_template_38";
     }
 
+    @GetMapping("/1a-cobot-dress-pack")
+    public String ecoSystem39() {
+        return "eco/ecosystem_template_39_cobot_dress";
+    }
 
+    @GetMapping("/hand-e")
+    public String ecoSystem40() {
+        return "eco/ecosystem_template_40_hand_e";
+    }
 
+    @GetMapping("/fhs-sh-set-hcr-series")
+    public String ecoSystem41() {
+        return "eco/ecosystem_template_41_fhs_sh_set";
+    }
+
+    @GetMapping("/2f-85-2f-140")
+    public String ecoSystem42() {
+        return "eco/ecosystem_template_42_2f_85_2f_140";
+    }
+
+    @GetMapping("/nt-50-re-en")
+    public String ecoSystem43() {
+        return "eco/ecosystem_template_43_nt_50_re";
+    }
+
+    @GetMapping("/ag-95-adaptive-gripper")
+    public String ecoSystem44() {
+        return "eco/ecosystem_template_44_ag_95_adaptive";
+    }
+
+    @GetMapping("/nt-100-re-en")
+    public String ecoSystem45() {
+        return "eco/ecosystem_template_45_nt_100_re_en";
+    }
+
+    @GetMapping("/phd-pneu-connect-s1-pneumatic-grippers")
+    public String ecoSystem46() {
+        return "eco/ecosystem_template_46_phd_pneu_connect";
+    }
+
+    @GetMapping("/nt-50-cc-en")
+    public String ecoSystem47() {
+        return "eco/ecosystem_template_47_nt_50_cc_en";
+    }
+
+    @GetMapping("/co-act-egp-c")
+    public String ecoSystem48() {
+        return "eco/ecosystem_template_48_co_act_egp_c";
+    }
+
+    @GetMapping("/hrc-03-086003")
+    public String ecoSystem49() {
+        return "eco/ecosystem_template_49_hrc_03_086003";
+    }
+
+    @GetMapping("/hrc-03-099507")
+    public String ecoSystem50() {
+        return "eco/ecosystem_template_50_hrc_03_099507";
+    }
+
+    @GetMapping("/jegb-4140")
+    public String ecoSystem51() { return "ecosystem_template_51_jegb_4140"; }
+
+    @GetMapping("/cogrip-drim-robotics")
+    public String ecoSystem52() {
+        return "eco/ecosystem_template_52_cogrip_drim_robotics";
+    }
+
+    @GetMapping("/cogrip-8")
+    public String ecoSystem53() {
+        return "eco/ecosystem_template_53_cogrip_8";
+    }
+
+    @GetMapping("/v-grip-system")
+    public String ecoSystem54() {
+        return "eco/ecosystem_template_54_v_grip_system";
+    }
+
+    @GetMapping("/magic-grippers")
+    public String ecoSystem55() {
+        return "eco/ecosystem_template_55_magic_grippers";
+    }
+
+    @GetMapping("/fxcb-fmcb")
+    public String ecoSystem56() {
+        return "eco/ecosystem_template_56_fxcb_fmcb";
+    }
+
+    @GetMapping("/cobot-pump-ecbpi")
+    public String ecoSystem57() {
+        return "eco/ecosystem_template_57_Cobot-Pump-ECBPi";
+    }
+
+    @GetMapping("/jpgb-3285")
+    public String ecoSystem58() {
+        return "eco/ecosystem_template_58_jpgb_3285";
+    }
 
 }
