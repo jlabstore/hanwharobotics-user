@@ -265,7 +265,7 @@ public class EcoController {
     }
 
     @GetMapping("/jegb-4140")
-    public String ecoSystem51() { return "ecosystem_template_51_jegb_4140"; }
+    public String ecoSystem51() { return "eco/ecosystem_template_51_jegb_4140"; }
 
     @GetMapping("/cogrip-drim-robotics")
     public String ecoSystem52() {
@@ -294,7 +294,7 @@ public class EcoController {
 
     @GetMapping("/cobot-pump-ecbpi")
     public String ecoSystem57() {
-        return "eco/ecosystem_template_57_Cobot-Pump-ECBPi";
+        return "eco/ecosystem_template_57_cobot_pump_ecbpi";
     }
 
     @GetMapping("/jpgb-3285")
