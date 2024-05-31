@@ -92,12 +92,31 @@ public class MailUtil {
 		}
 	}
 
+//	@Async
+//	public void sendMemberId(String email, String memberId) {
+//		Context context = new Context();
+//		context.setVariable("baseUrl", baseUrl);
+//		context.setVariable("memberId", memberId);
+//		String emailContent = templateEngine.process("email/email_id", context);
+//		this.sendEmail(
+//				List.of(email),
+//				"문의하신 한화로보틱스 아이디 안내입니다.",
+//				emailContent
+//		);
+//	}
+
 	@Async
-	public void sendMemberId(String email, String memberId) {
+	public void sendMemberId(String email, String memberId, String region) {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("memberId", memberId);
-		String emailContent = templateEngine.process("email/email_id", context);
+
+		String emailContent;
+		if (region.equals("KR")) {
+			emailContent = templateEngine.process("email/email_id", context);
+		} else {
+			emailContent = templateEngine.process("email/email_id_en", context);
+		}
 		this.sendEmail(
 				List.of(email),
 				"문의하신 한화로보틱스 아이디 안내입니다.",

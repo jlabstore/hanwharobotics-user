@@ -89,7 +89,8 @@ public class MemberServiceImpl implements MemberService {
 		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
 				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
 		String memberId = member.getMemberId();
-		mailUtil.sendMemberId(member.getEmail(), memberId);
+		String region = member.getRegion();
+		mailUtil.sendMemberId(member.getEmail(), memberId, region);
 	}
 
 
