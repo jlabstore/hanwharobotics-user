@@ -114,14 +114,20 @@ public class MailUtil {
 		String emailContent;
 		if (region.equals("KR")) {
 			emailContent = templateEngine.process("email/email_id", context);
+			this.sendEmail(
+					List.of(email),
+					"문의하신 한화로보틱스 아이디 안내입니다.",
+					emailContent
+			);
 		} else {
 			emailContent = templateEngine.process("email/email_id_en", context);
+			this.sendEmail(
+					List.of(email),
+					"Hanwha Robotics | Find ID",
+					emailContent
+			);
 		}
-		this.sendEmail(
-				List.of(email),
-				"문의하신 한화로보틱스 아이디 안내입니다.",
-				emailContent
-		);
+
 	}
 
 	@Async
@@ -138,16 +144,19 @@ public class MailUtil {
 		String region = member.getRegion();
 		if (region.equals("KR")) {
 			emailContent = templateEngine.process("email/email_password_re", context);
+			this.sendEmail(
+					List.of(member.getEmail()),
+					"한화로보틱스 비밀번호 재설정 안내입니다.",
+					emailContent
+			);
 		} else {
 			emailContent = templateEngine.process("email/email_password_re_en", context);
+			this.sendEmail(
+					List.of(member.getEmail()),
+					"Hanwha Robotics | Password Reset",
+					emailContent
+			);
 		}
-
-
-		this.sendEmail(
-				List.of(member.getEmail()),
-				"한화로보틱스 비밀번호 재설정 안내입니다.",
-				emailContent
-		);
 	}
 
 	private String generateResetToken(Member member) {
@@ -170,15 +179,19 @@ public class MailUtil {
 		String emailContent;
 		if (region.equals("KR")) {
 			emailContent = templateEngine.process("email/email_password_re", context);
+			this.sendEmail(
+					List.of(email),
+					"한화로보틱스 고객님의 비밀번호가 변경되었습니다.",
+					emailContent
+			);
 		} else {
 			emailContent = templateEngine.process("email/email_password_re_en", context);
+			this.sendEmail(
+					List.of(email),
+					"Hanwha Robotics | Password Change Notification",
+					emailContent
+			);
 		}
-
-		this.sendEmail(
-				List.of(email),
-				"한화로보틱스 고객님의 비밀번호가 변경되었습니다.",
-				emailContent
-		);
 	}
 
 	@Async
