@@ -132,7 +132,16 @@ public class MailUtil {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("resetLink", resetLink);
-		String emailContent = templateEngine.process("email/email_password_re", context);
+//		String emailContent = templateEngine.process("email/email_password_re", context);
+
+		String emailContent;
+		String region = member.getRegion();
+		if (region.equals("KR")) {
+			emailContent = templateEngine.process("email/email_password_re", context);
+		} else {
+			emailContent = templateEngine.process("email/email_password_re_en", context);
+		}
+
 
 		this.sendEmail(
 				List.of(member.getEmail()),
@@ -153,10 +162,17 @@ public class MailUtil {
 	}
 
 	@Async
-	public void sendPasswordChangeConfirm(String email) {
+	public void sendPasswordChangeConfirm(String email, String region) {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
-		String emailContent = templateEngine.process("email/email_password_complete", context);
+//		String emailContent = templateEngine.process("email/email_password_complete", context);
+
+		String emailContent;
+		if (region.equals("KR")) {
+			emailContent = templateEngine.process("email/email_password_re", context);
+		} else {
+			emailContent = templateEngine.process("email/email_password_re_en", context);
+		}
 
 		this.sendEmail(
 				List.of(email),

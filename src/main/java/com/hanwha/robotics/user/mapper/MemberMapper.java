@@ -29,4 +29,5 @@ public interface MemberMapper {
 
 	String findEmailByMemberNo(int memberNo);
 
+	String findRegionByMemberNo(int memberNo);
 }

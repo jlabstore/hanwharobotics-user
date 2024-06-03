@@ -154,6 +154,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.findEmailByMemberNo(memberNo);
 	}
 
+	@Override
+	public String getMemberRegion(int memberNo) {
+		return memberMapper.findRegionByMemberNo(memberNo);
+	}
 
 
 	// 회원 탈퇴

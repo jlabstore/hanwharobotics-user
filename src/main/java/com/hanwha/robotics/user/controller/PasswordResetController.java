@@ -67,7 +67,8 @@ public class PasswordResetController {
 	public ResponseEntity<ApiResponse<Void>> resetPassword(@RequestBody ResetPasswordRequest request) {
 		memberService.resetPassword(request);
 		String email = passwordResetTokenService.retrieveEmail(request.getToken());
-		mailUtil.sendPasswordChangeConfirm(email);
+		String region = passwordResetTokenService.retrieveRegion(request.getToken());
+		mailUtil.sendPasswordChangeConfirm(email, region);
 		passwordResetTokenService.deleteToken(request.getToken());
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}

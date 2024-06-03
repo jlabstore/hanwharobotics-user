@@ -27,9 +27,19 @@ public class PasswordResetTokenServiceImpl implements PasswordResetTokenService 
         return passwordResetTokenMapper.findEmailByToken(token);
     }
 
+//    @Override
+//    public String retrieveEmailAndRegion(String token) {
+//        return passwordResetTokenMapper.findEmailAndRegionByToken(token);
+//    }
+
     @Override
     public void deleteToken(String token) {
         passwordResetTokenMapper.deleteToken(token);
+    }
+
+    @Override
+    public String retrieveRegion(String token) {
+        return passwordResetTokenMapper.findRegionByToken(token);
     }
 
 }

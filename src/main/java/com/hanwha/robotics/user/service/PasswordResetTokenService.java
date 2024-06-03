@@ -22,9 +22,13 @@ public interface PasswordResetTokenService {
 	 */
 	String retrieveEmail(String token);
 
+//	String retrieveEmailAndRegion(String token);
+
 	/**
 	 * 토큰 삭제
 	 * @param token
 	 */
     void deleteToken(String token);
+
+	String retrieveRegion(String email);
 }

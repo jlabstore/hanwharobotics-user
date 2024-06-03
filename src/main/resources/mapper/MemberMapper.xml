@@ -83,7 +83,14 @@
     </select>
 
 
-    <!-- 회원정보 수정 -->
+  <select id="findRegionByMemberNo" parameterType="int" resultType="String">
+    SELECT region
+    FROM tb_member
+    WHERE member_no = #{memberNo}
+  </select>
+
+
+  <!-- 회원정보 수정 -->
     <update id="updateMember" parameterType="com.hanwha.robotics.user.dto.MemberRequest">
         UPDATE tb_member
         SET
