@@ -7,7 +7,7 @@
 <div layout:fragment="content">
 
 
-    <main class="login">
+    <main class="login" th:if="#{header.nation} == 'EN'">
         <div class="login-container">
             <h1>아이디 찾기</h1>
             <section class="login-content">
@@ -29,6 +29,28 @@
         </div>
     </main>
 
+    <main class="login" th:unless="#{header.nation} == 'EN'">
+        <div class="login-container">
+            <h1>Find ID</h1>
+            <section class="login-content">
+                <article class="login-main">
+                    <form>
+                        <div class="login-main-container">
+                            <p class="login-find-txt">
+                                Please enter the email address you used when signing up.<br/>
+                                We will send your ID to the matching email address.
+                            </p>
+                            <div class="login-find-input-wrapper">
+                                <input type="email" id="email" name="email" placeholder="Email Address" />
+                                <button type="submit" class="login-find-submit" onclick="sendId()">Send Email</button>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </div>
+    </main>
+
 </div>
 
 </body>
@@ -42,7 +64,8 @@
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
         if (!emailRegex.test(email)) {
-            alert('올바른 이메일 주소를 입력하세요.');
+            // alert('올바른 이메일 주소를 입력하세요.');
+            alert("[[#{find.idMessage}]]");
             return;
         }
 
@@ -60,12 +83,12 @@
             },
 
             error: function (xhr, textStatus) {
-                console.error('전송 실패:', textStatus);
+                console.error('error:', textStatus);
                 if (xhr.responseJSON) {
                     const errorMessage = xhr.responseJSON.message;
                     alert(errorMessage);
                 } else {
-                    alert('아이디 전송에 실패했습니다.');
+                    alert('error');
                 }
             }
         });
