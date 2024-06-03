@@ -6,31 +6,57 @@
 <body>
 <div layout:fragment="content">
 
-    <main class="login">
-        <div class="login-container">
-            <h1>비밀번호 재설정</h1>
-            <section class="login-content">
-                <article class="login-main">
-                   <form>
-                        <div class="login-main-container">
-                            <p class="login-find-txt">
-                                새로운 비밀번호를 입력해주세요.<br/>
-                                영문과 숫자를 조합하여 만들어주세요.
-                            </p>
-                            <div class="login-pwd-re-wrapper">
-                                <input type="password" id="pwd" name="pwd" placeholder="비밀번호" />
-                                <input type="password" id="pwd2" name="pwd2" placeholder="비밀번호 다시입력" />
-                            </div>
-                            <div class="login-pwd-re-btn-wrapper">
-                                <button type="button" class="login-pwd-re-submit" onclick="resetPw()">비밀번호 변경</button>
-                            </div>
-                        </div>
-                   </form>
-                </article>
-            </section>
-        </div>
-    </main>
+  <main class="login" th:if="#{header.nation} == 'EN'">
+    <div class="login-container">
+      <h1>비밀번호 재설정</h1>
+      <section class="login-content">
+        <article class="login-main">
+          <form>
+            <div class="login-main-container">
+              <p class="login-find-txt">
+                새로운 비밀번호를 입력해주세요.<br/>
+                영문과 숫자를 조합하여 만들어주세요.
+              </p>
+              <div class="login-pwd-re-wrapper">
+                <input type="password" id="pwd" name="pwd" placeholder="비밀번호"/>
+                <input type="password" id="pwd2" name="pwd2" placeholder="비밀번호 다시입력"/>
+              </div>
+              <div class="login-pwd-re-btn-wrapper">
+                <button type="button" class="login-pwd-re-submit" onclick="resetPw()">비밀번호 변경
+                </button>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+    </div>
+  </main>
 
+
+  <main class="login" th:unless="#{header.nation} == 'EN'">
+    <div class="login-container">
+      <h1>Reset Password</h1>
+      <section class="login-content">
+        <article class="login-main">
+          <form>
+            <div class="login-main-container">
+              <p class="login-find-txt">
+                Please enter a new password.<br/>
+                Please use a combination of letters and numbers for your password.
+              </p>
+              <div class="login-pwd-re-wrapper">
+                <input type="password" id="pwd" name="pwd" placeholder="New Password"/>
+                <input type="password" id="pwd2" name="pwd2" placeholder="Re-enter Password"/>
+              </div>
+              <div class="login-pwd-re-btn-wrapper">
+                <button type="submit" class="login-pwd-re-submit" onclick="resetPw()">Change Password</button>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+    </div>
+  </main>
 
 
 </div>
@@ -40,63 +66,61 @@
 <script>
 
 
+  // 비밀번호 조건 체크
+  function checkPasswordConditions() {
+    const password = document.getElementById('pwd').value;
+    return !(password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password));
+  }
 
-    // 비밀번호 조건 체크
-    function checkPasswordConditions() {
-        const password = document.getElementById('pwd').value;
-        return !(password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password));
+  // 비밀번호 재입력 일치 여부 체크
+  function checkPasswordMatch() {
+    const password = document.getElementById('pwd').value;
+    const password2 = document.getElementById('pwd2').value;
+    return password === password2;
+  }
+
+  function resetPw() {
+
+    const isPasswordValid = checkPasswordConditions();
+    const isPasswordMatch = checkPasswordMatch();
+
+    if (!isPasswordValid) {
+      alert('비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.');
+      return;
+    }
+    if (!isPasswordMatch) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
     }
 
-    // 비밀번호 재입력 일치 여부 체크
-    function checkPasswordMatch() {
-        const password = document.getElementById('pwd').value;
-        const password2 = document.getElementById('pwd2').value;
-        return password === password2;
-    }
+    const newPassword = $('#pwd').val();
+    const urlParams = new URL(location.href).searchParams;
+    const token = urlParams.get('token');
 
+    const jsonData = {
+      token: token,
+      newPassword: newPassword
+    };
 
-    function resetPw() {
+    COMM.ajax({
+      type: 'PUT',
+      url: '/password/reset',
+      data: JSON.stringify(jsonData),
+      contentType: 'application/json',
+      success: function (data) {
+        // alert('변경에 성공하였습니다.')
+        window.location.href = '/password/reset/complete';
+      },
 
-        const isPasswordValid = checkPasswordConditions();
-        const isPasswordMatch = checkPasswordMatch();
-
-        if (!isPasswordValid) {
-            alert('비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.');
-            return;
+      error: function (xhr, textStatus) {
+        console.error('전송 실패:', textStatus);
+        if (xhr.responseJSON) {
+          const errorMessage = xhr.responseJSON.message;
+          alert(errorMessage);
+        } else {
+          alert('비밀번호 재설정에 실패했습니다.');
         }
-        if (!isPasswordMatch) {
-            alert('비밀번호가 일치하지 않습니다.');
-            return;
-        }
-
-        const newPassword = $('#pwd').val();
-        const urlParams = new URL(location.href).searchParams;
-        const token = urlParams.get('token');
-
-        const jsonData = {
-            token: token,
-            newPassword : newPassword
-        };
-
-        COMM.ajax({
-            type: 'PUT',
-            url: '/password/reset',
-            data: JSON.stringify(jsonData),
-            contentType: 'application/json',
-            success: function (data) {
-                // alert('변경에 성공하였습니다.')
-                window.location.href = '/password/reset/complete';
-            },
-
-            error: function (xhr, textStatus) {
-                console.error('전송 실패:', textStatus);
-                if (xhr.responseJSON) {
-                    const errorMessage = xhr.responseJSON.message;
-                    alert(errorMessage);
-                } else {
-                    alert('비밀번호 재설정에 실패했습니다.');
-                }
-            }
-        });
-    }
+      }
+    });
+  }
 </script>

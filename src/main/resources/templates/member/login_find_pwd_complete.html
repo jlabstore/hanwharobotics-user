@@ -7,30 +7,57 @@
 <div layout:fragment="content">
 
 
-    <main class="login">
-        <div class="login-container">
-            <h1>비밀번호 찾기</h1>
-            <section class="login-content">
-                <article class="login-main find-complete">
-                    <form>
-                        <div class="login-main-container find-id-complete">
-                            <div class="login-find-id-complete-msg">
-                                <h3>비밀번호 재설정 이메일이 발송되었습니다.</h3>
-                                <p>
-                                    회원가입시 입력한 이메일 주소로 메일이 발송되었습니다.<br/>
-                                    메일의 절차에 따라 비밀번호 재설정을 진행하신 후 로그인 해주세요.<br/>
-                                    (서버 상태에 따라 시간이 몇분 소요될 수 있습니다)
-                                </p>
-                            </div>
-                            <div class="login-find-id-complete-btn-group">
-                                <a class="login-find-id-complete-btn color-orange" href="/login-page">로그인</a>
-                            </div>
-                        </div>
-                    </form>
-                </article>
-            </section>
-        </div>
-    </main>
+  <main class="login" th:if="#{header.nation} == 'EN'">
+    <div class="login-container">
+      <h1>비밀번호 찾기</h1>
+      <section class="login-content">
+        <article class="login-main find-complete">
+          <form>
+            <div class="login-main-container find-id-complete">
+              <div class="login-find-id-complete-msg">
+                <h3>비밀번호 재설정 이메일이 발송되었습니다.</h3>
+                <p>
+                  회원가입시 입력한 이메일 주소로 메일이 발송되었습니다.<br/>
+                  메일의 절차에 따라 비밀번호 재설정을 진행하신 후 로그인 해주세요.<br/>
+                  (서버 상태에 따라 시간이 몇분 소요될 수 있습니다)
+                </p>
+              </div>
+              <div class="login-find-id-complete-btn-group">
+                <a class="login-find-id-complete-btn color-orange" href="/login-page">로그인</a>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+    </div>
+  </main>
+
+
+  <main class="login" th:unless="#{header.nation} == 'EN'">
+    <div class="login-container">
+      <h1>Find Password</h1>
+      <section class="login-content">
+        <article class="login-main find-complete">
+          <form>
+            <div class="login-main-container find-id-complete">
+              <div class="login-find-id-complete-msg">
+                <h3>A password reset email has been sent.</h3>
+                <p>
+                  An email has been sent to the email address you provided during registration.<br/>
+                  Please follow the instructions in the email to reset your password and log
+                  in.<br/>
+                  (Please note that it may take a few minutes depending on the server status.)
+                </p>
+              </div>
+              <div class="login-find-id-complete-btn-group">
+                <a class="login-find-id-complete-btn color-orange" href="/login-page">Login</a>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+    </div>
+  </main>
 
 </div>
 
@@ -38,8 +65,6 @@
 </html>
 
 <script>
-
-
 
 
 </script>

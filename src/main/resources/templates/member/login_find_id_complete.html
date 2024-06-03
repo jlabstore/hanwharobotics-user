@@ -8,7 +8,7 @@
 
 
 
-    <main class="login">
+    <main class="login" th:if="#{header.nation} == 'EN'">
         <div class="login-container">
             <h1>아이디 찾기</h1>
             <section class="login-content">
@@ -25,6 +25,32 @@
                             <div class="login-find-id-complete-btn-group">
                                 <a class="login-find-id-complete-btn" href="/find-pw">비밀번호 찾기</a>
                                 <a class="login-find-id-complete-btn color-orange" href="/login-page">로그인</a>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <main class="login" th:unless="#{header.nation} == 'EN'">
+        <div class="login-container">
+            <h1>Find ID</h1>
+            <section class="login-content">
+                <article class="login-main find-complete">
+                    <form>
+                        <div class="login-main-container find-id-complete">
+                            <div class="login-find-id-complete-msg">
+                                <h3>Your ID has been sent to your email.</h3>
+                                <p>
+                                    An email has been sent to the email address you provided.<br/>
+                                    Please check your email to find your ID.<br/>
+                                    (It may take a few minutes depending on the server status.)
+                                </p>
+                            </div>
+                            <div class="login-find-id-complete-btn-group">
+                                <a class="login-find-id-complete-btn" href="/find-pw">Find Password</a>
+                                <a class="login-find-id-complete-btn color-orange" href="/login-page">Login</a>
                             </div>
                         </div>
                     </form>

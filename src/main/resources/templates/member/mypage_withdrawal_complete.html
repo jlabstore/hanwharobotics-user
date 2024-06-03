@@ -6,7 +6,7 @@
 <body>
 <div layout:fragment="content">
 
-    <main class="login withdrawal-complete">
+    <main class="login withdrawal-complete" th:if="#{header.nation} == 'EN'">
         <div class="login-container">
             <h1>회원탈퇴</h1>
             <section class="login-content">
@@ -20,6 +20,24 @@
             </section>
         </div>
     </main>
+
+
+    <main class="login withdrawal-complete" th:unless="#{header.nation} == 'EN'">
+        <div class="login-container">
+            <h1>Withdrawal</h1>
+            <section class="login-content">
+                <div class="withdrawal-complete-img">
+                    <img src="../images/pc/mypage_withdrawal@3x.webp" alt="" />
+                </div>
+                <div class="withdrawal-complete-textgroup">
+                    <h2>Your membership withdrawal has been completed.</h2>
+                    <p>
+                        Thank you for being with Hanwha Robotics all this time.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
 
 
 </div>
