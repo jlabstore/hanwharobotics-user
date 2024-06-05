@@ -121,7 +121,6 @@ public class MemberAccountController {
         if (currentMemberEmail.equals(email)) {
             return ResponseEntity.ok(false);
         }
-
         boolean isExists = memberService.isMemberEmailExists(email);
         return ResponseEntity.ok(isExists);
     }

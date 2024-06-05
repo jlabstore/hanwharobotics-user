@@ -1,5 +1,6 @@
 package com.hanwha.robotics.user.service;
 
+import com.hanwha.robotics.user.dto.ResetPasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +32,6 @@ public interface PasswordResetTokenService {
     void deleteToken(String token);
 
 	String retrieveRegion(String email);
+
+	ResetPasswordDto retrieveEmailAndRegion(String token);
 }

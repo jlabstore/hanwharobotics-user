@@ -1,6 +1,7 @@
 package com.hanwha.robotics.user.controller;
 
 import com.hanwha.robotics.user.common.utils.MailUtil;
+import com.hanwha.robotics.user.dto.ResetPasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -66,9 +67,10 @@ public class PasswordResetController {
 	@ResponseBody
 	public ResponseEntity<ApiResponse<Void>> resetPassword(@RequestBody ResetPasswordRequest request) {
 		memberService.resetPassword(request);
-		String email = passwordResetTokenService.retrieveEmail(request.getToken());
-		String region = passwordResetTokenService.retrieveRegion(request.getToken());
-		mailUtil.sendPasswordChangeConfirm(email, region);
+
+		ResetPasswordDto dto = passwordResetTokenService.retrieveEmailAndRegion(request.getToken());
+
+		mailUtil.sendPasswordChangeConfirm(dto.getEmail(), dto.getRegion());
 		passwordResetTokenService.deleteToken(request.getToken());
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}

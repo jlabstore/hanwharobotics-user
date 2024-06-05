@@ -1,5 +1,6 @@
 package com.hanwha.robotics.user.service.impl;
 
+import com.hanwha.robotics.user.dto.ResetPasswordDto;
 import com.hanwha.robotics.user.entity.PasswordResetToken;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 import com.hanwha.robotics.user.service.PasswordResetTokenService;
@@ -40,6 +41,11 @@ public class PasswordResetTokenServiceImpl implements PasswordResetTokenService 
     @Override
     public String retrieveRegion(String token) {
         return passwordResetTokenMapper.findRegionByToken(token);
+    }
+
+    @Override
+    public ResetPasswordDto retrieveEmailAndRegion(String token) {
+        return passwordResetTokenMapper.findByEmailAndRegionByToken(token);
     }
 
 }

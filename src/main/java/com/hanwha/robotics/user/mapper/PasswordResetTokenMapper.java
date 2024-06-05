@@ -1,5 +1,6 @@
 package com.hanwha.robotics.user.mapper;
 
+import com.hanwha.robotics.user.dto.ResetPasswordDto;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -19,4 +20,6 @@ public interface PasswordResetTokenMapper {
   void deleteToken(String token);
 
   String findRegionByToken(String token);
+
+  ResetPasswordDto findByEmailAndRegionByToken(String token);
 }
