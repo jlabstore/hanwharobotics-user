@@ -25,4 +25,8 @@ public class MemberResponse {
     private String email;
     private String contact;
 
+  public MemberResponse(String email, String region) {
+      this.email = email;
+      this.region = region;
+  }
 }

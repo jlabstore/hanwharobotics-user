@@ -2,6 +2,7 @@ package com.hanwha.robotics.user.mapper;
 
 import com.hanwha.robotics.user.dto.MemberResponse;
 import com.hanwha.robotics.user.entity.Member;
+import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -23,7 +24,11 @@ public interface MemberMapper {
 
     void deleteMember(int memberNo);
 
-    MemberResponse findByMemberNo(int memberNo);
+		MemberResponse findByMemberNo(int memberNo);
+
+	Optional<Member> findEmailAndRegionByMemberNo(int memberNo);
+
+
 
 	void updateMember(Member member);
 

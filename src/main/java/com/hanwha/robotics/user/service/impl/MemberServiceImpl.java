@@ -88,9 +88,7 @@ public class MemberServiceImpl implements MemberService {
 	public void findId(MemberRequest request) {
 		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
 				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
-		String memberId = member.getMemberId();
-		String region = member.getRegion();
-		mailUtil.sendMemberId(member.getEmail(), memberId, region);
+		mailUtil.sendMemberId(member.getEmail(), member.getMemberId(), member.getRegion());
 	}
 
 
@@ -158,6 +156,15 @@ public class MemberServiceImpl implements MemberService {
 	public String getMemberRegion(int memberNo) {
 		return memberMapper.findRegionByMemberNo(memberNo);
 	}
+
+
+
+	public MemberResponse getMemberEmailAndRegion(int memberNo) {
+		Member member = memberMapper.findEmailAndRegionByMemberNo(memberNo).orElseThrow(() -> new RuntimeException("없음"));
+		return new MemberResponse(member.getEmail(), member.getRegion());
+	}
+
+
 
 
 	// 회원 탈퇴

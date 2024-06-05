@@ -100,11 +100,8 @@ public class MemberAccountController {
             @RequestBody MemberRequest request
     ) {
         memberService.changePassword(memberNo, request);
-        String email = memberService.getMemberEmail(memberNo);
-
-        String region = memberService.getMemberRegion(memberNo);
-
-        mailUtil.sendPasswordChangeConfirm(email, region);
+        MemberResponse memberInfo = memberService.getMemberEmailAndRegion(memberNo);
+        mailUtil.sendPasswordChangeConfirm(memberInfo.getEmail(), memberInfo.getRegion());
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 

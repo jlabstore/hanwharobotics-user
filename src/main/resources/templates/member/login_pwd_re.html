@@ -49,7 +49,7 @@
                 <input type="password" id="pwd2" name="pwd2" placeholder="Re-enter Password"/>
               </div>
               <div class="login-pwd-re-btn-wrapper">
-                <button type="submit" class="login-pwd-re-submit" onclick="resetPw()">Change Password</button>
+                <button type="button" class="login-pwd-re-submit" onclick="resetPw()">Change Password</button>
               </div>
             </div>
           </form>
@@ -118,7 +118,7 @@
           const errorMessage = xhr.responseJSON.message;
           alert(errorMessage);
         } else {
-          alert('비밀번호 재설정에 실패했습니다.');
+          alert('error');
         }
       }
     });

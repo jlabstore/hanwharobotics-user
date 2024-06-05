@@ -42,7 +42,7 @@
                             </p>
                             <div class="login-find-input-wrapper">
                                 <input type="email" id="email" name="email" placeholder="Email Address" />
-                                <button type="submit" class="login-find-submit" onclick="sendId()">Send Email</button>
+                                <button type="button" class="login-find-submit" onclick="sendId()">Send Email</button>
                             </div>
                         </div>
                     </form>
@@ -56,7 +56,7 @@
 </body>
 </html>
 
-<script>
+<script th:inline="javascript">
 
     function sendId() {
         const email = $('#email').val();
@@ -65,7 +65,7 @@
 
         if (!emailRegex.test(email)) {
             // alert('올바른 이메일 주소를 입력하세요.');
-            alert("[[#{find.idMessage}]]");
+            alert([[#{find.idMessage}]]);
             return;
         }
 
@@ -78,10 +78,11 @@
             url: '/find-id',
             data: JSON.stringify(jsonData),
             contentType: 'application/json',
+
             success: function () {
+                console.log('AJAX 요청이 성공적으로 완료되었습니다.');
                 window.location.href = '/find-id/complete';
             },
-
             error: function (xhr, textStatus) {
                 console.error('error:', textStatus);
                 if (xhr.responseJSON) {

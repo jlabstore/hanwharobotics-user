@@ -45,7 +45,7 @@
               </p>
               <div class="login-find-input-wrapper">
                 <input type="text" id="id" name="id" placeholder="ID"/>
-                <button type="submit" class="login-find-submit" onclick="sendResetPw()">Send Email</button>
+                <button type="button" class="login-find-submit" onclick="sendResetPw()">Send Email</button>
               </div>
             </div>
           </form>
@@ -88,7 +88,7 @@
           const errorMessage = xhr.responseJSON.message;
           alert(errorMessage);
         } else {
-          alert('비밀번호 재설정 링크 발송에 실패했습니다.');
+          alert('error');
         }
       }
     });

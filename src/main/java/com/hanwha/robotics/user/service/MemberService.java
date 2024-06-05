@@ -80,4 +80,6 @@ public interface MemberService {
     String getMemberEmail(int memberNo);
 
     String getMemberRegion(int memberNo);
+
+    MemberResponse getMemberEmailAndRegion(int memberNo);
 }

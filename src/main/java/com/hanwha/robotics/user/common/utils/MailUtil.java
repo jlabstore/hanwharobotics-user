@@ -112,6 +112,8 @@ public class MailUtil {
 		context.setVariable("memberId", memberId);
 
 		String emailContent;
+
+
 		if (region.equals("KR")) {
 			emailContent = templateEngine.process("email/email_id", context);
 			this.sendEmail(
@@ -127,6 +129,7 @@ public class MailUtil {
 					emailContent
 			);
 		}
+
 
 	}
 
