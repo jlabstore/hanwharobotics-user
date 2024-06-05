@@ -3,7 +3,7 @@
       th:fragment="div(layerInquiryClass)">
 <div th:class="${layerInquiryClass}">
 
-    <div class="layer_inner">
+    <div class="layer_inner" th:if="#{header.nation} == 'EN'">
         <div class="pwd-edit-confirm-popup">
             <div class="text-group">
                 <button class="btn_close" onclick="closeInquiryLayer()"><span>close</span></button>
@@ -16,6 +16,23 @@
             </div>
             <div class="btn-group">
                 <button type="button" class="round-btn pwd-edit-step-2" onclick="changePassword()">비밀번호 변경</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer_inner" th:unless="#{header.nation} == 'EN'">
+        <div class="pwd-edit-confirm-popup en">
+            <div class="text-group">
+                <button class="btn_close" onclick="closeInquiryLayer()"><span>close</span></button>
+                <h1>Please enter a new password.</h1>
+                <p>Please use a combination of letters and numbers for your password.</p>
+            </div>
+            <div class="input-group">
+                <input type="password" name="pwd" id="pwd" class="newPassword" placeholder="New Password" />
+                <input type="password" name="pwd2" id="pwd2" class="newPassword2" placeholder="Re-enter Password" />
+            </div>
+            <div class="btn-group">
+                <button type="button" class="round-btn pwd-edit-step-2" onclick="changePassword()">Change Password</button>
             </div>
         </div>
     </div>
