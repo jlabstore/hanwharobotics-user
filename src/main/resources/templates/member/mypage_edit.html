@@ -9,21 +9,20 @@
     <main class="mypage edit">
         <form>
             <div class="mypage-container">
-                <h1>회원정보 수정</h1>
+                <h1 th:utext="#{mypage.edit.title}"></h1>
                 <section class="mypage-contents edit">
                     <div class="mypage-section">
-                        <h2>아이디<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.id}"><strong>*</strong></h2>
                         <input name="id" id="id" type="text" readonly th:value="${memberResponse.getMemberId()}"/>
                     </div>
                     <div class="mypage-section">
-                        <h2>비밀번호 변경</h2>
-                        <button type="button" class="mypage-pwd-edit" onclick="layerMyPagePwdEditOpenBtn()">비밀번호 변경
-                        </button>
+                        <h2 th:utext="#{mypage.edit.changePwd}"></h2>
+                        <button type="button" class="mypage-pwd-edit" onclick="layerMyPagePwdEditOpenBtn()" th:utext="#{mypage.edit.changePwd}"></button>
                     </div>
 
 
                     <div class="mypage-section">
-                        <h2>이메일<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.email}"><strong>*</strong></h2>
 
                         <div class="signup-main-email-container">
                             <div class="signup-main-email-wrapper">
@@ -46,17 +45,20 @@
                                         <option value="hanmail.net">hanmail.net</option>
                                         <option value="nate.com">nate.com</option>
                                         <option value="kakao.com">kakao.com</option>
-                                        <option value="">직접 입력</option>
+                                        <option value="" th:utext="#{signup.emailDirect}"></option>
                                     </select>
+                                    <span class="signup-main-email-wrapper custom-email" style="display: none;">
+                                        <input type='text' name='email-domain-2' id='email-domain-2' class='email_end_2'></input>
+                                    </span>
                                 </div>
 
-                                <button type="button" onclick="checkDuplicateEmail()">중복확인</button>
+                                <button type="button" onclick="checkDuplicateEmail()" th:utext="#{signup.checkDuplication}"></button>
                             </div>
-                            <div class="signup-main-email-wrapper custom-email" style="display: none;">
+                            <!-- <div class="signup-main-email-wrapper custom-email" style="display: none;">
                                 <div class="mypage-edit-email" style="padding-left: 41%;">
                                     <input type='text' name='email-domain-2' id='email-domain-2' class='email_end_2'></input>
                                 </div>
-                            </div>
+                            </div> -->
                             <label class="signup-message-warning check_text" id="email_check"
                                    style="display: none"></label>
                         </div>
@@ -65,9 +67,9 @@
 
 
                     <div class="mypage-section">
-                        <h2>업체명<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.companyName}"><strong>*</strong></h2>
                         <input type="text" name="company_name" id="company_name" class="companyName"
-                               th:value="${memberResponse.getCompanyNm()}" required placeholder="업체명"/>
+                               th:value="${memberResponse.getCompanyNm()}"/>
                         <!--                        <input type="text" th:value="${memberResponse.getCompanyNm()}" id="companyName" name="companyName">-->
                     </div>
 
@@ -90,46 +92,43 @@
 
 
                     <div class="mypage-section">
-                        <h2>우편번호<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.postCode}"><strong>*</strong></h2>
                         <div class="mypage-edit-zipcode">
                             <input type="text" name="zipcode" id="zipcode" th:value="${memberResponse.getPostCd()}"
                                    required readonly placeholder="우편번호"/>
                             <button type="button" th:if="${memberResponse.getRegion()} == 'KR'"
-                                    onclick="daumPostcode()">우편번호 찾기
+                                    onclick="daumPostcode()" th:utext="#{signup.find.postCode}">
                             </button>
                         </div>
                     </div>
 
 
                     <div class="mypage-section">
-                        <h2>주소<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.address}"><strong>*</strong></h2>
                         <input type="text" name="address" id="address" th:value="${memberResponse.getAddress()}"
                                required placeholder="주소"/>
                     </div>
                     <div class="mypage-section">
-                        <h2>상세주소<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.detailAddress}"><strong>*</strong></h2>
                         <input type="text" name="address_detail" id="address_detail"
-                               th:value="${memberResponse.getAddressDetail()}" required placeholder="상세주소"/>
+                               th:value="${memberResponse.getAddressDetail()}" required />
                     </div>
 
 
                     <div class="mypage-section">
-                        <h2>로봇구매처/대리점<strong>*</strong></h2>
-                        <input type="text" name="agency" id="agency" th:value="${memberResponse.getStore()}" required
-                               placeholder="로봇구매처/대리점"/>
+                        <h2 th:utext="#{signup.robot}"><strong>*</strong></h2>
+                        <input type="text" name="agency" id="agency" th:value="${memberResponse.getStore()}" required />
                     </div>
                     <div class="mypage-section">
-                        <h2>이름<strong>*</strong></h2>
-                        <input type="text" name="name" id="name" th:value="${memberResponse.getMemberNm()}" required
-                               placeholder="이름"/>
+                        <h2 th:utext="#{signup.name}"><strong>*</strong></h2>
+                        <input type="text" name="name" id="name" th:value="${memberResponse.getMemberNm()}" required />
                     </div>
                     <div class="mypage-section">
-                        <h2>직급</h2>
-                        <input type="text" name="rank" id="rank" th:value="${memberResponse.getPosition()}" required
-                               placeholder="직급"/>
+                        <h2 th:utext="#{signup.position}"></h2>
+                        <input type="text" name="rank" id="rank" th:value="${memberResponse.getPosition()}" required />
                     </div>
                     <div class="mypage-section">
-                        <h2>연락처<strong>*</strong></h2>
+                        <h2 th:utext="#{signup.contactNumber}"><strong>*</strong></h2>
                         <div class="mypage-edit-phone"
                              th:with="contactParts=${#strings.setSplit(memberResponse.getContact(), ')')}">
 
@@ -148,7 +147,7 @@
                     </div>
                 </section>
             </div>
-            <button type="button" class="mypage-btn color-orange edit" onclick="editConfirm()">수정 완료</button>
+            <button type="button" class="mypage-btn color-orange edit" onclick="editConfirm()" th:utext="#{mypage.edit.save}" ></button>
         </form>
     </main>
 
@@ -180,6 +179,7 @@
         if($('#email-domain').val() === '') {
             // $( 'select' ).remove( '#email-domain' );
             // $('.mypage-edit-email').append("<input type='text' name='email-domain' id='email-domain' class='email_end' required></input>");
+            $('#email-domain').hide();
             $('.custom-email').show();
             $('#email-domain-2').focus();
         } else {
@@ -207,7 +207,8 @@
         const emailCheckElement = $('#email_check');
 
         if (email_front.length < 3|| !emailPattern.test(email_end)) {
-            emailCheckElement.text("이메일을 정확히 입력해 주세요");
+            // emailCheckElement.text("이메일을 정확히 입력해 주세요");
+            emailCheckElement.text([[#{signup.emailCheckMessage3}]]);
             emailCheckElement.show();
         } else {
             $.ajax({
@@ -218,19 +219,21 @@
                 },
                 success: function (data) {
                     if (data === true) {
-                        emailCheckElement.text("이미 존재하는 이메일입니다.");
+                        // emailCheckElement.text("이미 존재하는 이메일입니다.");
+                        emailCheckElement.text([[#{signup.emailCheckMessage}]]);
                         emailCheckElement.show();
                         emailCheck = true;
                         isEmailChanged = true;
                     } else {
-                        emailCheckElement.text("사용 가능한 이메일 입니다.");
+                        // emailCheckElement.text("사용 가능한 이메일 입니다.");
+                        emailCheckElement.text([[#{signup.emailCheckMessage2}]]);
                         emailCheckElement.show();
                         emailCheck = false;
                         isEmailChanged = false;
                     }
                 },
                 error: function () {
-                    alert('에러가 발생했습니다.');
+                    alert('error.');
                 }
             });
         }
@@ -294,12 +297,14 @@
         const contact = phone_code + ")" + phone;
 
         if (isEmailChanged || emailCheck || ($('#email-domain').val() === '' && $('#email-domain-2').val() === '')) {
-            alert("이메일 중복확인을 해주세요.");
+            // alert("이메일 중복확인을 해주세요.");
+            alert([[#{signup.emailCheckMessage1}]]);
             return;
         }
 
         if (!email || !companyNm || !postCode || !address || !addressDetail || !store || !memberNm || !contact) {
-            alert('필수 입력 항목을 모두 입력해주세요.');
+            // alert('필수 입력 항목을 모두 입력해주세요.');
+            alert([[#{signup.required}]]);
             return;
         }
 
@@ -341,7 +346,7 @@
         };
 
         if (password == null || password === '') {
-            alert("기존 비밀번호를 입력하세요.");
+            alert([[#{mypage.edit.password}]]);
         } else {
             COMM.ajax({
                 url: "/member/check/password",
@@ -403,12 +408,12 @@
 
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (!passwordRegex.test(newPassword)) {
-            alert("비밀번호는 영문자와 숫자를 포함하는 8자 이상이어야 합니다.");
+            alert([[#{signup.pwCheckMessage}]]);
             return false;
         }
 
         if (newPassword !== newPassword2) {
-            alert("비밀번호 확인이 일치하지 않습니다.");
+            alert([[#{signup.pwCheckMessage2}]]);
             return false;
         }
 
