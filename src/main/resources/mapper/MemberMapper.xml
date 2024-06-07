@@ -93,8 +93,7 @@
     WHERE member_no = #{memberNo}
   </select>
 
-  <select id="findEmailAndRegionByMemberNo"
-    resultType="com.hanwha.robotics.user.entity.Member">
+  <select id="findEmailAndRegionByMemberNo" parameterType="int" resultType="com.hanwha.robotics.user.entity.Member">
     SELECT email,
            region
     FROM tb_member

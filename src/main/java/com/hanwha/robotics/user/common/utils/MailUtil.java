@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -95,19 +96,41 @@ public class MailUtil {
 		}
 	}
 
+//	@Async
+//	public void sendMemberId(String email, String memberId, String region) {
+//		Context context = new Context();
+//		context.setVariable("baseUrl", baseUrl);
+//		context.setVariable("baseUrlEn", baseUrlEn);
+//		context.setVariable("memberId", memberId);
+//
+//		String template = region.equals("KR") ? "email/email_id" : "email/email_id_en";
+//		String subject = region.equals("KR") ? "문의하신 한화로보틱스 아이디 안내입니다." : "Hanwha Robotics | Find ID";
+//
+//		String emailContent = templateEngine.process(template, context);
+//		this.sendEmail(List.of(email), subject, emailContent);
+//	}
+
+
 	@Async
-	public void sendMemberId(String email, String memberId, String region) {
+	public void sendMemberId(String email, String memberId, String region, String locale) {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("baseUrlEn", baseUrlEn);
 		context.setVariable("memberId", memberId);
 
-		String template = region.equals("KR") ? "email/email_id" : "email/email_id_en";
-		String subject = region.equals("KR") ? "문의하신 한화로보틱스 아이디 안내입니다." : "Hanwha Robotics | Find ID";
+//		String template = region.equals("KR") ? "email/email_id" : "email/email_id_en";
+//		String subject = region.equals("KR") ? "문의하신 한화로보틱스 아이디 안내입니다." : "Hanwha Robotics | Find ID";
+
+		String template = locale.equals("ko") ? "email/email_id" : "email/email_id_en";
+		String subject = locale.equals("ko") ? "문의하신 한화로보틱스 아이디 안내입니다." : "Hanwha Robotics | Find ID";
 
 		String emailContent = templateEngine.process(template, context);
 		this.sendEmail(List.of(email), subject, emailContent);
 	}
+
+
+
+
 
 	@Async
 	public void sendPasswordResetLink(Member member) {

@@ -17,7 +17,6 @@ import com.hanwha.robotics.user.mapper.MemberMapper;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 import com.hanwha.robotics.user.service.MemberService;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -26,7 +25,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.util.WebUtils;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -126,7 +124,8 @@ public class MemberServiceImpl implements MemberService {
 				.orElseThrow(() -> new NotFoundException(
 						messageSource.getMessage("error.member.notfound", null, locale)
 				));
-		mailUtil.sendMemberId(member.getEmail(), member.getMemberId(), member.getRegion());
+		mailUtil.sendMemberId(member.getEmail(), member.getMemberId(), member.getRegion(),
+        String.valueOf(locale));
 	}
 
 
@@ -155,9 +154,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void checkPassword(int memberNo, MemberRequest request) {
+		Locale locale = LocaleContextHolder.getLocale();
 		Member member = memberMapper.selectByMemberNo(memberNo);
 		if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
-			throw new BadRequestException("기존 비밀번호와 일치하지 않습니다.");
+			String errorMessage = (locale.equals(Locale.KOREAN)) ? "기존 비밀번호와 일치하지 않습니다." : "It does not match an existing password.";
+			throw  new BadRequestException(errorMessage);
+//			throw new BadRequestException("기존 비밀번호와 일치하지 않습니다.");
 		}
 	}
 
@@ -190,6 +192,12 @@ public class MemberServiceImpl implements MemberService {
 	public String getMemberEmail(int memberNo) {
 		return memberMapper.findEmailByMemberNo(memberNo);
 	}
+
+	@Override
+	public String getMemberRegion(int memberNo) {
+		return memberMapper.findRegionByMemberNo(memberNo);
+	}
+
 
 	public MemberResponse getMemberEmailAndRegion(int memberNo) {
 		Member member = memberMapper.findEmailAndRegionByMemberNo(memberNo).orElseThrow(() -> new RuntimeException("not found"));

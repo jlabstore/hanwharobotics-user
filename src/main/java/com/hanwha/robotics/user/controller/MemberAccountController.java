@@ -94,14 +94,26 @@ public class MemberAccountController {
      * @param request
      * @return
      */
+//    @PutMapping("/change/password")
+//    public ResponseEntity<Object> changePassword(
+//            @AuthenticationPrincipal int memberNo,
+//            @RequestBody MemberRequest request
+//    ) {
+//        memberService.changePassword(memberNo, request);
+//        MemberResponse memberInfo = memberService.getMemberEmailAndRegion(memberNo);
+//        mailUtil.sendPasswordChangeConfirm(memberInfo.getEmail(), memberInfo.getRegion());
+//        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
+//    }
+
     @PutMapping("/change/password")
     public ResponseEntity<Object> changePassword(
-            @AuthenticationPrincipal int memberNo,
-            @RequestBody MemberRequest request
+        @AuthenticationPrincipal int memberNo,
+        @RequestBody MemberRequest request
     ) {
         memberService.changePassword(memberNo, request);
-        MemberResponse memberInfo = memberService.getMemberEmailAndRegion(memberNo);
-        mailUtil.sendPasswordChangeConfirm(memberInfo.getEmail(), memberInfo.getRegion());
+        String email = memberService.getMemberEmail(memberNo);
+        String region = memberService.getMemberRegion(memberNo);
+        mailUtil.sendPasswordChangeConfirm(email, region);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 
