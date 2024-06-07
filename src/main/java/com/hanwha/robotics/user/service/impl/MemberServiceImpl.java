@@ -21,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,11 +51,11 @@ public class MemberServiceImpl implements MemberService {
 	public void registerMember(MemberRequest request) {
 
 		if (this.isMemberIdExists(request.getMemberId())) {
-			throw new BadRequestException("중복된 아이디 입니다.");
+			throw new BadRequestException("Duplicate ID");
 		}
 
 		if (this.isMemberEmailExists(request.getEmail())){
-			throw new BadRequestException("중복된 이메일 입니다.");
+			throw new BadRequestException("Duplicate Email");
 		}
 
 		request.encryptedPassword(passwordEncoder);
@@ -77,28 +78,47 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 로그인
+//	@Override
+//	public Member login(String memberId, String password) {
+//		return Optional.ofNullable(memberMapper.selectByMemberId(memberId)).map(member -> {
+//			if (!passwordEncoder.matches(password, member.getPassword())) {
+//				throw new RuntimeException("아이디 혹은 패스워드가 일치하지 않습니다.");
+//			}
+//			if (member.getAcceptYn().equals("N")) {
+//				throw new RuntimeException("승인전 계정입니다.");
+//			}
+//			memberLogService.insertMemberLog(member.getMemberNo(), MemberLogType.LOGIN);
+//			return member;
+//		}).orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
+//	}
+
 	@Override
 	public Member login(String memberId, String password) {
 		return Optional.ofNullable(memberMapper.selectByMemberId(memberId)).map(member -> {
+			Locale locale = LocaleContextHolder.getLocale();
+			String errorMessage;
+
 			if (!passwordEncoder.matches(password, member.getPassword())) {
-				throw new RuntimeException("아이디 혹은 패스워드가 일치하지 않습니다.");
+				errorMessage = (locale.equals(Locale.KOREAN)) ? "아이디 혹은 패스워드가 일치하지 않습니다." : "Invalid ID or password.";
+				throw new RuntimeException(errorMessage);
 			}
+
 			if (member.getAcceptYn().equals("N")) {
-				throw new RuntimeException("승인전 계정입니다.");
+				errorMessage = (locale.equals(Locale.KOREAN)) ? "승인전 계정입니다." : "Account not approved.";
+				throw new RuntimeException(errorMessage);
 			}
+
 			memberLogService.insertMemberLog(member.getMemberNo(), MemberLogType.LOGIN);
 			return member;
-		}).orElseThrow(() -> new RuntimeException("회원정보를 찾을 수 없습니다."));
+		}).orElseThrow(() -> {
+			Locale locale = LocaleContextHolder.getLocale();
+			String errorMessage = (locale.equals(Locale.KOREAN)) ? "회원정보를 찾을 수 없습니다." : "Member information not found.";
+      return new RuntimeException(errorMessage);
+		});
 	}
 
-	// 아이디 찾기
-//	@Override
-//	public void findId(MemberRequest request) {
-//		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
-//				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
-//		mailUtil.sendMemberId(member.getEmail(), member.getMemberId(), member.getRegion());
-//	}
 
+	// 아이디 찾기
 	@Override
 	public void findId(MemberRequest request, HttpServletRequest httpRequest) {
 		Locale locale = LocaleUtils.getLocaleFromCookie(httpRequest, "lang");
