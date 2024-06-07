@@ -129,13 +129,11 @@ public class MemberServiceImpl implements MemberService {
 //		}
 		String encodedPassword = passwordEncoder.encode(request.getNewPassword());
 		memberMapper.updatePassword(member.getMemberId(), encodedPassword);
-
 	}
-
 
 	// 회원 정보
 	@Override
-	public MemberResponse retrieve(int memberNo) {    // FIXME
+	public MemberResponse retrieve(int memberNo) {
 		return memberMapper.findByMemberNo(memberNo);
 	}
 
@@ -152,20 +150,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.findEmailByMemberNo(memberNo);
 	}
 
-	@Override
-	public String getMemberRegion(int memberNo) {
-		return memberMapper.findRegionByMemberNo(memberNo);
-	}
-
-
-
 	public MemberResponse getMemberEmailAndRegion(int memberNo) {
 		Member member = memberMapper.findEmailAndRegionByMemberNo(memberNo).orElseThrow(() -> new RuntimeException("없음"));
 		return new MemberResponse(member.getEmail(), member.getRegion());
 	}
-
-
-
 
 	// 회원 탈퇴
 	@Override
@@ -175,7 +163,5 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.deleteMember(memberNo);
 		SecurityContextHolder.clearContext();
 	}
-
-
 
 }

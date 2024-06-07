@@ -36,6 +36,9 @@ public class MailUtil {
 	@Value("${base.url}")
 	private String baseUrl;
 
+	@Value("${base.url.en}")
+	private String baseUrlEn;
+
 	@Value("${base.admin.url}")
 	private String adminUrl;
 
@@ -92,75 +95,39 @@ public class MailUtil {
 		}
 	}
 
-//	@Async
-//	public void sendMemberId(String email, String memberId) {
-//		Context context = new Context();
-//		context.setVariable("baseUrl", baseUrl);
-//		context.setVariable("memberId", memberId);
-//		String emailContent = templateEngine.process("email/email_id", context);
-//		this.sendEmail(
-//				List.of(email),
-//				"문의하신 한화로보틱스 아이디 안내입니다.",
-//				emailContent
-//		);
-//	}
-
 	@Async
 	public void sendMemberId(String email, String memberId, String region) {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
+		context.setVariable("baseUrlEn", baseUrlEn);
 		context.setVariable("memberId", memberId);
 
-		String emailContent;
+		String template = region.equals("KR") ? "email/email_id" : "email/email_id_en";
+		String subject = region.equals("KR") ? "문의하신 한화로보틱스 아이디 안내입니다." : "Hanwha Robotics | Find ID";
 
-
-		if (region.equals("KR")) {
-			emailContent = templateEngine.process("email/email_id", context);
-			this.sendEmail(
-					List.of(email),
-					"문의하신 한화로보틱스 아이디 안내입니다.",
-					emailContent
-			);
-		} else {
-			emailContent = templateEngine.process("email/email_id_en", context);
-			this.sendEmail(
-					List.of(email),
-					"Hanwha Robotics | Find ID",
-					emailContent
-			);
-		}
-
-
+		String emailContent = templateEngine.process(template, context);
+		this.sendEmail(List.of(email), subject, emailContent);
 	}
 
 	@Async
 	public void sendPasswordResetLink(Member member) {
 		String resetToken = generateResetToken(member);
-		String resetLink = baseUrl + "/password/reset?token=" + URLEncoder.encode(resetToken, StandardCharsets.UTF_8);
+		String resetLink = String.format("%s/password/reset?token=%s", baseUrl, URLEncoder.encode(resetToken, StandardCharsets.UTF_8));
+		String resetLinkEn = String.format("%s/password/reset?token=%s", baseUrlEn, URLEncoder.encode(resetToken, StandardCharsets.UTF_8));
 
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
+		context.setVariable("baseUrlEn", baseUrlEn);
 		context.setVariable("resetLink", resetLink);
-//		String emailContent = templateEngine.process("email/email_password_re", context);
+		context.setVariable("resetLinkEn", resetLinkEn);
 
-		String emailContent;
-		String region = member.getRegion();
-		if (region.equals("KR")) {
-			emailContent = templateEngine.process("email/email_password_re", context);
-			this.sendEmail(
-					List.of(member.getEmail()),
-					"한화로보틱스 비밀번호 재설정 안내입니다.",
-					emailContent
-			);
-		} else {
-			emailContent = templateEngine.process("email/email_password_re_en", context);
-			this.sendEmail(
-					List.of(member.getEmail()),
-					"Hanwha Robotics | Password Reset",
-					emailContent
-			);
-		}
+		String template = member.getRegion().equals("KR") ? "email/email_password_re" : "email/email_password_re_en";
+		String subject = member.getRegion().equals("KR") ? "한화로보틱스 비밀번호 재설정 안내입니다." : "Hanwha Robotics | Password Reset";
+
+		String emailContent = templateEngine.process(template, context);
+		this.sendEmail(List.of(member.getEmail()), subject, emailContent);
 	}
+
 
 	private String generateResetToken(Member member) {
 		String resetToken = UUID.randomUUID().toString().replace("-", "").substring(0, 12);
@@ -177,25 +144,15 @@ public class MailUtil {
 	public void sendPasswordChangeConfirm(String email, String region) {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
-//		String emailContent = templateEngine.process("email/email_password_complete", context);
+		context.setVariable("baseUrlEn", baseUrlEn);
 
-		String emailContent;
-		if (region.equals("KR")) {
-			emailContent = templateEngine.process("email/email_password_re", context);
-			this.sendEmail(
-					List.of(email),
-					"한화로보틱스 고객님의 비밀번호가 변경되었습니다.",
-					emailContent
-			);
-		} else {
-			emailContent = templateEngine.process("email/email_password_re_en", context);
-			this.sendEmail(
-					List.of(email),
-					"Hanwha Robotics | Password Change Notification",
-					emailContent
-			);
-		}
+		String template = region.equals("KR") ? "email/email_password_re" : "email/email_password_re_en";
+		String subject = region.equals("KR") ? "한화로보틱스 고객님의 비밀번호가 변경되었습니다." : "Hanwha Robotics | Password Change Notification";
+
+		String emailContent = templateEngine.process(template, context);
+		this.sendEmail(List.of(email), subject, emailContent);
 	}
+
 
 	@Async
 	public void sendNewQnaToAdmin(int qnaNo) {

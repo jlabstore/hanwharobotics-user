@@ -10,42 +10,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class PasswordResetTokenServiceImpl implements PasswordResetTokenService {
 
-    @Autowired
-    private PasswordResetTokenMapper passwordResetTokenMapper;
+  @Autowired
+  private PasswordResetTokenMapper passwordResetTokenMapper;
 
-    @Override
-    public boolean validate(String token) {
-        PasswordResetToken resetToken = passwordResetTokenMapper.findByToken(token);
-        // FIXME
-        if (resetToken == null) {
-            return false;
-        }
-        return !resetToken.isExpired();
+  @Override
+  public boolean validate(String token) {
+    PasswordResetToken resetToken = passwordResetTokenMapper.findByToken(token);
+    if (resetToken == null) {
+      return false;
     }
+    return !resetToken.isExpired();
+  }
 
-    @Override
-    public String retrieveEmail(String token) {
-        return passwordResetTokenMapper.findEmailByToken(token);
-    }
+  @Override
+  public String retrieveEmail(String token) {
+    return passwordResetTokenMapper.findEmailByToken(token);
+  }
 
-//    @Override
-//    public String retrieveEmailAndRegion(String token) {
-//        return passwordResetTokenMapper.findEmailAndRegionByToken(token);
-//    }
+  @Override
+  public void deleteToken(String token) {
+    passwordResetTokenMapper.deleteToken(token);
+  }
 
-    @Override
-    public void deleteToken(String token) {
-        passwordResetTokenMapper.deleteToken(token);
-    }
-
-    @Override
-    public String retrieveRegion(String token) {
-        return passwordResetTokenMapper.findRegionByToken(token);
-    }
-
-    @Override
-    public ResetPasswordDto retrieveEmailAndRegion(String token) {
-        return passwordResetTokenMapper.findByEmailAndRegionByToken(token);
-    }
+  @Override
+  public ResetPasswordDto retrieveEmailAndRegion(String token) {
+    return passwordResetTokenMapper.findByEmailAndRegionByToken(token);
+  }
 
 }
