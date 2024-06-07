@@ -2,6 +2,7 @@ package com.hanwha.robotics.user.controller;
 
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.ResetPasswordDto;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,8 +40,8 @@ public class PasswordResetController {
 	 */
 	@PostMapping("/password/reset-page")
 	@ResponseBody
-	public ResponseEntity<ApiResponse<Void>> sendPasswordResetPage(@RequestBody MemberRequest request) {
-		memberService.sendPasswordResetMail(request);
+	public ResponseEntity<ApiResponse<Void>> sendPasswordResetPage(@RequestBody MemberRequest request, HttpServletRequest httpServletRequest) {
+		memberService.sendPasswordResetMail(request, httpServletRequest);
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 

@@ -116,8 +116,8 @@ public class MemberController {
 	 * @return
 	 */
 	@PostMapping("/find-id")
-	public ResponseEntity<Object> sendMemberId(@Valid @RequestBody MemberRequest request) {
-		memberService.findId(request);
+	public ResponseEntity<Object> sendMemberId(@Valid @RequestBody MemberRequest request, HttpServletRequest httpRequest) {
+		memberService.findId(request, httpRequest);
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}
 

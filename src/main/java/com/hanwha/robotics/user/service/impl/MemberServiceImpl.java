@@ -1,5 +1,7 @@
 package com.hanwha.robotics.user.service.impl;
 
+import com.hanwha.robotics.user.common.utils.LocaleUtils;
+import java.util.Locale;
 import java.util.Optional;
 
 import com.hanwha.robotics.user.common.enums.MemberLogType;
@@ -15,11 +17,15 @@ import com.hanwha.robotics.user.mapper.MemberMapper;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 import com.hanwha.robotics.user.service.MemberService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.WebUtils;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -36,6 +42,8 @@ public class MemberServiceImpl implements MemberService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private MailUtil mailUtil;
+	@Autowired
+	private MessageSource messageSource;
 
 	// 회원가입
 	@Override
@@ -46,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		if (this.isMemberEmailExists(request.getEmail())){
-			throw new BadRequestException("중복된 아이디 입니다.");
+			throw new BadRequestException("중복된 이메일 입니다.");
 		}
 
 		request.encryptedPassword(passwordEncoder);
@@ -84,19 +92,32 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 아이디 찾기
+//	@Override
+//	public void findId(MemberRequest request) {
+//		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
+//				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
+//		mailUtil.sendMemberId(member.getEmail(), member.getMemberId(), member.getRegion());
+//	}
+
 	@Override
-	public void findId(MemberRequest request) {
+	public void findId(MemberRequest request, HttpServletRequest httpRequest) {
+		Locale locale = LocaleUtils.getLocaleFromCookie(httpRequest, "lang");
 		Member member = Optional.ofNullable(memberMapper.selectByEmail(request.getEmail()))
-				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
+				.orElseThrow(() -> new NotFoundException(
+						messageSource.getMessage("error.member.notfound", null, locale)
+				));
 		mailUtil.sendMemberId(member.getEmail(), member.getMemberId(), member.getRegion());
 	}
 
 
 	// 비밀번호 찾기 - 이메일 링크 전송
 	@Override
-	public void sendPasswordResetMail(MemberRequest request) {
+	public void sendPasswordResetMail(MemberRequest request, HttpServletRequest httpRequest) {
+		Locale locale = LocaleUtils.getLocaleFromCookie(httpRequest, "lang");
 		Member member = Optional.ofNullable(memberMapper.selectByMemberId(request.getMemberId()))
-				.orElseThrow(() -> new NotFoundException("회원정보를 찾을 수 없습니다."));
+				.orElseThrow(() -> new NotFoundException(
+						messageSource.getMessage("error.member.notfound", null, locale)
+				));
 		mailUtil.sendPasswordResetLink(member);
 	}
 
@@ -151,7 +172,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	public MemberResponse getMemberEmailAndRegion(int memberNo) {
-		Member member = memberMapper.findEmailAndRegionByMemberNo(memberNo).orElseThrow(() -> new RuntimeException("없음"));
+		Member member = memberMapper.findEmailAndRegionByMemberNo(memberNo).orElseThrow(() -> new RuntimeException("not found"));
 		return new MemberResponse(member.getEmail(), member.getRegion());
 	}
 

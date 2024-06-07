@@ -4,6 +4,7 @@ import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.dto.MemberResponse;
 import com.hanwha.robotics.user.dto.ResetPasswordRequest;
 import com.hanwha.robotics.user.entity.Member;
+import javax.servlet.http.HttpServletRequest;
 
 public interface MemberService {
 
@@ -44,14 +45,16 @@ public interface MemberService {
    *
    * @param request
    */
-  void findId(MemberRequest request);
+//  void findId(MemberRequest request);
+
+  void findId(MemberRequest request, HttpServletRequest httpRequest);
 
   /**
    * 비밀번호 찾기 - 임시비밀번호 전송
    *
    * @param request
    */
-  void sendPasswordResetMail(MemberRequest request);
+  void sendPasswordResetMail(MemberRequest request, HttpServletRequest httpRequest);
 
   void checkPassword(int memberNo, MemberRequest request);
 
