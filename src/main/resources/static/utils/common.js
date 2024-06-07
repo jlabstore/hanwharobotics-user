@@ -364,10 +364,12 @@ var layerCookieOpenBtn = function() {
 var closeInquiryLayer = function(id){
     $('body').removeClass('scroll-lock');
     // $('.layer.inquiry').hide('fast');
-    if(id){
+    if(id == 'privacy'){
         $('#'+ id).hide('fast');
-
-    }else{
+    } else if (id == 'pwd') {
+        $("#pwd").val('');
+        $('.layer').hide('fast');
+    } else {
         $('.layer').hide('fast');
     }
     $('.layer_bg').hide();
