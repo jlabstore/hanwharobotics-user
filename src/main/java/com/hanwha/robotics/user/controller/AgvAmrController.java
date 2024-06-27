@@ -37,17 +37,18 @@ public class AgvAmrController {
     public String conveyor() {
         return "agv_amr/products_detail_conveyor";
     }
-    @GetMapping("/semiconductor")
+    
+    @GetMapping("/glass-packaging-type")
     public String semiconductor() {
         return "agv_amr/products_detail_semiconductor";
     }
 
-    @GetMapping("/wafer-production1")
+    @GetMapping("/wafer-production-type")
     public String waferProduction1() {
         return "agv_amr/products_detail_wafer_production1";
     }
 
-    @GetMapping("/wafer-production2")
+    @GetMapping("/semiconductor-production-type")
     public String waferProduction2() {
         return "agv_amr/products_detail_wafer_production2";
     }
