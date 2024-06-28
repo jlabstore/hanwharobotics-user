@@ -18,7 +18,7 @@ public class AgvAmrController {
         return "agv_amr/products_detail_forklift";
     }
 
-    @GetMapping("/reel-and-roll")
+    @GetMapping("/reel-and-roll-type")
     public String reelAndRoll() {
         return "agv_amr/products_detail_reel_roll";
     }
@@ -33,7 +33,7 @@ public class AgvAmrController {
         return "agv_amr/products_detail_high_mast";
     }
 
-    @GetMapping("/conveyor")
+    @GetMapping("/conveyor-type")
     public String conveyor() {
         return "agv_amr/products_detail_conveyor";
     }
