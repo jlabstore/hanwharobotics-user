@@ -13,7 +13,7 @@ public class AgvAmrController {
         return "agv_amr/products";
     }
 
-    @GetMapping("/forklift")
+    @GetMapping("/forklift-type")
     public String forklift() {
         return "agv_amr/products_detail_forklift";
     }
@@ -23,12 +23,12 @@ public class AgvAmrController {
         return "agv_amr/products_detail_reel_roll";
     }
 
-    @GetMapping("/pallet-truck")
+    @GetMapping("/pallet-truck-type")
     public String palletTruck() {
         return "agv_amr/products_detail_pallet_truck";
     }
 
-    @GetMapping("/high-mast")
+    @GetMapping("/high-mast-type")
     public String highMast() {
         return "agv_amr/products_detail_high_mast";
     }
