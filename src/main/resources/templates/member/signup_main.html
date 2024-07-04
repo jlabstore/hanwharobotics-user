@@ -16,7 +16,7 @@
                                 <h2 th:utext="#{signup.id}"><strong>*</strong></h2>
                                 <div>
                                     <div>
-                                        <input type="text" name="id" id="memberId" required />
+                                        <input type="text" name="id" id="memberId" th:placeholder="#{signup.IdInput}" required />
                                         <button type="button" class="signup-main-id-check" onclick="checkDuplicateId()" th:utext="#{signup.checkDuplication}"></button>
                                     </div>
                                     <!-- 중복확인 결과 메시지 -->
