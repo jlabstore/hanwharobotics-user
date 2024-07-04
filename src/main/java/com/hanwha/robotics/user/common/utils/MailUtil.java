@@ -169,7 +169,7 @@ public class MailUtil {
 		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("baseUrlEn", baseUrlEn);
 
-		String template = region.equals("KR") ? "email/email_password_re" : "email/email_password_re_en";
+		String template = region.equals("KR") ? "email/email_password_complete" : "email/email_password_complete_en";
 		String subject = region.equals("KR") ? "한화로보틱스 고객님의 비밀번호가 변경되었습니다." : "Hanwha Robotics | Password Change Notification";
 
 		String emailContent = templateEngine.process(template, context);
@@ -205,7 +205,7 @@ public class MailUtil {
 
 			this.sendEmail(
 				adminMapper.selectAdminEmail(),
-				"Q&A 게시글에 새로운 댓글이 등록되었습니다.",
+				"문의하신 내용에 답변이 등록되었습니다.",
 					emailContent
 			);
 		} catch (Exception e) {

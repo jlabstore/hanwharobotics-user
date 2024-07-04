@@ -443,8 +443,9 @@
         }
 
         // 비밀번호 체크
-        if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password)) {
-            // alert('비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.');
+        // if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password)) {
+        if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/.test(password)) {
+                // alert('비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.');
             alert([[#{signup.pwCheckMessage}]]);
             $('#password').focus();
             return;
