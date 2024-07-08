@@ -9,14 +9,7 @@
     <main class="login signup-terms" th:if="#{header.nation} == 'EN'">
         <div class="login-container">
             <h1>회원가입</h1>
-
-            <div>
-                회원가입은 최종관리자의 승인이 필요하며,
-                회원가입 신청 후 승일 이메일을 받으신 후부터
-                로그인이 가능합니다
-            </div>
-
-
+            <p class="login-container-subtitle">회원가입은 최종관리자의 승인이 필요하며, 회원가입 신청 후 승일 이메일을 받으신 후부터 로그인이 가능합니다.</p>
             <section class="login-content">
                 <article class="login-main">
                     <div class="signup-terms-text">
@@ -170,6 +163,7 @@
     <main class="login signup-terms" th:unless="#{header.nation} == 'EN'">
         <div class="login-container">
             <h1>Sign up</h1>
+            <p class="login-container-subtitle">Sign-up requires approval from the final administrator, and you will be able to log in after receiving an approval email.</p>
             <section class="login-content">
                 <article class="login-main">
                     <div class="signup-terms-text">
