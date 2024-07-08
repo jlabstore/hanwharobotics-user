@@ -1,7 +1,9 @@
 package com.hanwha.robotics.user.controller;
 
+import com.hanwha.robotics.user.common.utils.LocaleUtils;
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.ResetPasswordDto;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -66,12 +68,12 @@ public class PasswordResetController {
 	 */
 	@PutMapping("/password/reset")
 	@ResponseBody
-	public ResponseEntity<ApiResponse<Void>> resetPassword(@RequestBody ResetPasswordRequest request) {
+	public ResponseEntity<ApiResponse<Void>> resetPassword(@RequestBody ResetPasswordRequest request, HttpServletRequest httpRequest) {
 		memberService.resetPassword(request);
 
 		ResetPasswordDto dto = passwordResetTokenService.retrieveEmailAndRegion(request.getToken());
-
-		mailUtil.sendPasswordChangeConfirm(dto.getEmail(), dto.getRegion());
+		Locale locale = LocaleUtils.getLocaleFromCookie(httpRequest, "lang");
+		mailUtil.sendPasswordChangeConfirm(dto.getEmail(), String.valueOf(locale));
 		passwordResetTokenService.deleteToken(request.getToken());
 		return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
 	}

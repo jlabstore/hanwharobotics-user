@@ -2,12 +2,15 @@ package com.hanwha.robotics.user.controller;
 
 import com.hanwha.robotics.user.common.dto.ApiResponse;
 import com.hanwha.robotics.user.common.enums.ApiStatus;
+import com.hanwha.robotics.user.common.utils.LocaleUtils;
 import com.hanwha.robotics.user.common.utils.MailUtil;
 import com.hanwha.robotics.user.dto.MemberRequest;
 import com.hanwha.robotics.user.dto.MemberResponse;
 import com.hanwha.robotics.user.service.CodeService;
 import com.hanwha.robotics.user.service.MemberService;
 
+import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -108,12 +111,14 @@ public class MemberAccountController {
     @PutMapping("/change/password")
     public ResponseEntity<Object> changePassword(
         @AuthenticationPrincipal int memberNo,
-        @RequestBody MemberRequest request
+        @RequestBody MemberRequest request,
+        HttpServletRequest httpRequest
     ) {
         memberService.changePassword(memberNo, request);
         String email = memberService.getMemberEmail(memberNo);
-        String region = memberService.getMemberRegion(memberNo);
-        mailUtil.sendPasswordChangeConfirm(email, region);
+//        String region = memberService.getMemberRegion(memberNo);
+        Locale locale = LocaleUtils.getLocaleFromCookie(httpRequest, "lang");
+        mailUtil.sendPasswordChangeConfirm(email, String.valueOf(locale));
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name()));
     }
 

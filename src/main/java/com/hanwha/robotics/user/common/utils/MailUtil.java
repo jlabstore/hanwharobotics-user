@@ -133,7 +133,7 @@ public class MailUtil {
 
 
 	@Async
-	public void sendPasswordResetLink(Member member) {
+	public void sendPasswordResetLink(Member member, String locale) {
 		String resetToken = generateResetToken(member);
 		String resetLink = String.format("%s/password/reset?token=%s", baseUrl, URLEncoder.encode(resetToken, StandardCharsets.UTF_8));
 		String resetLinkEn = String.format("%s/password/reset?token=%s", baseUrlEn, URLEncoder.encode(resetToken, StandardCharsets.UTF_8));
@@ -144,8 +144,8 @@ public class MailUtil {
 		context.setVariable("resetLink", resetLink);
 		context.setVariable("resetLinkEn", resetLinkEn);
 
-		String template = member.getRegion().equals("KR") ? "email/email_password_re" : "email/email_password_re_en";
-		String subject = member.getRegion().equals("KR") ? "한화로보틱스 비밀번호 재설정 안내입니다." : "Hanwha Robotics | Password Reset";
+		String template = locale.equals("ko") ? "email/email_password_re" : "email/email_password_re_en";
+		String subject = locale.equals("ko") ? "한화로보틱스 비밀번호 재설정 안내입니다." : "Hanwha Robotics | Password Reset";
 
 		String emailContent = templateEngine.process(template, context);
 		this.sendEmail(List.of(member.getEmail()), subject, emailContent);
@@ -164,13 +164,13 @@ public class MailUtil {
 	}
 
 	@Async
-	public void sendPasswordChangeConfirm(String email, String region) {
+	public void sendPasswordChangeConfirm(String email, String locale) {
 		Context context = new Context();
 		context.setVariable("baseUrl", baseUrl);
 		context.setVariable("baseUrlEn", baseUrlEn);
 
-		String template = region.equals("KR") ? "email/email_password_complete" : "email/email_password_complete_en";
-		String subject = region.equals("KR") ? "한화로보틱스 고객님의 비밀번호가 변경되었습니다." : "Hanwha Robotics | Password Change Notification";
+		String template = locale.equals("ko") ? "email/email_password_complete" : "email/email_password_complete_en";
+		String subject = locale.equals("ko") ? "한화로보틱스 고객님의 비밀번호가 변경되었습니다." : "Hanwha Robotics | Password Change Notification";
 
 		String emailContent = templateEngine.process(template, context);
 		this.sendEmail(List.of(email), subject, emailContent);

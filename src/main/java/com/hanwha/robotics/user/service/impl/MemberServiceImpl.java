@@ -137,7 +137,7 @@ public class MemberServiceImpl implements MemberService {
 				.orElseThrow(() -> new NotFoundException(
 						messageSource.getMessage("error.member.notfound", null, locale)
 				));
-		mailUtil.sendPasswordResetLink(member);
+		mailUtil.sendPasswordResetLink(member, String.valueOf(locale));
 	}
 
 	// 비밀번호 재설정
