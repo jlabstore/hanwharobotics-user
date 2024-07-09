@@ -1,21 +1,19 @@
 package com.hanwha.robotics.user.config;
 
-import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+import java.util.Arrays;
 
 public class LangFilter extends OncePerRequestFilter {
 
-  @Value("${base.url}")
-  private String baseUrl;
-
-  @Value("${base.url.en}")
-  private String baseUrlEn;
+  private final String baseUrl;
+  private final String baseUrlEn;
 
   public LangFilter(String baseUrl, String baseUrlEn) {
     this.baseUrl = baseUrl;
@@ -35,14 +33,18 @@ public class LangFilter extends OncePerRequestFilter {
       lang = "kr";
     }
 
-    Cookie langCookie = new Cookie("lang", lang);
-    langCookie.setPath("/");
-//    langCookie.setMaxAge(60 * 60 * 24 * 30);
-    langCookie.setSecure(true);
-    langCookie.setHttpOnly(false);
-    response.addCookie(langCookie);
+    boolean langCookieExists = Arrays.stream(request.getCookies())
+        .anyMatch(cookie -> cookie.getName().equals("lang"));
+
+    if (!langCookieExists) {
+      Cookie langCookie = new Cookie("lang", lang);
+      langCookie.setPath("/");
+      langCookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+      langCookie.setSecure(true);
+      langCookie.setHttpOnly(false);
+      response.addCookie(langCookie);
+    }
 
     filterChain.doFilter(request, response);
   }
-
 }
