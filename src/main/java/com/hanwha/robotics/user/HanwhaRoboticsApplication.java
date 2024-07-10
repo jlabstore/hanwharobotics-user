@@ -12,4 +12,6 @@ public class HanwhaRoboticsApplication {
 		SpringApplication.run(HanwhaRoboticsApplication.class, args);
 	}
 
+
+
 }

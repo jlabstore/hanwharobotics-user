@@ -16,7 +16,7 @@ public class CommonUtil {
      */
     public String getCookieLang(HttpServletRequest request){
         String lang = getCookieValue("lang", request);
-        return lang != null && !"".equals(lang) ? lang : "ko";
+        return lang != null && !"".equals(lang) ? lang : null;
     }
 
     
