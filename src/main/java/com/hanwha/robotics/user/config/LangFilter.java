@@ -1,5 +1,6 @@
 package com.hanwha.robotics.user.config;
 
+import java.util.Optional;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -25,26 +26,43 @@ public class LangFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
 
     String serverName = request.getServerName();
-    String lang = "kr";
+    String expectedLang = "ko";
 
     if (serverName.endsWith(baseUrlEn)) {
-      lang = "en";
-    } else if (serverName.endsWith(baseUrl)) {
-      lang = "kr";
+      expectedLang = "en";
     }
 
-    boolean langCookieExists = Arrays.stream(request.getCookies())
-        .anyMatch(cookie -> cookie.getName().equals("lang"));
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+      Optional<Cookie> langCookieOpt = Arrays.stream(cookies)
+          .filter(cookie -> "lang".equals(cookie.getName()))
+          .findFirst();
 
-    if (!langCookieExists) {
-      Cookie langCookie = new Cookie("lang", lang);
-      langCookie.setPath("/");
-      langCookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
-      langCookie.setSecure(true);
-      langCookie.setHttpOnly(false);
-      response.addCookie(langCookie);
+      if (langCookieOpt.isPresent()) {
+        Cookie langCookie = langCookieOpt.get();
+        if (!expectedLang.equals(langCookie.getValue())) {
+          langCookie.setValue(expectedLang);
+          response.addCookie(langCookie);
+        }
+        filterChain.doFilter(request, response);
+        return;
+      }
     }
+
+    Cookie langCookie = new Cookie("lang", expectedLang);
+//    langCookie.setPath("/");
+//    langCookie.setMaxAge(60 * 60 * 24 * 30);
+//    langCookie.setSecure(true);
+//    langCookie.setHttpOnly(false);
+    response.addCookie(langCookie);
 
     filterChain.doFilter(request, response);
   }
+
+
+
 }
+
+
+
+
