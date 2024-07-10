@@ -23,7 +23,7 @@ public class I18nConfig implements WebMvcConfigurer {
     public LocaleResolver localeResolver() {
       // CookieLocaleResolver 쿠키의 값을 저장하여 사용
         CookieLocaleResolver resolver = new CookieLocaleResolver();
-//        resolver.setDefaultLocale(Locale.getDefault());
+        resolver.setDefaultLocale(Locale.getDefault());
 //        resolver.setDefaultLocale(Locale.KOREAN);
         resolver.setCookieName("lang");
         return resolver;
