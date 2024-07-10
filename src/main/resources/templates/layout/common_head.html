@@ -34,7 +34,21 @@
 
         <link rel="canonical" href="https://hanwharobotics.co.kr" th:if="#{header.nation} == 'EN'">
         <meta property="og:url" content="https://hanwharobotics.co.kr" th:if="#{header.nation} == 'EN'">
+        <link rel="canonical" href="https://hanwharobotics.com" th:unless="#{header.nation} == 'EN'">
+        <meta property="og:url" content="https://www.hanwharobotics.com" th:unless="#{header.nation} == 'EN'">
 
+        <!-- Google Tag Manager -->
+        <script>
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-M76R6HN5');
+        </script>
+      <!-- End Google Tag Manager -->
+
+        <link rel="canonical" href="https://hanwharobotics.co.kr" th:if="#{header.nation} == 'EN'">
+        <meta property="og:url" content="https://hanwharobotics.co.kr" th:if="#{header.nation} == 'EN'">
         <div itemscope itemtype="https://schema.org/Organization" th:if="#{header.nation} == 'EN'">
                 <span itemprop="name">한화로보틱스</span>
                 <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -47,7 +61,6 @@
 
         <link rel="canonical" href="https://hanwharobotics.com" th:unless="#{header.nation} == 'EN'">
         <meta property="og:url" content="https://www.hanwharobotics.com" th:unless="#{header.nation} == 'EN'">
-
         <div itemscope itemtype="https://schema.org/Organization" th:unless="#{header.nation} == 'EN'">
                 <span itemprop="name">Hanwha Robotics</span>
                 <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -57,14 +70,4 @@
                         <span itemprop="streetAddress">323, Pangyo-ro</span>
                 </div>
         </div>
-
-        <!-- Google Tag Manager -->
-        <script>
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-M76R6HN5');
-        </script>
-      <!-- End Google Tag Manager -->
 </html>
