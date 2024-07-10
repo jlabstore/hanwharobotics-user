@@ -18,24 +18,6 @@
 </head>
 
 <body class="pc">
-  <div itemscope itemtype="https://schema.org/Organization" th:if="#{header.nation} == 'EN'">
-    <span itemprop="name">한화로보틱스</span>
-    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-      <span itemprop="postalCode">13488</span>
-      <span itemprop="addressRegion">경기</span>
-      <span itemprop="addressLocality">성남시 분당구</span>
-      <span itemprop="streetAddress">판교로 323</span>
-    </div>
-  </div>
-  <div itemscope itemtype="https://schema.org/Organization" th:unless="#{header.nation} == 'EN'">
-    <span itemprop="name">Hanwha Robotics</span>
-    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-      <span itemprop="postalCode">13488</span>
-      <span itemprop="addressRegion">Gyeonggi</span>
-      <span itemprop="addressLocality">Bandang-gu, Seongnam-si</span>
-      <span itemprop="streetAddress">323, Pangyo-ro</span>
-    </div>
-  </div>
   <!-- <section class="inquiry_more"></section> -->
   <th:block th:replace="/layout/inquiry :: inquiry('inquiry_more')"></th:block>
 
