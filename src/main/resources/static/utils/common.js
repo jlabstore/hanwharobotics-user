@@ -394,6 +394,15 @@ var getCookieLang = ()=>{
     return lang;
 }
 
+
+// 쿠키 다국어 값 가져오기2
+var getCookieLangDefualtNull = ()=>{
+    var langType = ['ko', 'en'];
+    var lang = langType.includes(getCookie('lang')) ? getCookie('lang') : null;
+    return lang;
+}
+
+
 // 영문 css를 위한 클래스 수정(en 추가)
 document.addEventListener('DOMContentLoaded', function () {
     var lang = getCookieLang();
