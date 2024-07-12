@@ -233,26 +233,124 @@
 
 
 
+      // $(document).ready(function () {
+      //   // checkDomainLang();
+      // });
+      //
+      //
+      //
+      // var lang = getCookieLang();
+      // if (lang === null) {
+      //   if (window.location.href  === 'https://hanwharobotics.com:8090/') {
+      //     changeLang('en', '?lang=en');
+      //   }
+      // }
+      //
+      // if (window.location.host === 'hanwharobotics.com:8090' && window.location.search === '') {
+      //   const lang = getCookieLang();
+      //   if (lang !== 'en') {
+      //     location.href = window.location.href + '?lang=' + (lang || 'en');
+      //   }
+      // }
+      //
+      // if(window.location.host === 'hanwharobotics.com:8090'  && window.location.search === '?lang=en'){
+      //   location.href = (window.location.href).replace(window.location.search, '');
+      // }
+      //
+      // $('#languageSelect').click(function () {
+      //   const selectedLanguage = $(this).attr('value');
+      //   const param = "lang=" + selectedLanguage;
+      //   const path = window.location.pathname;
+      //   let url;
+      //   if (path === "/") {
+      //     url = "?" + param;
+      //   } else {
+      //     url = path + "?" + param;
+      //   }
+      //   changeLang(selectedLanguage, url);
+      // });
+      //
+      //
+      // function changeLang(lang, path) {
+      //   const ajaxOptions = {
+      //     type: 'GET',
+      //     url: lang === "en" ? '/lang/en' : '/lang/kr',
+      //     data: {
+      //       path
+      //     },
+      //     success: function (responseData) {
+      //       const redirectUrl = responseData.redirectUrl;
+      //       if (redirectUrl) {
+      //         window.location.href = redirectUrl;
+      //       }
+      //     }
+      //   };
+      //   ajaxOptions.xhrFields = {
+      //     withCredentials: true
+      //   };
+      //   $.ajax(ajaxOptions);
+      // }
+      //
+      // function getCookieLang() {
+      //   const cookies = document.cookie.split(';');
+      //   for (let i = 0; i < cookies.length; i++) {
+      //     let cookie = cookies[i].trim();
+      //     if (cookie.startsWith('lang=')) {
+      //       return cookie.substring(5);
+      //     }
+      //   }
+      //   return null;
+      // }
+      //
+      //
+      //
+      //
+      //
+      // function checkDomainLang() {
+      //   const lang = getCookieLang();
+      //   const domain = window.location.host;
+      //   if (domain === "hanwharobotics.co.kr:8090" && lang === "en") {
+      //     window.location.href = window.location.protocol + "//" + domain + window.location.pathname + "?lang=kr";
+      //   } else if (domain === "hanwharobotics.com:8090" && lang === "ko") {
+      //     window.location.href = window.location.protocol + "//" + domain + window.location.pathname + "?lang=en";
+      //   }
+      // }
+
+
+
       $(document).ready(function () {
         // checkDomainLang();
       });
 
+      var allowedDomains = [
+        'https://hanwharobotics.com:8090/',
+        'https://hanwharobotics.com/',
+        'https://www.hanwharobotics.com:8090/',
+        'https://www.hanwharobotics.com/'
+      ];
+
+      var allowedDomains2 = [
+        'hanwharobotics.com:8090',
+        'hanwharobotics.com',
+        'www.hanwharobotics.com:8090',
+        'www.hanwharobotics.com'
+      ];
 
       var lang = getCookieLang();
       if (lang === null) {
-        if (window.location.href  === 'https://hanwharobotics.com:8090/') {
+        if (allowedDomains.includes(window.location.host)) {
           changeLang('en', '?lang=en');
         }
       }
 
-      if (window.location.host === 'hanwharobotics.com:8090' && window.location.search === '') {
+      if (allowedDomains2.includes(window.location.host) && window.location.search === '') {
         const lang = getCookieLang();
         if (lang !== 'en') {
           location.href = window.location.href + '?lang=' + (lang || 'en');
         }
       }
 
-      if(window.location.host === 'hanwharobotics.com:8090'  && window.location.search === '?lang=en'){
+      if (allowedDomains2.includes(window.location.host) && window.location.search === '?lang=en') {
         location.href = (window.location.href).replace(window.location.search, '');
       }
 
@@ -268,7 +366,6 @@
         }
         changeLang(selectedLanguage, url);
       });
-
 
       function changeLang(lang, path) {
         const ajaxOptions = {
@@ -300,10 +397,6 @@
         }
         return null;
       }
-
-
-
-
 
       function checkDomainLang() {
         const lang = getCookieLang();
