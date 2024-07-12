@@ -133,7 +133,7 @@
                                                 <div>
                                                     <h4 class="hidden-text">내용</h4>
                                                     <!--                                                <p>-->
-                                                    <p id="reply-item-replyContent">{{replyContent}}</p>
+                                                    <p id="reply-item-replyContent" style="white-space: pre-wrap">{{replyContent}}</p>
                                                     <!--                                                </p>-->
                                                 </div>
                                                 <div class="qna-view-answer-my-btngroup">
@@ -150,7 +150,7 @@
                                                 <h4 th:utext="#{qna.answer}"></h4>
                                                 <p>
                                                     <strong>Admin<br/></strong>
-                                                    <span id="reply-item-replyContent">{{replyContent}}</span>
+                                                    <span id="reply-item-replyContent" style="white-space: pre-wrap">{{replyContent}}</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -428,6 +428,8 @@
                 success: function (data) {
                     if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
                         data.data.qnaReplies.forEach(function (reply) {
+                            reply.replyContent = br2nl(reply.replyContent);
+
                             if (reply.replyType === 'USER') {
                                 reply.isUser = true;
                                 reply.isAdmin = false;
@@ -439,6 +441,7 @@
 
                         const template = $("#reply-html").html();
                         const rendered = Mustache.render(template, {'list': data.data.qnaReplies});
+                        console.log("rendered", rendered);
                         $('.reply').html(rendered);
 
 
@@ -519,12 +522,19 @@
             });
         }
 
+        // 줄바꿈 문자를 <br>로 변환하는 함수
+        function nl2br(str) {
+            return str.replace(/\n/g, '<br>');
+        }
 
-
+        // <br>을 줄바꿈 문자로 변환하는 함수
+        function br2nl(str) {
+            return str.replace(/<br>/g, '\n');
+        }
 
         // 답글 등록
         function register() {
-            const replyContent = $('#replyContent_input').val();
+            const replyContent = nl2br($('#replyContent_input').val());
             const qnaNo = paths[paths.length - 1];
             const jsonData = {
                 replyContent: replyContent,
@@ -558,7 +568,7 @@
 
         // 답글 수정 완료
         function updateReply(replyNo) {
-            const replyContent = $('.replyContent_edit').val();
+            const replyContent = nl2br($('.replyContent_edit').val());
             const jsonData = {
                 replyContent: replyContent,
             };
@@ -618,6 +628,8 @@
                 success: function (data) {
                     if (data.data.qnaReplies != null && data.data.qnaReplies.length > 0) {
                         data.data.qnaReplies.forEach(function (reply) {
+                            reply.replyContent = br2nl(reply.replyContent);
+
                             if (reply.replyType === 'USER') {
                                 reply.isUser = true;
                                 reply.isAdmin = false;
