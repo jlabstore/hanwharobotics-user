@@ -4,9 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body data-gnb-target="robot">
-  <div layout:fragment="content">
+  <div layout:fragment="content" class="sub products solutions">
 
-  <main class="sub products solutions" th:if="#{header.nation} == 'EN'">
+  <main th:if="#{header.nation} == 'KR'">
     <section class="section_1">
       <div class="group group1">
         <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Solutions</div>
@@ -64,7 +64,7 @@
   </main>
 
 
-    <main class="sub products solutions" th:unless="#{header.nation} == 'EN'">
+    <main th:if="#{header.nation} == 'EN'">
       <section class="section_1">
         <div class="group group1">
           <div class="title" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">Solutions</div>
