@@ -533,7 +533,7 @@ $('#ecosystem-main-slider1').not('.slick-initialized').slick({
   nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 1025,
       settings: {
         slidesPerRow: 3,
         rows: 4,
@@ -562,7 +562,7 @@ $('.ecosystem-section .tab-nav #nav1').change(function() {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 4,
@@ -597,7 +597,7 @@ $('.ecosystem-section .tab-nav #nav2').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 4,
@@ -630,7 +630,7 @@ $('.ecosystem-section .tab-nav #nav3').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 4,
@@ -663,7 +663,7 @@ $('.ecosystem-section .tab-nav #nav4').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 4,
@@ -696,7 +696,7 @@ $('.ecosystem-section .tab-nav #nav5').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 4,
@@ -727,7 +727,7 @@ $('#ecosystem-template-01-slider1').not('.slick-initialized').slick({
   nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 1025,
       settings: {
         slidesPerRow: 3,
         rows: 2,
@@ -756,7 +756,7 @@ $('.ecosystem-template-01-section .tab-nav #nav1').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 2,
@@ -789,7 +789,7 @@ $('.ecosystem-template-01-section .tab-nav #nav2').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 2,
@@ -822,7 +822,7 @@ $('.ecosystem-template-01-section .tab-nav #nav3').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 2,
@@ -853,7 +853,7 @@ $('.ecosystem-template-01-section .tab-nav #nav4').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 2,
@@ -886,7 +886,7 @@ $('.ecosystem-template-01-section .tab-nav #nav5').change(function () {
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             slidesPerRow: 3,
             rows: 2,
