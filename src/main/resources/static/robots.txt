@@ -1,13 +1,2 @@
 User-agent: *
-Disallow: /contact/
-Disallow: /login-page/
-Disallow: /signup/
-Disallow: /check/
-Disallow: /delete/complete
-Disallow: /find-id/
-Disallow: /find-pw/
-Disallow: /qna/
-Disallow: /member/
-Disallow: /password/
-
-
+Disallow:
