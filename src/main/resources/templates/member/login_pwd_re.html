@@ -88,11 +88,13 @@
     const isPasswordMatch = checkPasswordMatch();
 
     if (!isPasswordValid) {
-      alert('비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.');
+      // alert('비밀번호는 8글자 이상의 영문과 숫자 조합이어야 합니다.');
+      alert([[#{pwd.reset.check1}]]);
       return;
     }
     if (!isPasswordMatch) {
-      alert('비밀번호가 일치하지 않습니다.');
+      // alert('비밀번호가 일치하지 않습니다.');
+      alert([[#{pwd.reset.check2}]]);
       return;
     }
 
