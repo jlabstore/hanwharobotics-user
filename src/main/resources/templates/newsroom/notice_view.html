@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
+
 <body data-gnb-target="newsroom">
     <div layout:fragment="content">
 
@@ -19,6 +20,8 @@
               <div class="column">
                 <div class="board_title"></div>
                 <div class="board_date"></div>
+
+                <!-- 여긴가 -->
                 <div class="board_contents"></div>
 
                 <div class="board_files"></div>
@@ -85,6 +88,20 @@
                 }
               });
             }
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+              var iframes = document.querySelectorAll('.col-9 iframe');
+              iframes.forEach(function (iframe) {
+                iframe.style.position = '';
+                iframe.style.width = '100%';
+                iframe.style.height = '';
+                iframe.style.top = '';
+                iframe.style.left = '';
+              });
+            });
+
+
         </script>
     </th:block>
 </html>
