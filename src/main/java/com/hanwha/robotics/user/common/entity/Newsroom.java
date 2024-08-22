@@ -16,6 +16,7 @@ public class Newsroom {
    private String showYn;
    private String categoryCd;
    private String categoryCdNm;
+   private String lang;
 
    //IR-첨부파일, PRESS-썸네일
    private String originalFileNm;

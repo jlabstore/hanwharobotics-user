@@ -71,7 +71,8 @@
            title,
            create_dt,
            content,
-           category_cd
+           category_cd,
+           lang
         FROM
             tb_newsroom
         WHERE
