@@ -45,9 +45,8 @@
     function getCookie(name) {
       const value = "; " + document.cookie;
       const parts = value.split("; " + name + "=");
-      if (parts.length === 2) {
-        return parts.pop().split(";").shift();
-      }
+      if (parts.length === 2) return parts.pop().split(";").shift();
+      return null;
     }
 
     function goBack() {
@@ -75,7 +74,7 @@
 
             const currentLang = getCookie('lang');
 
-            if (data.data.lang !== currentLang) {
+            if(currentLang && data.data.lang !== currentLang){
               location.href = "/newsroom/press";
               return;
             }
