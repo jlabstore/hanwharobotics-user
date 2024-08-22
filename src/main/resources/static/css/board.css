@@ -216,7 +216,7 @@
 }
 
 .board-type1 .board_list .tbody .contents strong {
-  font-family: HanwhaGothicB_OTF
+  font-family: HanwhaGothicB_OTF;
 }
 
 .board-type1 .board_list .tbody .td:first-child {
@@ -417,7 +417,7 @@
   margin-top: 162px;
   font-family: HanwhaGothicB_OTF;
   font-size: 40px;
-  line-height: 1.38;
+  line-height: 1.4;
   text-align: left;
   color: #000;
 }
@@ -426,7 +426,7 @@
   margin-top: 60px;
   font-family: HanwhaGothicB_OTF;
   font-size: 24px;
-  line-height: 1.38;
+  line-height: 1.4;
   text-align: left;
   color: #000;
 }
@@ -434,7 +434,7 @@
   margin-top: 45px;
   font-family: HanwhaGothicB_OTF;
   font-size: 18px;
-  line-height: 1.83;
+  line-height: 1.4;
   text-align: left;
   color: #000;
 }
@@ -443,22 +443,71 @@
   margin-bottom: 6px;
   font-family: HanwhaGothicB_OTF;
   font-size: 17px;
-  line-height: 1.94;
+  line-height: 1.4;
   text-align: left;
   color: #000;
 }
+.board .board_contents p {
+  margin: 20px 0;
+}
+.board .board_contents strong, .board .board_contents b {
+  font-family: HanwhaGothicB_OTF;
+}
+.board .board_contents a {
+  text-decoration: underline;
+  color: #1850e3;
+}
+.board .board_contents ul, .board .board_contents ol {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+.board .board_contents ul li {
+  list-style: square;
+}
 .board .board_contents blockquote {
-  margin-top: 50px;
+  margin: 30px 0;
 }
 
 .board .board_contents blockquote p {
-
   font-family: HanwhaGothicR_OTF;
   font-size: 14px;
-  line-height: 1.86;
+  line-height: 1.6;
   text-align: left;
   color: #999;
 }
+.board .board_contents .table {
+  margin: 20px 0;
+}
+.board .board_contents .table table, .board .board_contents .table th, .board .board_contents .table td {
+  border: 1px solid #000;
+  border-collapse: collapse;
+  font-size: 15px;
+  font-family: HanwhaGothicEL_OTF;
+}
+.board .board_contents .table th, .board .board_contents .table td {
+  padding: 3px 12px;
+}
+.board .board_contents .table table {
+  width: 100%;
+}
+.board .board_contents .table th {
+  background-color: #e9e9e9;
+}
+.board .board_contents .text-tiny {
+  font-size: 12px;
+}
+.board .board_contents .text-small {
+  font-size: 15px;
+}
+.board .board_contents .text-big {
+  font-size: 24px;
+  line-height: 1em;
+}
+.board .board_contents .text-huge {
+  font-size: 32px;
+  line-height: 1em;
+}
+
 .press-view .board-type1 .board_date {
   margin-top: 18px;
   font-family: HanwhaGothicEL_OTF;
