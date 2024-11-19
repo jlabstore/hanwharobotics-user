@@ -5,6 +5,12 @@ header {
 header .header_wrapper {
 	background: transparent;
 }
+@media (min-width: 1024px) {
+	header.main_header .header_wrapper {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+}
 
 .mobile header {
 	padding: 16px 40px !important;
