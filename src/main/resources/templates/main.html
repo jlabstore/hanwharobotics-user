@@ -7,38 +7,47 @@
 <div layout:fragment="content">
     <main class="main">
         <section class="section1">
-            <div class="bg_section"></div>
-            <div class="contents">
+<!--            <div class="bg_section"></div>-->
 
-                <div class="main_txt">
-
-                    <div class="title">Quality & Trust</div>
-                    <!-- <div class="txt">
-                      품질과 신뢰성을 기반으로<br />
-                      차별화된 기술과 솔루션을<br />
-                      제공합니다.
-                    </div> -->
-                    <div class="txt" th:utext="#{main.quality}"></div>
-                    <div class="move_to_intro">
-                        <!-- <a href="/about">
-                          한화로보틱스 소개<br />보러가기
-                          <span></span>
-                        </a> -->
-                        <!-- <a href="/about" th:utext="#{main.trust}"></a> -->
-                        <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)"
-                           th:utext="#{main.trust}"></a>
-                    </div>
-
-                </div>
+            <div class="bg_section">
+                <div class="contents"><img src="../images/pc/main_bg1.webp"></div>
+                <div class="contents"><img src="../images/pc/main_bg2.png"></div>
+                <div class="contents"><img src="../images/pc/main_bg3.png"></div>
             </div>
 
-            <div class="update updatesDiv">
-                <div class="title">Updates</div>
-                <div class="txt updatesContentDiv">
-                    <!-- <div>조회결과가 없습니다.</div> -->
-                    <div th:utext="#{main.noUpdates}"></div>
-                </div>
-            </div>
+
+<!--            <div class="contents">-->
+
+<!--                <div class="main_txt">-->
+
+<!--                    <div class="title">Quality & Trust</div>-->
+<!--                    &lt;!&ndash; <div class="txt">-->
+<!--                      품질과 신뢰성을 기반으로<br />-->
+<!--                      차별화된 기술과 솔루션을<br />-->
+<!--                      제공합니다.-->
+<!--                    </div> &ndash;&gt;-->
+<!--                    <div class="txt" th:utext="#{main.quality}"></div>-->
+<!--                    <div class="move_to_intro">-->
+<!--                        &lt;!&ndash; <a href="/about">-->
+<!--                          한화로보틱스 소개<br />보러가기-->
+<!--                          <span></span>-->
+<!--                        </a> &ndash;&gt;-->
+<!--                        &lt;!&ndash; <a href="/about" th:utext="#{main.trust}"></a> &ndash;&gt;-->
+<!--                        <a href="javascript:void(0)" th:type="#{header.nation}" onclick="goAbout(type)"-->
+<!--                           th:utext="#{main.trust}"></a>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="update updatesDiv">-->
+<!--                <div class="title">Updates</div>-->
+<!--                <div class="txt updatesContentDiv">-->
+<!--                    &lt;!&ndash; <div>조회결과가 없습니다.</div> &ndash;&gt;-->
+<!--                    <div th:utext="#{main.noUpdates}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
         </section>
 
         <section class="section_bottom">
@@ -243,6 +252,17 @@
                 location.href = '/about?lang=en';
             }
         }
+
+        $(document).ready(function(){
+            $('.bg_section').slick({
+                dots: true,
+                arrows: false,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: false
+            });
+        });
     </script>
 </th:block>
 </html>
