@@ -85,9 +85,9 @@
 <!--                  <a href="/eco/main">Ecosystem</a>-->
 <!--                </li>-->
 
-                <li>
-                  <a href="/cobot/case-studies" th:utext="#{header.partnerSystem}"></a>
-                </li>
+<!--                <li>-->
+<!--                  <a href="/cobot/case-studies" th:utext="#{header.partnerSystem}"></a>-->
+<!--                </li>-->
                 <li>
                   <a href="/cobot/modulesystem" th:utext="#{header.moduleSystem}"></a>
                 </li>
@@ -147,13 +147,13 @@
         </div>
 
         <a href="/login-page" th:if="${#request.userPrincipal == null}">
-          <span class="login">
+          <span class="login" style="display: none">
             <span>login</span>
           </span>
         </a>
 
 
-        <span class="login" th:if="${#request.userPrincipal != null}">
+        <span class="login" th:if="${#request.userPrincipal != null}" style="display: none">
           <span>login</span>
           <span class="login-tooltip" th:if="${#request.userPrincipal != null}">
             <div class="login-tooltip-content">
