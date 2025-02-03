@@ -13,6 +13,11 @@ public class AgvAmrController {
         return "agv_amr/products";
     }
 
+    @GetMapping("/case-studies")
+    public String agvAmr() {
+        return "agv_amr/case_studies";
+    }
+
     @GetMapping("/forklift-type")
     public String forklift() {
         return "agv_amr/products_detail_forklift";
