@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +49,7 @@ public class AgvAmrController {
     }
 
     @PostMapping("/case-studies")
-    public ResponseEntity<Object> findCaseCategory(
+    public ResponseEntity<Object> findCaseByCategory(
         RobotRequest robotRequest,
         HttpServletRequest request
     ) {
@@ -56,6 +57,14 @@ public class AgvAmrController {
         robotRequest.setLang(lang);
         List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
         return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
+    }
+
+    @GetMapping("/case-studies/{robotNo}")
+    public String caseStudiesViewPage(@PathVariable int robotNo, Model model) {
+        log.info("???들어는 왔나");
+        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+        model.addAttribute("robotCategory", robotCategory);
+        return "agv_amr/case_studies_view";
     }
 
 

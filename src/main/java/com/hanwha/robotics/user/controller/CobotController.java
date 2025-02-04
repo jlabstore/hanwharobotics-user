@@ -38,23 +38,22 @@ public class CobotController {
 
   private final CommonUtil commonUtil;
 
-
-
-//  @GetMapping("/modulesystem")
-//  public String modulesystem() {
-//    log.info("협동로봇 > 자동화시스템");
-//    return "cobot/modulesystem_list";
-//  }
-
   @GetMapping("/modulesystem")
   public String modulesystem(
       @RequestParam(value = "categoryNo", required = false) Integer categoryNo,
       Model model,
       HttpServletRequest request
   ) {
+    log.info("여기 들어왔나 {}", categoryNo);
     String lang = commonUtil.getCookieLang(request);
-    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
-    List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.AUTO_SYSTEM.name(), RobotBoardType.CO_ROBOT.name(), categoryNo, lang);
+    RobotRequest robotRequest = RobotRequest.builder()
+        .lang(lang)
+        .boardType1(RobotBoardType.AUTO_SYSTEM.name())
+        .boardType2(RobotBoardType.CO_ROBOT.name())
+        .categoryNo(categoryNo)
+        .build();
+    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory(robotRequest);
+    List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
     model.addAttribute("robotCategory", robotCategory);
     model.addAttribute("robotResponseList", robotResponseList);
     return "cobot/modulesystem_list";

@@ -9,135 +9,135 @@
 
 <div layout:fragment="content">
 
-    <main class="sub qna-list">
-        <div class="board board-type1">
-            <div class="column">
-                <h1>Q<span>&</span>A</h1>
-                <p class="desc" th:utext="#{qna.leftTitle}">
-                </p>
-            </div>
+  <main class="sub qna-list">
+    <div class="board board-type1">
+      <div class="column">
+        <h1>Q<span>&</span>A</h1>
+        <p class="desc" th:utext="#{qna.leftTitle}">
+        </p>
+      </div>
 
-            <div class="column board_list">
+      <div class="column board_list">
 
-                <div class="column-head">
-                    <form class="search" onsubmit="return false;">
-                        <input type="text" th:placeholder="#{qna.placeholder}" name="search" id="keyword"/>
-                        <button type="button" class="search-button" onclick="getList()">
-                            <img src="../images/pc/ic_search.svg" alt="" />
-                        </button>
-                        <button type="button" class="search-close">
-                            <img src="../images/pc/btn_close.svg" alt="" />
-                        </button>
-                    </form>
+        <div class="column-head">
+          <form class="search" onsubmit="return false;">
+            <input type="text" th:placeholder="#{qna.placeholder}" name="search" id="keyword"/>
+            <button type="button" class="search-button" onclick="getList()">
+              <img src="../images/pc/ic_search.svg" alt=""/>
+            </button>
+            <button type="button" class="search-close">
+              <img src="../images/pc/btn_close.svg" alt=""/>
+            </button>
+          </form>
 
-                    <button type="button" class="qna-mobile-search">
-                        <img src="../images/pc/ic_search.svg" alt="" />
-                    </button>
+          <button type="button" class="qna-mobile-search">
+            <img src="../images/pc/ic_search.svg" alt=""/>
+          </button>
 
-                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()" th:utext="#{qna.inquiryButton}">
+          <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()"
+                  th:utext="#{qna.inquiryButton}">
 
-                    </button>
-                </div>
-
-
-                <div class="table">
-                    <div class="thead">
-                        <div class="th" th:utext="#{qna.no}"></div>
-                        <div class="th" th:utext="#{qna.author}"></div>
-                        <div class="th" th:utext="#{qna.title}"></div>
-                        <div class="th" th:utext="#{qna.progress}"></div>
-                        <div class="th" th:utext="#{qna.date}"></div>
-                    </div>
-                    <div class="tbody newsroomTbody">
-                        <div class="tr">
-                            <p class="empty" th:utext="#{main.noLists}"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paging">
-
-<!--                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()">-->
-<!--                        문의하기-->
-<!--                        <span><strong>+</strong></span>-->
-<!--                    </button>-->
-
-                </div>
-
-            </div>
+          </button>
         </div>
 
 
-    </main>
-
-
-
-    <form id="form">
-        <input type="hidden" name="size" id="size" value="10"/>
-        <input type="hidden" name="page" id="page" value="1"/>
-    </form>
-
-    <script id="list-tmpl" type="x-tmpl-mustache" class="hide">
-        {{#list}}
+        <div class="table">
+          <div class="thead">
+            <div class="th" th:utext="#{qna.no}"></div>
+            <div class="th" th:utext="#{qna.author}"></div>
+            <div class="th" th:utext="#{qna.title}"></div>
+            <div class="th" th:utext="#{qna.progress}"></div>
+            <div class="th" th:utext="#{qna.date}"></div>
+          </div>
+          <div class="tbody newsroomTbody">
             <div class="tr">
+              <p class="empty" th:utext="#{main.noLists}"></p>
+            </div>
+          </div>
+        </div>
 
-                <a href="/qna/{{qnaNo}}">
+        <div class="paging">
+
+          <!--                    <button type="button" class="inquiry qna" onclick="layerQnaOpenBtn()">-->
+          <!--                        문의하기-->
+          <!--                        <span><strong>+</strong></span>-->
+          <!--                    </button>-->
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </main>
+
+
+  <form id="form">
+    <input type="hidden" name="size" id="size" value="10"/>
+    <input type="hidden" name="page" id="page" value="1"/>
+  </form>
+
+  <script id="list-tmpl" type="x-tmpl-mustache" class="hide">
+    {{#list}}
+        <div class="tr">
+
+            <a href="/qna/{{qnaNo}}">
 <!--                <a onclick="goToQnaDetail('{{qnaNo}}')">-->
 
-                    <div class="td">
-                        {{#isFixed}}
-                            <strong class="faq_notice">FAQ</strong>
-                        {{/isFixed}}
-                        {{^isFixed}}
-                            {{no}}
-                        {{/isFixed}}
-                    </div>
+                <div class="td">
+                    {{#isFixed}}
+                        <strong class="faq_notice">FAQ</strong>
+                    {{/isFixed}}
+                    {{^isFixed}}
+                        {{no}}
+                    {{/isFixed}}
+                </div>
 
 
-                    <div class="td">{{memberId}}</div>
+                <div class="td">{{memberId}}</div>
 
-                    <div class="td">
-                        <span class="contents">
-                            {{title}}
-                        </span>
-                        <span class="endStatus">
+                <div class="td">
+                    <span class="contents">
+                        {{title}}
+                    </span>
+                    <span class="endStatus">
 
-                            {{#isExposure}}
-                            {{/isExposure}}
+                        {{#isExposure}}
+                        {{/isExposure}}
 
-                            {{^isExposure}}
-                                <img class="qna_lock" src="../images/pc/ic_lock.svg" alt="" />
-                            {{/isExposure}}
-
-
-                        </span>
-                    </div>
-
-                    <div class="td">
-
-                        {{#isAnswered}}
-                            <span class="qna_badge qna_complete" th:text="#{qna.answered}">답변 완료</span>
-                        {{/isAnswered}}
-                        {{^isAnswered}}
-                            <span class="qna_badge qna_ing" th:text="#{qna.answeredProgress}">답변 진행중</span>
-                        {{/isAnswered}}
-
-                    </div>
-                    <div class="td">{{createDt}} </div>
-                </a>
+                        {{^isExposure}}
+                            <img class="qna_lock" src="../images/pc/ic_lock.svg" alt="" />
+                        {{/isExposure}}
 
 
-            </div>
-        {{/list}}
-        {{^list}}
-            <div class="tr">
-                <!-- <p class="empty">
-                    조회 결과가 없습니다.
-                </p> -->
-                <p class="empty" th:text="#{qna.empty}"></p>
-            </div>
-        {{/list}}
-    </script>
+                    </span>
+                </div>
+
+                <div class="td">
+
+                    {{#isAnswered}}
+                        <span class="qna_badge qna_complete" th:text="#{qna.answered}">답변 완료</span>
+                    {{/isAnswered}}
+                    {{^isAnswered}}
+                        <span class="qna_badge qna_ing" th:text="#{qna.answeredProgress}">답변 진행중</span>
+                    {{/isAnswered}}
+
+                </div>
+                <div class="td">{{createDt}} </div>
+            </a>
+
+
+        </div>
+    {{/list}}
+    {{^list}}
+        <div class="tr">
+            <!-- <p class="empty">
+                조회 결과가 없습니다.
+            </p> -->
+            <p class="empty" th:text="#{qna.empty}"></p>
+        </div>
+    {{/list}}
+  </script>
 
 </div>
 
@@ -146,86 +146,75 @@
 
 
 <th:block layout:fragment="script">
-    <script>
+  <script>
 
-        $(document).ready(function () {
-            setQueryStringParams();
-            getList();
-        });
+    $(document).ready(function () {
+      setQueryStringParams();
+      getList();
+    });
 
+    function getList(page) {
 
-        function getList(page) {
+      if (typeof page != "undefined" && page != null) {
+        $('#page').val(page);
+      }
 
-            if (typeof page != "undefined" && page != null) $('#page').val(page);
+      COMM.ajaxPagingList({
+            url: "/qna"
+          },
+          function success(data) {
 
-            COMM.ajaxPagingList({
-                    url: "/qna"
-                },
-                function success(data) {
+            data.contents.forEach(function (item) {
+              item.isExposure = (item.exposureStatus === 'Y');
+              item.isAnswered = (item.endStatus === 'Y');
+              item.isFixed = (item.fixedStatus === 'Y');
+            });
 
-                    data.contents.forEach(function (item) {
-                        item.isExposure = (item.exposureStatus === 'Y');
-                        item.isAnswered = (item.endStatus === 'Y');
-                        item.isFixed = (item.fixedStatus === 'Y');
-                    });
+            const template = $("#list-tmpl").html();
+            const rendered = Mustache.render(template, {'list': data.contents});
+            $('.tbody').html(rendered);
 
-                    const template = $("#list-tmpl").html();
-                    const rendered = Mustache.render(template, {'list': data.contents});
-                    $('.tbody').html(rendered);
+            // if (data.totalElements !== 0) {
+            setPagination(data, $('.paging'));
 
-                    // if (data.totalElements !== 0) {
-                        setPagination(data, $('.paging'));
+            // 문의하기 버튼 추가
+            const inquiryButton = document.createElement('button');
+            inquiryButton.setAttribute('type', 'button');
+            inquiryButton.classList.add('inquiry', 'qna');
+            // inquiryButton.innerHTML = '문의하기 <span><strong>+</strong></span>';
+            inquiryButton.innerHTML = '[[#{qna.inquiryButton2}]] <span><strong>+</strong></span>';
+            inquiryButton.onclick = function () {
+              layerQnaOpenBtn();
+            };
+            $('.paging').append(inquiryButton);
 
-                        // 문의하기 버튼 추가
-                        const inquiryButton = document.createElement('button');
-                        inquiryButton.setAttribute('type', 'button');
-                        inquiryButton.classList.add('inquiry', 'qna');
-                        // inquiryButton.innerHTML = '문의하기 <span><strong>+</strong></span>';
-                        inquiryButton.innerHTML = '[[#{qna.inquiryButton2}]] <span><strong>+</strong></span>';
-                        inquiryButton.onclick = function() {
-                            layerQnaOpenBtn();
-                        };
-                        $('.paging').append(inquiryButton);
+            // }
 
-                    // }
+          }
+      );
+    }
 
+    const loginMemberNo = Number("[[${#request.userPrincipal.getName()}]]");
 
+    // function goToQnaDetail(qnaNo, data) {
+    //     console.log(qnaNo)
+    //     console.log(data)
+    //     const qnaItem = data.contents.find(item => item.qnaNo === parseInt(qnaNo));
+    //     if ((qnaItem.exposureStatus === 'Y') && (loginMemberNo !== qnaItem.memberNo)) {
+    //         alert("비공개 게시글입니다.");
+    //     } else {
+    //         window.location.href = `/qna/${qnaNo}`;
+    //     }
+    // }
 
-
-                }
-            );
-        }
-
-
-        const loginMemberNo =  Number("[[${#request.userPrincipal.getName()}]]");
-
-
-        // function goToQnaDetail(qnaNo, data) {
-        //     console.log(qnaNo)
-        //     console.log(data)
-        //     const qnaItem = data.contents.find(item => item.qnaNo === parseInt(qnaNo));
-        //     if ((qnaItem.exposureStatus === 'Y') && (loginMemberNo !== qnaItem.memberNo)) {
-        //         alert("비공개 게시글입니다.");
-        //     } else {
-        //         window.location.href = `/qna/${qnaNo}`;
-        //     }
-        // }
-
-
-
-
+    document.getElementById('keyword').addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        getList();
+      }
+    });
 
 
-
-        document.getElementById('keyword').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                getList();
-            }
-        });
-
-
-    </script>
-
+  </script>
 
 
 </th:block>

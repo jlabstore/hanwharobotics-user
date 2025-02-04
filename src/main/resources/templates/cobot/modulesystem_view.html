@@ -53,22 +53,42 @@
         <div class="tab-nav-wrapper">
 
 
-          <input type="radio" id="nav0" name="nav" checked/>
-          <label for="nav0">전체</label>
+<!--          <input type="radio" id="nav0" name="nav" checked/>-->
+<!--          <label for="nav0">전체</label>-->
+<!--          <th:block th:each="robotCategory, stat : ${robotCategory}">-->
+<!--            <input type="radio" th:id="'nav' + ${stat.index + 1}"-->
+<!--                   th:data-category-no="${robotCategory.categoryNo}"-->
+<!--                   name="nav"/>-->
+<!--            <label th:for="'nav' + ${stat.index + 1}" th:text="${robotCategory.categoryNm}"></label>-->
+<!--          </th:block>-->
+
+<!--          <select class="tab-nav-mobile">-->
+<!--            <option value="nav_all" th:selected="true">전체</option>-->
+<!--            <th:block th:each="robotCategory, stat : ${robotCategory}">-->
+<!--              <option th:value="'nav' + ${stat.index}"-->
+<!--                      th:text="${robotCategory.categoryNm}"-->
+<!--                      th:onclick="'changeCategory(' + ${robotCategory.categoryNo} + ')'"-->
+<!--              ></option>-->
+<!--            </th:block>-->
+<!--          </select>-->
+
+
+
+          <input type="radio" id="nav1" name="nav" checked />
+          <label for="nav1" class="ecosystem-nav1">
+            <span>전체</span>
+          </label>
           <th:block th:each="robotCategory, stat : ${robotCategory}">
-            <input type="radio" th:id="'nav' + ${stat.index + 1}"
-                   th:data-category-no="${robotCategory.categoryNo}"
-                   name="nav"/>
-            <label th:for="'nav' + ${stat.index + 1}" th:text="${robotCategory.categoryNm}"></label>
+            <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav" />
+            <label th:for="'nav' + ${stat.index + 2}">
+              <span th:text="${robotCategory.categoryNm}"></span>
+            </label>
           </th:block>
 
           <select class="tab-nav-mobile">
             <option value="nav_all" th:selected="true">전체</option>
             <th:block th:each="robotCategory, stat : ${robotCategory}">
-              <option th:value="'nav' + ${stat.index}"
-                      th:text="${robotCategory.categoryNm}"
-                      th:onclick="'changeCategory(' + ${robotCategory.categoryNo} + ')'"
-              ></option>
+              <option th:value="'nav' + ${stat.index}" th:text="${robotCategory.categoryNm}"></option>
             </th:block>
           </select>
 

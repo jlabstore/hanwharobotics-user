@@ -23,5 +23,9 @@ public class RobotCategoryServiceImpl implements RobotCategoryService {
   }
 
 
+  public List<RobotCategoryResponse> findRobotCategoryByCase(RobotRequest robotRequest) {
+    return robotCategoryMapper.findRobotCategory(robotRequest);
+  }
+
 
 }

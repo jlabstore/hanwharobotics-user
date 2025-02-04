@@ -1,11 +1,13 @@
 package com.hanwha.robotics.user.dto.robot;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder(toBuilder = true)
 public class RobotRequest {
 
-  private int categoryNo;
+  private Integer categoryNo;
   private String boardType1;
   private String boardType2;
   private String robotNm;
