@@ -44,25 +44,23 @@ public class CobotController {
   }
 
   @GetMapping("/modulesystem")
-  public String modulesystem(
-      @RequestParam(value = "categoryNo", required = false) Integer categoryNo,
-      Model model,
-      HttpServletRequest request
-  ) {
-    log.info("여기 들어왔나 {}", categoryNo);
-    String lang = commonUtil.getCookieLang(request);
-    RobotRequest robotRequest = RobotRequest.builder()
-        .lang(lang)
-        .boardType1(RobotBoardType.AUTO_SYSTEM.name())
-        .boardType2(RobotBoardType.CO_ROBOT.name())
-        .categoryNo(categoryNo)
-        .build();
-    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory(robotRequest);
-    List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
+  public String modulesystemPage(Model model) {
+    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
     model.addAttribute("robotCategory", robotCategory);
-    model.addAttribute("robotResponseList", robotResponseList);
     return "cobot/modulesystem_list";
   }
+
+  @PostMapping
+  public ResponseEntity<Object> findmMdulesystemByCategory(
+      RobotRequest robotRequest,
+      HttpServletRequest request
+  ) {
+    String lang = commonUtil.getCookieLang(request);
+    robotRequest.setLang(lang);
+    List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
+    return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
+  }
+  
 
   @GetMapping("/modulesystem/{robotNo}")
   public String modulesystemDetail(
@@ -91,19 +89,14 @@ public class CobotController {
     return "cobot/modulesystem_view";
   }
 
+
   @GetMapping("/case-studies")
-  public String caseStudies(
-      @RequestParam(value = "categoryNo", required = false) Integer categoryNo,
-      Model model,
-      HttpServletRequest request
-  ) {
-    String lang = commonUtil.getCookieLang(request);
+  public String caseStudiesPage(Model model) {
     List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
-    List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.ROBOT_CASE.name(), RobotBoardType.CO_ROBOT.name(), categoryNo, lang);
     model.addAttribute("robotCategory", robotCategory);
-    model.addAttribute("robotResponseList", robotResponseList);
     return "cobot/case_studies_list";
   }
+
 
   @GetMapping("/case-studies/{robotNo}")
   public String caseDetail(
@@ -118,26 +111,6 @@ public class CobotController {
     model.addAttribute("robotFileList", robotFileList);
     return "cobot/case_studies_view";
   }
-
-//  @PostMapping("/category")
-//  public ResponseEntity<Object> findCategory(@RequestBody RobotRequest request) {
-//    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory(request);
-//    return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotCategory));
-//  }
-
-//  @PostMapping("/list")
-//  public ResponseEntity<Object> findRobotList(HttpServletRequest request) {
-//    String lang = commonUtil.getCookieLang(request);
-////    List<RobotResponse> robotResponseList = robotService.findRobot(lang);
-//    return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
-//  }
-
-
-
-
-
-
-
 
 
 

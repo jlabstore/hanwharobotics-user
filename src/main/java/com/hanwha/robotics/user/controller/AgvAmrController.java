@@ -44,7 +44,7 @@ public class AgvAmrController {
 
     @GetMapping("/case-studies")
     public String caseStudiesListPage(Model model) {
-        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
         model.addAttribute("robotCategory", robotCategory);
         return "agv_amr/case_studies_list";
     }
@@ -63,7 +63,7 @@ public class AgvAmrController {
     @GetMapping("/case-studies/{robotNo}")
     public String caseStudiesViewPage(@PathVariable int robotNo, Model model) {
         log.info("상세페이지");
-        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
         RobotResponse robotResponse = robotService.findRobotByRobotNo(robotNo);
         List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNo(robotNo);
         model.addAttribute("robotCategory", robotCategory);
@@ -73,20 +73,6 @@ public class AgvAmrController {
     }
 
 
-//    @GetMapping("/case-studies")
-//    public String caseStudies(
-//        @RequestParam(value = "categoryNo", required = false) Integer categoryNo,
-//        Model model,
-//        HttpServletRequest request
-//    ) {
-//        String lang = commonUtil.getCookieLang(request);
-//        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(
-//            RobotBoardType.AUTO_SYSTEM.name());
-//        List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.ROBOT_CASE.name(), RobotBoardType.AVG_AMR.name(), categoryNo, lang);
-//        model.addAttribute("robotCategory", robotCategory);
-//        model.addAttribute("robotResponseList", robotResponseList);
-//        return "agv_amr/case_studies_list";
-//    }
 
     @GetMapping("/forklift-type")
     public String forklift() {
