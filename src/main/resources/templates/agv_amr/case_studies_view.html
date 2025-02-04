@@ -17,594 +17,71 @@
     <section class="product-info">
       <!-- 카테고리 -->
       <div class="product-category">
-        <span>Food & Beverage</span>
+        <span th:utext="${robotResponse.categoryNm}"></span>
       </div>
       <!-- 타이틀 -->
-      <div class="product-title">바리스타 로봇(스토랑)</div>
+      <div class="product-title" th:utext="${robotResponse.robotNm}"></div>
       <!-- 설명 -->
-      <div class="product-desc">커피 및 다양한 음료 제조 과정을 자동화한 시스템 모듈</div>
+      <div class="product-desc" th:utext="${robotResponse.description}"></div>
     </section>
+
 
     <section class="product-image">
       <!-- 썸네일 or 동영상 -->
-      <img src="../images/product/casestudies_image.png" />
+      <th:block th:each="file : ${robotFileList}">
+        <img th:src="@{${file.filePath}}" alt="로봇 이미지" />
+      </th:block>
     </section>
 
     <section class="product-spec">
-      <!-- 내용 -->
-      제품스펙제품스펙제품스펙제품스펙제품스펙제품스펙
+      <span th:utext="${robotResponse.productSpac}"></span>
     </section>
 
     <section class="ecosystem-template-01-section">
       <div class="tab-nav">
         <div class="tab-nav-wrapper">
+
+
           <input type="radio" id="nav1" name="nav" checked />
           <label for="nav1" class="ecosystem-nav1">
             <span>전체</span>
           </label>
-          <input type="radio" id="nav2" name="nav" />
-          <label for="nav2" class="ecosystem-nav2">
-            <span>그리퍼</span>
-          </label>
-          <input type="radio" id="nav3" name="nav" />
-          <label for="nav3" class="ecosystem-nav3">
-            <span>비전</span>
-          </label>
-          <input type="radio" id="nav4" name="nav" />
-          <label for="nav4" class="ecosystem-nav4">
-            <span>기능 확장</span>
-          </label>
-          <input type="radio" id="nav5" name="nav" />
-          <label for="nav5" class="ecosystem-nav5">
-            <span>기타</span>
-          </label>
+          <th:block th:each="robotCategory, stat : ${robotCategory}">
+            <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav" />
+            <label th:for="'nav' + ${stat.index + 2}"
+                   th:data-category="${robotCategory.categoryNm}"
+                   th:data-category-no="${robotCategory.categoryNo}"
+            >
+              <span th:text="${robotCategory.categoryNm}"></span>
+            </label>
+          </th:block>
+
 
           <select class="tab-nav-mobile">
-            <option value="nav1" selected>전체</option>
-            <option value="nav2">그리퍼</option>
-            <option value="nav3">비전</option>
-            <option value="nav4">기능 확장</option>
-            <option value="nav5">기타</option>
+            <option value="nav_all" th:selected="true">전체</option>
+            <th:block th:each="robotCategory, stat : ${robotCategory}">
+              <option th:value="${robotCategory.categoryNo}" th:text="${robotCategory.categoryNm}"></option>
+            </th:block>
           </select>
+
 
           <div class="tab-content-wrapper">
             <div id="nav1-content" class="nav-content">
               <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider1">
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_02_thumb.jpeg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_03_thumb.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_04_thumb.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_05_thumb.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_06_thumb.jpeg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_07.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_08.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_09_thumb.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_10.jpg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_11.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_12.jpg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_13_thumb.png" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_14.jpg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_15.jpg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
-                <a href="#" class="casestudies-template-01-slider-item">
-                  <div class="casestudies-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_16.jpg" alt="" />
-                  </div>
-                  <p>EYES</p>
-                  <span>OnRobot</span>
-                </a>
+                <script id="slider-template" type="x-tmpl-mustache" class="hide">
+                  {{#items}}
+                    <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
+                      <div class="casestudies-main-slider-item-img">
+                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+                      </div>
+                      <p>{{robotNm}}</p>
+                      <span>{{description}}</span>
+                    </a>
+                  {{/items}}
+                </script>
               </div>
             </div>
-            <div id="nav2-content" class="nav-content">
-              <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider2">
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_04_thumb.png" alt="" />
-                  </div>
-                  <p>PHD Pneu-Connect X2 Dual Pneumatic Grippers</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_08.png" alt="" />
-                  </div>
-                  <p>Vacuum Gripper Unit ZXP-X1(Compatible with HCR-3A)</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_12.jpg" alt="" />
-                  </div>
-                  <p>Air Gripper Unit for Hanwha Collaborative Robots (JMHZ2-HWRB01)</p>
-                </a>
 
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_16.jpg" alt="" />
-                  </div>
-                  <p>Soft Grippers</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_19_thumb.png" alt="" />
-                  </div>
-                  <p>3FG15</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_22_thumb.png" alt="" />
-                  </div>
-                  <p>Gecko SP</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_25_thumb.png" alt="" />
-                  </div>
-                  <p>VGC10</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_28_thumb.png" alt="" />
-                  </div>
-                  <p>Gecko Gripper</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_31_thumb.png" alt="" />
-                  </div>
-                  <p>RG2-FT</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_34_thumb.png" alt="" />
-                  </div>
-                  <p>VG10</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_37_thumb.png" alt="" />
-                  </div>
-                  <p>RG2, RG6</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_40_thumb.png" alt="" />
-                  </div>
-                  <p>Hand-E</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_42_thumb.jpeg" alt="" />
-                  </div>
-                  <p>2F-85, 2F-140</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_44_thumb.jpeg" alt="" />
-                  </div>
-                  <p>AG-95 Adaptive Gripper</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_46_thumb.png" alt="" />
-                  </div>
-                  <p>PHD Pneu-Connect X1 Pneumatic Grippers</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_48_thumb.png" alt="" />
-                  </div>
-                  <p>Co-act EGP-C</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_49.png" alt="" />
-                  </div>
-                  <p>HRC-03-086003</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_50.png" alt="" />
-                  </div>
-                  <p>HRC-03-099507</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_51.jpg" alt="" />
-                  </div>
-                  <p>JEGB-4140/485</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_52_thumb.jpeg" alt="" />
-                  </div>
-                  <p>Respiro</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_53.jpg" alt="" />
-                  </div>
-                  <p>CoGrip-8/4</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_54_thumb.jpeg" alt="" />
-                  </div>
-                  <p>V-Grip System</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_55_thumb.jpeg" alt="" />
-                  </div>
-                  <p>Magic Grippers</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_56.jpg" alt="" />
-                  </div>
-                  <p>FXCB / FMCB : Vacuum Area Gripping Systems</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_57.jpg" alt="" />
-                  </div>
-                  <p>Cobot Pump ECBPi</p>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_58.jpg" alt="" />
-                  </div>
-                  <p>JPGB-3285/32140</p>
-                </a>
-              </div>
-            </div>
-            <div id="nav3-content" class="nav-content">
-              <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider3">
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_05_thumb.png" alt="" />
-                  </div>
-                  <p>Pickit M-HD</p>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_09_thumb.png" alt="" />
-                  </div>
-                  <p>Pickit M</p>
-                  <span>Pickit 3D</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_13_thumb.png" alt="" />
-                  </div>
-                  <p>Cognex In-Sight Vision Systems</p>
-                  <span>Cognex Corporation</span>
-                </a>
-              </div>
-            </div>
-            <div id="nav4-content" class="nav-content">
-              <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider4">
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_02_thumb.jpeg" alt="" />
-                  </div>
-                  <p>Screwdriver</p>
-                  <span>OnRobot</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_06_thumb.jpeg" alt="" />
-                  </div>
-                  <p>HCT-1200</p>
-                  <span>Dymato Automation</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_10.jpg" alt="" />
-                  </div>
-                  <p>SRP Cobot Palletiser</p>
-                  <span>RCO Mechatronics BV</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_14.jpg" alt="" />
-                  </div>
-                  <p>MT05 Loading Table</p>
-                  <span>Mactech</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_17.jpg" alt="" />
-                  </div>
-                  <p>MT04 CNC ASSISTANT</p>
-                  <span>Mactech</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_20_thumb.jpeg" alt="" />
-                  </div>
-                  <p>Hi400P</p>
-                  <span>현대종합금속(주)</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_23_thumb.jpeg" alt="" />
-                  </div>
-                  <p>ATI Axia80 Force/Torque Sensor Kit</p>
-                  <span>ATI Industrial Automation</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_26_thumb.png" alt="" />
-                  </div>
-                  <p>Asycube 50 & Asycube 80</p>
-                  <span>Asyril SA</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_29_thumb.png" alt="" />
-                  </div>
-                  <p>Asycube 240</p>
-                  <span>Asyril SA</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_32_thumb.png" alt="" />
-                  </div>
-                  <p>Asycube 380 & Asycube 530</p>
-                  <span>Asyril SA</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_35_thumb.jpeg" alt="" />
-                  </div>
-                  <p>스마트 피더 에이브 2.0/3.0</p>
-                  <span>주식회사 에이아이엠</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_38.jpg" alt="" />
-                  </div>
-                  <p>ABIROB W 300</p>
-                  <span>Abicor Binzel</span>
-                </a>
-              </div>
-            </div>
-            <div id="nav5-content" class="nav-content">
-              <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider5">
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_03_thumb.png" alt="" />
-                  </div>
-                  <p>Magbot Automatic Tool Changer</p>
-                  <span>UND</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_07.png" alt="" />
-                  </div>
-                  <p>Rodi-X software applications for ecosystem integration</p>
-                  <span>Airgate</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_11.png" alt="" />
-                  </div>
-                  <p>MT01, MT02</p>
-                  <span>Mactech</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_15.jpg" alt="" />
-                  </div>
-                  <p>Screen Protector</p>
-                  <span>Drim Robotics Sp.z.o.o.</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_18_thumb.jpeg" alt="" />
-                  </div>
-                  <p>Robotmaster V7</p>
-                  <span>Hypertherm Robotic Software Inc.</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_21_thumb.png" alt="" />
-                  </div>
-                  <p>AUTOMAPPPPS</p>
-                  <span>Convergent Information Technologies GmbH</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_24_thumb.jpeg" alt="" />
-                  </div>
-                  <p>RoboDK Simulation Software</p>
-                  <span>RoboDK</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_27_thumb.jpeg" alt="" />
-                  </div>
-                  <p>sBot-Speed</p>
-                  <span>SICK</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_30_thumb.png" alt="" />
-                  </div>
-                  <p>Quick Changer</p>
-                  <span>OnRobot</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_33.jpg" alt="" />
-                  </div>
-                  <p>CoPROTECT</p>
-                  <span>CoRobotics</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_36.jpg" alt="" />
-                  </div>
-                  <p>HCR_Dresspack_2M/3M</p>
-                  <span>만희기전</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_39_thumb.jpeg" alt="" />
-                  </div>
-                  <p>1A CoBot Dress Pack</p>
-                  <span>REIKU GmbH</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_41.jpg" alt="" />
-                  </div>
-                  <p>FHS-SH-Set HCR Series</p>
-                  <span>Murrplastik Systemtechnik GmbH</span>
-                </a>
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_43.jpg" alt="" />
-                  </div>
-                  <p>NT 50-RS-EN</p>
-                  <span>Hilscher Gesellschaft für Systemautomation mbH</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_45.jpg" alt="" />
-                  </div>
-                  <p>NT 100-RE-EN</p>
-                  <span>Hilscher Gesellschaft für Systemautomation mbH</span>
-                </a>
-
-                <a href="#" class="ecosystem-template-01-slider-item">
-                  <div class="ecosystem-template-01-slider-item-img">
-                    <img src="../images/pc/ecosystem_main_47.jpg" alt="" />
-                  </div>
-                  <p>NT 50-CC-EN</p>
-                  <span>Hilscher Gesellschaft für Systemautomation mbH</span>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -614,4 +91,153 @@
 
 </div>
 </body>
+
+<th:block layout:fragment="script">
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      getList();
+      updateCategoryName();
+
+      $("input[name='nav']").on("change", function () {
+        let categoryNo = $(this).next("label").data("category-no") || "";
+        getList(categoryNo);
+      });
+
+      $(".tab-nav-mobile").on("change", function () {
+        let categoryNo = $(this).val();
+        getList(categoryNo);
+      });
+
+    });
+
+
+    $(document).ready(async function() {
+      $('#casestudies-main-slider1').not('.slick-initialized').slick({
+        dots: true,
+        arrows: true,
+        infinite: false,
+        autoplay: false,
+        slidesPerRow: 3,
+        // slidesToShow: 3,
+        rows: 3,
+        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesPerRow: 2,
+              rows: 3,
+            }
+          },
+          {
+            breakpoint: 765,
+            settings: {
+              slidesPerRow: 1,
+              rows: 3,
+            }
+          },
+        ]
+      })
+    });
+
+
+    function getList(categoryNo) {
+      COMM.ajax({
+        url: '/agv-amr/case-studies',
+        type: 'POST',
+        data: {
+          boardType1: 'ROBOT_CASE',
+          boardType2: 'AVG_AMR',
+          categoryNo: categoryNo
+        },
+        dataType: 'json',
+        success: function(data) {
+          const $slider = $('#casestudies-main-slider1');
+
+          if ($slider.hasClass('slick-initialized')) {
+            $slider.slick('unslick');
+          }
+
+          const template = $("#slider-template").html();
+          const rendered = Mustache.render(template, { items: data.data });
+
+          $slider.html(rendered);
+          initializeSlider();
+        },
+        error: function(xhr, status, error) {
+          console.error('AJAX 요청 실패', status, error);
+        }
+      });
+    }
+
+
+
+    function initializeSlider() {
+      $('#casestudies-main-slider1').not('.slick-initialized').slick({
+        dots: true,
+        arrows: true,
+        infinite: false,
+        autoplay: false,
+        slidesPerRow: 3,
+        rows: 3,
+        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesPerRow: 2,
+              rows: 3,
+            }
+          },
+          {
+            breakpoint: 765,
+            settings: {
+              slidesPerRow: 1,
+              rows: 3,
+            }
+          },
+        ]
+      });
+    }
+
+
+    function updateCategoryName() {
+
+      let selectedInput = $("input[name='nav']:checked");
+      let selectedLabel = selectedInput.next("label");
+      let selectedCategory = selectedLabel.data("category");
+
+      console.log("선택된 카테고리:", selectedCategory);
+
+      if (!selectedCategory) {
+        selectedCategory = "전체";
+      }
+
+      $(".category-name").text(selectedCategory);
+      console.log("category-name 업데이트됨:", $(".category-name").text());
+    }
+
+    $(document).ready(function () {
+      console.log("페이지 로드 완료");
+      updateCategoryName();
+
+      $("input[name='nav']").on("change", function () {
+        console.log("카테고리 변경 감지됨");
+        updateCategoryName();
+      });
+    });
+
+
+
+
+
+
+
+
+  </script>
+</th:block>
+
 </html>

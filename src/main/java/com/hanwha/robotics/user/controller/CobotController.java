@@ -67,14 +67,27 @@ public class CobotController {
   @GetMapping("/modulesystem/{robotNo}")
   public String modulesystemDetail(
       @PathVariable int robotNo,
-      Model model
+      Model model,
+      HttpServletRequest request
   ) {
+
+    String lang = commonUtil.getCookieLang(request);
+    RobotRequest robotRequest = RobotRequest.builder()
+        .lang(lang)
+        .boardType1(RobotBoardType.AUTO_SYSTEM.name())
+        .boardType2(RobotBoardType.CO_ROBOT.name())
+        .build();
+
     List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+    List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
+
     RobotResponse robotResponse = robotService.findRobotByRobotNo(robotNo);
     List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNo(robotNo);
     model.addAttribute("robotCategory", robotCategory);
     model.addAttribute("robotResponse", robotResponse);
     model.addAttribute("robotFileList", robotFileList);
+    model.addAttribute("robotResponseList", robotResponseList);
+
     return "cobot/modulesystem_view";
   }
 

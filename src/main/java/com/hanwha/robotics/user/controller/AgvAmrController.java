@@ -7,6 +7,7 @@ import com.hanwha.robotics.user.common.enums.ApiStatus;
 import com.hanwha.robotics.user.common.enums.RobotBoardType;
 import com.hanwha.robotics.user.common.utils.CommonUtil;
 import com.hanwha.robotics.user.dto.robot.RobotCategoryResponse;
+import com.hanwha.robotics.user.dto.robot.RobotFileResponse;
 import com.hanwha.robotics.user.dto.robot.RobotRequest;
 import com.hanwha.robotics.user.dto.robot.RobotResponse;
 import com.hanwha.robotics.user.service.RobotCategoryService;
@@ -61,9 +62,13 @@ public class AgvAmrController {
 
     @GetMapping("/case-studies/{robotNo}")
     public String caseStudiesViewPage(@PathVariable int robotNo, Model model) {
-        log.info("???들어는 왔나");
+        log.info("상세페이지");
         List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+        RobotResponse robotResponse = robotService.findRobotByRobotNo(robotNo);
+        List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNo(robotNo);
         model.addAttribute("robotCategory", robotCategory);
+        model.addAttribute("robotResponse", robotResponse);
+        model.addAttribute("robotFileList", robotFileList);
         return "agv_amr/case_studies_view";
     }
 

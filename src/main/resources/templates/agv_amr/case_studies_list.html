@@ -68,8 +68,6 @@
 
 
 
-
-
             </div>
 
 
@@ -153,11 +151,6 @@
           }
 
           const template = $("#slider-template").html();
-          // if (!template) {
-          //   console.error("템플릿을 찾을 수 없습니다. #slider-template 요소가 올바르게 로드되지 않았습니다.");
-          //   return;
-          // }
-
           const rendered = Mustache.render(template, { items: data.data });
 
           $slider.html(rendered);
@@ -202,25 +195,31 @@
 
 
     function updateCategoryName() {
+
       let selectedInput = $("input[name='nav']:checked");
       let selectedLabel = selectedInput.next("label");
       let selectedCategory = selectedLabel.data("category");
+
+      console.log("선택된 카테고리:", selectedCategory);
 
       if (!selectedCategory) {
         selectedCategory = "전체";
       }
 
       $(".category-name").text(selectedCategory);
+      console.log("category-name 업데이트됨:", $(".category-name").text());
     }
 
-
     $(document).ready(function () {
+      console.log("페이지 로드 완료");
       updateCategoryName();
 
       $("input[name='nav']").on("change", function () {
+        console.log("카테고리 변경 감지됨");
         updateCategoryName();
       });
     });
+
 
 
 
