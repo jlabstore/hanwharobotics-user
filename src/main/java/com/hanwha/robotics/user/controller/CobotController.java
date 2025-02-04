@@ -38,6 +38,11 @@ public class CobotController {
 
   private final CommonUtil commonUtil;
 
+  @GetMapping
+  public String introducePage() {
+    return "cobot/cobot_introduce";
+  }
+
   @GetMapping("/modulesystem")
   public String modulesystem(
       @RequestParam(value = "categoryNo", required = false) Integer categoryNo,
