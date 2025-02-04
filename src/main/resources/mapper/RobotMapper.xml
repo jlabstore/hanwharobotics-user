@@ -15,19 +15,31 @@
       and lang = #{lang}
     order by robot_no;
   </select>
-  <select id="findRobotByRobotNo"
-          resultType="com.hanwha.robotics.user.dto.robot.RobotResponse">
+  <select id="findRobotByRobotNo" resultType="com.hanwha.robotics.user.dto.robot.RobotResponse">
     select *, c.category_nm
     from tb_robot r
     left join tb_robot_category c on r.category_no = c.category_no
     where robot_no = #{robotNo}
       and r.del_yn = 'N'
   </select>
-  <select id="findRobotFileByRoboyNo"
-          resultType="com.hanwha.robotics.user.dto.robot.RobotFileResponse">
+  <select id="findRobotFileByRoboyNo" resultType="com.hanwha.robotics.user.dto.robot.RobotFileResponse">
     select *
     from tb_robot_file
     where robot_no = #{robotNo}
+  </select>
+
+  <select id="findRobotByCategory" resultType="com.hanwha.robotics.user.dto.robot.RobotResponse">
+    select * ,
+    (select file_path from tb_robot_file where robot_no = r.robot_no and thumnail_yn = 'Y' limit 1) as thumbnail_url
+    from tb_robot r
+    where board_type_1 = #{boardType1}
+    and board_type_2 = #{boardType2}
+    and del_yn = 'N'
+    <if test="categoryNo != null and categoryNo != 0">
+      and category_no = #{categoryNo}
+    </if>
+    and lang = #{lang}
+    order by robot_no;
   </select>
 
 

@@ -18,12 +18,18 @@
       <div class="tab-nav">
         <div class="tab-nav-wrapper">
 
-          <input type="radio" id="nav0" name="nav" checked />
-          <label for="nav0">전체</label>
+          <input type="radio" id="nav1" name="nav" checked />
+          <label for="nav1" class="ecosystem-nav1">
+            <span>전체</span>
+          </label>
+
           <th:block th:each="robotCategory, stat : ${robotCategory}">
-            <input type="radio" th:id="'nav' + ${stat.index + 1}" name="nav" />
-            <label th:for="'nav' + ${stat.index + 1}" th:text="${robotCategory.categoryNm}"></label>
+            <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav" />
+            <label th:for="'nav' + ${stat.index + 2}">
+              <span th:text="${robotCategory.categoryNm}"></span>
+            </label>
           </th:block>
+
 
           <select class="tab-nav-mobile">
             <option value="nav_all" th:selected="true">전체</option>
@@ -33,8 +39,25 @@
           </select>
 
           <div class="tab-content-wrapper">
-            <div id="nav1-content" class="nav-content">
 
+
+            <div id="nav1-content00" class="nav-content00">
+              <div class="ecosystem-main-slider100" id="ecosystem-main-slider100">
+                <div th:each="robot : ${robotResponseList}">
+                  <a th:href="@{/cobot/case-studies/{robotNo}(robotNo=${robot.robotNo})}" class="ecosystem-main-slider-item">
+                    <div class="ecosystem-main-slider-item-img">
+                      <img th:src="@{${robot.thumbnailUrl}}" alt="" />
+                    </div>
+                    <p th:text="${robot.robotNm}"></p>
+                    <span th:text="${robot.description}"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div id="nav1-content" class="nav-content">
               <div class="board-top">
                 <div class="category-name">Food & Beverage</div>
                 <p>클린룸 인증을 받아 많은 F&B산업군에서 사용되고 있는 한화로보틱스의 협동로봇을 소개합니다.</p>

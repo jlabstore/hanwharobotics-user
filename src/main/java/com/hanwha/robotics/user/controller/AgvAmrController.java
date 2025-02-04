@@ -1,14 +1,27 @@
 package com.hanwha.robotics.user.controller;
 
+import com.hanwha.robotics.user.common.dto.ApiResponse;
+import com.hanwha.robotics.user.common.dto.PageRequest;
+import com.hanwha.robotics.user.common.dto.PageResponse;
+import com.hanwha.robotics.user.common.enums.ApiStatus;
+import com.hanwha.robotics.user.common.enums.RobotBoardType;
+import com.hanwha.robotics.user.common.utils.CommonUtil;
 import com.hanwha.robotics.user.dto.robot.RobotCategoryResponse;
+import com.hanwha.robotics.user.dto.robot.RobotRequest;
+import com.hanwha.robotics.user.dto.robot.RobotResponse;
 import com.hanwha.robotics.user.service.RobotCategoryService;
+import com.hanwha.robotics.user.service.RobotService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/agv-amr")
@@ -18,16 +31,47 @@ public class AgvAmrController {
 
     private final RobotCategoryService robotCategoryService;
 
+    private final RobotService robotService;
+
+    private final CommonUtil commonUtil;
+
     @GetMapping
     public String products() {
         return "agv_amr/products";
     }
 
+    @GetMapping("/case-studies")
+    public String caseStudiesListPage(Model model) {
+        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+        model.addAttribute("robotCategory", robotCategory);
+        return "agv_amr/case_studies_list";
+    }
+
+    @PostMapping("/case-studies")
+    public ResponseEntity<Object> findCaseCategory(
+        RobotRequest robotRequest,
+        HttpServletRequest request
+    ) {
+        String lang = commonUtil.getCookieLang(request);
+        robotRequest.setLang(lang);
+        List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
+    }
+
+
 //    @GetMapping("/case-studies")
-//    public String agvAmr(Model model) {
-//        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory();
+//    public String caseStudies(
+//        @RequestParam(value = "categoryNo", required = false) Integer categoryNo,
+//        Model model,
+//        HttpServletRequest request
+//    ) {
+//        String lang = commonUtil.getCookieLang(request);
+//        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(
+//            RobotBoardType.AUTO_SYSTEM.name());
+//        List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.ROBOT_CASE.name(), RobotBoardType.AVG_AMR.name(), categoryNo, lang);
 //        model.addAttribute("robotCategory", robotCategory);
-//        return "agv_amr/case_studies";
+//        model.addAttribute("robotResponseList", robotResponseList);
+//        return "agv_amr/case_studies_list";
 //    }
 
     @GetMapping("/forklift-type")

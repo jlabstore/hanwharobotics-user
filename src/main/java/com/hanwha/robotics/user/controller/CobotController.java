@@ -54,7 +54,7 @@ public class CobotController {
   ) {
     String lang = commonUtil.getCookieLang(request);
     List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
-    List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.ROBOT_CASE.name(), RobotBoardType.CO_ROBOT.name(), categoryNo, lang);
+    List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.AUTO_SYSTEM.name(), RobotBoardType.CO_ROBOT.name(), categoryNo, lang);
     model.addAttribute("robotCategory", robotCategory);
     model.addAttribute("robotResponseList", robotResponseList);
     return "cobot/modulesystem_list";
@@ -81,11 +81,25 @@ public class CobotController {
       HttpServletRequest request
   ) {
     String lang = commonUtil.getCookieLang(request);
-    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
+    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
     List<RobotResponse> robotResponseList = robotService.findRobot(RobotBoardType.ROBOT_CASE.name(), RobotBoardType.CO_ROBOT.name(), categoryNo, lang);
     model.addAttribute("robotCategory", robotCategory);
     model.addAttribute("robotResponseList", robotResponseList);
     return "cobot/case_studies_list";
+  }
+
+  @GetMapping("/case-studies/{robotNo}")
+  public String caseDetail(
+      @PathVariable int robotNo,
+      Model model
+  ) {
+    List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
+    RobotResponse robotResponse = robotService.findRobotByRobotNo(robotNo);
+    List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNo(robotNo);
+    model.addAttribute("robotCategory", robotCategory);
+    model.addAttribute("robotResponse", robotResponse);
+    model.addAttribute("robotFileList", robotFileList);
+    return "cobot/case_studies_view";
   }
 
 //  @PostMapping("/category")
@@ -100,6 +114,14 @@ public class CobotController {
 ////    List<RobotResponse> robotResponseList = robotService.findRobot(lang);
 //    return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
 //  }
+
+
+
+
+
+
+
+
 
 
 
