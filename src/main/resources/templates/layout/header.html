@@ -205,9 +205,10 @@
         }
 
         // 영문사이트 변경 후 ?lang=en 제거 -> 고객사 요청 
-        if (allowedEnDomains.includes(window.location.origin) && window.location.origin.pathname === '/' && window.location.search === '?lang=en') {
+        if (allowedEnDomains.includes(window.location.origin) && window.location.origin.pathname
+            === '/' && window.location.search === '?lang=en') {
           //  location.href = (window.location.href).replace(window.location.search, '');
-          history.replaceState({},'','/');
+          history.replaceState({}, '', '/');
         }
 
         $('#languageSelect').click(function () {
@@ -224,7 +225,6 @@
         });
 
       });
-
 
       function changeLang(lang, path) {
         const ajaxOptions = {
@@ -245,6 +245,13 @@
         };
         $.ajax(ajaxOptions);
       }
+
+
+
+
+
+
+
 
 
     </script>

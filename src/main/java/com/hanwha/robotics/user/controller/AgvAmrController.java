@@ -1,22 +1,34 @@
 package com.hanwha.robotics.user.controller;
 
+import com.hanwha.robotics.user.dto.robot.RobotCategoryResponse;
+import com.hanwha.robotics.user.service.RobotCategoryService;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/agv-amr")
+@RequiredArgsConstructor
+@Slf4j
 public class AgvAmrController {
+
+    private final RobotCategoryService robotCategoryService;
 
     @GetMapping
     public String products() {
         return "agv_amr/products";
     }
 
-    @GetMapping("/case-studies")
-    public String agvAmr() {
-        return "agv_amr/case_studies";
-    }
+//    @GetMapping("/case-studies")
+//    public String agvAmr(Model model) {
+//        List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory();
+//        model.addAttribute("robotCategory", robotCategory);
+//        return "agv_amr/case_studies";
+//    }
 
     @GetMapping("/forklift-type")
     public String forklift() {

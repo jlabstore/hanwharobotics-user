@@ -17,38 +17,19 @@
     <section class="ecosystem-section">
       <div class="tab-nav">
         <div class="tab-nav-wrapper">
-          <input type="radio" id="nav1" name="nav" checked />
-          <label for="nav1" class="ecosystem-nav1">
-            <span>전체</span>
-          </label>
-          <input type="radio" id="nav2" name="nav" />
-          <label for="nav2" class="ecosystem-nav2">
-            <span>F&B</span>
-          </label>
-          <input type="radio" id="nav3" name="nav" />
-          <label for="nav3" class="ecosystem-nav3">
-            <span>제조/공정</span>
-          </label>
-          <input type="radio" id="nav4" name="nav" />
-          <label for="nav4" class="ecosystem-nav4">
-            <span>유통/물류</span>
-          </label>
-          <input type="radio" id="nav4" name="nav" />
-          <label for="nav4" class="ecosystem-nav4">
-            <span>용접</span>
-          </label>
-          <input type="radio" id="nav5" name="nav" />
-          <label for="nav5" class="ecosystem-nav5">
-            <span>기타</span>
-          </label>
+
+          <input type="radio" id="nav0" name="nav" checked />
+          <label for="nav0">전체</label>
+          <th:block th:each="robotCategory, stat : ${robotCategory}">
+            <input type="radio" th:id="'nav' + ${stat.index + 1}" name="nav" />
+            <label th:for="'nav' + ${stat.index + 1}" th:text="${robotCategory.categoryNm}"></label>
+          </th:block>
 
           <select class="tab-nav-mobile">
-            <option value="nav1" selected>전체</option>
-            <option value="nav2">F&B</option>
-            <option value="nav3">제조/공정</option>
-            <option value="nav4">유통/물류</option>
-            <option value="nav5">용접</option>
-            <option value="nav6">기타</option>
+            <option value="nav_all" th:selected="true">전체</option>
+            <th:block th:each="robotCategory, stat : ${robotCategory}">
+              <option th:value="'nav' + ${stat.index}" th:text="${robotCategory.categoryNm}"></option>
+            </th:block>
           </select>
 
           <div class="tab-content-wrapper">
