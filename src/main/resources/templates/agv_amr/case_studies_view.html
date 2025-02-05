@@ -4,9 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body>
-<div layout:fragment="content">
+<main layout:fragment="content" class="casestudies view ecosystem-template-01 type2">
 
-  <main class="casestudies view ecosystem-template-01 type2">
+<!--  <main class="casestudies view ecosystem-template-01 type2">-->
     <section class="ecosystem-template-01-title">
       <a href="/agv-amr/case-studies">
         <img src="../images/pc/products_detail_arrow.png" />
@@ -63,26 +63,9 @@
           </select>
 
 
-<!--          <div class="tab-content-wrapper">-->
-<!--            <div id="nav1-content" class="nav-content">-->
-<!--              <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider1">-->
-<!--                <script id="slider-template" type="x-tmpl-mustache" class="hide">-->
-<!--                  {{#items}}-->
-<!--                    <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-template-01-slider-item">-->
-<!--                      <div class="casestudies-template-01-slider-item-img">-->
-<!--                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />-->
-<!--                      </div>-->
-<!--                      <p>{{robotNm}}</p>-->
-<!--                      <span>{{description}}</span>-->
-<!--                    </a>-->
-<!--                  {{/items}}-->
-<!--                </script>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
 
           <div class="tab-content-wrapper">
+
             <div id="nav1-content" class="nav-content">
               <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider1">
               </div>
@@ -125,10 +108,10 @@
       {{/items}}
     </script>
 
-  </main>
+<!--  </main>-->
 
 
-</div>
+</main>
 </body>
 
 <th:block layout:fragment="script">

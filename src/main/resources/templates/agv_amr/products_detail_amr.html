@@ -4,10 +4,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body data-gnb-target="agv/amr">
-<div layout:fragment="content" class="products-detail">
+<main layout:fragment="content" class="products-detail">
 
 
-    <main th:if="#{header.nation} == 'EN'">
+<!--    <main th:if="#{header.nation} == 'EN'">-->
         <a href="/agv-amr" class="products-detail-prev">
             <img src="../images/pc/products_detail_arrow.svg" alt />
         </a>
@@ -344,8 +344,8 @@
             </div>
         </section>
 
-    </main>
+<!--    </main>-->
 
-</div>
+</main>
 </body>
 </html>

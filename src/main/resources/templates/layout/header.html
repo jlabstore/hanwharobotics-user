@@ -146,25 +146,28 @@
           </ul>
         </div>
 
-        <a href="/login-page" th:if="${#request.userPrincipal == null}">
-          <span class="login" style="display: none">
-            <span>login</span>
-          </span>
+        <a href="/login-page" th:if="${#request.userPrincipal == null}" style="display: none">
+
+                        <span class="login">
+                            <span>login</span>
+                        </span>
+
         </a>
 
 
         <span class="login" th:if="${#request.userPrincipal != null}" style="display: none">
-          <span>login</span>
-          <span class="login-tooltip" th:if="${#request.userPrincipal != null}">
-            <div class="login-tooltip-content">
-              <a href="/member/profile"
-                 th:text="#{header.nation} == 'EN' ? '마이페이지' : 'View Profile'"></a>
-              <div></div>
-              <button onclick="window.location.href='/member/logout'" type="button"
-                      th:text="#{header.nation} == 'EN' ? '로그아웃' : 'Sign Out'"></button>
-            </div>
-          </span>
-      </span>
+                        <span>login</span>
+
+                        <span class="login-tooltip" th:if="${#request.userPrincipal != null}">
+                            <div class="login-tooltip-content">
+                              <a href="/member/profile"
+                                 th:text="#{header.nation} == 'EN' ? '마이페이지' : 'View Profile'"></a>
+                              <div></div>
+                              <button onclick="window.location.href='/member/logout'" type="button"
+                                      th:text="#{header.nation} == 'EN' ? '로그아웃' : 'Sign Out'"></button>
+                            </div>
+                        </span>
+                    </span>
 
 
         <a class="selected_country" id="languageSelect" th:if="#{header.nation} == 'EN'" value="en">

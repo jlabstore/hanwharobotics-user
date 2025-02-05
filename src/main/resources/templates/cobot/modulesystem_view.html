@@ -4,13 +4,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body data-gnb-target="contact">
-<div layout:fragment="content">
+<main layout:fragment="content" class="ecosystem-template-01 type2">
 
 
-  <main class="ecosystem-template-01 type2">
+<!--  <main class="ecosystem-template-01 type2">-->
     <section class="ecosystem-template-01-title">
       <a href="/cobot/modulesystem">
-        <img src="../images/pc/products_detail_arrow.png" />
+        <img src="../images/pc/products_detail_arrow.png" alt />
       </a>
       <h1>자동화 시스템</h1>
     </section>
@@ -133,6 +133,14 @@
               <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider4">
               </div>
             </div>
+            <div id="nav5-content" class="nav-content">
+              <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider5">
+              </div>
+            </div>
+            <div id="nav6-content" class="nav-content">
+              <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider6">
+              </div>
+            </div>
           </div>
 
         </div>
@@ -151,11 +159,11 @@
       {{/items}}
     </script>
 
-  </main>
+<!--  </main>-->
 
 
 
-</div>
+</main>
 </body>
 
 
@@ -284,7 +292,7 @@
     function initializeSlider() {
       console.log("슬라이더 초기화 시작");
 
-      $(".ecosystem-template-01-slider1, .ecosystem-template-01-slider2, .ecosystem-template-01-slider3, .ecosystem-template-01-slider4").each(function () {
+      $(".ecosystem-template-01-slider1, .ecosystem-template-01-slider2, .ecosystem-template-01-slider3, .ecosystem-template-01-slider4 .ecosystem-template-01-slider5 .ecosystem-template-01-slider6").each(function () {
         const $slider = $(this);
 
         if ($slider.hasClass('slick-initialized')) {

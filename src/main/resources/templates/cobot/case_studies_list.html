@@ -4,9 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body>
-<div layout:fragment="content">
+<main layout:fragment="content" class="ecosystem casestudies">
 
-  <main class="ecosystem casestudies">
+<!--  <main class="ecosystem casestudies">-->
     <section class="ecosystem-title">
       <h2>협동로봇</h2>
       <h1>적용사례</h1>
@@ -111,6 +111,21 @@
               </div>
             </div>
 
+            <div id="nav5-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1" id="casestudies-main-slider5">
+              </div>
+            </div>
+
+            <div id="nav6-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1" id="casestudies-main-slider6">
+              </div>
+            </div>
 
 
 
@@ -132,10 +147,10 @@
     </script>
 
 
-  </main>
+<!--  </main>-->
 
 
-</div>
+</main>
 </body>
 <th:block layout:fragment="script">
   <script type="text/javascript">
@@ -288,7 +303,7 @@
     function initializeSlider() {
       console.log("슬라이더 초기화 시작");
 
-      $(".casestudies-main-slider1, .casestudies-main-slider2, .casestudies-main-slider3, .casestudies-main-slider4").each(function () {
+      $(".casestudies-main-slider1, .casestudies-main-slider2, .casestudies-main-slider3, .casestudies-main-slider4 .casestudies-main-slider5 .casestudies-main-slider6").each(function () {
         const $slider = $(this);
 
         if ($slider.hasClass('slick-initialized')) {

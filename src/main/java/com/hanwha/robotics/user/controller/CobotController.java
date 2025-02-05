@@ -60,6 +60,19 @@ public class CobotController {
     List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
     return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
   }
+
+//  @PostMapping
+//  public ResponseEntity<Object> findmMdulesystemByCategory(
+//      RobotRequest robotRequest,
+//      PageRequest pageRequest,
+//      HttpServletRequest request
+//  ) {
+//    String lang = commonUtil.getCookieLang(request);
+//    robotRequest.setLang(lang);
+////    List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
+//    PageResponse body = robotService.findRobotByCategory2(robotRequest, pageRequest, lang);
+//    return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), body));
+//  }
   
 
   @GetMapping("/modulesystem/{robotNo}")

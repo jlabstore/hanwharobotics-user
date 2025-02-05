@@ -12,7 +12,10 @@
     <if test="categoryNo != null and categoryNo != 0">
       and category_no = #{categoryNo}
     </if>
+    <if test="lang != null">
       and lang = #{lang}
+    </if>
+
     order by robot_no;
   </select>
   <select id="findRobotByRobotNo" resultType="com.hanwha.robotics.user.dto.robot.RobotResponse">
@@ -38,7 +41,39 @@
     <if test="categoryNo != null and categoryNo != 0">
       and category_no = #{categoryNo}
     </if>
-    and lang = #{lang}
+    <if test="lang != null">
+      and lang = #{lang}
+    </if>
+    order by robot_no;
+  </select>
+
+
+  <select id="countRobotByCategoryList" resultType="int">
+    select count(*)
+    from tb_robot r
+    where board_type_1 = #{request.boardType1}
+    and board_type_2 = #{request.boardType2}
+    and del_yn = 'N'
+    <if test="request.categoryNo != null and request.categoryNo != 0">
+      and category_no = #{request.categoryNo}
+    </if>
+    <if test="lang != null">
+      and lang = #{lang}
+    </if>
+  </select>
+  <select id="findRobotByCategory2" resultType="com.hanwha.robotics.user.dto.robot.RobotResponse">
+    select * ,
+    (select file_path from tb_robot_file where robot_no = r.robot_no and thumnail_yn = 'Y' limit 1) as thumbnail_url
+    from tb_robot r
+    where board_type_1 = #{request.boardType1}
+    and board_type_2 = #{request.boardType2}
+    and del_yn = 'N'
+    <if test="request.categoryNo != null and request.categoryNo != 0">
+      and category_no = #{request.categoryNo}
+    </if>
+    <if test="lang != null">
+      and lang = #{lang}
+    </if>
     order by robot_no;
   </select>
 

@@ -1,11 +1,16 @@
 package com.hanwha.robotics.user.service.impl;
 
+import com.hanwha.robotics.user.common.dto.PageRequest;
+import com.hanwha.robotics.user.common.dto.PageResponse;
+import com.hanwha.robotics.user.dto.QnaResponse;
 import com.hanwha.robotics.user.dto.robot.RobotFileResponse;
 import com.hanwha.robotics.user.dto.robot.RobotRequest;
 import com.hanwha.robotics.user.dto.robot.RobotResponse;
 import com.hanwha.robotics.user.mapper.RobotMapper;
 import com.hanwha.robotics.user.service.RobotService;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +29,17 @@ public class RobotServiceImpl implements RobotService {
   public List<RobotResponse> findRobotByCategory(RobotRequest robotRequest) {
     return robotMapper.findRobotByCategory(robotRequest);
   }
+
+  @Override
+  public PageResponse findRobotByCategory2(RobotRequest robotRequest, PageRequest page, String lang) {
+    Map<String, Object> map = new HashMap<>();
+    map.put("page", page);
+
+    int totalCount = robotMapper.countRobotByCategoryList(map, robotRequest, lang);
+    List<RobotResponse> responseList = robotMapper.findRobotByCategory2(robotRequest, page, lang);
+    return new PageResponse(responseList, totalCount, page);
+  }
+
 
   @Override
   public RobotResponse findRobotByRobotNo(int robotNo) {
