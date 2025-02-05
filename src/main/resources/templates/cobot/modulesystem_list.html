@@ -39,32 +39,32 @@
         </select>
 
 
-<!--        <div class="tab-content-wrapper">-->
-<!--          <div id="nav1-content" class="nav-content">-->
-<!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider1">-->
-<!--            </div>-->
-<!--          </div>-->
+        <!--        <div class="tab-content-wrapper">-->
+        <!--          <div id="nav1-content" class="nav-content">-->
+        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider1">-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-<!--          <div id="nav2-content" class="nav-content">-->
-<!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider2">-->
-<!--            </div>-->
-<!--          </div>-->
+        <!--          <div id="nav2-content" class="nav-content">-->
+        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider2">-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-<!--          <div id="nav3-content" class="nav-content">-->
-<!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider3">-->
-<!--            </div>-->
-<!--          </div>-->
+        <!--          <div id="nav3-content" class="nav-content">-->
+        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider3">-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-<!--          <div id="nav4-content" class="nav-content">-->
-<!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider4">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--          <div id="nav4-content" class="nav-content">-->
+        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider4">-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
         <div class="tab-content-wrapper">
           <th:block th:each="robotCategory, stat : ${robotCategory}">
             <div th:id="|nav${stat.index + 1}-content|" class="nav-content">
-            <div class="ecosystem-main-slider1" th:id="'ecosystem-main-slider' + ${stat.index + 1}">
+              <div class="ecosystem-main-slider1" th:id="'ecosystem-main-slider' + ${stat.index + 1}">
               </div>
             </div>
           </th:block>
@@ -105,21 +105,20 @@
   <script type="text/javascript">
 
     $(document).ready(function () {
-
       getList();
-
       $("input[name='nav']").on("change", function (e) {
         let categoryNo = $(this).next("label").data("category-no") || "";
         let page = $('#page').val();
+        console.log('categoryNo', categoryNo)
+        console.log('page', page)
         getList(categoryNo, page);
       });
 
       $(".tab-nav-mobile").on("change", function () {
         let categoryNo = $(this).val();
+        let page = $('#page').val();
         getList(categoryNo, page);
       })
-
-
     });
 
 
@@ -128,6 +127,7 @@
       if(typeof page != "undefined" && page != null) $('#page').val(page);
 
       console.log('페이지'+ $('#page').val())
+      console.log('카테고리'+ categoryNo)
 
       COMM.ajaxPagingList({
             url : "/cobot",
