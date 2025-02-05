@@ -7,7 +7,6 @@
 <div layout:fragment="content">
 
   <main class="ecosystem casestudies">
-
     <section class="ecosystem-title">
       <h2>협동로봇</h2>
       <h1>적용사례</h1>
@@ -34,7 +33,7 @@
 
 
           <select class="tab-nav-mobile">
-            <option value="nav_all" th:selected="true">전체</option>
+            <option value="" th:selected="true">전체</option>
             <th:block th:each="robotCategory, stat : ${robotCategory}">
               <option th:value="${robotCategory.categoryNo}" th:text="${robotCategory.categoryNm}"></option>
             </th:block>
@@ -57,32 +56,80 @@
 <!--            </div>-->
 
 
+<!--            <div id="nav1-content" class="nav-content">-->
+<!--              <div class="board-top">-->
+<!--                <div class="category-name"></div>-->
+<!--&lt;!&ndash;                <p>클린룸 인증을 받아 많은 F&B산업군에서 사용되고 있는 한화로보틱스의 협동로봇을 소개합니다.</p>&ndash;&gt;-->
+<!--              </div>-->
+
+<!--              <div class="casestudies-main-slider1" id="casestudies-main-slider1">-->
+<!--                <script id="slider-template" type="x-tmpl-mustache" class="hide">-->
+<!--                  {{#items}}-->
+<!--                    <a href="/cobot/case-studies/{{robotNo}}" class="casestudies-main-slider-item">-->
+<!--                      <div class="casestudies-main-slider-item-img">-->
+<!--                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />-->
+<!--                      </div>-->
+<!--                      <p>{{robotNm}}</p>-->
+<!--                      <span>{{description}}</span>-->
+<!--                    </a>-->
+<!--                  {{/items}}-->
+<!--                </script>-->
+<!--              </div>-->
+<!--              -->
+<!--            </div>-->
+
+
             <div id="nav1-content" class="nav-content">
               <div class="board-top">
                 <div class="category-name"></div>
-<!--                <p>클린룸 인증을 받아 많은 F&B산업군에서 사용되고 있는 한화로보틱스의 협동로봇을 소개합니다.</p>-->
               </div>
-
-
               <div class="casestudies-main-slider1" id="casestudies-main-slider1">
-                <script id="slider-template" type="x-tmpl-mustache" class="hide">
-                  {{#items}}
-                    <a href="/cobot/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
-                      <div class="casestudies-main-slider-item-img">
-                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
-                      </div>
-                      <p>{{robotNm}}</p>
-                      <span>{{description}}</span>
-                    </a>
-                  {{/items}}
-                </script>
               </div>
-
             </div>
+
+            <div id="nav2-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1" id="casestudies-main-slider2">
+              </div>
+            </div>
+
+            <div id="nav3-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1" id="casestudies-main-slider3">
+              </div>
+            </div>
+
+            <div id="nav4-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1" id="casestudies-main-slider4">
+              </div>
+            </div>
+
+
+
+
           </div>
         </div>
       </div>
     </section>
+
+    <script id="slider-template" type="x-tmpl-mustache" class="hide">
+      {{#items}}
+        <a href="/cobot/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
+          <div class="casestudies-main-slider-item-img">
+            <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+          </div>
+          <p>{{robotNm}}</p>
+          <span>{{description}}</span>
+        </a>
+      {{/items}}
+    </script>
 
 
   </main>
@@ -141,6 +188,36 @@
     });
 
 
+    // function getList(categoryNo) {
+    //   COMM.ajax({
+    //     url: '/cobot',
+    //     type: 'POST',
+    //     data: {
+    //       boardType1: 'ROBOT_CASE',
+    //       boardType2: 'CO_ROBOT',
+    //       categoryNo: categoryNo
+    //     },
+    //     dataType: 'json',
+    //     success: function(data) {
+    //       const $slider = $('#casestudies-main-slider1');
+    //
+    //       if ($slider.hasClass('slick-initialized')) {
+    //         $slider.slick('unslick');
+    //       }
+    //
+    //       const template = $("#slider-template").html();
+    //       const rendered = Mustache.render(template, { items: data.data });
+    //
+    //       $slider.html(rendered);
+    //       initializeSlider();
+    //     },
+    //     error: function(xhr, status, error) {
+    //       console.error('AJAX 요청 실패', status, error);
+    //     }
+    //   });
+    // }
+
+
     function getList(categoryNo) {
       COMM.ajax({
         url: '/cobot',
@@ -152,55 +229,102 @@
         },
         dataType: 'json',
         success: function(data) {
-          const $slider = $('#casestudies-main-slider1');
+          console.log("서버에서 받은 데이터:", data);
+          const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
+          const $slider = $('#casestudies-main-slider'+ navNum);
 
-          if ($slider.hasClass('slick-initialized')) {
-            $slider.slick('unslick');
-          }
+          console.log($slider)
+
+          // if ($slider.hasClass('slick-initialized')) {
+          //   console.log('2')
+          //   $slider.slick('unslick');
+          // }
+          console.log('3')
 
           const template = $("#slider-template").html();
           const rendered = Mustache.render(template, { items: data.data });
 
+          console.log("렌더링된 HTML:", rendered);
           $slider.html(rendered);
           initializeSlider();
         },
         error: function(xhr, status, error) {
-          console.error('AJAX 요청 실패', status, error);
+          console.error('ajax 요청 실패', status, error);
         }
       });
     }
 
 
 
-    function initializeSlider() {
-      $('#casestudies-main-slider1').not('.slick-initialized').slick({
-        dots: true,
-        arrows: true,
-        infinite: false,
-        autoplay: false,
-        slidesPerRow: 3,
-        rows: 3,
-        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-        responsive: [
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesPerRow: 2,
-              rows: 3,
-            }
-          },
-          {
-            breakpoint: 765,
-            settings: {
-              slidesPerRow: 1,
-              rows: 3,
-            }
-          },
-        ]
-      });
-    }
+    // function initializeSlider() {
+    //   $('#casestudies-main-slider1').not('.slick-initialized').slick({
+    //     dots: true,
+    //     arrows: true,
+    //     infinite: false,
+    //     autoplay: false,
+    //     slidesPerRow: 3,
+    //     rows: 3,
+    //     prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+    //     nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+    //     responsive: [
+    //       {
+    //         breakpoint: 1025,
+    //         settings: {
+    //           slidesPerRow: 2,
+    //           rows: 3,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 765,
+    //         settings: {
+    //           slidesPerRow: 1,
+    //           rows: 3,
+    //         }
+    //       },
+    //     ]
+    //   });
+    // }
 
+    function initializeSlider() {
+      console.log("슬라이더 초기화 시작");
+
+      $(".casestudies-main-slider1, .casestudies-main-slider2, .casestudies-main-slider3, .casestudies-main-slider4").each(function () {
+        const $slider = $(this);
+
+        if ($slider.hasClass('slick-initialized')) {
+          $slider.slick('unslick');
+        }
+
+        $slider.slick({
+          dots: true,
+          arrows: true,
+          infinite: false,
+          autoplay: false,
+          slidesPerRow: 3,
+          rows: 1,
+          prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+          nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+          responsive: [
+            {
+              breakpoint: 1025,
+              settings: {
+                slidesPerRow: 2,
+                rows: 1,
+              }
+            },
+            {
+              breakpoint: 765,
+              settings: {
+                slidesPerRow: 1,
+                rows: 1,
+              }
+            },
+          ]
+        });
+      });
+
+      console.log("슬라이더 초기화 완료");
+    }
 
     function updateCategoryName() {
 

@@ -4,21 +4,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body>
+
 <div layout:fragment="content">
 
   <main class="robot-introduce" th:if="#{header.nation} == 'EN'">
     <section class="title">
       <h2>협동로봇</h2>
-      <h1>적용사례</h1>
+      <h1>제품소개</h1>
       <p>한화로보틱스의 HCR 시리즈는 정밀 설계, 제어 기술 기반의 고품격<br/>
         협동로봇 브랜드입니다.<br/>
         다양한 산업군에 사용될 수 있는 HCR 시리즈를 만나보세요.</p>
 
-      <!--      <div class="btn_question">구매/견적 문의<span class="circle"></span></div>-->
-      <button type="button" class="inquiry products" onclick="layerInquiryBtn(2)">
-        구매/견적 문의
-        <span><strong>+</strong></span>
-      </button>
+      <div class="btn_question" onclick="layerInquiryBtn(2)">구매/견적 문의<span class="circle"></span></div>
+
 
     </section>
 
@@ -219,7 +217,7 @@
 
 <th:block layout:fragment="script">
   <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function(){
       $('.robot-slide').slick({
         centerMode: true,
         centerPadding: '60px',
@@ -240,7 +238,7 @@
             }
           },
         ],
-        customPaging: function (slider, i) {
+        customPaging: function(slider, i) {
           if (i === 0) {
             return 'HCR-3A';
           } else if (i === 1) {

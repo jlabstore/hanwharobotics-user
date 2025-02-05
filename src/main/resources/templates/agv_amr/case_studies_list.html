@@ -44,31 +44,78 @@
 
           <div class="tab-content-wrapper">
 
-            <div id="nav1-content" class="nav-content">
+<!--            <div id="nav1-content" class="nav-content">-->
 
+<!--              <div class="board-top">-->
+<!--                <div class="category-name"></div>-->
+<!--&lt;!&ndash;                <p>클린룸 인증을 받아 많은 F&B산업군에서 사용되고 있는 한화로보틱스의 협동로봇을 소개합니다.</p>&ndash;&gt;-->
+<!--              </div>-->
+
+
+<!--              <div class="casestudies-main-slider1" id="casestudies-main-slider1">-->
+<!--                <script id="slider-template" type="x-tmpl-mustache" class="hide">-->
+<!--                  {{#items}}-->
+<!--                    <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">-->
+<!--                      <div class="casestudies-main-slider-item-img">-->
+<!--                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />-->
+<!--                      </div>-->
+<!--                      <p>{{robotNm}}</p>-->
+<!--                      <span>{{description}}</span>-->
+<!--                    </a>-->
+<!--                  {{/items}}-->
+<!--                </script>-->
+<!--              </div>-->
+
+
+
+<!--            </div>-->
+
+
+            <div id="nav1-content" class="nav-content">
               <div class="board-top">
                 <div class="category-name"></div>
-<!--                <p>클린룸 인증을 받아 많은 F&B산업군에서 사용되고 있는 한화로보틱스의 협동로봇을 소개합니다.</p>-->
               </div>
-
-
               <div class="casestudies-main-slider1" id="casestudies-main-slider1">
-                <script id="slider-template" type="x-tmpl-mustache" class="hide">
-                  {{#items}}
-                    <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
-                      <div class="casestudies-main-slider-item-img">
-                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
-                      </div>
-                      <p>{{robotNm}}</p>
-                      <span>{{description}}</span>
-                    </a>
-                  {{/items}}
-                </script>
               </div>
-
-
-
             </div>
+
+            <div id="nav2-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider2" id="casestudies-main-slider2">
+              </div>
+            </div>
+
+            <div id="nav3-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider3" id="casestudies-main-slider3">
+              </div>
+            </div>
+
+            <div id="nav4-content" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider4" id="casestudies-main-slider4">
+              </div>
+            </div>
+
+
+            <script id="slider-template" type="x-tmpl-mustache" class="hide">
+              {{#items}}
+                <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
+                  <div class="casestudies-main-slider-item-img">
+                    <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+                  </div>
+                  <p>{{robotNm}}</p>
+                  <span>{{description}}</span>
+                </a>
+              {{/items}}
+            </script>
+
 
 
           </div>
@@ -144,20 +191,27 @@
         },
         dataType: 'json',
         success: function(data) {
-          const $slider = $('#casestudies-main-slider1');
+          console.log("서버에서 받은 데이터:", data);
+          const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
+          const $slider = $('#casestudies-main-slider'+ navNum);
 
-          if ($slider.hasClass('slick-initialized')) {
-            $slider.slick('unslick');
-          }
+          console.log($slider)
+
+          // if ($slider.hasClass('slick-initialized')) {
+          //   console.log('2')
+          //   $slider.slick('unslick');
+          // }
+          console.log('3')
 
           const template = $("#slider-template").html();
           const rendered = Mustache.render(template, { items: data.data });
 
+          console.log("렌더링된 HTML:", rendered);
           $slider.html(rendered);
           initializeSlider();
         },
         error: function(xhr, status, error) {
-          console.error('AJAX 요청 실패', status, error);
+          console.error('ajax 요청 실패', status, error);
         }
       });
     }
