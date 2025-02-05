@@ -111,20 +111,20 @@
         </div>
       </div>
 
-
-      <script id="slider-template" type="x-tmpl-mustache" class="hide">
-        {{#items}}
-          <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-template-01-slider-item">
-            <div class="casestudies-template-01-slider-item-img">
-              <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
-            </div>
-            <p>{{robotNm}}</p>
-            <span>{{description}}</span>
-          </a>
-        {{/items}}
-      </script>
-
     </section>
+
+    <script id="slider-template" type="x-tmpl-mustache" class="hide">
+      {{#items}}
+        <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-template-01-slider-item">
+          <div class="casestudies-template-01-slider-item-img">
+            <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+          </div>
+          <p>{{robotNm}}</p>
+          <span>{{description}}</span>
+        </a>
+      {{/items}}
+    </script>
+
   </main>
 
 
@@ -225,7 +225,7 @@
         success: function(data) {
           console.log("서버에서 받은 데이터:", data);
           const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
-          const $slider = $('#casestudies-template-01-slider1'+ navNum);
+          const $slider = $('#casestudies-template-01-slider'+ navNum);
 
           console.log($slider)
 
@@ -250,33 +250,74 @@
 
 
 
+    // function initializeSlider() {
+    //   $('#casestudies-template-01-slider1').not('.slick-initialized').slick({
+    //     dots: true,
+    //     arrows: true,
+    //     infinite: false,
+    //     autoplay: false,
+    //     slidesPerRow: 3,
+    //     rows: 3,
+    //     prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+    //     nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+    //     responsive: [
+    //       {
+    //         breakpoint: 1025,
+    //         settings: {
+    //           slidesPerRow: 2,
+    //           rows: 3,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 765,
+    //         settings: {
+    //           slidesPerRow: 1,
+    //           rows: 3,
+    //         }
+    //       },
+    //     ]
+    //   });
+    // }
+
     function initializeSlider() {
-      $('#casestudies-template-01-slider1').not('.slick-initialized').slick({
-        dots: true,
-        arrows: true,
-        infinite: false,
-        autoplay: false,
-        slidesPerRow: 3,
-        rows: 3,
-        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-        responsive: [
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesPerRow: 2,
-              rows: 3,
-            }
-          },
-          {
-            breakpoint: 765,
-            settings: {
-              slidesPerRow: 1,
-              rows: 3,
-            }
-          },
-        ]
+      console.log("슬라이더 초기화 시작");
+
+      $(".casestudies-template-01-slider1, .casestudies-template-01-slider2, .casestudies-template-01-slider3, .casestudies-template-01-slider4").each(function () {
+        const $slider = $(this);
+
+        if ($slider.hasClass('slick-initialized')) {
+          $slider.slick('unslick');
+        }
+
+        $slider.slick({
+          dots: true,
+          arrows: true,
+          infinite: false,
+          autoplay: false,
+          slidesPerRow: 3,
+          rows: 1,
+          prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+          nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+          responsive: [
+            {
+              breakpoint: 1025,
+              settings: {
+                slidesPerRow: 2,
+                rows: 1,
+              }
+            },
+            {
+              breakpoint: 765,
+              settings: {
+                slidesPerRow: 1,
+                rows: 1,
+              }
+            },
+          ]
+        });
       });
+
+      console.log("슬라이더 초기화 완료");
     }
 
 
