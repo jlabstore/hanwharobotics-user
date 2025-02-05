@@ -74,7 +74,11 @@
     <if test="lang != null">
       and lang = #{lang}
     </if>
-    order by robot_no;
+    order by robot_no
+    LIMIT
+    #{page.size}
+    OFFSET
+    #{page.offset}
   </select>
 
 
