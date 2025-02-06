@@ -59,7 +59,7 @@
                    th:data-category="${robotCategory.categoryNm}"
                    th:data-category-no="${robotCategory.categoryNo}"
             >
-              <span th:text="${robotCategory.categoryNm}"></span>
+              <span th:text="${robotCategory.categoryNm}" style="max-width: 88px"></span>
             </label>
           </th:block>
 
@@ -124,21 +124,18 @@
       getList();
       $("input[name='nav']").on("change", function (e) {
         let categoryNo = $(this).next("label").data("category-no") || "";
-        let page = $('#page').val();
         console.log('categoryNo', categoryNo)
-        console.log('page', page)
-        getList(categoryNo, page);
+        getList(1, categoryNo);
       });
 
       $(".tab-nav-mobile").on("change", function () {
         let categoryNo = $(this).val();
-        let page = $('#page').val();
-        getList(categoryNo, page);
+        getList(1, categoryNo);
       })
     });
 
 
-    function getList(categoryNo, page){
+    function getList(page, categoryNo){
       if(typeof page != "undefined" && page != null) $('#page').val(page);
 
       console.log('페이지'+ $('#page').val())
@@ -165,9 +162,13 @@
 
             $('.ecosystem-template-01-slider1').html(rendered);
 
-            if(data.totalElements != 0){
+            if (data.totalElements != 0) {
               setPagination(data, $('.paging'));
+              $('.paging').show()
+            } else {
+              $('.paging').hide()
             }
+
           }
       );
     }

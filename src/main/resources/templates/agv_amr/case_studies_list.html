@@ -59,16 +59,16 @@
                  th:id="'casestudies-main-slider' + ${robotCategory.size() + 1}">
             </div>
           </div>
+
+          <div class="paging" style="position: absolute;bottom: -70px">
+          </div>
+
         </div>
-
-
-
       </div>
     </div>
   </section>
 
-  <div class="paging">
-  </div>
+
 
   <form id="form" >
     <input type="hidden" name="size" id="size"  value="9"/>
@@ -101,14 +101,13 @@
       $("input[name='nav']").on("change", function () {
         console.log("카테고리 변경");
         let categoryNo = $(this).next("label").data("category-no") || "";
-        let page = $('#page').val();
         updateCategoryName
-        getList(categoryNo, page);
+        getList(1, categoryNo);
       });
 
       $(".tab-nav-mobile").on("change", function () {
         let categoryNo = $(this).val();
-        getList(categoryNo);
+        getList(1, categoryNo);
       });
 
     });
@@ -123,7 +122,7 @@
       });
     });
 
-    function getList(categoryNo, page) {
+    function getList(page, categoryNo) {
       if (typeof page != "undefined" && page != null) {
         $('#page').val(page);
       }
@@ -145,10 +144,9 @@
           function success(data) {
             console.log("응답 데이터:", data.contents);
 
-            if (data.contents.length === 0) {
-              $(".casestudies-main-slider1").html("<p>등록된 적용사례가 없습니다.</p>");
-              return;
-            }
+            // if (data.contents.length === 0) {
+            //   $(".casestudies-main-slider1").html("<p>조회된 결과가 없습니다.</p>");
+            // }
 
             const template = $("#slider-template").html();
             const rendered = Mustache.render(template, {items: data.contents});
@@ -159,6 +157,9 @@
 
             if (data.totalElements != 0) {
               setPagination(data, $('.paging'));
+              $('.paging').show()
+            } else {
+              $('.paging').hide()
             }
           });
     }

@@ -97,8 +97,8 @@
 
       $(".tab-nav-mobile").on("change", function () {
         let categoryNo = $(this).val();
-        let page = $('#page').val();
-        getList(page, categoryNo);
+        $('#page').val(1);
+        getList(1, categoryNo);
       })
     });
 
@@ -135,9 +135,11 @@
             if (data.totalElements != 0) {
               setPagination(data, $('.paging'));
               $('.paging').show()
-            }else{
+            } else {
               $('.paging').hide()
             }
+
+
           }
       );
     }
