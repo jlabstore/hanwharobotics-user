@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
 <body data-gnb-target="cobot">
-<main layout:fragment="content" class="ecosystem">
+<main layout:fragment="content" class="ecosystem modulesystem">
 
   <section class="ecosystem-title">
     <h1>자동화 시스템</h1>
@@ -25,7 +25,7 @@
                  th:data-category-no="${robotCategory.categoryNo}"
                  th:value="${robotCategory.categoryNo}"
           >
-            <span th:text="${robotCategory.categoryNm}" style="max-width: 88px"></span>
+            <span th:text="${robotCategory.categoryNm}"></span>
           </label>
         </th:block>
 
@@ -36,34 +36,30 @@
                     th:text="${robotCategory.categoryNm}"></option>
           </th:block>
         </select>
+      </div>
 
-<!--        <div class="tab-content-wrapper">-->
-<!--          <th:block th:each="robotCategory, stat : ${robotCategory}">-->
-<!--            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">-->
-<!--              <div class="ecosystem-main-slider1"-->
-<!--                   th:id="'ecosystem-main-slider' + ${stat.index + 1}">-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </th:block>-->
 
-<!--          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">-->
-<!--            <div class="ecosystem-main-slider1"-->
-<!--                 th:id="'ecosystem-main-slider' + ${robotCategory.size() + 1}">-->
-<!--            </div>-->
-<!--          </div>-->
-
-        <div class="tab-content-wrapper">
-          <div  class="nav-content">
-            <div class="ecosystem-main-slider1">
-            </div>
-          </div>
-          <div class="paging" style="position: absolute;bottom: -70px">
+      <div class="tab-content-wrapper">
+        <div class="nav-content">
+          <div class="ecosystem-main-slider1">
           </div>
         </div>
 
-      </div>
-    </div>
+        <div class="paging">
+        </div>
 
+<!--          <div class="pagination">-->
+<!--            <button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>-->
+<!--            <span class="on">1</span>-->
+<!--            <span>2</span>-->
+<!--            <span>3</span>-->
+<!--            <span>4</span>-->
+<!--            <button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>-->
+<!--          </div>-->
+
+      </div>
+
+    </div>
   </section>
 
 
