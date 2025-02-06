@@ -928,7 +928,7 @@ $('.ecosystem-template-01-info-slider').slick({
 if (win.outerWidth() <= 765) {
   $('.tab-nav-mobile').change(function () {
     let value = $('.tab-nav-mobile option:selected').val();
-    // $('.nav-content').hide();
+    $('.nav-content').show();
     // $(`#${value}-content`).show();
 
     // $(`#${value}-content .ecosystem-main-slider1`).not('.slick-initialized').slick({

@@ -65,17 +65,10 @@
         </select>
 
         <div class="tab-content-wrapper">
-          <th:block th:each="robotCategory, stat : ${robotCategory}">
-            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">
-              <div class="casestudies-template-01-slider1"
-                   th:id="'casestudies-template-01-slider' + ${stat.index + 1}">
-              </div>
-            </div>
-          </th:block>
 
-          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">
-            <div class="casestudies-template-01-slider1"
-                 th:id="'casestudies-template-01-slider' + ${robotCategory.size() + 1}">
+
+          <div class="nav-content">
+            <div class="casestudies-template-01-slider1">
             </div>
           </div>
 
@@ -104,6 +97,8 @@
         <span>{{description}}</span>
       </a>
     {{/items}}
+    {{^items}} <p> 조회된 결과가 없습니다 </p>{{/items}}
+
   </script>
 
 </main>
@@ -156,6 +151,8 @@
             console.log(rendered)
 
             $('.casestudies-template-01-slider1').html(rendered);
+            $('.nav-content').show();
+
 
             if (data.totalElements != 0) {
               setPagination(data, $('.paging'));
