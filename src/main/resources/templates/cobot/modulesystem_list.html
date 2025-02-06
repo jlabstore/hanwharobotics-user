@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
@@ -16,12 +15,12 @@
     <div class="tab-nav">
       <div class="tab-nav-wrapper">
 
-        <input type="radio" id="nav1" name="nav" checked />
+        <input type="radio" id="nav1" name="nav" checked/>
         <label for="nav1" class="ecosystem-nav1">
           <span>전체</span>
         </label>
         <th:block th:each="robotCategory, stat : ${robotCategory}">
-          <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav" />
+          <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav"/>
           <label th:for="'nav' + ${stat.index + 2}"
                  th:data-category="${robotCategory.categoryNm}"
                  th:data-category-no="${robotCategory.categoryNo}"
@@ -34,33 +33,35 @@
         <select class="tab-nav-mobile">
           <option value="" th:selected="true">전체</option>
           <th:block th:each="robotCategory, stat : ${robotCategory}">
-            <option th:value="${robotCategory.categoryNo}" th:text="${robotCategory.categoryNm}"></option>
+            <option th:value="${robotCategory.categoryNo}"
+                    th:text="${robotCategory.categoryNm}"></option>
           </th:block>
         </select>
 
-<!--        <div class="tab-content-wrapper">-->
-<!--          <div id="nav1-content" class="nav-content">-->
-<!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider1">-->
-<!--            </div>-->
-<!--          </div>-->
+        <!--        <div class="tab-content-wrapper">-->
+        <!--          <div id="nav1-content" class="nav-content">-->
+        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider1">-->
+        <!--            </div>-->
+        <!--          </div>-->
 
         <div class="tab-content-wrapper">
           <th:block th:each="robotCategory, stat : ${robotCategory}">
             <div th:id="|nav${stat.index + 1}-content|" class="nav-content">
-              <div class="ecosystem-main-slider1" th:id="'ecosystem-main-slider' + ${stat.index + 1}">
+              <div class="ecosystem-main-slider1"
+                   th:id="'ecosystem-main-slider' + ${stat.index + 1}">
               </div>
             </div>
           </th:block>
 
           <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">
-            <div class="ecosystem-main-slider1" th:id="'ecosystem-main-slider' + ${robotCategory.size() + 1}">
+            <div class="ecosystem-main-slider1"
+                 th:id="'ecosystem-main-slider' + ${robotCategory.size() + 1}">
             </div>
           </div>
         </div>
 
       </div>
 
-      </div>
     </div>
 
   </section>
@@ -68,9 +69,9 @@
   <div class="paging">
   </div>
 
-  <form id="form" >
-    <input type="hidden" name="size" id="size"  value="1"/>
-    <input type="hidden" name="page" id="page"  value="1"/>
+  <form id="form">
+    <input type="hidden" name="size" id="size" value="1"/>
+    <input type="hidden" name="page" id="page" value="1"/>
   </form>
 
   <script id="slider-template" type="x-tmpl-mustache" class="hide">
@@ -109,16 +110,16 @@
       })
     });
 
+    function getList(categoryNo, page) {
+      if (typeof page != "undefined" && page != null) {
+        $('#page').val(page);
+      }
 
-
-    function getList(categoryNo, page){
-      if(typeof page != "undefined" && page != null) $('#page').val(page);
-
-      console.log('페이지'+ $('#page').val())
-      console.log('카테고리'+ categoryNo)
+      console.log('페이지' + $('#page').val())
+      console.log('카테고리' + categoryNo)
 
       COMM.ajaxPagingList({
-            url : "/cobot",
+            url: "/cobot",
             type: 'POST',
             data: {
               boardType1: 'AUTO_SYSTEM',
@@ -128,23 +129,22 @@
             },
             dataType: 'json',
           },
-          function success(data){
+          function success(data) {
             console.log("응답 데이터:", data.contents);
 
             const template = $("#slider-template").html();
-            const rendered = Mustache.render(template, { items: data.contents });
+            const rendered = Mustache.render(template, {items: data.contents});
 
             console.log(rendered)
 
             $('.ecosystem-main-slider1').html(rendered);
 
-            if(data.totalElements != 0){
+            if (data.totalElements != 0) {
               setPagination(data, $('.paging'));
             }
           }
       );
     }
-
 
 
   </script>
