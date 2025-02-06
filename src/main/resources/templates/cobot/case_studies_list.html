@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
-<body>
+<body data-gnb-target="cobot">
 <main layout:fragment="content" class="ecosystem casestudies">
   <section class="ecosystem-title">
     <h2>협동로봇</h2>
@@ -38,8 +38,6 @@
         </select>
 
         <div class="tab-content-wrapper">
-
-
           <div class="nav-content">
             <div class="board-top">
               <div class="category-name"></div>
@@ -48,7 +46,6 @@
             </div>
           </div>
 
-
           <div class="paging" style="position: absolute;bottom: -70px">
           </div>
 
@@ -56,7 +53,6 @@
       </div>
     </div>
   </section>
-
 
 
   <form id="form">

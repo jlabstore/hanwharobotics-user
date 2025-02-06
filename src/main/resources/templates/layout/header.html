@@ -69,7 +69,7 @@
               </ul>
             </li>
             <li>
-              <span class="header__nav__link" data-gnb="robot" th:utext="#{header.cobot}"></span>
+              <span class="header__nav__link" data-gnb="cobot" th:utext="#{header.cobot}"></span>
               <ul class="header__nav__items_sub">
                 <li>
                   <a href="javascript:void(0)"
@@ -99,14 +99,14 @@
             </li>
 
             <li>
-              <span class="header__nav__link" data-gnb="agv/amr" th:utext="#{header.agvAmr}"></span>
+              <span class="header__nav__link" data-gnb="agv_amr" th:utext="#{header.agvAmr}"></span>
 
               <ul class="header__nav__items_sub">
                 <li>
                   <a href="javascript:void(0)" onclick="window.location.href='/agv-amr'" th:utext="#{header.products}"></a>
                 </li>
                 <li>
-                  <a href="/agv-amr/case-studies" th:utext="#{header.case}"></a>
+                  <a href="/agv-amr/case-studies"  class="header_case" th:utext="#{header.case}"></a>
                 </li>
               </ul>
             </li>
@@ -201,7 +201,7 @@
 
       $(document).ready(function () {
 
-        // 영문도메인으로 바로 접근시 영문사이트 변경 
+        // 영문도메인으로 바로 접근시 영문사이트 변경
         var lang = getCookieLangDefualtNull();
         if (lang === null && allowedEnDomains.includes(window.location.href)) {
           changeLang('en', '?lang=en');
