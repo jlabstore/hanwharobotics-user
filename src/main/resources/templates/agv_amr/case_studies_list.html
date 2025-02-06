@@ -5,142 +5,87 @@
       layout:decorate="~{layout/sub_layout.html}">
 <body>
 <main layout:fragment="content" class="ecosystem casestudies">
+  <section class="ecosystem-title">
+    <h2>이동로봇</h2>
+    <h1>적용사례</h1>
+    <p>한화 이동로봇의 다양한 실제 사용 사례를 알려 드립니다.</p>
+  </section>
 
-<!--  <main class="ecosystem casestudies">-->
+  <section class="ecosystem-section">
+    <div class="tab-nav">
+      <div class="tab-nav-wrapper">
 
-    <section class="ecosystem-title">
-      <h2>이동로봇</h2>
-      <h1>적용사례</h1>
-      <p>한화 이동로봇의 다양한 실제 사용 사례를 알려 드립니다.</p>
-    </section>
-
-    <section class="ecosystem-section">
-      <div class="tab-nav">
-        <div class="tab-nav-wrapper">
-
-
-          <input type="radio" id="nav1" name="nav" checked />
-          <label for="nav1" class="ecosystem-nav1">
-            <span>전체</span>
+        <input type="radio" id="nav1" name="nav" checked/>
+        <label for="nav1" class="ecosystem-nav1">
+          <span>전체</span>
+        </label>
+        <th:block th:each="robotCategory, stat : ${robotCategory}">
+          <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav"/>
+          <label th:for="'nav' + ${stat.index + 2}"
+                 th:data-category="${robotCategory.categoryNm}"
+                 th:data-category-no="${robotCategory.categoryNo}"
+          >
+            <span th:text="${robotCategory.categoryNm}"></span>
           </label>
+        </th:block>
+
+        <select class="tab-nav-mobile">
+          <option value="" th:selected="true">전체</option>
           <th:block th:each="robotCategory, stat : ${robotCategory}">
-            <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav" />
-            <label th:for="'nav' + ${stat.index + 2}"
-                   th:data-category="${robotCategory.categoryNm}"
-                   th:data-category-no="${robotCategory.categoryNo}"
-            >
-              <span th:text="${robotCategory.categoryNm}"></span>
-            </label>
+            <option th:value="${robotCategory.categoryNo}"
+                    th:text="${robotCategory.categoryNm}"></option>
+          </th:block>
+        </select>
+
+
+
+        <div class="tab-content-wrapper">
+          <th:block th:each="robotCategory, stat : ${robotCategory}">
+            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1"
+                   th:id="'casestudies-main-slider' + ${stat.index + 1}">
+              </div>
+            </div>
           </th:block>
 
-
-          <select class="tab-nav-mobile">
-            <option value="nav_all" th:selected="true">전체</option>
-            <th:block th:each="robotCategory, stat : ${robotCategory}">
-              <option th:value="${robotCategory.categoryNo}" th:text="${robotCategory.categoryNm}"></option>
-            </th:block>
-          </select>
-
-
-          <div class="tab-content-wrapper">
-
-<!--            <div id="nav1-content" class="nav-content">-->
-
-<!--              <div class="board-top">-->
-<!--                <div class="category-name"></div>-->
-<!--&lt;!&ndash;                <p>클린룸 인증을 받아 많은 F&B산업군에서 사용되고 있는 한화로보틱스의 협동로봇을 소개합니다.</p>&ndash;&gt;-->
-<!--              </div>-->
-
-
-<!--              <div class="casestudies-main-slider1" id="casestudies-main-slider1">-->
-<!--                <script id="slider-template" type="x-tmpl-mustache" class="hide">-->
-<!--                  {{#items}}-->
-<!--                    <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">-->
-<!--                      <div class="casestudies-main-slider-item-img">-->
-<!--                        <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />-->
-<!--                      </div>-->
-<!--                      <p>{{robotNm}}</p>-->
-<!--                      <span>{{description}}</span>-->
-<!--                    </a>-->
-<!--                  {{/items}}-->
-<!--                </script>-->
-<!--              </div>-->
-
-
-
-<!--            </div>-->
-
-
-            <div id="nav1-content" class="nav-content">
-              <div class="board-top">
-                <div class="category-name"></div>
-              </div>
-              <div class="casestudies-main-slider1" id="casestudies-main-slider1">
-              </div>
+          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">
+            <div class="board-top">
+              <div class="category-name"></div>
             </div>
-
-            <div id="nav2-content" class="nav-content">
-              <div class="board-top">
-                <div class="category-name"></div>
-              </div>
-              <div class="casestudies-main-slider1" id="casestudies-main-slider2">
-              </div>
+            <div class="casestudies-main-slider1"
+                 th:id="'casestudies-main-slider' + ${robotCategory.size() + 1}">
             </div>
-
-            <div id="nav3-content" class="nav-content">
-              <div class="board-top">
-                <div class="category-name"></div>
-              </div>
-              <div class="casestudies-main-slider1" id="casestudies-main-slider3">
-              </div>
-            </div>
-
-            <div id="nav4-content" class="nav-content">
-              <div class="board-top">
-                <div class="category-name"></div>
-              </div>
-              <div class="casestudies-main-slider1" id="casestudies-main-slider4">
-              </div>
-            </div>
-
-            <div id="nav5-content" class="nav-content">
-              <div class="board-top">
-                <div class="category-name"></div>
-              </div>
-              <div class="casestudies-main-slider1" id="casestudies-main-slider5">
-              </div>
-            </div>
-
-            <div id="nav6-content" class="nav-content">
-              <div class="board-top">
-                <div class="category-name"></div>
-              </div>
-              <div class="casestudies-main-slider4" id="casestudies-main-slider6">
-              </div>
-            </div>
-
-
-            <script id="slider-template" type="x-tmpl-mustache" class="hide">
-              {{#items}}
-                <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
-                  <div class="casestudies-main-slider-item-img">
-                    <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
-                  </div>
-                  <p>{{robotNm}}</p>
-                  <span>{{description}}</span>
-                </a>
-              {{/items}}
-            </script>
-
-
-
           </div>
         </div>
+
+
+
       </div>
-    </section>
+    </div>
+  </section>
 
+  <div class="paging">
+  </div>
 
-<!--  </main>-->
+  <form id="form" >
+    <input type="hidden" name="size" id="size"  value="9"/>
+    <input type="hidden" name="page" id="page"  value="1"/>
+  </form>
+
+  <script id="slider-template" type="x-tmpl-mustache" class="hide">
+    {{#items}}
+      <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
+        <div class="casestudies-main-slider-item-img">
+          <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+        </div>
+        <p>{{robotNm}}</p>
+        <span>{{description}}</span>
+      </a>
+    {{/items}}
+  </script>
 
 
 </main>
@@ -148,13 +93,17 @@
 <th:block layout:fragment="script">
   <script type="text/javascript">
 
+
     $(document).ready(function () {
       getList();
       updateCategoryName();
 
       $("input[name='nav']").on("change", function () {
+        console.log("카테고리 변경");
         let categoryNo = $(this).next("label").data("category-no") || "";
-        getList(categoryNo);
+        let page = $('#page').val();
+        updateCategoryName
+        getList(categoryNo, page);
       });
 
       $(".tab-nav-mobile").on("change", function () {
@@ -163,122 +112,6 @@
       });
 
     });
-
-
-    $(document).ready(async function() {
-      $('#casestudies-main-slider1').not('.slick-initialized').slick({
-        dots: true,
-        arrows: true,
-        infinite: false,
-        autoplay: false,
-        slidesPerRow: 3,
-        // slidesToShow: 3,
-        rows: 3,
-        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-        responsive: [
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesPerRow: 2,
-              rows: 3,
-            }
-          },
-          {
-            breakpoint: 765,
-            settings: {
-              slidesPerRow: 1,
-              rows: 3,
-            }
-          },
-        ]
-      })
-    });
-
-
-    function getList(categoryNo) {
-      COMM.ajax({
-        url: '/agv-amr/case-studies',
-        type: 'POST',
-        data: {
-          boardType1: 'ROBOT_CASE',
-          boardType2: 'AVG_AMR',
-          categoryNo: categoryNo
-        },
-        dataType: 'json',
-        success: function(data) {
-          console.log("서버에서 받은 데이터:", data);
-          const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
-          const $slider = $('#casestudies-main-slider'+ navNum);
-
-          console.log($slider)
-
-          // if ($slider.hasClass('slick-initialized')) {
-          //   console.log('2')
-          //   $slider.slick('unslick');
-          // }
-          console.log('3')
-
-          const template = $("#slider-template").html();
-          const rendered = Mustache.render(template, { items: data.data });
-
-          console.log("렌더링된 HTML:", rendered);
-          $slider.html(rendered);
-          initializeSlider();
-        },
-        error: function(xhr, status, error) {
-          console.error('ajax 요청 실패', status, error);
-        }
-      });
-    }
-
-
-
-    function initializeSlider() {
-      $('#casestudies-main-slider1').not('.slick-initialized').slick({
-        dots: true,
-        arrows: true,
-        infinite: false,
-        autoplay: false,
-        slidesPerRow: 3,
-        rows: 3,
-        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-        responsive: [
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesPerRow: 2,
-              rows: 3,
-            }
-          },
-          {
-            breakpoint: 765,
-            settings: {
-              slidesPerRow: 1,
-              rows: 3,
-            }
-          },
-        ]
-      });
-    }
-
-
-    function updateCategoryName() {
-
-      let selectedInput = $("input[name='nav']:checked");
-      let selectedLabel = selectedInput.next("label");
-      let selectedCategory = selectedLabel.data("category");
-
-      console.log("선택된 카테고리:", selectedCategory);
-
-      if (!selectedCategory) {
-        selectedCategory = "전체";
-      }
-
-      $(".category-name").text(selectedCategory);
-      console.log("category-name 업데이트됨:", $(".category-name").text());
-    }
 
     $(document).ready(function () {
       console.log("페이지 로드 완료");
@@ -290,7 +123,62 @@
       });
     });
 
+    function getList(categoryNo, page) {
+      if (typeof page != "undefined" && page != null) {
+        $('#page').val(page);
+      }
 
+      console.log('페이지: ' + $('#page').val())
+      console.log('카테고리: ' + categoryNo)
+
+      COMM.ajaxPagingList({
+            url: "/agv-amr/case-studies",
+            type: 'POST',
+            data: {
+              boardType1: 'ROBOT_CASE',
+              boardType2: 'AVG_AMR',
+              categoryNo: categoryNo,
+              page: $('#page').val()
+            },
+            dataType: 'json',
+          },
+          function success(data) {
+            console.log("응답 데이터:", data.contents);
+
+            if (data.contents.length === 0) {
+              $(".casestudies-main-slider1").html("<p>등록된 적용사례가 없습니다.</p>");
+              return;
+            }
+
+            const template = $("#slider-template").html();
+            const rendered = Mustache.render(template, {items: data.contents});
+
+            console.log(rendered)
+
+            $('.casestudies-main-slider1').html(rendered);
+
+            if (data.totalElements != 0) {
+              setPagination(data, $('.paging'));
+            }
+          });
+    }
+
+    function updateCategoryName() {
+      let selectedInput = $("input[name='nav']:checked");
+      let selectedLabel = selectedInput.next("label");
+      let selectedCategory = selectedLabel.data("category");
+
+      console.log("선택된 카테고리:", selectedCategory);
+
+      if (!selectedCategory) {
+        selectedCategory = "전체";
+      }
+
+      if ($(".category-name").text() !== selectedCategory) {
+        $(".category-name").text(selectedCategory);
+        console.log("category-name 업데이트됨:", selectedCategory);
+      }
+    }
 
 
   </script>

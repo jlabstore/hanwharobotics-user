@@ -5,81 +5,109 @@
       layout:decorate="~{layout/sub_layout.html}">
 <body>
 <main layout:fragment="content" class="ecosystem casestudies">
-    <section class="ecosystem-title">
-      <h2>협동로봇</h2>
-      <h1>적용사례</h1>
-      <p>한화 협동로봇 HCR의 다양한 실제 사용 사례를 알려 드립니다.</p>
-    </section>
+  <section class="ecosystem-title">
+    <h2>협동로봇</h2>
+    <h1>적용사례</h1>
+    <p>한화 협동로봇 HCR의 다양한 실제 사용 사례를 알려 드립니다.</p>
+  </section>
 
-    <section class="ecosystem-section">
-      <div class="tab-nav">
-        <div class="tab-nav-wrapper">
+  <section class="ecosystem-section">
+    <div class="tab-nav">
+      <div class="tab-nav-wrapper">
 
-          <input type="radio" id="nav1" name="nav" checked />
-          <label for="nav1" class="ecosystem-nav1">
-            <span>전체</span>
+        <input type="radio" id="nav1" name="nav" checked/>
+        <label for="nav1" class="ecosystem-nav1">
+          <span>전체</span>
+        </label>
+        <th:block th:each="robotCategory, stat : ${robotCategory}">
+          <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav"/>
+          <label th:for="'nav' + ${stat.index + 2}"
+                 th:data-category="${robotCategory.categoryNm}"
+                 th:data-category-no="${robotCategory.categoryNo}"
+          >
+            <span th:text="${robotCategory.categoryNm}"></span>
           </label>
+        </th:block>
+
+        <select class="tab-nav-mobile">
+          <option value="" th:selected="true">전체</option>
           <th:block th:each="robotCategory, stat : ${robotCategory}">
-            <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav" />
-            <label th:for="'nav' + ${stat.index + 2}"
-                   th:data-category="${robotCategory.categoryNm}"
-                   th:data-category-no="${robotCategory.categoryNo}"
-            >
-              <span th:text="${robotCategory.categoryNm}"></span>
-            </label>
+            <option th:value="${robotCategory.categoryNo}"
+                    th:text="${robotCategory.categoryNm}"></option>
+          </th:block>
+        </select>
+
+<!--        <div class="tab-content-wrapper">-->
+
+<!--          <div id="nav1-content" class="nav-content">-->
+<!--            <div class="board-top">-->
+<!--              <div class="category-name"></div>-->
+<!--            </div>-->
+<!--            <div class="casestudies-main-slider1" id="casestudies-main-slider1">-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <th:block th:each="robotCategory, stat : ${robotCategory}">-->
+<!--            <div th:id="|nav${stat.index + 2}-content|" class="nav-content">-->
+<!--              <div class="board-top">-->
+<!--                <div class="category-name"></div>-->
+<!--              </div>-->
+<!--              <div class="casestudies-main-slider1"-->
+<!--                   th:id="'casestudies-main-slider' + ${stat.index + 2}">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </th:block>-->
+<!--        </div>-->
+
+
+        <div class="tab-content-wrapper">
+          <th:block th:each="robotCategory, stat : ${robotCategory}">
+            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">
+              <div class="board-top">
+                <div class="category-name"></div>
+              </div>
+              <div class="casestudies-main-slider1"
+                   th:id="'casestudies-main-slider' + ${stat.index + 1}">
+              </div>
+            </div>
           </th:block>
 
-          <select class="tab-nav-mobile">
-            <option value="" th:selected="true">전체</option>
-            <th:block th:each="robotCategory, stat : ${robotCategory}">
-              <option th:value="${robotCategory.categoryNo}" th:text="${robotCategory.categoryNm}"></option>
-            </th:block>
-          </select>
-
-            <div class="tab-content-wrapper">
-
-              <div id="nav1-content" class="nav-content">
-                <div class="board-top">
-                  <div class="category-name"></div>
-                </div>
-                <div class="casestudies-main-slider1" id="casestudies-main-slider1">
-                </div>
-              </div>
-
-              <th:block th:each="robotCategory, stat : ${robotCategory}">
-                <div th:id="|nav${stat.index + 2}-content|" class="nav-content">
-                  <div class="board-top">
-                    <div class="category-name"></div>
-                  </div>
-                  <div class="casestudies-main-slider1" th:id="'casestudies-main-slider' + ${stat.index + 2}">
-                  </div>
-                </div>
-              </th:block>
+          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">
+            <div class="board-top">
+              <div class="category-name"></div>
             </div>
-
+            <div class="casestudies-main-slider1"
+                 th:id="'casestudies-main-slider' + ${robotCategory.size() + 1}">
+            </div>
+          </div>
         </div>
+
+
       </div>
-    </section>
+
+    </div>
+    </div>
+  </section>
 
   <div class="paging">
   </div>
 
-  <form id="form" >
-    <input type="hidden" name="size" id="size"  value="9"/>
-    <input type="hidden" name="page" id="page"  value="1"/>
+  <form id="form">
+    <input type="hidden" name="size" id="size" value="9"/>
+    <input type="hidden" name="page" id="page" value="1"/>
   </form>
 
   <script id="slider-template" type="x-tmpl-mustache" class="hide">
-      {{#items}}
-        <a href="/cobot/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
-          <div class="casestudies-main-slider-item-img">
-            <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
-          </div>
-          <p>{{robotNm}}</p>
-          <span>{{description}}</span>
-        </a>
-      {{/items}}
-    </script>
+    {{#items}}
+      <a href="/cobot/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
+        <div class="casestudies-main-slider-item-img">
+          <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+        </div>
+        <p>{{robotNm}}</p>
+        <span>{{description}}</span>
+      </a>
+    {{/items}}
+  </script>
 
 </main>
 </body>
@@ -115,9 +143,10 @@
       });
     });
 
-
     function getList(categoryNo, page) {
-      if (typeof page != "undefined" && page != null) $('#page').val(page);
+      if (typeof page != "undefined" && page != null) {
+        $('#page').val(page);
+      }
 
       console.log('페이지: ' + $('#page').val())
       console.log('카테고리: ' + categoryNo)
@@ -142,7 +171,7 @@
             }
 
             const template = $("#slider-template").html();
-            const rendered = Mustache.render(template, { items: data.contents });
+            const rendered = Mustache.render(template, {items: data.contents});
 
             console.log(rendered)
 
@@ -153,8 +182,6 @@
             }
           });
     }
-
-
 
     function updateCategoryName() {
       let selectedInput = $("input[name='nav']:checked");
@@ -172,9 +199,6 @@
         console.log("category-name 업데이트됨:", selectedCategory);
       }
     }
-
-
-
 
 
   </script>

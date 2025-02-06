@@ -38,28 +38,11 @@
           </th:block>
         </select>
 
-
-        <!--        <div class="tab-content-wrapper">-->
-        <!--          <div id="nav1-content" class="nav-content">-->
-        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider1">-->
-        <!--            </div>-->
-        <!--          </div>-->
-
-        <!--          <div id="nav2-content" class="nav-content">-->
-        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider2">-->
-        <!--            </div>-->
-        <!--          </div>-->
-
-        <!--          <div id="nav3-content" class="nav-content">-->
-        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider3">-->
-        <!--            </div>-->
-        <!--          </div>-->
-
-        <!--          <div id="nav4-content" class="nav-content">-->
-        <!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider4">-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
+<!--        <div class="tab-content-wrapper">-->
+<!--          <div id="nav1-content" class="nav-content">-->
+<!--            <div class="ecosystem-main-slider1" id="ecosystem-main-slider1">-->
+<!--            </div>-->
+<!--          </div>-->
 
         <div class="tab-content-wrapper">
           <th:block th:each="robotCategory, stat : ${robotCategory}">
@@ -68,11 +51,16 @@
               </div>
             </div>
           </th:block>
+
+          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">
+            <div class="ecosystem-main-slider1" th:id="'ecosystem-main-slider' + ${robotCategory.size() + 1}">
+            </div>
+          </div>
         </div>
 
       </div>
 
-
+      </div>
     </div>
 
   </section>
