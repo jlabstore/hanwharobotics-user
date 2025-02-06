@@ -150,6 +150,32 @@ var setPagination = function(data, elemnt){
 
 }
 
+
+// 페이징 UI 셋팅
+var setPagination2 = function(data, elemnt){
+  var prevTmpl = $("#paginate-prev-tmpl2").html();
+  var prevPage = data.page > 1 ?   data.page-1 : 1;
+  var prev = Mustache.render(prevTmpl, {'class' : data.page > 1 ? 'enabled' : 'disabled', 'page': prevPage});
+
+
+  var nextTmpl = $("#paginate-next-tmpl2").html();
+  var nextPage = data.page +1 > data.totalPages ?   data.totalPages : data.page +1;
+  var next = Mustache.render(nextTmpl,  {'class' : data.page < data.totalPages? 'enabled' : 'disabled', 'page': nextPage});
+
+  var paginateTmpl = $("#paginate-tmpl2").html();
+  var list = []
+  for(var i=0; i<data.totalPages ; i++){
+    var page = i+1;
+    list.push({'class':page == data.page ? 'on':'', 'page':page})
+  }
+  var paginate = Mustache.render(paginateTmpl, {'list' : list});
+  elemnt.html(prev + paginate + next)
+}
+
+
+
+
+
 // 문의하기 팝업 레이어 열기
 var layerInquiryBtn = function(data){
 

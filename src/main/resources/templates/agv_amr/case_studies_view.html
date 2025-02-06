@@ -8,7 +8,7 @@
 
   <section class="ecosystem-template-01-title">
     <a href="/agv-amr/case-studies">
-      <img src="../images/pc/products_detail_arrow.png"/>
+      <img src="../images/pc/products_detail_arrow.png" alt=""/>
     </a>
     <h1>적용사례</h1>
   </section>
@@ -25,12 +25,25 @@
   </section>
 
 
-  <section class="product-image">
+  <section class="product-image" th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
     <!-- 썸네일 or 동영상 -->
+    <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
+      <iframe
+          th:src="@{${robotResponse.videoUrl}}"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+    </th:block>
+  </section>
+
+
+  <section class="product-image">
     <th:block th:each="file : ${robotFileList}">
       <img th:src="@{${file.filePath}}" alt="로봇 이미지"/>
     </th:block>
   </section>
+
 
   <section class="product-spec">
     <span th:utext="${robotResponse.productSpac}"></span>
@@ -62,6 +75,8 @@
           </th:block>
         </select>
 
+      </div>
+    </div>
 
         <div class="tab-content-wrapper">
 
@@ -72,12 +87,11 @@
           </div>
 
 
-          <div class="paging" style="position: absolute;bottom: -70px">
+          <div class="pagination">
           </div>
 
         </div>
-      </div>
-    </div>
+
 
   </section>
 
@@ -161,10 +175,10 @@
 
 
             if (data.totalElements != 0) {
-              setPagination(data, $('.paging'));
-              $('.paging').show()
+              setPagination2(data, $('.pagination'));
+              $('.pagination').show()
             } else {
-              $('.paging').hide()
+              $('.pagination').hide()
             }
           });
     }

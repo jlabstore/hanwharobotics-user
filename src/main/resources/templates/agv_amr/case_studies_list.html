@@ -42,26 +42,6 @@
 
 
         <div class="tab-content-wrapper">
-<!--          <th:block th:each="robotCategory, stat : ${robotCategory}">-->
-<!--            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">-->
-<!--              <div class="board-top">-->
-<!--                <div class="category-name"></div>-->
-<!--              </div>-->
-<!--              <div class="casestudies-main-slider1"-->
-<!--                   th:id="'casestudies-main-slider' + ${stat.index + 1}">-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </th:block>-->
-
-<!--          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">-->
-<!--            <div class="board-top">-->
-<!--              <div class="category-name"></div>-->
-<!--            </div>-->
-<!--            <div class="casestudies-main-slider1"-->
-<!--                 th:id="'casestudies-main-slider' + ${robotCategory.size() + 1}">-->
-<!--            </div>-->
-<!--          </div>-->
-
 
           <div class="nav-content">
             <div class="board-top">
@@ -72,20 +52,8 @@
           </div>
 
 
-          <div class="paging">
+          <div class="pagination">
           </div>
-
-
-
-
-<!--              <div class="pagination">-->
-<!--                <button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>-->
-<!--                <span class="on">1</span>-->
-<!--                <span>2</span>-->
-<!--                <span>3</span>-->
-<!--                <span>4</span>-->
-<!--                <button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>-->
-<!--              </div>-->
 
 
 
@@ -169,10 +137,6 @@
           function success(data) {
             console.log("응답 데이터:", data.contents);
 
-            // if (data.contents.length === 0) {
-            //   $(".casestudies-main-slider1").html("<p>조회된 결과가 없습니다.</p>");
-            // }
-
             const template = $("#slider-template").html();
             const rendered = Mustache.render(template, {items: data.contents});
 
@@ -183,10 +147,10 @@
 
 
             if (data.totalElements != 0) {
-              setPagination(data, $('.paging'));
-              $('.paging').show()
+              setPagination2(data, $('.pagination'));
+              $('.pagination').show()
             } else {
-              $('.paging').hide()
+              $('.pagination').hide()
             }
           });
     }

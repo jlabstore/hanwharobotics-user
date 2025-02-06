@@ -1,0 +1,24 @@
+<html lang="ko"
+            xmlns:th="http://www.thymeleaf.org"
+            th:fragment="pagingTmpl2">
+
+<script id="paginate-prev-tmpl2" type="x-tmpl-mustache">
+  <button href="#" class="slick-prev" onclick="getList({{page}})">
+      <span><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></span>
+  </button>
+</script>
+
+<script id="paginate-next-tmpl2" type="x-tmpl-mustache">
+  <button href="#" class="slick-next" onclick="getList({{page}})">
+      <span><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></span>
+  </button>
+</script>
+
+<script id="paginate-tmpl2" type="x-tmpl-mustache">
+  <span>
+      {{#list}}
+          <a href="#" class="{{class}}" onclick="getList({{page}})">{{page}}</a>
+      {{/list}}
+  </span>
+</script>
+<html>

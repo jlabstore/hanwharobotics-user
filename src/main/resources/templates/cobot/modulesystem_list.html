@@ -45,17 +45,11 @@
           </div>
         </div>
 
-        <div class="paging">
-        </div>
+<!--        <div class="paging">-->
+<!--        </div>-->
 
-<!--          <div class="pagination">-->
-<!--            <button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>-->
-<!--            <span class="on">1</span>-->
-<!--            <span>2</span>-->
-<!--            <span>3</span>-->
-<!--            <span>4</span>-->
-<!--            <button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>-->
-<!--          </div>-->
+          <div class="pagination">
+          </div>
 
       </div>
 
@@ -138,10 +132,10 @@
             $('.nav-content').show();
 
             if (data.totalElements != 0) {
-              setPagination(data, $('.paging'));
-              $('.paging').show()
+              setPagination2(data, $('.pagination'));
+              $('.pagination').show()
             } else {
-              $('.paging').hide()
+              $('.pagination').hide()
             }
 
 

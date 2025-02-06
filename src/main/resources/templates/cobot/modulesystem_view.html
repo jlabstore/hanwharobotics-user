@@ -25,12 +25,26 @@
     </section>
 
 
-    <section class="product-image">
-      <!-- 썸네일 or 동영상 -->
-      <th:block th:each="file : ${robotFileList}">
-        <img th:src="@{${file.filePath}}" alt="로봇 이미지" />
-      </th:block>
-    </section>
+
+  <section class="product-image" th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
+    <!-- 썸네일 or 동영상 -->
+    <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
+      <iframe
+          th:src="@{${robotResponse.videoUrl}}"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+    </th:block>
+  </section>
+
+
+  <section class="product-image">
+    <!-- 썸네일 or 동영상 -->
+    <th:block th:each="file : ${robotFileList}">
+      <img th:src="@{${file.filePath}}" alt="로봇 이미지" />
+    </th:block>
+  </section>
 
 
     <section class="product-app">
@@ -70,23 +84,33 @@
             </th:block>
           </select>
 
+        </div>
+
+      </div>
+
+
+
 
           <div class="tab-content-wrapper">
             <div class="nav-content">
               <div class="ecosystem-template-01-slider1">
               </div>
             </div>
+
+            <div class="pagination">
+            </div>
+
           </div>
 
 
-        </div>
 
-      </div>
+
+
 
     </section>
 
-  <div class="paging">
-  </div>
+<!--  <div class="paging">-->
+<!--  </div>-->
 
   <form id="form">
     <input type="hidden" name="size" id="size" value="8"/>
@@ -158,10 +182,10 @@
             $('.nav-content').show();
 
             if (data.totalElements != 0) {
-              setPagination(data, $('.paging'));
-              $('.paging').show()
+              setPagination2(data, $('.pagination'));
+              $('.pagination').show()
             } else {
-              $('.paging').hide()
+              $('.pagination').hide()
             }
 
           }
