@@ -19,6 +19,7 @@ public interface RobotMapper {
 
   List<RobotResponse> findRobotByCategory(RobotRequest robotRequest);
 
+
   int countRobotByCategoryList(Map<String, Object> map, RobotRequest request, String lang);
 
   List<RobotResponse> findRobotByCategory2(RobotRequest request, PageRequest page, String lang);

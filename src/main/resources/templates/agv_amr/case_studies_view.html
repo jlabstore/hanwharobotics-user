@@ -76,13 +76,33 @@
     </div>
 
     <div class="tab-content-wrapper">
-      <div class="nav-content">
-        <div class="casestudies-template-01-slider1">
+<!--      <div class="nav-content">-->
+<!--        <div class="casestudies-template-01-slider1">-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+      <div id="nav1-content" class="nav-content">
+        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider1">
         </div>
       </div>
 
-      <div class="pagination">
+      <div id="nav2-content" class="nav-content">
+        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider2">
+        </div>
       </div>
+
+      <div id="nav3-content" class="nav-content">
+        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider3">
+        </div>
+      </div>
+
+      <div id="nav4-content" class="nav-content">
+        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider4">
+        </div>
+      </div>
+
+
     </div>
 
 
@@ -117,64 +137,160 @@
 
     $(document).ready(function () {
       getList();
+      updateCategoryName();
 
       $("input[name='nav']").on("change", function () {
-        console.log("카테고리 변경");
         let categoryNo = $(this).next("label").data("category-no") || "";
-        getList(1, categoryNo);
+        getList(categoryNo);
       });
 
       $(".tab-nav-mobile").on("change", function () {
         let categoryNo = $(this).val();
-        getList(1, categoryNo);
+        getList(categoryNo);
       });
 
     });
 
-    function getList(page, categoryNo) {
-      if (typeof page != "undefined" && page != null) {
-        $('#page').val(page);
+
+    $(document).ready(async function() {
+      $('#casestudies-template-01-slider1').not('.slick-initialized').slick({
+        dots: true,
+        arrows: true,
+        infinite: false,
+        autoplay: false,
+        slidesPerRow: 3,
+        // slidesToShow: 3,
+        rows: 3,
+        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesPerRow: 2,
+              rows: 3,
+            }
+          },
+          {
+            breakpoint: 765,
+            settings: {
+              slidesPerRow: 1,
+              rows: 3,
+            }
+          },
+        ]
+      })
+    });
+
+
+
+    function getList(categoryNo) {
+      COMM.ajax({
+        url: '/agv-amr/case-studies/category',
+        type: 'POST',
+        data: {
+          boardType1: 'ROBOT_CASE',
+          boardType2: 'AVG_AMR',
+          categoryNo: categoryNo
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log("서버에서 받은 데이터:", data);
+          const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
+          const $slider = $('#casestudies-template-01-slider'+ navNum);
+
+          console.log($slider)
+
+          if ($slider.hasClass('slick-initialized')) {
+            console.log('2')
+            $slider.slick('unslick');
+          }
+          console.log('3')
+
+          const template = $("#slider-template").html();
+          const rendered = Mustache.render(template, { items: data.data });
+
+          console.log("렌더링된 HTML:", rendered);
+          $slider.html(rendered);
+          initializeSlider();
+        },
+        error: function(xhr, status, error) {
+          console.error('ajax 요청 실패', status, error);
+        }
+      });
+    }
+
+
+    function initializeSlider() {
+      console.log("슬라이더 초기화 시작");
+
+      $(".casestudies-template-01-slider1, .casestudies-template-01-slider2, .casestudies-template-01-slider3, .casestudies-template-01-slider4").each(function () {
+        const $slider = $(this);
+
+        if ($slider.hasClass('slick-initialized')) {
+          $slider.slick('unslick');
+        }
+
+        $slider.slick({
+          dots: true,
+          arrows: true,
+          infinite: false,
+          autoplay: false,
+          slidesPerRow: 3,
+          rows: 1,
+          prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+          nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+          responsive: [
+            {
+              breakpoint: 1025,
+              settings: {
+                slidesPerRow: 2,
+                rows: 1,
+              }
+            },
+            {
+              breakpoint: 765,
+              settings: {
+                slidesPerRow: 1,
+                rows: 1,
+              }
+            },
+          ]
+        });
+      });
+
+      console.log("슬라이더 초기화 완료");
+    }
+
+
+    function updateCategoryName() {
+
+      let selectedInput = $("input[name='nav']:checked");
+      let selectedLabel = selectedInput.next("label");
+      let selectedCategory = selectedLabel.data("category");
+
+      console.log("선택된 카테고리:", selectedCategory);
+
+      if (!selectedCategory) {
+        selectedCategory = "전체";
       }
 
-      console.log('페이지: ' + $('#page').val())
-      console.log('카테고리: ' + categoryNo)
-
-      COMM.ajaxPagingList({
-            url: '/agv-amr/case-studies',
-            type: 'POST',
-            data: {
-              boardType1: 'ROBOT_CASE',
-              boardType2: 'AVG_AMR',
-              categoryNo: categoryNo,
-              page: $('#page').val()
-            },
-            dataType: 'json',
-          },
-          function success(data) {
-            console.log("응답 데이터:", data.contents);
-
-            // if (data.contents.length === 0) {
-            //   $(".casestudies-template-01-slider1").html("<p>등록된 적용사례가 없습니다.</p>");
-            //   return;
-            // }
-
-            const template = $("#slider-template").html();
-            const rendered = Mustache.render(template, {items: data.contents});
-
-            console.log(rendered)
-
-            $('.casestudies-template-01-slider1').html(rendered);
-            $('.nav-content').show();
-
-
-            if (data.totalElements != 0) {
-              setPagination2(data, $('.pagination'));
-              $('.pagination').show()
-            } else {
-              $('.pagination').hide()
-            }
-          });
+      $(".category-name").text(selectedCategory);
+      console.log("category-name 업데이트됨:", $(".category-name").text());
     }
+
+    $(document).ready(function () {
+      console.log("페이지 로드 완료");
+      updateCategoryName();
+
+      $("input[name='nav']").on("change", function () {
+        console.log("카테고리 변경 감지됨");
+        updateCategoryName();
+      });
+    });
+
+
+
 
 
   </script>

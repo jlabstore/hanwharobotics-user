@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
-<body data-gnb-target="contact">
-<main layout:fragment="content" class="ecosystem-template-01 type2">
+<body data-gnb-target="cobot">
+<main layout:fragment="content" class="modulesystem view ecosystem-template-01 type2">
 
     <section class="ecosystem-template-01-title">
       <a href="/cobot/modulesystem">
@@ -86,36 +86,69 @@
 
         </div>
 
-      </div>
+
+<!--          <div class="tab-content-wrapper">-->
+<!--            <div class="nav-content">-->
+<!--              <div class="ecosystem-template-01-slider1">-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="pagination">-->
+<!--            </div>-->
+
+<!--          </div>-->
 
 
+<!--        <div class="tab-content-wrapper">-->
+<!--          <th:block th:each="robotCategory, stat : ${robotCategory}">-->
+<!--            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">-->
+<!--              <div class="casestudies-template-01-slider1"-->
+<!--                   th:id="'casestudies-template-01-slider' + ${stat.index + 1}">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </th:block>-->
+
+<!--          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">-->
+<!--            <div class="casestudies-template-01-slider1"-->
+<!--                 th:id="'casestudies-template-01-slider' + ${robotCategory.size() + 1}">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
 
-          <div class="tab-content-wrapper">
-            <div class="nav-content">
-              <div class="ecosystem-template-01-slider1">
-              </div>
+        <div class="tab-content-wrapper">
+          <div id="nav1-content" class="nav-content">
+            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider1">
             </div>
-
-            <div class="pagination">
-            </div>
-
           </div>
+          <div id="nav2-content" class="nav-content">
+            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider2">
+            </div>
+          </div>
+          <div id="nav3-content" class="nav-content">
+            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider3">
+            </div>
+          </div>
+          <div id="nav4-content" class="nav-content">
+            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider4">
+            </div>
+          </div>
+          <div id="nav5-content" class="nav-content">
+            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider5">
+            </div>
+          </div>
+          <div id="nav6-content" class="nav-content">
+            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider6">
+            </div>
+          </div>
+        </div>
 
 
 
-
-
+      </div>
 
     </section>
 
-<!--  <div class="paging">-->
-<!--  </div>-->
-
-  <form id="form">
-    <input type="hidden" name="size" id="size" value="8"/>
-    <input type="hidden" name="page" id="page" value="1"/>
-  </form>
 
 
     <script id="slider-template" type="x-tmpl-mustache" class="hide">
@@ -139,61 +172,143 @@
   <script type="text/javascript">
 
     $(document).ready(function () {
-      getList();
+      $("input[name='nav']").off("change");
+      $(".tab-nav-mobile").off("change");
+
+      getList("");
+
       $("input[name='nav']").on("change", function (e) {
+        e.stopPropagation();
         let categoryNo = $(this).next("label").data("category-no") || "";
-        console.log('categoryNo', categoryNo)
-        getList(1, categoryNo);
+        getList(categoryNo);
       });
 
       $(".tab-nav-mobile").on("change", function () {
         let categoryNo = $(this).val();
-        getList(1, categoryNo);
+        getList(categoryNo);
+      });
+
+    });
+
+
+    $(document).ready(async function() {
+      $('#ecosystem-template-01-slider1').not('.slick-initialized').slick({
+        dots: true,
+        arrows: true,
+        infinite: false,
+        autoplay: false,
+        slidesPerRow: 3,
+        // slidesToShow: 3,
+        rows: 3,
+        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesPerRow: 2,
+              rows: 3,
+            }
+          },
+          {
+            breakpoint: 765,
+            settings: {
+              slidesPerRow: 1,
+              rows: 3,
+            }
+          },
+        ]
       })
     });
 
 
-    function getList(page, categoryNo){
-      if(typeof page != "undefined" && page != null) $('#page').val(page);
 
-      console.log('페이지'+ $('#page').val())
-      console.log('카테고리'+ categoryNo)
 
-      COMM.ajaxPagingList({
-            url : "/cobot",
-            type: 'POST',
-            data: {
-              boardType1: 'AUTO_SYSTEM',
-              boardType2: 'CO_ROBOT',
-              categoryNo: categoryNo,
-              page: $('#page').val()
-            },
-            dataType: 'json',
-          },
-          function success(data){
-            console.log("응답 데이터:", data.contents);
+    function getList(categoryNo) {
+      COMM.ajax({
+        url: '/cobot/category',
+        type: 'POST',
+        data: {
+          boardType1: 'AUTO_SYSTEM',
+          boardType2: 'CO_ROBOT',
+          categoryNo: categoryNo
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log("서버에서 받은 데이터:", data);
+          const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
+          const $slider = $('#ecosystem-template-01-slider'+ navNum);
 
-            const template = $("#slider-template").html();
-            const rendered = Mustache.render(template, { items: data.contents });
+          console.log($slider)
 
-            console.log(rendered)
-
-            $('.ecosystem-template-01-slider1').html(rendered);
-            $('.nav-content').show();
-
-            if (data.totalElements != 0) {
-              setPagination2(data, $('.pagination'));
-              $('.pagination').show()
-            } else {
-              $('.pagination').hide()
-            }
-
+          if ($slider.hasClass('slick-initialized')) {
+            console.log('2')
+            $slider.slick('unslick');
           }
-      );
+          console.log('3')
+
+          const template = $("#slider-template").html();
+          const rendered = Mustache.render(template, { items: data.data });
+
+          console.log("렌더링된 HTML:", rendered);
+          $slider.html(rendered);
+          initializeSlider();
+        },
+        error: function(xhr, status, error) {
+          console.error('ajax 요청 실패', status, error);
+        }
+      });
     }
+
+
+
+    function initializeSlider() {
+      console.log("슬라이더 초기화 시작");
+
+      $(".ecosystem-template-01-slider1, .ecosystem-template-01-slider2, .ecosystem-template-01-slider3, .ecosystem-template-01-slider4 .ecosystem-template-01-slider5 .ecosystem-template-01-slider6").each(function () {
+        const $slider = $(this);
+
+        if ($slider.hasClass('slick-initialized')) {
+          $slider.slick('unslick');
+        }
+
+        $slider.slick({
+          dots: true,
+          arrows: true,
+          infinite: false,
+          autoplay: false,
+          slidesPerRow: 3,
+          rows: 1,
+          prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+          nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+          responsive: [
+            {
+              breakpoint: 1025,
+              settings: {
+                slidesPerRow: 2,
+                rows: 1,
+              }
+            },
+            {
+              breakpoint: 765,
+              settings: {
+                slidesPerRow: 1,
+                rows: 1,
+              }
+            },
+          ]
+        });
+      });
+
+      console.log("슬라이더 초기화 완료");
+    }
+
 
 
   </script>
 </th:block>
 </html>
+
+
+
 

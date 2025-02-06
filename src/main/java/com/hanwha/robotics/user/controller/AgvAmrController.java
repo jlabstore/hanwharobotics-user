@@ -49,16 +49,16 @@ public class AgvAmrController {
         return "agv_amr/case_studies_list";
     }
 
-//    @PostMapping("/case-studies")
-//    public ResponseEntity<Object> findCaseByCategory(
-//        RobotRequest robotRequest,
-//        HttpServletRequest request
-//    ) {
-//        String lang = commonUtil.getCookieLang(request);
-//        robotRequest.setLang(lang);
-//        List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
-//        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
-//    }
+    @PostMapping("/case-studies/category")
+    public ResponseEntity<Object> findCaseByCategory(
+        RobotRequest robotRequest,
+        HttpServletRequest request
+    ) {
+        String lang = commonUtil.getCookieLang(request);
+        robotRequest.setLang(lang);
+        List<RobotResponse> robotResponseList = robotService.findRobotByCategory(robotRequest);
+        return ResponseEntity.ok(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), robotResponseList));
+    }
 
 
 
