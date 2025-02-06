@@ -87,36 +87,35 @@
         </div>
       </div>
 
-      <div id="nav2-content" class="nav-content">
-        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider2">
-        </div>
-      </div>
+      <!--      <div id="nav2-content" class="nav-content">-->
+      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider2">-->
+      <!--        </div>-->
+      <!--      </div>-->
 
-      <div id="nav3-content" class="nav-content">
-        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider3">
-        </div>
-      </div>
+      <!--      <div id="nav3-content" class="nav-content">-->
+      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider3">-->
+      <!--        </div>-->
+      <!--      </div>-->
 
-      <div id="nav4-content" class="nav-content">
-        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider4">
-        </div>
-      </div>
+      <!--      <div id="nav4-content" class="nav-content">-->
+      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider4">-->
+      <!--        </div>-->
+      <!--      </div>-->
 
-      <div id="nav5-content" class="nav-content">
-        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider5">
-        </div>
-      </div>
+      <!--      <div id="nav5-content" class="nav-content">-->
+      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider5">-->
+      <!--        </div>-->
+      <!--      </div>-->
 
-      <div id="nav6-content" class="nav-content">
-        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider6">
-        </div>
-      </div>
+      <!--      <div id="nav6-content" class="nav-content">-->
+      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider6">-->
+      <!--        </div>-->
+      <!--      </div>-->
 
 
     </div>
 
   </section>
-
 
 
   <script id="slider-template" type="x-tmpl-mustache" class="hide">
@@ -137,28 +136,31 @@
 </body>
 
 <th:block layout:fragment="script">
+
   <script type="text/javascript">
-    $(document).ready(function () {
-      // 페이지 로드 완료 후 초기화
-      console.log("페이지 로드 완료");
 
-      // 첫 번째 데이터 호출
-      getList("");
+    let isReady = false;
 
-      // 카테고리 변경 시 데이터 다시 불러오기
-      $("input[name='nav']").on("change", function () {
-        let categoryNo = $(this).next("label").data("category-no") || "";
-        getList(categoryNo);
+    if (!isReady) {
+
+      $(document).ready(function () {
+        console.log("페이지 로드 완료");
+
+        getList("");
+
+        $("input[name='nav']").off("change").on("change", function () {
+          let categoryNo = $(this).next("label").data("category-no") || "";
+          getList(categoryNo);
+        });
+
+        $(".tab-nav-mobile").off("change").on("change", function () {
+          let categoryNo = $(this).val();
+          getList(categoryNo);
+        });
       });
 
-      $(".tab-nav-mobile").on("change", function () {
-        let categoryNo = $(this).val();
-        getList(categoryNo);
-      });
+    }
 
-      // 슬라이더 초기화
-      initializeSlider();
-    });
 
     function getList(categoryNo) {
       COMM.ajax({
@@ -170,19 +172,22 @@
           categoryNo: categoryNo
         },
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
           console.log("서버에서 받은 데이터:", data);
-          const navNum = $('[name=nav]:checked').attr('id').replace('nav','');
-          const $slider = $('#casestudies-template-01-slider'+ navNum);
+          const $slider = $('#casestudies-template-01-slider1');
+
+          if ($slider.hasClass('slick-initialized')) {
+            $slider.slick('unslick');// 기존 슬라이더를 완전히 비움
+          }
 
           const template = $("#slider-template").html();
-          const rendered = Mustache.render(template, { items: data.data });
+          const rendered = Mustache.render(template, {items: data.data});
 
-          console.log("렌더링된 HTML:", rendered);
           $slider.html(rendered);
-          initializeSlider(); // 슬라이더 초기화 함수 호출
+
+          initializeSlider();
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.error('ajax 요청 실패', status, error);
         }
       });
@@ -191,43 +196,38 @@
     function initializeSlider() {
       console.log("슬라이더 초기화 시작");
 
-      $(".casestudies-template-01-slider1, .casestudies-template-01-slider2, .casestudies-template-01-slider3, .casestudies-template-01-slider4 .casestudies-template-01-slider5 .casestudies-template-01-slider6").each(function () {
-        const $slider = $(this);
+      const $slider = $('#casestudies-template-01-slider1');
 
-        if ($slider.hasClass('slick-initialized')) {
-          $slider.slick('unslick');
-        }
-
-        $slider.slick({
-          dots: true,
-          arrows: true,
-          infinite: false,
-          autoplay: false,
-          slidesPerRow: 3,
-          rows: 1,
-          prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-          nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-          responsive: [
-            {
-              breakpoint: 1025,
-              settings: {
-                slidesPerRow: 2,
-                rows: 1,
-              }
-            },
-            {
-              breakpoint: 765,
-              settings: {
-                slidesPerRow: 1,
-                rows: 1,
-              }
-            },
-          ]
-        });
+      $slider.slick({
+        dots: true,  // 페이지네이션 노출 활성화
+        arrows: true, // prev/next 버튼 활성화
+        infinite: false,
+        autoplay: false,
+        slidesToShow: 4,
+        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesToShow: 4,
+            }
+          },
+          {
+            breakpoint: 765,
+            settings: {
+              dots: true,
+              infinite: false,
+              slidesToShow: 1,
+            }
+          },
+        ]
       });
 
       console.log("슬라이더 초기화 완료");
+
     }
+
   </script>
 
 </th:block>
