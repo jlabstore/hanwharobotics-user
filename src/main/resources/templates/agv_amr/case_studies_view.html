@@ -30,7 +30,7 @@
     <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
       <iframe
           th:src="@{${robotResponse.videoUrl}}"
-          title="YouTube video player" frameborder="0"
+          title="YouTube video player" frameborder="0" width="100%" height="100%"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
       </iframe>
@@ -38,7 +38,7 @@
   </section>
 
 
-  <section class="product-image">
+  <section class="product-image" th:if="${robotFileList.size() != 0}">
     <th:block th:each="file : ${robotFileList}">
       <img th:src="@{${file.filePath}}" alt="로봇 이미지"/>
     </th:block>
@@ -52,8 +52,6 @@
   <section class="ecosystem-template-01-section">
     <div class="tab-nav">
       <div class="tab-nav-wrapper">
-
-
         <input type="radio" id="nav1" name="nav" checked/>
         <label for="nav1" class="ecosystem-nav1">
           <span>전체</span>
@@ -74,23 +72,18 @@
                     th:text="${robotCategory.categoryNm}"></option>
           </th:block>
         </select>
-
       </div>
     </div>
 
-        <div class="tab-content-wrapper">
-
-
-          <div class="nav-content">
-            <div class="casestudies-template-01-slider1">
-            </div>
-          </div>
-
-
-          <div class="pagination">
-          </div>
-
+    <div class="tab-content-wrapper">
+      <div class="nav-content">
+        <div class="casestudies-template-01-slider1">
         </div>
+      </div>
+
+      <div class="pagination">
+      </div>
+    </div>
 
 
   </section>

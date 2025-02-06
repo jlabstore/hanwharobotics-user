@@ -38,7 +38,7 @@
   </section>
 
 
-  <section class="product-image">
+  <section class="product-image" th:if="${robotFileList.size() != 0}">
     <!-- 썸네일 or 동영상 -->
 
     <th:block th:each="file : ${robotFileList}">
