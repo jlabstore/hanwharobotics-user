@@ -3,6 +3,22 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
+      <head>
+        <style>
+          /* CKEditor 기본 테이블 스타일 */
+          table {
+              border-collapse: collapse;
+              width: 100%;
+          }
+          table, th, td {
+              border: 1px solid #ccc;
+          }
+          th, td {
+              padding: 8px;
+              text-align: left;
+          }
+      </style>
+    </head>
 <body data-gnb-target="cobot">
 <main layout:fragment="content" class="modulesystem view ecosystem-template-01 type2">
 
