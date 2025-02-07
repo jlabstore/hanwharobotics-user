@@ -7,45 +7,45 @@ header .header_wrapper {
 }
 
 .section1 .visual-contents {
-	position: absolute;
-	width: 100%;
-	z-index: 6;
-	top: 50%;
-	left: 120px;
-	transform: translateY(-50%);
-	margin-top: 90px;
+  position: absolute;
+  width: 100%;
+  z-index: 6;
+  top: 50%;
+  left: 120px;
+  transform: translateY(-50%);
+  margin-top: 90px;
 }
 
 .section1 .visual-contents .main_txt .sub-title{
-	font-family: HanwhaGothicB_OTF;
-	font-size: 70px;
-	color: #fff;
+  font-family: HanwhaGothicB_OTF;
+  font-size: 70px;
+  color: #fff;
 }
 
 .section1 .visual-contents .main_txt .title{
-	font-family: HanwhaGothicB_OTF;
-	font-size: 130px;
-	color: #f37321;
+  font-family: HanwhaGothicB_OTF;
+  font-size: 130px;
+  color: #f37321;
 }
 
 .section1 .visual-contents .main_txt .txt{
-	font-family: HanwhaGothicEL_OTF;
-	font-size: 28px;
-	color: #eaeaea;
-	margin-top: 61px;
-}
+  font-family: HanwhaGothicEL_OTF;
+  font-size: 28px;
+  color: #eaeaea;
+  margin-top: 61px;
+} 
 
 .section1 .contents .main_txt span.button {
-	display: inline-block;
-	width: 110px;
-	height: 110px;
-	background: url(../images/pc/ic_round_arrow.svg) no-repeat 0 0;
-	background-size: 110px;
-	position: absolute;
-	top: 50%;
-	right: 240px;
-	transform: translateY(-50%);
-	cursor: pointer;
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  background: url(../images/pc/ic_round_arrow.svg) no-repeat 0 0;
+  background-size: 110px;
+  position: absolute;
+  top: 50%;
+  right: 240px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 
@@ -122,7 +122,7 @@ header .more_btn  a.distributor {
 
 .section1 {
 	position: relative;
-	max-width: 1920px;
+	/* max-width: 1920px; */
 	min-width: 335px;
 	margin: 0 auto;
 	/* height: 1180px; */
@@ -130,16 +130,16 @@ header .more_btn  a.distributor {
 }
 
 .section1 .bg_section {
-	width: 100%;
-	height: 100vh; /* 세로 크기를 뷰포트의 100%로 설정 */
-	/* background: url('../images/pc/main_bg1.png') no-repeat center center;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100vh; /* 세로 크기를 뷰포트의 100%로 설정 */
+  /* background: url('../images/pc/main_bg1.png') no-repeat center center;
+  background-size: cover; 
+  background-position: center; 
   background-repeat: no-repeat;  */
 }
 
 .section1 .bg_section .slick-slide {
-	float: left;
+  float: left;
 }
 
 .section1 .bg_section .contents {
@@ -155,35 +155,35 @@ header .more_btn  a.distributor {
 }
 
 .section1 .contents img {
-	width: 100%;
-	height: 100vh;
-	object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
 }
 
 .section1 .bg_section .slick-dots {
-	height: 11px;
-	position: absolute;
-	bottom: 40px;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  height: 11px;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .section1 .bg_section .slick-dots li {
-	float: left;
+  float: left;
 }
 
 .section1 .bg_section .slick-dots li button {
-	width: 11px;
-	height: 11px;
-	background-color: #5d6260;
-	margin-right: 10px;
-	text-indent: 9999px;
-	border-radius: 50%;
-	cursor: pointer;
+  width: 11px;
+  height: 11px;
+  background-color: #5d6260;
+  margin-right: 10px;
+  text-indent: 9999px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .section1 .bg_section .slick-dots li.slick-active button {
-	background-color: #fff;
+  background-color: #fff;
 }
 
 /* .section1 .contents {
@@ -1001,7 +1001,7 @@ header .more_btn  a.distributor {
 
 	.section1 .contents {
 		/* padding: 0 15px 0 !important; */
-		padding: 0 !important;
+    padding: 0 !important;
 	}
 	.section2 .primary_box .contents {
 		background: url('../images/pc/thumb_1@3x.webp') no-repeat 100% 100%/contain !important;
@@ -1653,41 +1653,41 @@ header .more_btn  a.distributor {
 		max-height: 870px;
 	}
 
-
-	.section1 .visual-contents {
-		position: absolute;
-		z-index: 6;
-		/* top: 50%;
+  
+  .section1 .visual-contents {
+    position: absolute;
+    z-index: 6;
+    /* top: 50%; 
     transform: translate(90px, -50%);  */
-		top: 50%;
-		left: 90px;
-		transform: translateY(-50%);
-		margin-top: 70px;
-	}
+    top: 50%;
+    left: 90px;
+    transform: translateY(-50%);
+    margin-top: 70px;
+  }
+  
+  .section1 .visual-contents .main_txt .sub-title{
+    font-size: 47px;
+  }
+  
+  .section1 .visual-contents .main_txt .title{
+    font-size: 88px;
+  }
+  
+  .section1 .visual-contents .main_txt .txt{
+    font-size: 20px;
+    margin-top: 45px;
+    line-height: 1.6;
+  }
 
-	.section1 .visual-contents .main_txt .sub-title{
-		font-size: 47px;
-	}
-
-	.section1 .visual-contents .main_txt .title{
-		font-size: 88px;
-	}
-
-	.section1 .visual-contents .main_txt .txt{
-		font-size: 20px;
-		margin-top: 45px;
-		line-height: 1.6;
-	}
-
-	.section1 .contents .main_txt span.button {
-		position: relative;
-		transform: inherit;
-		right: inherit;
-		margin-top: 50px;
-		width: 80px;
-		height: 80px;
-		background-size: 80px;
-	}
+  .section1 .contents .main_txt span.button {
+    position: relative;
+    transform: inherit;
+    right: inherit;
+    margin-top: 50px;
+    width: 80px;
+    height: 80px;
+    background-size: 80px;
+  }
 
 
 	.section2 {
@@ -2217,41 +2217,41 @@ header .more_btn  a.distributor {
 @media (max-width: 765px) {
 	.mobile header {
 		padding: 16px 20px !important;
-		/* position: absolute; */
+    /* position: absolute; */
 	}
 
-	.section1 .visual-contents {
-		position: absolute;
-		z-index: 6;
-		top: 50%;
-		left: 35px;
-		transform: translateY(-50%);
-		margin-top: 70px;
-	}
+  .section1 .visual-contents {
+    position: absolute;
+    z-index: 6;
+    top: 50%;
+    left: 35px;
+    transform: translateY(-50%);
+    margin-top: 70px;
+  }
+  
+  .section1 .visual-contents .main_txt .sub-title{
+    font-size: 22px;
+  }
+  
+  .section1 .visual-contents .main_txt .title{
+    font-size: 42px;
+  }
+  
+  .section1 .visual-contents .main_txt .txt{
+    font-size: 16px;
+    margin-top: 32px;
+    line-height: 1.5;
+  }
 
-	.section1 .visual-contents .main_txt .sub-title{
-		font-size: 22px;
-	}
-
-	.section1 .visual-contents .main_txt .title{
-		font-size: 42px;
-	}
-
-	.section1 .visual-contents .main_txt .txt{
-		font-size: 16px;
-		margin-top: 32px;
-		line-height: 1.5;
-	}
-
-	.section1 .contents .main_txt span.button {
-		position: relative;
-		transform: inherit;
-		right: inherit;
-		margin-top: 30px;
-		width: 60px;
-		height: 60px;
-		background-size: 60px;
-	}
+  .section1 .contents .main_txt span.button {
+    position: relative;
+    transform: inherit;
+    right: inherit;
+    margin-top: 30px;
+    width: 60px;
+    height: 60px;
+    background-size: 60px;
+  }
 
 	.section1 .update {
 		position: fixed;
@@ -2321,7 +2321,7 @@ header .more_btn  a.distributor {
 	/* .section1 .contents .main_txt .txt br {
 		display: none;
 	} */
-
+  
 	.section_bottom {
 		position: relative;
 		z-index: 2;
