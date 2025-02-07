@@ -24,16 +24,16 @@
     <div class="product-desc" th:utext="${robotResponse.description}"></div>
   </section>
 
-
   <section class="product-image" th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
     <!-- 썸네일 or 동영상 -->
     <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
-      <iframe
+      <span th:utext="${robotResponse.videoUrl}"></span>
+      <!-- <iframe
           th:src="@{${robotResponse.videoUrl}}"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
+      </iframe> -->
     </th:block>
   </section>
 
