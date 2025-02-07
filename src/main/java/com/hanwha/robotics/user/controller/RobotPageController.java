@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/robot")
-public class RobotController {
+public class RobotPageController {
 
     @GetMapping
     public String robot() {
