@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body data-gnb-target="cobot">
+<main layout:fragment="content" class="modulesystem view ecosystem-template-01 type2">
+
+  <section class="ecosystem-template-01-title">
+    <a href="/cobot/modulesystem">
+      <img src="../images/pc/products_detail_arrow.png" alt/>
+    </a>
+    <h1>자동화 시스템</h1>
+  </section>
+
+  <section class="product-info">
+    <!-- 카테고리 -->
+    <div class="product-category">
+      <span th:utext="${robotResponse.categoryNm}"></span>
+    </div>
+    <!-- 타이틀 -->
+    <div class="product-title" th:utext="${robotResponse.robotNm}"></div>
+    <!-- 설명 -->
+    <div class="product-desc" th:utext="${robotResponse.description}"></div>
+  </section>
+
+
+  <section class="product-image" th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
+    <!-- 썸네일 or 동영상 -->
+    <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
+      <iframe
+          th:src="@{${robotResponse.videoUrl}}"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+    </th:block>
+  </section>
+
+
+  <section class="product-image" th:if="${robotFileList.size() != 0}">
+    <!-- 썸네일 or 동영상 -->
+    <th:block th:each="file : ${robotFileList}">
+      <img th:src="@{${file.filePath}}" alt="로봇 이미지"/>
+    </th:block>
+  </section>
+
+
+  <section class="product-app">
+    <!-- 어플리케이션 정보 -->
+    <div class="left" th:utext="${robotResponse.applicationInfo}"></div>
+    <!-- 시나리오 -->
+    <div class="right" th:utext="${robotResponse.scenario}"></div>
+  </section>
+
+  <section class="product-spec">
+    <h2>Specifications</h2>
+    <span th:utext="${robotResponse.productSpac}"></span>
+  </section>
+
+  <section class="ecosystem-template-01-section">
+    <div class="tab-nav">
+      <div class="tab-nav-wrapper">
+
+        <input type="radio" id="nav1" name="nav" checked/>
+        <label for="nav1" class="ecosystem-nav1">
+          <span>전체</span>
+        </label>
+        <th:block th:each="robotCategory, stat : ${robotCategory}">
+          <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav"/>
+          <label th:for="'nav' + ${stat.index + 2}"
+                 th:data-category="${robotCategory.categoryNm}"
+                 th:data-category-no="${robotCategory.categoryNo}"
+          >
+            <span th:text="${robotCategory.categoryNm}"></span>
+          </label>
+        </th:block>
+
+        <select class="tab-nav-mobile">
+          <option value="" th:selected="true">전체</option>
+          <th:block th:each="robotCategory, stat : ${robotCategory}">
+            <option th:value="${robotCategory.categoryNo}" th:text="${robotCategory.categoryNm}"></option>
+          </th:block>
+        </select>
+
+      </div>
+
+
+      <!--          <div class="tab-content-wrapper">-->
+      <!--            <div class="nav-content">-->
+      <!--              <div class="ecosystem-template-01-slider1">-->
+      <!--              </div>-->
+      <!--            </div>-->
+
+      <!--            <div class="pagination">-->
+      <!--            </div>-->
+
+      <!--          </div>-->
+
+
+      <!--        <div class="tab-content-wrapper">-->
+      <!--          <th:block th:each="robotCategory, stat : ${robotCategory}">-->
+      <!--            <div th:id="|nav${stat.index + 1}-content|" class="nav-content">-->
+      <!--              <div class="casestudies-template-01-slider1"-->
+      <!--                   th:id="'casestudies-template-01-slider' + ${stat.index + 1}">-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--          </th:block>-->
+
+      <!--          <div th:id="|nav${robotCategory.size() + 1}-content|" class="nav-content">-->
+      <!--            <div class="casestudies-template-01-slider1"-->
+      <!--                 th:id="'casestudies-template-01-slider' + ${robotCategory.size() + 1}">-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+
+
+      <div class="tab-content-wrapper">
+        <div id="nav1-content" class="nav-content">
+          <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider1">
+          </div>
+        </div>
+        <!--          <div id="nav2-content" class="nav-content">-->
+        <!--            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider2">-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div id="nav3-content" class="nav-content">-->
+        <!--            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider3">-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div id="nav4-content" class="nav-content">-->
+        <!--            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider4">-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div id="nav5-content" class="nav-content">-->
+        <!--            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider5">-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div id="nav6-content" class="nav-content">-->
+        <!--            <div class="ecosystem-template-01-slider1" id="ecosystem-template-01-slider6">-->
+        <!--            </div>-->
+        <!--          </div>-->
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <script id="slider-template" type="x-tmpl-mustache" class="hide">
+    {{#items}}
+      <a href="/cobot/modulesystem/{{robotNo}}" class="ecosystem-template-01-slider-item">
+        <div class="ecosystem-template-01-slider-item-img">
+          <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+        </div>
+        <p>{{robotNm}}</p>
+      </a>
+    {{/items}}
+    {{^items}} <p> 조회된 결과가 없습니다 </p>{{/items}}
+  </script>
+
+
+</main>
+</body>
+
+
+<th:block layout:fragment="script">
+  <script type="text/javascript">
+
+    let isReady = false;
+
+    if (!isReady) {
+
+      isReady = true;
+
+      $(document).ready(function () {
+
+        getList("");
+
+        $("input[name='nav']").off("change").on("change", function (e) {
+          console.log("input[name='nav'] change");
+          e.stopPropagation();
+          let categoryNo = $(this).next("label").data("category-no") || "";
+          getList(categoryNo);
+        });
+
+        $(".tab-nav-mobile").off("change").on("change", function () {
+          console.log("tab-nav-mobile change");
+          let categoryNo = $(this).val();
+          getList(categoryNo);
+        });
+
+      });
+
+    }
+
+    function getList(categoryNo) {
+
+      COMM.ajax({
+        url: '/cobot/category',
+        type: 'POST',
+        data: {
+          boardType1: 'AUTO_SYSTEM',
+          boardType2: 'CO_ROBOT',
+          categoryNo: categoryNo
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log("서버에서 받은 데이터:", data);
+          const $slider = $('#ecosystem-template-01-slider1');
+
+          if ($slider.hasClass('slick-initialized')) {
+            $slider.slick('unslick');// 기존 슬라이더를 완전히 비움
+          }
+
+          const template = $("#slider-template").html();
+          const rendered = Mustache.render(template, {items: data.data});
+
+          $slider.html(rendered);
+
+          initializeSlider();
+
+        },
+        error: function (xhr, status, error) {
+          console.error('ajax 요청 실패', status, error);
+        }
+      });
+    }
+
+
+    function initializeSlider() {
+      console.log("슬라이더 초기화 시작");
+
+      const $slider = $('#ecosystem-template-01-slider1');
+
+      $slider.slick({
+        dots: true,  // 페이지네이션 노출 활성화
+        arrows: true, // prev/next 버튼 활성화
+        infinite: false,
+        autoplay: false,
+        slidesToShow: 4,
+        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesToShow: 4,
+            }
+          },
+          {
+            breakpoint: 765,
+            settings: {
+              dots: true,
+              infinite: false,
+              slidesToShow: 1,
+            }
+          },
+        ]
+      });
+
+      console.log("슬라이더 초기화 완료");
+
+    }
+
+  </script>
+</th:block>
+</html>
+
+
+
+

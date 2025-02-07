@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/sub_layout.html}">
+<body data-gnb-target="agv_amr">
+<main layout:fragment="content" class="ecosystem casestudies">
+  <section class="ecosystem-title">
+    <h2>이동로봇</h2>
+    <h1>적용사례</h1>
+    <p>한화 이동로봇의 다양한 실제 사용 사례를 알려 드립니다.</p>
+  </section>
+
+  <section class="ecosystem-section">
+    <div class="tab-nav">
+      <div class="tab-nav-wrapper">
+
+        <input type="radio" id="nav1" name="nav" checked/>
+        <label for="nav1" class="ecosystem-nav1">
+          <span>전체</span>
+        </label>
+        <th:block th:each="robotCategory, stat : ${robotCategory}">
+          <input type="radio" th:id="'nav' + ${stat.index + 2}" name="nav"/>
+          <label th:for="'nav' + ${stat.index + 2}"
+                 th:data-category="${robotCategory.categoryNm}"
+                 th:data-category-no="${robotCategory.categoryNo}"
+          >
+            <span th:text="${robotCategory.categoryNm}"></span>
+          </label>
+        </th:block>
+
+        <select class="tab-nav-mobile">
+          <option value="" th:selected="true">전체</option>
+          <th:block th:each="robotCategory, stat : ${robotCategory}">
+            <option th:value="${robotCategory.categoryNo}"
+                    th:text="${robotCategory.categoryNm}"></option>
+          </th:block>
+        </select>
+
+      </div>
+    </div>
+
+
+        <div class="tab-content-wrapper">
+
+          <div class="nav-content">
+            <div class="board-top">
+              <div class="category-name"></div>
+            </div>
+            <div class="casestudies-main-slider1">
+            </div>
+          </div>
+
+
+          <div class="pagination">
+          </div>
+
+
+
+    </div>
+  </section>
+
+
+
+  <form id="form" >
+    <input type="hidden" name="size" id="size"  value="9"/>
+    <input type="hidden" name="page" id="page"  value="1"/>
+  </form>
+
+  <script id="slider-template" type="x-tmpl-mustache" class="hide">
+    {{#items}}
+      <a href="/agv-amr/case-studies/{{robotNo}}" class="casestudies-main-slider-item">
+        <div class="casestudies-main-slider-item-img">
+          <img src="{{thumbnailUrl}}" alt="{{robotNm}}" />
+        </div>
+        <p>{{robotNm}}</p>
+        <span>{{description}}</span>
+      </a>
+    {{/items}}
+    {{^items}} <p> 조회된 결과가 없습니다 </p>{{/items}}
+  </script>
+
+
+</main>
+</body>
+<th:block layout:fragment="script">
+  <script type="text/javascript">
+
+
+    $(document).ready(function () {
+      getList();
+      updateCategoryName();
+
+      $("input[name='nav']").on("change", function () {
+        console.log("카테고리 변경");
+        let categoryNo = $(this).next("label").data("category-no") || "";
+        updateCategoryName
+        getList(1, categoryNo);
+      });
+
+      $(".tab-nav-mobile").on("change", function () {
+        let categoryNo = $(this).val();
+        getList(1, categoryNo);
+      });
+
+    });
+
+    $(document).ready(function () {
+      console.log("페이지 로드 완료");
+      updateCategoryName();
+
+      $("input[name='nav']").on("change", function () {
+        console.log("카테고리 변경 감지됨");
+        updateCategoryName();
+      });
+    });
+
+    function getList(page, categoryNo) {
+      if (typeof page != "undefined" && page != null) {
+        $('#page').val(page);
+      }
+
+      console.log('페이지: ' + $('#page').val())
+      console.log('카테고리: ' + categoryNo)
+
+      COMM.ajaxPagingList({
+            url: "/agv-amr/case-studies",
+            type: 'POST',
+            data: {
+              boardType1: 'ROBOT_CASE',
+              boardType2: 'AVG_AMR',
+              categoryNo: categoryNo,
+              page: $('#page').val()
+            },
+            dataType: 'json',
+          },
+          function success(data) {
+            console.log("응답 데이터:", data.contents);
+
+            const template = $("#slider-template").html();
+            const rendered = Mustache.render(template, {items: data.contents});
+
+            console.log(rendered)
+
+            $('.casestudies-main-slider1').html(rendered);
+            $('.nav-content').show();
+
+
+            if (data.totalElements != 0) {
+              setPagination2(data, $('.pagination'));
+              $('.pagination').show()
+            } else {
+              $('.pagination').hide()
+            }
+          });
+    }
+
+    function updateCategoryName() {
+      let selectedInput = $("input[name='nav']:checked");
+      let selectedLabel = selectedInput.next("label");
+      let selectedCategory = selectedLabel.data("category");
+
+      console.log("선택된 카테고리:", selectedCategory);
+
+      if (!selectedCategory) {
+        selectedCategory = "전체";
+      }
+
+      if ($(".category-name").text() !== selectedCategory) {
+        $(".category-name").text(selectedCategory);
+        console.log("category-name 업데이트됨:", selectedCategory);
+      }
+    }
+
+
+  </script>
+</th:block>
+
+</html>

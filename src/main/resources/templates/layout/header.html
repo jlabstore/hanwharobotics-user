@@ -42,7 +42,7 @@
           <ul class="header__nav__items">
             <li>
               <!-- <a class="header__nav__link active" href="/about.html" target="_blank">ABOUT</a> -->
-              <span class="header__nav__link" data-gnb="about">ABOUT</span>
+              <span class="header__nav__link" data-gnb="about" th:utext="#{header.about}">ABOUT</span>
 
               <ul class="header__nav__items_sub">
                 <li>
@@ -55,7 +55,7 @@
                   <!-- <a href="/about" class="header_about">경영방침</a> -->
                 </li>
                 <li>
-                  <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
+                  <a href="https://www.hanwhain.com" target="_blank" th:utext="#{header.recruit}">Recruit</a>
                 </li>
                 <!-- <li>
                   <a href="#" target="_blank">연혁</a>
@@ -69,66 +69,72 @@
               </ul>
             </li>
             <li>
-              <span class="header__nav__link" data-gnb="robot">ROBOT</span>
+              <span class="header__nav__link" data-gnb="cobot" th:utext="#{header.cobot}"></span>
               <ul class="header__nav__items_sub">
                 <li>
                   <a href="javascript:void(0)"
-                     onclick="window.location.href='/robot'">Products</a>
+                     onclick="window.location.href='/cobot'" th:utext="#{header.products}">Products</a>
                   <!--                                    <a th:unless="#{header.nation} == 'EN'" href="javscript:void(0)"-->
                   <!--                                       onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'"-->
                   <!--                                       target="_blank">Products</a>-->
                 </li>
+<!--                <li>-->
+<!--                  <a href="/robot/solutions">Solutions</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="/eco/main">Ecosystem</a>-->
+<!--                </li>-->
+
+<!--                <li>-->
+<!--                  <a href="/cobot/case-studies" th:utext="#{header.partnerSystem}"></a>-->
+<!--                </li>-->
                 <li>
-                  <a href="/robot/solutions">Solutions</a>
+                  <a href="/cobot/modulesystem" th:utext="#{header.moduleSystem}"></a>
                 </li>
+
                 <li>
-                  <a href="/eco/main">Ecosystem</a>
+                  <a href="/cobot/case-studies" th:utext="#{header.case}"></a>
                 </li>
-                <!-- <li>
-                  <a href="#" target="_blank">Case Study</a>
-                </li> -->
               </ul>
             </li>
 
             <li>
-              <span class="header__nav__link" data-gnb="agv/amr">AGV/AMR</span>
+              <span class="header__nav__link" data-gnb="agv_amr" th:utext="#{header.agvAmr}"></span>
 
               <ul class="header__nav__items_sub">
                 <li>
-                  <a href="javascript:void(0)"
-                     onclick="window.location.href='/agv-amr'">Products</a>
-
+                  <a href="javascript:void(0)" onclick="window.location.href='/agv-amr'" th:utext="#{header.products}"></a>
                 </li>
-                <!-- <li>
-                  <a href="#" target="_blank">Case Study</a>
-                </li> -->
+                <li>
+                  <a href="/agv-amr/case-studies"  class="header_case" th:utext="#{header.case}"></a>
+                </li>
               </ul>
             </li>
 
 
             <li>
               <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
-              <span class="header__nav__link" data-gnb="newsroom">NEWSROOM</span>
+              <span class="header__nav__link" data-gnb="newsroom" th:utext="#{header.newsroom}"></span>
 
               <ul class="header__nav__items_sub">
                 <li>
-                  <a href="/newsroom/press" class="header_press">Press</a>
+                  <a href="/newsroom/press" class="header_press" th:utext="#{header.press}"></a>
                 </li>
                 <li>
-                  <a href="/newsroom/ir" class="header_ir">IR</a>
+                  <a href="/newsroom/ir" class="header_ir" th:utext="#{header.ir}"></a>
                 </li>
                 <li>
-                  <a href="/newsroom/notice" class="header_notice">Notice</a>
+                  <a href="/newsroom/notice" class="header_notice" th:utext="#{header.notice}"></a>
                 </li>
               </ul>
             </li>
             <li>
               <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
-              <span class="header__nav__link" data-gnb="contact">CONTACT</span>
+              <span class="header__nav__link" data-gnb="contact" th:utext="#{header.contact}"></span>
 
               <ul class="header__nav__items_sub">
                 <li>
-                  <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
+                  <a href="/contact/inquiry" class="header_inquiry" th:utext="#{header.salesInquiry}"></a>
                 </li>
 
                 <li style="display: none">
@@ -195,16 +201,17 @@
 
       $(document).ready(function () {
 
-        // 영문도메인으로 바로 접근시 영문사이트 변경 
+        // 영문도메인으로 바로 접근시 영문사이트 변경
         var lang = getCookieLangDefualtNull();
         if (lang === null && allowedEnDomains.includes(window.location.href)) {
           changeLang('en', '?lang=en');
         }
 
         // 영문사이트 변경 후 ?lang=en 제거 -> 고객사 요청 
-        if (allowedEnDomains.includes(window.location.origin) && window.location.origin.pathname === '/' && window.location.search === '?lang=en') {
+        if (allowedEnDomains.includes(window.location.origin) && window.location.origin.pathname
+            === '/' && window.location.search === '?lang=en') {
           //  location.href = (window.location.href).replace(window.location.search, '');
-          history.replaceState({},'','/');
+          history.replaceState({}, '', '/');
         }
 
         $('#languageSelect').click(function () {
@@ -221,7 +228,6 @@
         });
 
       });
-
 
       function changeLang(lang, path) {
         const ajaxOptions = {
@@ -242,6 +248,13 @@
         };
         $.ajax(ajaxOptions);
       }
+
+
+
+
+
+
+
 
 
     </script>

@@ -3,10 +3,6 @@ package com.hanwha.robotics.user.service;
 import com.hanwha.robotics.user.common.dto.PageRequest;
 import com.hanwha.robotics.user.common.dto.PageResponse;
 import com.hanwha.robotics.user.dto.*;
-import com.hanwha.robotics.user.entity.Qna;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface QnaService {
     /**

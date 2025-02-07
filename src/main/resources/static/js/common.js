@@ -551,28 +551,31 @@ $('#ecosystem-main-slider1').not('.slick-initialized').slick({
 
 $('.ecosystem-section .tab-nav #nav1').change(function() {
   if ($(this).is(':checked')) {
+    // 자동화시스템 메인
     $('#ecosystem-main-slider1').not('.slick-initialized').slick({
       dots: true,
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 3,
+      slidesPerRow: 2,
+      rows: 2,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
+          // akpoint: 1499,
           breakpoint: 1025,
           settings: {
-            slidesPerRow: 3,
-            rows: 4,
+            slidesPerRow: 2,
+            rows: 2,
           }
         },
         {
+          // breakpoint: 1023,
           breakpoint: 765,
           settings: {
-            slidesPerRow: 2,
-            rows: 3,
+            slidesPerRow: 1,
+            rows: 2,
           }
         },
       ]
@@ -584,6 +587,7 @@ $('.ecosystem-section .tab-nav #nav1').change(function() {
   $('#ecosystem-main-slider2').slick('slickGoTo', 0);
 })
 
+// 자동화시스템 메인 nav2
 $('.ecosystem-section .tab-nav #nav2').change(function () {
   if ($(this).is(':checked')) {
     $('#ecosystem-main-slider2').not('.slick-initialized').slick({
@@ -591,23 +595,23 @@ $('.ecosystem-section .tab-nav #nav2').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 3,
+      slidesPerRow: 2,
+      rows: 2,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
           breakpoint: 1025,
           settings: {
-            slidesPerRow: 3,
-            rows: 4,
+            slidesPerRow: 2,
+            rows: 2,
           }
         },
         {
           breakpoint: 765,
           settings: {
-            slidesPerRow: 2,
-            rows: 3,
+            slidesPerRow: 1,
+            rows: 2,
           }
         },
       ]
@@ -624,23 +628,23 @@ $('.ecosystem-section .tab-nav #nav3').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 3,
+      slidesPerRow: 2,
+      rows: 2,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
           breakpoint: 1025,
           settings: {
-            slidesPerRow: 3,
-            rows: 4,
+            slidesPerRow: 2,
+            rows: 2,
           }
         },
         {
           breakpoint: 765,
           settings: {
-            slidesPerRow: 2,
-            rows: 3,
+            slidesPerRow: 1,
+            rows: 2,
           }
         },
       ]
@@ -657,23 +661,23 @@ $('.ecosystem-section .tab-nav #nav4').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 3,
+      slidesPerRow: 2,
+      rows: 2,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
           breakpoint: 1025,
           settings: {
-            slidesPerRow: 3,
-            rows: 4,
+            slidesPerRow: 2,
+            rows: 2,
           }
         },
         {
           breakpoint: 765,
           settings: {
-            slidesPerRow: 2,
-            rows: 3,
+            slidesPerRow: 1,
+            rows: 2,
           }
         },
       ]
@@ -690,23 +694,23 @@ $('.ecosystem-section .tab-nav #nav5').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 3,
+      slidesPerRow: 2,
+      rows: 2,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
         {
           breakpoint: 1025,
           settings: {
-            slidesPerRow: 3,
-            rows: 4,
+            slidesPerRow: 2,
+            rows: 2,
           }
         },
         {
           breakpoint: 765,
           settings: {
-            slidesPerRow: 2,
-            rows: 3,
+            slidesPerRow: 1,
+            rows: 2,
           }
         },
       ]
@@ -716,28 +720,33 @@ $('.ecosystem-section .tab-nav #nav5').change(function () {
   $('#ecosystem-main-slider5').slick('slickGoTo', 0);
 })
 
+// 자동화시스템 상세
 $('#ecosystem-template-01-slider1').not('.slick-initialized').slick({
-  dots: true,
+  dots: false,
   arrows: true,
   infinite: false,
   autoplay: false,
-  slidesPerRow: 4,
-  rows: 2,
+  // slidesPerRow: 5,
+  slidesToShow: 5,
+  // rows: 1,
   prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
   nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
   responsive: [
     {
       breakpoint: 1025,
       settings: {
-        slidesPerRow: 3,
-        rows: 2,
+        // slidesPerRow: 4,
+        slidesToShow: 4,
+        // rows: 1,
       }
     },
     {
       breakpoint: 765,
       settings: {
-        slidesPerRow: 2,
-        rows: 3,
+        dots: true,
+        // slidesPerRow: 2,
+        slidesToShow: 2,
+        // rows: 1,
       }
     },
   ]
@@ -746,12 +755,12 @@ $('#ecosystem-template-01-slider1').not('.slick-initialized').slick({
 $('.ecosystem-template-01-section .tab-nav #nav1').change(function () {
   if ($(this).is(':checked')) {
     $('#ecosystem-template-01-slider1').not('.slick-initialized').slick({
-      dots: true,
+      dots: false,
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 2,
+      slidesPerRow: 5,
+      rows: 1,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
@@ -776,15 +785,16 @@ $('.ecosystem-template-01-section .tab-nav #nav1').change(function () {
   $('#ecosystem-template-01-slider1').slick('slickGoTo', 0);
 })
 
+///////////////// 탭 클릭시
 $('.ecosystem-template-01-section .tab-nav #nav2').change(function () {
   if ($(this).is(':checked')) {
     $('#ecosystem-template-01-slider2').not('.slick-initialized').slick({
-      dots: true,
+      dots: false,
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 2,
+      slidesPerRow: 5,
+      rows: 1,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
@@ -816,8 +826,8 @@ $('.ecosystem-template-01-section .tab-nav #nav3').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 2,
+      slidesPerRow: 5,
+      rows: 1,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
@@ -847,8 +857,8 @@ $('.ecosystem-template-01-section .tab-nav #nav4').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 2,
+      slidesPerRow: 5,
+      rows: 1,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
@@ -880,8 +890,8 @@ $('.ecosystem-template-01-section .tab-nav #nav5').change(function () {
       arrows: true,
       infinite: false,
       autoplay: false,
-      slidesPerRow: 4,
-      rows: 2,
+      slidesPerRow: 5,
+      rows: 1,
       prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
       nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
       responsive: [
@@ -918,50 +928,77 @@ $('.ecosystem-template-01-info-slider').slick({
 if (win.outerWidth() <= 765) {
   $('.tab-nav-mobile').change(function () {
     let value = $('.tab-nav-mobile option:selected').val();
-    $('.nav-content').hide();
-    $(`#${value}-content`).show();
+    $('.nav-content').show();
+    // $(`#${value}-content`).show();
 
-    $(`#${value}-content .ecosystem-main-slider1`).not('.slick-initialized').slick({
-      dots: true,
-      arrows: true,
-      infinite: false,
-      autoplay: false,
-      slidesPerRow: 4,
-      rows: 3,
-      prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-      nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-      responsive: [
-        {
-          breakpoint: 765,
-          settings: {
-            slidesPerRow: 2,
-            rows: 3,
-          }
-        },
-      ]
-    })
+    // $(`#${value}-content .ecosystem-main-slider1`).not('.slick-initialized').slick({
+    //   dots: true,
+    //   arrows: true,
+    //   infinite: false,
+    //   autoplay: false,
+    //   slidesPerRow: 4,
+    //   rows: 3,
+    //   prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+    //   nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+    //   responsive: [
+    //     {
+    //       breakpoint: 765,
+    //       settings: {
+    //         slidesPerRow: 2,
+    //         rows: 3,
+    //       }
+    //     },
+    //   ]
+    // })
 
     $(`#${value}-content .ecosystem-main-slider1`).slick('slickGoTo', 0);
 
-    $(`#${value}-content .ecosystem-template-01-slider1`).not('.slick-initialized').slick({
-      dots: true,
-      arrows: true,
-      infinite: false,
-      autoplay: false,
-      slidesPerRow: 4,
-      rows: 2,
-      prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-      nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
-      responsive: [
-        {
-          breakpoint: 765,
-          settings: {
-            slidesPerRow: 2,
-            rows: 3,
-          }
-        },
-      ]
-    })
+    // $(`#${value}-content .ecosystem-template-01-slider1`).not('.slick-initialized').slick({
+    //   dots: true,
+    //   arrows: true,
+    //   infinite: false,
+    //   autoplay: false,
+    //   slidesPerRow: 5,
+    //   rows: 2,
+    //   prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+    //   nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+    //   responsive: [
+    //     {
+    //       breakpoint: 765,
+    //       settings: {
+    //         slidesPerRow: 2,
+    //         rows: 3,
+    //       }
+    //     },
+    //   ]
+    // })
+
+    // $('#ecosystem-template-01-slider1').not('.slick-initialized').slick({
+    //   dots: true,
+    //   arrows: true,
+    //   infinite: false,
+    //   autoplay: false,
+    //   slidesPerRow: 2,
+    //   rows: 2,
+    //   prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+    //   nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+    //   responsive: [
+    //     {
+    //       breakpoint: 1025,
+    //       settings: {
+    //         slidesPerRow: 3,
+    //         rows: 2,
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 765,
+    //       settings: {
+    //         slidesPerRow: 2,
+    //         rows: 2,
+    //       }
+    //     },
+    //   ]
+    // })
 
     $(`#${value}-content .ecosystem-template-01-slider1`).slick('slickGoTo', 0);
   });
