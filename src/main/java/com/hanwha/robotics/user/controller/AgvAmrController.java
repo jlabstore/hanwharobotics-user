@@ -82,7 +82,7 @@ public class AgvAmrController {
         log.info("상세페이지");
         List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
         RobotResponse robotResponse = robotService.findRobotByRobotNo(robotNo);
-        List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNo(robotNo);
+        List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNoNoneThumnail(robotNo);
         model.addAttribute("robotCategory", robotCategory);
         model.addAttribute("robotResponse", robotResponse);
         model.addAttribute("robotFileList", robotFileList);

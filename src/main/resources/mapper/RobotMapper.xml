@@ -25,10 +25,21 @@
     where robot_no = #{robotNo}
       and r.del_yn = 'N'
   </select>
+
   <select id="findRobotFileByRoboyNo" resultType="com.hanwha.robotics.user.dto.robot.RobotFileResponse">
     select *
     from tb_robot_file
     where robot_no = #{robotNo}
+    order by thumnail_yn
+  </select>
+
+
+  
+  <select id="findRobotFileByRoboyNoNoneThumnail" resultType="com.hanwha.robotics.user.dto.robot.RobotFileResponse">
+    select *
+    from tb_robot_file
+    where robot_no = #{robotNo}
+        AND thumnail_yn != 'Y'
   </select>
 
   <select id="findRobotByCategory" resultType="com.hanwha.robotics.user.dto.robot.RobotResponse">

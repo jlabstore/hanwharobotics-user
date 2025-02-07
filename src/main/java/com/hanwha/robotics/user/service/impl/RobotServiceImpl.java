@@ -51,5 +51,9 @@ public class RobotServiceImpl implements RobotService {
     return robotMapper.findRobotFileByRoboyNo(robotNo);
   }
 
+  @Override
+  public List<RobotFileResponse> findRobotFileByRoboyNoNoneThumnail(int robotNo) {
+    return robotMapper.findRobotFileByRoboyNoNoneThumnail(robotNo);
+  }
 
 }

@@ -9,6 +9,7 @@ public class RobotFileResponse {
   private String fileNo;
   private String fileNm;
   private String filePath;
+  private String typeCd;
   private String thumnailYn;
 
 }
