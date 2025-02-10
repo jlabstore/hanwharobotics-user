@@ -18,6 +18,25 @@
               padding: 8px;
               text-align: left;
           }
+
+
+          .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+          }
+
+          .video-container iframe,
+          .video-container object,
+          .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
       </style>
     </head>
 <body data-gnb-target="cobot">
@@ -43,15 +62,17 @@
 
   <section class="product-image" th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
     <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
-      <span th:utext="${robotResponse.videoUrl}"></span>
+      <div th:utext="${robotResponse.videoUrl}" class="video-container"></div>
       <!-- <iframe
           th:src="@{${robotResponse.videoUrl}}"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
       </iframe> -->
+
     </th:block>
   </section>
+
 
 
   <section class="product-image" th:if="${robotFileList.size() != 0}">
