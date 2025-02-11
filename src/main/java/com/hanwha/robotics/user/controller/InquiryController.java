@@ -1,5 +1,6 @@
 package com.hanwha.robotics.user.controller;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,12 +66,52 @@ public class InquiryController {
         return "popup/layer_inquiry";
     }
 
+//    @RequestMapping(value = "/inquiry/send", method=RequestMethod.POST , consumes = "application/json")
+//    @ResponseBody
+//    public ResponseEntity<Object> sendInquiryMail(HttpServletRequest request, HttpServletResponse response , @RequestBody Map<String,Object> params) {
+//
+//        // 문의 유형별 메일 설정
+//        String inquiryType = (String) params.get("inquiryType");
+//        String targetMail = "";
+//        switch (inquiryType) {
+//            case "제품 구매 문의":
+//                targetMail = productMail;
+//                break;
+//            case "대리점 문의":
+//                targetMail = distributorMail;
+//                break;
+//            case "사업 제휴/협업 문의":
+//                targetMail = cooperationMail;
+//                break;
+//            case "교육 문의":
+//                targetMail = educationMail;
+//                break;
+//        }
+//
+//        params.put("targetMail", targetMail);
+//
+//        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), inquiryService.sendMail(params)), HttpStatus.OK);
+//    }
+
     @RequestMapping(value = "/inquiry/send", method=RequestMethod.POST , consumes = "application/json")
     @ResponseBody
     public ResponseEntity<Object> sendInquiryMail(HttpServletRequest request, HttpServletResponse response , @RequestBody Map<String,Object> params) {
 
         // 문의 유형별 메일 설정
         String inquiryType = (String) params.get("inquiryType");
+        String[] targetMails = getStrings(inquiryType);
+
+        Arrays.stream(targetMails)
+            .map(String::trim)
+            .forEach(mail -> {
+                params.put("targetMail", mail);
+                inquiryService.sendMail(params);
+            });
+
+        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), "메일 발송 완료"), HttpStatus.OK);
+    }
+
+    private String[] getStrings(String inquiryType) {
         String targetMail = "";
         switch (inquiryType) {
             case "제품 구매 문의":
@@ -87,8 +128,8 @@ public class InquiryController {
                 break;
         }
 
-        params.put("targetMail", targetMail);
-
-        return new ResponseEntity<>(ApiResponse.res(ApiStatus.OK.getValue(), ApiStatus.OK.name(), inquiryService.sendMail(params)), HttpStatus.OK);
+        String[] targetMails = targetMail.split(",");
+        return targetMails;
     }
+
 }
