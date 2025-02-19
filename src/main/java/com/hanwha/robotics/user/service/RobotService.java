@@ -22,4 +22,8 @@ public interface RobotService {
   RobotResponse findRobotByRobotNo(int robotNo);
 
   List<RobotFileResponse> findRobotFileByRoboyNo(int robotNo);
+
+  List<RobotFileResponse> findRobotFileByRoboyNoNoneThumnail(int robotNo);
+
+  
 }

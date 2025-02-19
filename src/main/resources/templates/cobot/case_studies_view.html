@@ -3,12 +3,48 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/sub_layout.html}">
+      <head>
+        <!-- <link rel="stylesheet" href="https://cdn.ckeditor.com/4.18.0/full-all/contents.css"> -->
+        <style>
+          /* CKEditor 기본 테이블 스타일 */
+          table {
+              border-collapse: collapse;
+              width: 100%;
+          }
+          table, th, td {
+              border: 1px solid #ccc;
+          }
+          th, td {
+              padding: 8px;
+              text-align: left;
+          }
+
+
+          .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+          }
+
+          .video-container iframe,
+          .video-container object,
+          .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+      </style>
+    </head>
 <body data-gnb-target="cobot">
 <main layout:fragment="content" class="casestudies view ecosystem-template-01 type2">
 
   <section class="ecosystem-template-01-title">
     <a href="/cobot/case-studies">
-      <img src="../images/pc/products_detail_arrow.png"/>
+      <img th:src="@{/images/pc/products_detail_arrow.png}" />
     </a>
     <h1>적용사례</h1>
   </section>
@@ -24,30 +60,38 @@
     <div class="product-desc" th:utext="${robotResponse.description}"></div>
   </section>
 
-
   <section class="product-image" th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
-    <!-- 썸네일 or 동영상 -->
     <th:block th:if="${robotResponse.videoUrl != null and robotResponse.videoUrl != ''}">
-      <iframe
+      <div th:utext="${robotResponse.videoUrl}" class="video-container"></div>
+      <!-- <iframe
           th:src="@{${robotResponse.videoUrl}}"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
+      </iframe> -->
+
     </th:block>
   </section>
 
 
-  <section class="product-image" th:if="${robotFileList.size() != 0}">
-    <!-- 썸네일 or 동영상 -->
 
+  <section class="product-image" th:if="${robotFileList.size() != 0}">
     <th:block th:each="file : ${robotFileList}">
-      <img th:src="@{${file.filePath}}" alt="로봇 이미지"/>
+      <th:block th:if="${#strings.contains('mp4,avi,mkv,mov,wmv,webm,ogg', file.typeCd)}">
+        <video width="100%" height="100%" controls>
+          <source th:src="@{${file.filePath}}"  th:type="'video/'+ ${file.typeCd}">
+        </video><br/>
+      </th:block>
+      <th:block th:if="${#strings.contains('jpg,jpeg,png,gif,webp,svg', file.typeCd)}">
+        <img th:src="@{${file.filePath}}" alt="로봇 이미지"/><br/>
+      </th:block>
     </th:block>
   </section>
 
   <section class="product-spec">
-    <span th:utext="${robotResponse.productSpac}"></span>
+    <span th:utext="${robotResponse.productSpac}"></span><br/>
+    <span th:utext="${robotResponse.scenario}"></span><br/>
+    <span th:utext="${robotResponse.applicationInfo}"></span><br/>
   </section>
 
   <section class="ecosystem-template-01-section">
@@ -81,38 +125,10 @@
     </div>
 
     <div class="tab-content-wrapper">
-
       <div id="nav1-content" class="nav-content">
         <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider1">
         </div>
       </div>
-
-      <!--      <div id="nav2-content" class="nav-content">-->
-      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider2">-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      <div id="nav3-content" class="nav-content">-->
-      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider3">-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      <div id="nav4-content" class="nav-content">-->
-      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider4">-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      <div id="nav5-content" class="nav-content">-->
-      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider5">-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      <div id="nav6-content" class="nav-content">-->
-      <!--        <div class="casestudies-template-01-slider1" id="casestudies-template-01-slider6">-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-
     </div>
 
   </section>
@@ -128,7 +144,7 @@
         <span>{{description}}</span>
       </a>
     {{/items}}
-    {{^items}} <p> 조회된 결과가 없습니다 </p>{{/items}}
+    {{^items}} <p style="min-height:150px;text-align:center;"> 조회된 결과가 없습니다 </p>{{/items}}
 
   </script>
 
@@ -199,13 +215,13 @@
       const $slider = $('#casestudies-template-01-slider1');
 
       $slider.slick({
-        dots: true,  // 페이지네이션 노출 활성화
+        dots: false,  // 페이지네이션 노출 활성화
         arrows: true, // prev/next 버튼 활성화
         infinite: false,
         autoplay: false,
         slidesToShow: 4,
-        prevArrow: "<button type='button' class='slick-prev'><img src='../images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
-        nextArrow: "<button type='button' class='slick-next'><img src='../images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
+        prevArrow: "<button type='button' class='slick-prev'><img src='/images/pc/robots_slider_arrow_left.svg' alt='' /></button>",
+        nextArrow: "<button type='button' class='slick-next'><img src='/images/pc/robots_slider_arrow_right.svg' alt='' /></button>",
         responsive: [
           {
             breakpoint: 1025,

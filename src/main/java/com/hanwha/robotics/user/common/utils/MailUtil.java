@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.hanwha.robotics.user.mapper.AdminMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,6 +27,7 @@ import com.hanwha.robotics.user.entity.Member;
 import com.hanwha.robotics.user.mapper.PasswordResetTokenMapper;
 
 @Component
+@Slf4j
 public class MailUtil {
 
 	@Value("${spring.mail.username}")
@@ -55,24 +57,67 @@ public class MailUtil {
 	@Autowired
 	private AdminMapper adminMapper;
 
-	public Boolean sendMail(Map<String,Object> params){
+//	public Boolean sendMail(Map<String,Object> params){
+//		Boolean result = false;
+//		try{
+//			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+//			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false , "UTF-8");
+//			String targetMail = (String) params.get("targetMail");
+//			messageHelper.setTo(targetMail); // 메일 수신자
+//			messageHelper.setSubject("한화로보틱스 문의 메일"); // 메일 제목
+//			messageHelper.setText(setContext(params), true); // 메일 본문 내용, HTML 여부
+//			messageHelper.setFrom(new InternetAddress(target, "한화로보틱스"));
+//			javaMailSender.send(mimeMessage);
+//			log.info("메일 발송 : 수신자 = {}", targetMail);
+//			log.info("이메일이 정상적으로 발송되었습니다");
+//			result = true;
+//		}catch(Exception e){
+//			result = false;
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+
+
+
+	public Boolean sendMail(Map<String, Object> params) {
 		Boolean result = false;
-		try{
+		try {
+			log.info("메일 발송 시작: 파라미터 = {}", params);  // 파라미터 확인
+
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false , "UTF-8");
+			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+
 			String targetMail = (String) params.get("targetMail");
-			messageHelper.setTo(targetMail); // 메일 수신자
-			// messageHelper.setTo(target); // 메일 수신자
-			messageHelper.setSubject("한화로보틱스 문의 메일"); // 메일 제목
-			messageHelper.setText(setContext(params), true); // 메일 본문 내용, HTML 여부
+			if (targetMail == null || targetMail.isEmpty()) {
+				log.error("수신자 이메일이 비어있거나 null입니다");
+				return false;
+			}
+
+			log.info("메일 수신자: {}", targetMail);
+
+			messageHelper.setTo(targetMail);
+			messageHelper.setSubject("한화로보틱스 문의 메일");
+			String mailContent = setContext(params);
+			messageHelper.setText(mailContent, true);
+
+			messageHelper.setFrom(new InternetAddress("noreply@hanwharobotics.com", "한화로보틱스"));
+
+			log.info("메일 제목: {}", "한화로보틱스 문의 메일");
+			log.info("메일 본문 내용: {}", mailContent);
+
 			javaMailSender.send(mimeMessage);
+			log.info("메일 발송 완료: 수신자 = {}", targetMail);
+			log.info("이메일이 정상적으로 발송되었습니다");
+
 			result = true;
-		}catch(Exception e){
-			result = false;
+		} catch (Exception e) {
+			log.error("메일 발송 중 오류 발생: {}", e.getMessage());
 			e.printStackTrace();
 		}
 		return result;
 	}
+
 
 	public String setContext(Map<String, Object> params) {
 		Context context = new Context();
@@ -91,7 +136,12 @@ public class MailUtil {
 			messageHelper.setText(text, true);
 			messageHelper.setFrom(new InternetAddress(target, "한화로보틱스"));
 			javaMailSender.send(mimeMessage);
+
+			log.info("메일 발송 : 수신자 = {}", String.join(", ", emailArray));
+			log.info("이메일이 정상적으로 발송되었습니다");
+
 		} catch (Exception e) {
+			log.error("이메일 발송 에러");
 			throw new RuntimeException("메일발송 에러발생", e);
 		}
 	}
@@ -186,8 +236,8 @@ public class MailUtil {
 			String emailContent = templateEngine.process("email/email_post", context);
 
 			this.sendEmail(
-				adminMapper.selectAdminEmail(),
-				"Q&A 게시판에 새로운 글이 등록되었습니다.",
+					adminMapper.selectAdminEmail(),
+					"Q&A 게시판에 새로운 글이 등록되었습니다.",
 					emailContent
 			);
 		} catch (Exception e) {
@@ -204,8 +254,8 @@ public class MailUtil {
 			String emailContent = templateEngine.process("email/email_reply", context);
 
 			this.sendEmail(
-				adminMapper.selectAdminEmail(),
-				"Q&A 게시물에 새로운 댓글이 등록되었습니다.",
+					adminMapper.selectAdminEmail(),
+					"Q&A 게시물에 새로운 댓글이 등록되었습니다.",
 					emailContent
 			);
 		} catch (Exception e) {

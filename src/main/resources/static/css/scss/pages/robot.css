@@ -1,8 +1,14 @@
 .robot-introduce {
   padding: 158px 0 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.robot-introduce .title {
+.robot-introduce section.title {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
   position: relative;
   padding: 0 60px;
 }
@@ -68,13 +74,16 @@
 
 .robot-introduce .contents {
   margin-top: 110px;
-  padding: 0 200px;
+  width: 100%;
+  padding: 0 50px;
 }
 
 .robot-introduce .desc {
   display: flex;
   flex-direction: row;
   gap: 50px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .robot-introduce .desc > div {
@@ -106,7 +115,8 @@
 .robot-slide {
   margin-top: 110px;
   width: 100%;
-  /* height: 730px; */
+  max-width: 1400px;
+  margin: 110px auto 0;
 }
 
 .robot-slide .slide-item {
@@ -273,10 +283,11 @@
 }
 
 .robot-introduce .box-why {
-  margin-top: 69px;
   display: flex;
   flex-direction: row;
   gap: 25px;
+  max-width: 1400px;
+  margin: 70px auto 0;
 }
 
 .robot-introduce .box-why .box-col {
@@ -396,6 +407,10 @@
   font-size: 20px;
 }
 
+.robot-introduce .box-app {
+  max-width: 1400px;
+  margin: 0 auto;
+}
 .robot-introduce .box-app h2 {
   margin-top: 140px;
   font-family: HanwhaGothic-R_OTF;
@@ -461,7 +476,14 @@
 
 @media (max-width: 1024px) {
   .robot-introduce {
-    padding: 178px 0 50px;
+    padding: 178px 0 0 0;
+    width: 100%;
+  }
+
+  .robot-introduce section.title {
+    /* max-width: 925px; */
+    margin: 0 auto;
+    padding: 0 50px;
   }
 
   .robot-introduce .title h2 {
@@ -479,6 +501,10 @@
     line-height: 1.55;
   }
 
+  .robot-introduce .btn_question {
+    right: 50px;
+  }
+
   .robot-introduce .visual {
     margin-top: 70px;
   }
@@ -486,8 +512,8 @@
   .robot-introduce .contents {
     margin-top: 70px;
     padding: 0 50px;
+    width: 100%;
   }
-
 
   .robot-introduce .desc {
     flex-direction: column;
@@ -556,11 +582,13 @@
     margin-top: 70px;
     width: auto;
     margin: 70px -50px 0;
-
     font-size: 22px;
     height: 76px;
     border-radius: 0;
+  }
 
+  .robot-slide .slick-dots li {
+    margin: 0 30px;
   }
 }
 
@@ -731,6 +759,8 @@
 
   .robot-introduce .box-reason .reasons .reason-col .tit {
     margin-bottom: 30px;
+    border-right: none;
+    width: 70%;
   }
 
   .robot-introduce .box-app h2 {

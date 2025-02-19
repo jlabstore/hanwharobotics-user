@@ -17,6 +17,8 @@ public interface RobotMapper {
 
   List<RobotFileResponse> findRobotFileByRoboyNo(int robotNo);
 
+  List<RobotFileResponse> findRobotFileByRoboyNoNoneThumnail(int robotNo);
+
   List<RobotResponse> findRobotByCategory(RobotRequest robotRequest);
 
 
