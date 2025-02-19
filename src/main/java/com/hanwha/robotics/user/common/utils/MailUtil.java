@@ -236,8 +236,8 @@ public class MailUtil {
 			String emailContent = templateEngine.process("email/email_post", context);
 
 			this.sendEmail(
-				adminMapper.selectAdminEmail(),
-				"Q&A 게시판에 새로운 글이 등록되었습니다.",
+					adminMapper.selectAdminEmail(),
+					"Q&A 게시판에 새로운 글이 등록되었습니다.",
 					emailContent
 			);
 		} catch (Exception e) {
@@ -254,8 +254,8 @@ public class MailUtil {
 			String emailContent = templateEngine.process("email/email_reply", context);
 
 			this.sendEmail(
-				adminMapper.selectAdminEmail(),
-				"Q&A 게시물에 새로운 댓글이 등록되었습니다.",
+					adminMapper.selectAdminEmail(),
+					"Q&A 게시물에 새로운 댓글이 등록되었습니다.",
 					emailContent
 			);
 		} catch (Exception e) {
