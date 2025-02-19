@@ -44,52 +44,66 @@
 
       <div class="robot-slide">
         <div class="slide-item">
-          <div class="item-img"><img src="../images/product/HCR-3A.webp"/></div>
-          <div class="item-desc">
-            <h3>HCR-3A</h3>
-            <div><span>가반하중</span> | 3kg</div>
-            <div><span>구동범위</span> | 1420mm</div>
-          </div>
+          <a href="/robot/hcr-3a">
+            <div class="item-img"><img src="../images/product/HCR-3A.webp"/></div>
+            <div class="item-desc">
+              <h3>HCR-3A</h3>
+              <div><span>가반하중</span> | 3kg</div>
+              <div><span>구동범위</span> | 1420mm</div>
+            </div>
+          </a>
         </div>
         <div class="slide-item">
+          <a href="/robot/hcr-5a">
           <div class="item-img"><img src="../images/product/HCR-5A.webp"/></div>
           <div class="item-desc">
             <h3>HCR-5A</h3>
             <div><span>가반하중</span> | 2kg</div>
             <div><span>구동범위</span> | 420mm</div>
           </div>
+          </a>
         </div>
+
+<!--        <div class="slide-item">-->
+<!--&lt;!&ndash;          <a href="/robot/hcr-5w">&ndash;&gt;-->
+<!--          <div class="item-img"><img src="../images/product/HCR-5A.webp"/></div>-->
+<!--          <div class="item-desc">-->
+<!--            <h3>HCR-5W</h3>-->
+<!--            <div><span>가반하중</span> | 2kg</div>-->
+<!--            <div><span>구동범위</span> | 420mm</div>-->
+<!--          </div>-->
+<!--&lt;!&ndash;          </a>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="slide-item">-->
+<!--&lt;!&ndash;          <a href="/robot/hcr-10L">&ndash;&gt;-->
+<!--          <div class="item-img"><img src="../images/product/HCR-10L.webp"/></div>-->
+<!--          <div class="item-desc">-->
+<!--            <h3>HCR-10L</h3>-->
+<!--            <div><span>가반하중</span> | 2kg</div>-->
+<!--            <div><span>구동범위</span> | 420mm</div>-->
+<!--          </div>-->
+<!--&lt;!&ndash;          </a>&ndash;&gt;-->
+<!--        </div>-->
+
         <div class="slide-item">
-          <div class="item-img"><img src="../images/product/HCR-5A.webp"/></div>
-          <div class="item-desc">
-            <h3>HCR-5W</h3>
-            <div><span>가반하중</span> | 2kg</div>
-            <div><span>구동범위</span> | 420mm</div>
-          </div>
-        </div>
-        <div class="slide-item">
-          <div class="item-img"><img src="../images/product/HCR-10L.webp"/></div>
-          <div class="item-desc">
-            <h3>HCR-10L</h3>
-            <div><span>가반하중</span> | 2kg</div>
-            <div><span>구동범위</span> | 420mm</div>
-          </div>
-        </div>
-        <div class="slide-item">
+          <a href="/robot/hcr-12a">
           <div class="item-img"><img src="../images/product/HCR-12.webp"/></div>
           <div class="item-desc">
-            <h3>HCR-12</h3>
+            <h3>HCR-12A</h3>
             <div><span>가반하중</span> | 2kg</div>
             <div><span>구동범위</span> | 420mm</div>
           </div>
+          </a>
         </div>
         <div class="slide-item">
+          <a href="/robot/hcr-14">
           <div class="item-img"><img src="../images/product/HCR-14.webp"/></div>
           <div class="item-desc">
             <h3>HCR-14</h3>
             <div><span>가반하중</span> | 2kg</div>
             <div><span>구동범위</span> | 420mm</div>
           </div>
+          </a>
         </div>
       </div>
 
@@ -239,24 +253,30 @@
           },
         ],
         customPaging: function(slider, i) {
+          var robotName = '';
           if (i === 0) {
-            return 'HCR-3A';
+            robotName = 'HCR-3A';
           } else if (i === 1) {
-            return 'HCR-5A';
-          } else if (i === 2) {
-            return 'HCR-5W';
-          } else if (i === 3) {
-            return 'HCR-10L';
-          } else if (i === 4) {
-            return 'HCR-12';
-          } else if (i === 5) {
-            return 'HCR-14';
+            robotName = 'HCR-5A';
           }
+          else if (i === 2) {
+            robotName = 'HCR-5W';
+          } else if (i === 3) {
+            robotName = 'HCR-10L';
+          }
+          else if (i === 4) {
+            robotName = 'HCR-12A';
+          } else if (i === 5) {
+            robotName = 'HCR-14';
+          }
+          return '<span class="robot-name">' + robotName + '</span>';
         }
       });
 
+      $('.slick-dots li').css('cursor', 'pointer');
     });
   </script>
+
 </th:block>
 
 </html>
