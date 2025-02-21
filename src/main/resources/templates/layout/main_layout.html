@@ -3,12 +3,20 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head>
+<head th:if="#{header.nation} == 'EN'">
   <th:block th:replace="/layout/common_head :: commonHead"></th:block>
   <link rel="stylesheet" th:href="@{/css/common.css}" />
   <link rel="stylesheet" th:href="@{/css/main.css}" />
   <link rel="stylesheet" th:href="@{/css/management.css}" />
 </head>
+
+<head th:unless="#{header.nation} == 'EN'">
+  <th:block th:replace="/layout/common_head :: commonHead"></th:block>
+  <link rel="stylesheet" th:href="@{/css/common2.css}" />
+  <link rel="stylesheet" th:href="@{/css/main2.css}" />
+  <link rel="stylesheet" th:href="@{/css/management.css}" />
+</head>
+
 
 <body class="pc">
   <!-- <section class="inquiry_more"></section> -->
