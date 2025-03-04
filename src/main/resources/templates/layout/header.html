@@ -39,7 +39,8 @@
             <span></span>
           </button>
 
-          <ul class="header__nav__items">
+
+          <ul class="header__nav__items" th:if="#{header.nation} == 'EN'">
             <li>
               <!-- <a class="header__nav__link active" href="/about.html" target="_blank">ABOUT</a> -->
               <span class="header__nav__link" data-gnb="about" th:utext="#{header.about}">ABOUT</span>
@@ -142,8 +143,130 @@
                 </li>
               </ul>
 
+          </ul>
+
+
+
+
+          <ul class="header__nav__items" th:unless="#{header.nation} == 'EN'">
+            <li>
+              <!-- <a class="header__nav__link active" href="/about.html" target="_blank">ABOUT</a> -->
+              <span class="header__nav__link" data-gnb="about">ABOUT</span>
+
+              <ul class="header__nav__items_sub">
+                <li>
+                  <a href="/about" class="header_about" th:utext="#{header.hanwharobotics}"></a>
+                  <!-- <a href="/about" class="header_about">한화로보틱스</a> -->
+                </li>
+                <li>
+                  <a href="/about/managementPolicy" class="header_about"
+                     th:utext="#{header.managementPolicy}"></a>
+                  <!-- <a href="/about" class="header_about">경영방침</a> -->
+                </li>
+                <li>
+                  <a href="https://www.hanwhain.com" target="_blank">Recruit</a>
+                </li>
+                <!-- <li>
+                  <a href="#" target="_blank">연혁</a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">경영</a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">채용</a>
+                </li> -->
+              </ul>
+            </li>
+            <li>
+              <span class="header__nav__link" data-gnb="robot">ROBOT</span>
+              <ul class="header__nav__items_sub">
+                <li>
+                  <a href="javascript:void(0)"
+                     onclick="window.location.href='/robot'">Products</a>
+                  <!--                                    <a th:unless="#{header.nation} == 'EN'" href="javscript:void(0)"-->
+                  <!--                                       onclick="window.open('about:blank').location.href='https://o.hanwharobotics.com/'"-->
+                  <!--                                       target="_blank">Products</a>-->
+                </li>
+                <li>
+                  <a href="/robot/solutions">Solutions</a>
+                </li>
+                <li>
+                  <a href="/eco/main">Ecosystem</a>
+                </li>
+                <!-- <li>
+                  <a href="#" target="_blank">Case Study</a>
+                </li> -->
+              </ul>
+            </li>
+
+            <li>
+              <span class="header__nav__link" data-gnb="agv/amr">AGV/AMR</span>
+
+              <ul class="header__nav__items_sub">
+                <li>
+                  <a href="javascript:void(0)"
+                     onclick="window.location.href='/agv-amr'">Products</a>
+
+                </li>
+                <!-- <li>
+                  <a href="#" target="_blank">Case Study</a>
+                </li> -->
+              </ul>
+            </li>
+
+
+            <li>
+              <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">NEWSROOM</a> -->
+              <span class="header__nav__link" data-gnb="newsroom">NEWSROOM</span>
+
+              <ul class="header__nav__items_sub">
+                <li>
+                  <a href="/newsroom/press" class="header_press">Press</a>
+                </li>
+                <li>
+                  <a href="/newsroom/ir" class="header_ir">IR</a>
+                </li>
+                <li>
+                  <a href="/newsroom/notice" class="header_notice">Notice</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <!-- <a class="header__nav__link" href="/newroom.html" target="_blank">CONTACT</a> -->
+              <span class="header__nav__link" data-gnb="contact">CONTACT</span>
+
+              <ul class="header__nav__items_sub">
+                <li>
+                  <a href="/contact/inquiry" class="header_inquiry">Sales Inquiry</a>
+                </li>
+
+                <li style="display: none">
+                  <a href="/qna" class="header_inquiry">Q&A</a>
+                </li>
+              </ul>
 
           </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
         <a href="/login-page" th:if="${#request.userPrincipal == null}" style="display: none">

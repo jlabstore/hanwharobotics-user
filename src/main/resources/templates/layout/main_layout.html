@@ -7,6 +7,7 @@
   <th:block th:replace="/layout/common_head :: commonHead"></th:block>
   <link rel="stylesheet" th:href="@{/css/common.css}" />
   <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/board.css}" />
   <link rel="stylesheet" th:href="@{/css/management.css}" />
 </head>
 
@@ -14,6 +15,8 @@
   <th:block th:replace="/layout/common_head :: commonHead"></th:block>
   <link rel="stylesheet" th:href="@{/css/common2.css}" />
   <link rel="stylesheet" th:href="@{/css/main2.css}" />
+  <link rel="stylesheet" th:href="@{/css/board2.css}" />
+  <link rel="stylesheet" th:href="@{/css/tablet2.css}" />
   <link rel="stylesheet" th:href="@{/css/management.css}" />
 </head>
 
@@ -51,6 +54,8 @@
 
   <script th:src="@{/js/library.js}"></script>
   <script th:src="@{/js/common.js}"></script>
+<!--  <script th:src="@{/js/common2.js}" th:unless="#{header.nation} == 'EN'"></script>-->
+
   <script th:src="@{/js/main.js}"></script>
 
   <!-- Add Google Analytics script here -->
