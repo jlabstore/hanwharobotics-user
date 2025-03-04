@@ -28,7 +28,7 @@
 <!--  &lt;!&ndash; <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> &ndash;&gt;-->
 <!--</head>-->
 
-<head >
+<head th:if="#{header.nation} == 'EN'">
   <th:block th:replace="/layout/common_head :: commonHead"></th:block>
 
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css" />
@@ -73,78 +73,78 @@
 
 
 <body class="pc">
-  <!-- <section class="inquiry_more"></section> -->
-  <th:block th:replace="/layout/inquiry :: inquiry('inquiry_more')"></th:block>
+<!-- <section class="inquiry_more"></section> -->
+<th:block th:replace="/layout/inquiry :: inquiry('inquiry_more')"></th:block>
 
-  <!-- <header id="header" class="sub_header"></header> -->
-  <th:block th:replace="/layout/header :: header('sub_header')" ></th:block>
+<!-- <header id="header" class="sub_header"></header> -->
+<th:block th:replace="/layout/header :: header('sub_header')" ></th:block>
 
-  <div layout:fragment="content"></div>
+<div layout:fragment="content"></div>
 
-  <!-- <footer id="footer"></footer> -->
-  <th:block th:replace="/layout/footer :: footer('footer')"></th:block>
+<!-- <footer id="footer"></footer> -->
+<th:block th:replace="/layout/footer :: footer('footer')"></th:block>
 
-  <!-- <div class="layer_wrap"></div> -->
-  <th:block th:replace="/layout/layer :: div('layer_wrap')"></th:block>
+<!-- <div class="layer_wrap"></div> -->
+<th:block th:replace="/layout/layer :: div('layer_wrap')"></th:block>
 
-  <script type="text/javascript" th:src="@{/js/aos.js}"></script>
+<script type="text/javascript" th:src="@{/js/aos.js}"></script>
 
-  <script text="text/javascript" th:src="@{/js/gsap.min.js}"></script>
-  <script text="text/javascript" th:src="@{/js/ScrollTrigger.min.js}"></script>
+<script text="text/javascript" th:src="@{/js/gsap.min.js}"></script>
+<script text="text/javascript" th:src="@{/js/ScrollTrigger.min.js}"></script>
 
-  <!-- Slick -->
-  <script text="text/javascript" th:src="@{/js/slick.min.js}" ></script>
+<!-- Slick -->
+<script text="text/javascript" th:src="@{/js/slick.min.js}" ></script>
 
-  <!-- 패럴렉스 -->
-  <script type="text/javascript" th:src="@{/js/ScrollMagic.min.js}"></script>
-  <script type="text/javascript" th:src="@{/js/animation.gsap.js}"></script>
+<!-- 패럴렉스 -->
+<script type="text/javascript" th:src="@{/js/ScrollMagic.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/animation.gsap.js}"></script>
 
-  <script th:src="@{/js/library.js}"></script>
-  <script th:src="@{/js/common.js}"></script>
-  <script th:src="@{/js/common2.js}" th:unless="#{header.nation} == 'EN'"></script>
-  <script th:src="@{/js/sub.js}"></script>
+<script th:src="@{/js/library.js}"></script>
+<script th:src="@{/js/common.js}" th:if="#{header.nation} == 'EN'"></script>
+<script th:src="@{/js/common2.js}" th:unless="#{header.nation} == 'EN'"></script>
+<script th:src="@{/js/sub.js}"></script>
 
-  <!-- 페이징 tmpl -->
-  <th:block th:replace="/common/paging_tmpl :: pagingTmpl"></th:block>
-  <th:block th:replace="/common/paging_tmpl2 :: pagingTmpl2"></th:block>
+<!-- 페이징 tmpl -->
+<th:block th:replace="/common/paging_tmpl :: pagingTmpl"></th:block>
+<th:block th:replace="/common/paging_tmpl2 :: pagingTmpl2"></th:block>
 
-  <th:block th:replace="/common/files_tmpl :: filesTmpl"></th:block>
+<th:block th:replace="/common/files_tmpl :: filesTmpl"></th:block>
 
-  <!-- Add Google Analytics script here -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9CFYTN47J"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-D9CFYTN47J');
-  </script>
-   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
-        //     layerCookieOpenBtn();
-        // }
-        var lang = getCookieLang()
+<!-- Add Google Analytics script here -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D9CFYTN47J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-D9CFYTN47J');
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
+    //     layerCookieOpenBtn();
+    // }
+    var lang = getCookieLang()
 
-      console.log("getcookie@@#!$!@$~$", lang);
-        // if (lang == 'ko') {
-          if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
-              layerCookieOpenBtn();
-          }
-        // }
-    });
-
-
+    console.log("getcookie@@#!$!@$~$", lang);
+    // if (lang == 'ko') {
+    if(localStorage.chk1Yn == undefined || localStorage.chk1Yn == null) {
+      layerCookieOpenBtn();
+    }
+    // }
+  });
 
 
 
-  </script>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M76R6HN5"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
+
+
+</script>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M76R6HN5"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 </body>
-  <th:block layout:fragment="script"></th:block>
+<th:block layout:fragment="script"></th:block>
 </html>
