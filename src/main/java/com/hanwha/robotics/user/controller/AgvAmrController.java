@@ -43,7 +43,8 @@ public class AgvAmrController {
     }
 
     @GetMapping("/case-studies")
-    public String caseStudiesListPage(Model model) {
+    public String caseStudiesListPage(Model model,HttpServletRequest request) {
+
         List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
         model.addAttribute("robotCategory", robotCategory);
         return "agv_amr/case_studies_list";

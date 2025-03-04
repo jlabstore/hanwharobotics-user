@@ -321,19 +321,26 @@
 
       $(document).ready(function () {
 
-        // 영문도메인으로 바로 접근시 영문사이트 변경
+        // 언어 쿠키 확인
         var lang = getCookieLangDefualtNull();
+
+        // 영문 도메인으로 바로 접근 시 영문사이트 변경
         if (lang === null && allowedEnDomains.includes(window.location.href)) {
           changeLang('en', '?lang=en');
         }
 
-        // 영문사이트 변경 후 ?lang=en 제거 -> 고객사 요청 
-        if (allowedEnDomains.includes(window.location.origin) && window.location.origin.pathname
-            === '/' && window.location.search === '?lang=en') {
-          //  location.href = (window.location.href).replace(window.location.search, '');
+        // 언어가 'ko'일 때, '/eco' 이하로 접근을 막고 main으로 리다이렉션
+        if (lang === 'ko' && window.location.pathname.startsWith('/eco')) {
+          window.location.href = '/';
+          return;
+        }
+
+        // 영문 사이트 변경 후 ?lang=en 제거 -> 고객사 요청
+        if (allowedEnDomains.includes(window.location.origin) && window.location.origin.pathname === '/' && window.location.search === '?lang=en') {
           history.replaceState({}, '', '/');
         }
 
+        // 언어 선택 버튼 클릭 시
         $('#languageSelect').click(function () {
           const selectedLanguage = $(this).attr('value');
           const param = "lang=" + selectedLanguage;
@@ -349,25 +356,32 @@
 
       });
 
+      // 언어 변경 함수
       function changeLang(lang, path) {
+        document.cookie = "lang=" + lang + "; path=/;";
+
         const ajaxOptions = {
           type: 'GET',
           url: lang === "en" ? '/lang/en' : '/lang/kr',
-          data: {
-            path
-          },
+          data: { path },
           success: function (responseData) {
             const redirectUrl = responseData.redirectUrl;
             if (redirectUrl) {
               window.location.href = redirectUrl;
+            } else {
+              location.reload();  // 페이지 새로 고침
             }
+          },
+          error: function(xhr, status, error) {
+            console.error("언어 변경 실패:", error);
           }
         };
-        ajaxOptions.xhrFields = {
-          withCredentials: true
-        };
+
+        ajaxOptions.xhrFields = { withCredentials: true };
         $.ajax(ajaxOptions);
       }
+
+
 
 
 

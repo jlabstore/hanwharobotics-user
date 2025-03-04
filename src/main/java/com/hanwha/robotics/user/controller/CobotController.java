@@ -44,7 +44,11 @@ public class CobotController {
   }
 
   @GetMapping("/modulesystem")
-  public String modulesystemPage(Model model) {
+  public String modulesystemPage(Model model, HttpServletRequest request) {
+    String lang = commonUtil.getCookieLang(request);
+    if ("en".equals(lang)) {
+      return "main";
+    }
     List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.AUTO_SYSTEM.name());
     model.addAttribute("robotCategory", robotCategory);
     return "cobot/modulesystem_list";
@@ -83,6 +87,9 @@ public class CobotController {
   ) {
 
     String lang = commonUtil.getCookieLang(request);
+    if ("en".equals(lang)) {
+      return "main";
+    }
     RobotRequest robotRequest = RobotRequest.builder()
         .lang(lang)
         .boardType1(RobotBoardType.AUTO_SYSTEM.name())
@@ -104,7 +111,11 @@ public class CobotController {
 
 
   @GetMapping("/case-studies")
-  public String caseStudiesPage(Model model) {
+  public String caseStudiesPage(Model model, HttpServletRequest request) {
+    String lang = commonUtil.getCookieLang(request);
+    if ("en".equals(lang)) {
+      return "main";
+    }
     List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
     model.addAttribute("robotCategory", robotCategory);
     return "cobot/case_studies_list";
@@ -114,8 +125,13 @@ public class CobotController {
   @GetMapping("/case-studies/{robotNo}")
   public String caseDetail(
       @PathVariable int robotNo,
-      Model model
+      Model model,
+      HttpServletRequest request
   ) {
+    String lang = commonUtil.getCookieLang(request);
+    if ("en".equals(lang)) {
+      return "main";
+    }
     List<RobotCategoryResponse> robotCategory = robotCategoryService.findRobotCategory2(RobotBoardType.ROBOT_CASE.name());
     RobotResponse robotResponse = robotService.findRobotByRobotNo(robotNo);
     List<RobotFileResponse> robotFileList = robotService.findRobotFileByRoboyNoNoneThumnail(robotNo);
