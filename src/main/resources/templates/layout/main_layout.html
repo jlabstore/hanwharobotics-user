@@ -16,7 +16,7 @@
   <link rel="stylesheet" th:href="@{/css/common2.css}" />
   <link rel="stylesheet" th:href="@{/css/main2.css}" />
   <link rel="stylesheet" th:href="@{/css/board2.css}" />
-  <link rel="stylesheet" th:href="@{/css/tablet2.css}" />
+<!--  <link rel="stylesheet" th:href="@{/css/tablet2.css}" />-->
   <link rel="stylesheet" th:href="@{/css/management.css}" />
 </head>
 
@@ -56,7 +56,9 @@
   <script th:src="@{/js/common.js}" th:if="#{header.nation} == 'EN'"></script>
   <script th:src="@{/js/common2.js}" th:unless="#{header.nation} == 'EN'"></script>
 
-  <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/main.js}" th:if="#{header.nation} == 'EN'"></script>
+  <script th:src="@{/js/main2.js}" th:unless="#{header.nation} == 'EN'"></script>
+
 
   <!-- Add Google Analytics script here -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9CFYTN47J"></script>
